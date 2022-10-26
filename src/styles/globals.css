@@ -1,0 +1,5 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* If you got any warnings in VS Code, please follow this url https://flaviocopes.com/fix-unknown-at-rule-tailwind/  */

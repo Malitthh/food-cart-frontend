@@ -1,0 +1,44 @@
+{
+  "name": "nextjs-assignment-base",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "2.0.0",
+    "axios": "^0.27.2",
+    "carousel-react-rcdev": "^0.0.5",
+    "daisyui": "^2.24.0",
+    "formidable": "^2.0.1",
+    "joi-browser": "^13.4.0",
+    "next": "12.2.2",
+    "next-redux-wrapper": "^7.0.5",
+    "qs": "^6.11.0",
+    "query-string": "^7.1.1",
+    "react": "18.2.0",
+    "react-bootstrap": "^2.5.0",
+    "react-dom": "18.2.0",
+    "react-hook-form": "^7.34.2",
+    "react-multi-carousel": "^2.8.2",
+    "react-redux": "^8.0.2",
+    "react-responsive-carousel": "^3.2.23",
+    "react-select": "^5.4.0",
+    "react-toastify": "^9.0.8",
+    "redux": "^4.2.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
+    "redux-saga": "^1.2.1",
+    "yup": "^0.32.11"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.8",
+    "eslint": "8.20.0",
+    "eslint-config-next": "12.2.2",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8"
+  }
+}
