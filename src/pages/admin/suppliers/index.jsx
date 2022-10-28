@@ -5,16 +5,13 @@ import { getUserStart } from "../../../store/users/actions";
 import { apiUrl, clientBaseURLImages } from "config";
 import queryString from 'query-string'
 
-const CustomerIndex = () => {
+const Index = () => {
   const dispatch = useDispatch();
   const { users, auth } = useSelector((state) => state);
   const { allUsers } = users;
 
-  console.log(allUsers, "uu")
-
   const featchOnLoad = async () => {
-    let role = 'customer'
-    
+    let role = 'supplier'
     dispatch(getUserStart(role));
   };
 
@@ -35,17 +32,17 @@ const CustomerIndex = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Customers</span>
+              <span className="current-page">Suppliers</span>
             </li>
           </ul>
           <div style={{ float: "right" }}>
             <a
               data-cy="link-new-report"
-              href="/admin/customers/new-customer"
+              href="/admin/suppliers/new-supplier"
               className="new-report btn btn-primary gap-2 btn-sm"
             >
               <i className="fa fa-plus" aria-hidden="true"></i>
-              New Customer
+              New Supplier
             </a>
           </div>
         </nav>
@@ -93,4 +90,4 @@ const CustomerIndex = () => {
   );
 };
 
-export default CustomerIndex;
+export default Index;

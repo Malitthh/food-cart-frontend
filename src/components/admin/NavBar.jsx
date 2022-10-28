@@ -36,8 +36,8 @@ const NavBar = () => {
                                 <li className="menu-item"><a href="/admin">Dashboard</a></li>
                                 <li className="menu-item"><a href="/admin/products" className="menu-name" data-title="Product" >Products</a></li>
                                 <li className="menu-item"><a href="/admin/customers">Customers</a></li>
-                                <li className="menu-item"><a href="/admin/">Employees</a></li>
-                                <li className="menu-item"><a href="/admin/">Suppliers</a></li>
+                                <li className="menu-item"><a href="/admin/employees">Employees</a></li>
+                                <li className="menu-item"><a href="/admin/suppliers">Suppliers</a></li>
                                 <li className="menu-item"><a href="/admin/orders">Orders</a></li>
                                 <li className="menu-item"><a href="/admin/">Reports</a></li>
                             </ul>
