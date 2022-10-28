@@ -73,9 +73,8 @@ const NewCustomer = () => {
    * OnSubmit method to invoke the database call
    */
   const onSubmit = async () => {
-
     let user = userInfo;
-    user.role = 'customer';
+    user.role = 'supplier';
     dispatch(addUserStart(user));
     toast.success("Successfully Added !");
 

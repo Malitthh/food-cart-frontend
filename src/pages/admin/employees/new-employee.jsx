@@ -75,7 +75,7 @@ const NewCustomer = () => {
   const onSubmit = async () => {
 
     let user = userInfo;
-    user.role = 'customer';
+    user.role = 'employee';
     dispatch(addUserStart(user));
     toast.success("Successfully Added !");
 
