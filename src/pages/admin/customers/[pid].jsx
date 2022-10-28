@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NavBar from "src/components/admin/NavBar";
-import ImageGallery from "react-image-gallery";
+// import ImageGallery from "react-image-gallery";
 
-const SingleReport = () => {
+const Customer = () => {
   const router = useRouter();
   const { pid } = router.query;
   const [reportData, setReportData] = useState();
@@ -180,4 +180,4 @@ const SingleReport = () => {
   );
 };
 
-export default SingleReport;
+export default Customer;

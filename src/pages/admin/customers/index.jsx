@@ -13,12 +13,9 @@ const CustomerIndex = () => {
   console.log(allUsers, "uu")
 
   const featchOnLoad = async () => {
-    let param = {
-      role: 'customer'
-    }
+    let role = 'customer'
     
-
-    dispatch(getUserStart(queryString.stringify(param)));
+    dispatch(getUserStart(role));
   };
 
   useEffect(() => {
@@ -61,40 +58,31 @@ const CustomerIndex = () => {
                 <thead>
                   <tr>
                     <th></th>
-                    <th>Product Name</th>
-                    <th>Category</th>
-                    <th>Cost Price</th>
-                    <th>Market Price</th>
-                    <th>Stock In hand</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {allProducts &&
-                    allProducts.map((product, key) => (
+                  {allUsers &&
+                    allUsers.map((user, key) => (
                       <tr key={key} className={key % 2 === 1 ? "active" : ""}>
-                        <td>
-                          <img
-                            style={{height: "80px"}}
-                            src={`${clientBaseURLImages}${product.photos[0]?.url}`}
-                          />
-                        </td>
-                        <td>{product.productName}</td>
-                        <td>{product.category}</td>
-                        <td>{product.costPrice}</td>
-                        <td>{product.price}</td>
-                        <td>{product.stock}</td>
+                        <td>{key+1}</td>
+                        <td>{user.name}</td>
+                        <td>{user.email}</td>
+                        <td>{user.role}</td>
                         <td>
                           <a
                             data-cy={`view-report-btn${key}`}
-                            href={`reports/${product._id}`}
+                            href={`customers/${user._id}`}
                             className="inline-block px-6 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
                           >
                             <i className="leading-tight fa fa-eye text-xs"></i>
                           </a>
                         </td>
                       </tr>
-                    ))} */}
+                    ))}
                 </tbody>
               </table>
             </div>

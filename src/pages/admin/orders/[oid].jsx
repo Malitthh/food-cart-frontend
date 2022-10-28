@@ -12,17 +12,29 @@ const SingleOrder = () => {
   const { orders } = useSelector((state) => state);
   const { allOrders, singleOrder } = orders;
   console.log(orders, "or", singleOrder);
-  const featchOnLoad = async () => {
-    dispatch(getOneOrderStart(oid));
-  };
+  // const featchOnLoad = async () => {
+  //   dispatch(getOneOrderStart(oid));
+  // };
+
+  // useEffect(() => {
+  //   featchOnLoad();
+  // }, [oid]);
 
   useEffect(() => {
-    featchOnLoad();
-  }, [oid]);
+    if(!oid) {
+      return;
+    }
+
+    const featchOnLoad = async () => {
+      dispatch(getOneOrderStart(oid));
+    };
+    featchOnLoad()
+  }, [oid])
+
 
   console.log(router.query, "QQ");
 
-  const sum = singleOrder.orderItems.reduce(function (sum, item) {
+  const sum = singleOrder && singleOrder?.orderItems?.reduce(function (sum, item) {
     return sum + item.price * item.quantity;
   }, 0);
 
@@ -92,16 +104,16 @@ const SingleOrder = () => {
                                   <b>Billing Address</b>
                                 </p>
                                 <p className="mb-1">
-                                  {singleOrder.billingAddress.name}
+                                  {singleOrder.billingAddress?.name}
                                 </p>
-                                <p>{singleOrder.billingAddress.mobile}</p>
+                                <p>{singleOrder.billingAddress?.mobile}</p>
                                 <p className="mb-1">
-                                  {singleOrder.billingAddress.addressLine1},{" "}
-                                  {singleOrder.billingAddress.addressLine2}
+                                  {singleOrder.billingAddress?.addressLine1},{" "}
+                                  {singleOrder.billingAddress?.addressLine2}
                                 </p>
                                 <p className="mb-1">
-                                  {singleOrder.billingAddress.city},{" "}
-                                  {singleOrder.billingAddress.postalCode}
+                                  {singleOrder.billingAddress?.city},{" "}
+                                  {singleOrder.billingAddress?.postalCode}
                                 </p>
                               </div>
 
@@ -110,16 +122,16 @@ const SingleOrder = () => {
                                   <b>Shipping Address</b>
                                 </p>
                                 <p className="mb-1">
-                                  {singleOrder.shippingAddress.name}
+                                  {singleOrder.shippingAddress?.name}
                                 </p>
-                                <p>{singleOrder.shippingAddress.mobile}</p>
+                                <p>{singleOrder.shippingAddress?.mobile}</p>
                                 <p className="mb-1">
-                                  {singleOrder.shippingAddress.addressLine1},{" "}
-                                  {singleOrder.shippingAddress.addressLine2}
+                                  {singleOrder.shippingAddress?.addressLine1},{" "}
+                                  {singleOrder.shippingAddress?.addressLine2}
                                 </p>
                                 <p className="mb-1">
-                                  {singleOrder.shippingAddress.city},{" "}
-                                  {singleOrder.shippingAddress.postalCode}
+                                  {singleOrder.shippingAddress?.city},{" "}
+                                  {singleOrder.shippingAddress?.postalCode}
                                 </p>
                               </div>
 
@@ -165,7 +177,7 @@ const SingleOrder = () => {
                                   </thead>
                                   <tbody>
                                     {singleOrder &&
-                                      singleOrder.orderItems.map(
+                                      singleOrder.orderItems?.map(
                                         (product, key) => (
                                           <tr>
                                             <td>{product.productName}</td>

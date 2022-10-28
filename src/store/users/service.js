@@ -16,11 +16,12 @@ class UserService {
     });
 
   static getUsers = (payload) =>
-    axios.get(`${apiUrl}/v1/users?${payload}`, {
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+  axios.get(`${apiUrl}/v1/users`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    params: { role: payload }
+  });
 }
 
 export default UserService;
