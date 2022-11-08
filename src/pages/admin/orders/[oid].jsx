@@ -148,11 +148,11 @@ const SingleOrder = () => {
                                       </li>
                                       <li>
                                         <strong>Invoice Date:</strong> Monday,
-                                        October 10th, 2015
+                                        October 10th, 2022
                                       </li>
                                       <li>
                                         <strong>Due Date:</strong> Thursday,
-                                        December 1th, 2015
+                                        December 01st, 2022
                                       </li>
                                       <li>
                                         <strong>Status:</strong>{" "}
@@ -160,21 +160,43 @@ const SingleOrder = () => {
                                           Pending
                                         </span>
                                       </li>
-                                      <li>
-                                        <strong>Status Update:</strong>{" "}
-                                          <input type="radio" id="html" name="fav_language" value="HTML"/>
-  <label for="html">HTML</label><br/>
-  <input type="radio" id="css" name="fav_language" value="CSS"/>
-  <label for="css">CSS</label><br/>
-  <input type="radio" id="javascript" name="fav_language" value="JavaScript"/>
-  <label for="javascript">JavaScript</label>
-
-                                        <button className="btn btn-primary gap-2 btn-sm">
-                                          {" "}
+                                   
+                                    </ul>
+                                    <div style={{ borderStyle: 'dotted', border: 'dashed red', marginTop: '10px', padding: '5px'}}>
+                                        <hr />
+                                        <strong>Status Update:</strong>
+                                        <br />
+                                         {" "}
+                                        <input
+                                          type="radio"
+                                          id="pending"
+                                          name="order_status"
+                                          value="pending"
+                                        />
+                                          <label for="pending">Pending</label>
+                                        <br />
+                                         {" "}
+                                        <input
+                                          type="radio"
+                                          id="cancel"
+                                          name="order_status"
+                                          value="cancel"
+                                        />
+                                          <label for="cancel">Cancel </label>
+                                        <br />
+                                         {" "}
+                                        <input
+                                          type="radio"
+                                          id="complete"
+                                          name="order_status"
+                                          value="complete"
+                                        />
+                                         {" "}
+                                        <label for="complete">Complete</label>
+                                        <button className="btn btn-primary gap-2 btn-sm" style={{ float: 'right'}}>
                                           Update Order Status
                                         </button>
-                                      </li>
-                                    </ul>
+                                      </div>
                                   </div>
                                 </div>
                               </div>

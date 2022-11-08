@@ -79,7 +79,7 @@ const ProductIndex = () => {
                         <td>
                           <a
                             data-cy={`view-report-btn${key}`}
-                            href={`reports/${product._id}`}
+                            href={`products/${product._id}`}
                             className="inline-block px-6 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
                           >
                             <i className="leading-tight fa fa-eye text-xs"></i>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import NavBar from "src/components/admin/NavBar";
-import ImageGallery from "react-image-gallery";
+// import ImageGallery from "react-image-gallery";
 
 const SingleProduct = () => {
   const router = useRouter();
@@ -53,7 +53,7 @@ const SingleProduct = () => {
             <div className="container mx-auto">
               <div className="flex flex-wrap">
                 <div className="w-full md:w-1/2 px-3">
-                  <ImageGallery items={images} originalHeight={10} />
+                  {/* <ImageGallery items={images} originalHeight={10} /> */}
                 </div>
                 <div className="w-full md:w-1/2 px-3">
                   <div className="w-full">
