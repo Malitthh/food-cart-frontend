@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
-import { getOneOrderStart } from "../../../store/orders/actions";
+import {
+  getOneOrderStart,
+  updateOrderStart,
+} from "../../../store/orders/actions";
 import NavBar from "src/components/admin/NavBar";
 
 const SingleOrder = () => {
@@ -21,22 +24,23 @@ const SingleOrder = () => {
   // }, [oid]);
 
   useEffect(() => {
-    if(!oid) {
+    if (!oid) {
       return;
     }
 
     const featchOnLoad = async () => {
       dispatch(getOneOrderStart(oid));
     };
-    featchOnLoad()
-  }, [oid])
-
+    featchOnLoad();
+  }, [oid]);
 
   console.log(router.query, "QQ");
 
-  const sum = singleOrder && singleOrder?.orderItems?.reduce(function (sum, item) {
-    return sum + item.price * item.quantity;
-  }, 0);
+  const sum =
+    singleOrder &&
+    singleOrder?.orderItems?.reduce(function (sum, item) {
+      return sum + item.price * item.quantity;
+    }, 0);
 
   return (
     <div className="min-h-full">
@@ -153,8 +157,22 @@ const SingleOrder = () => {
                                       <li>
                                         <strong>Status:</strong>{" "}
                                         <span class="label label-danger">
-                                          UNPAID
+                                          Pending
                                         </span>
+                                      </li>
+                                      <li>
+                                        <strong>Status Update:</strong>{" "}
+                                          <input type="radio" id="html" name="fav_language" value="HTML"/>
+  <label for="html">HTML</label><br/>
+  <input type="radio" id="css" name="fav_language" value="CSS"/>
+  <label for="css">CSS</label><br/>
+  <input type="radio" id="javascript" name="fav_language" value="JavaScript"/>
+  <label for="javascript">JavaScript</label>
+
+                                        <button className="btn btn-primary gap-2 btn-sm">
+                                          {" "}
+                                          Update Order Status
+                                        </button>
                                       </li>
                                     </ul>
                                   </div>

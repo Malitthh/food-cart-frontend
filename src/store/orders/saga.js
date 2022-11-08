@@ -57,6 +57,18 @@ function* getOneOrderStart({type, payload}) {
     }
 }
 
+function* updateOrderStart({type, payload}) {
+    console.log(payload, "Saga")
+    try {
+        const response = yield OrderService.updateOrder(payload)
+        yield put(getOneOrderSuccess(response.data.order))
+        console.log(response,"saga")
+    } catch (err) {
+        yield put(getOneOrderError(err))
+        console.log(err, "err")
+    }
+}
+
 /**
  * Main Saga for Orders
  */
@@ -64,7 +76,8 @@ function* OrderSaga() {
     yield* [
         takeEvery(ORDER_TYPES.ADD_ORDER_START, addOrderStart),
         takeEvery(ORDER_TYPES.GET_ORDER_START, getOrderStart),
-        takeEvery(ORDER_TYPES.GET_ONE_ORDER_START, getOneOrderStart)
+        takeEvery(ORDER_TYPES.GET_ONE_ORDER_START, getOneOrderStart),
+        takeEvery(ORDER_TYPES.UPDATE_ORDER_START, updateOrderStart)
     ]
 }
 
