@@ -72,7 +72,7 @@ const NavBar = () => {
           <div className="container">
             <div className="row">
               <div className="col-lg-3 col-md-2 col-md-6 col-xs-6">
-                <a href="/admin" className="biolife-logo">
+                <a href="/" target="_blank" className="biolife-logo">
                   <img
                     src="/assets/images/Logo.jpg"
                     alt="Admin Portal"

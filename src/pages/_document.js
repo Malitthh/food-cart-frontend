@@ -25,6 +25,7 @@ export default function Document() {
             <link rel="stylesheet" href="/assets/css/slick.min.css"/>
             <link rel="stylesheet" href="/assets/css/style.css"/>
             <link rel="stylesheet" href="/assets/css/main-color03-green.css"/>
+          
 {/* 
             <script src="assets/js/jquery-3.4.1.min.js"></script> */}
           <script src="/assets/js/bootstrap.min.js"></script>

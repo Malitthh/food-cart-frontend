@@ -16,6 +16,7 @@ import QuickViewPopup from 'src/components/QuickViewPopup';
 import ScollUpButton from 'src/components/ScrollUpButton';
 import CarouselBar from 'src/components/CarouselBar';
 
+
 const Home = () => {
 
     return (
@@ -23,7 +24,7 @@ const Home = () => {
       <HeaderBar/>
       <PageContain>
         <MainContent>
-        {/* <CarouselBar/> */}
+        <CarouselBar/>
             <MainSlide/>
             <Banners/>
             <ProductTabs/>
