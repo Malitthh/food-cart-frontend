@@ -1,21 +1,25 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
-import { getUserStart } from "../../../store/users/actions";
+import { getUserStart, deleteUserStart } from "../../../store/users/actions";
 import { apiUrl, clientBaseURLImages } from "config";
-import queryString from 'query-string'
+import queryString from "query-string";
 
 const CustomerIndex = () => {
   const dispatch = useDispatch();
   const { users, auth } = useSelector((state) => state);
   const { allUsers } = users;
 
-  console.log(allUsers, "uu")
+  console.log(allUsers, "uu");
 
   const featchOnLoad = async () => {
-    let role = 'customer'
-    
+    let role = "customer";
+
     dispatch(getUserStart(role));
+  };
+
+  const deleteUser = async (id) => {
+    dispatch(deleteUserStart(id));
   };
 
   useEffect(() => {
@@ -68,7 +72,7 @@ const CustomerIndex = () => {
                   {allUsers &&
                     allUsers.map((user, key) => (
                       <tr key={key} className={key % 2 === 1 ? "active" : ""}>
-                        <td>{key+1}</td>
+                        <td>{key + 1}</td>
                         <td>{user.name}</td>
                         <td>{user.email}</td>
                         <td>{user.role}</td>
@@ -79,6 +83,14 @@ const CustomerIndex = () => {
                             className="inline-block px-6 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
                           >
                             <i className="leading-tight fa fa-eye text-xs"></i>
+                          </a>
+
+                          <a
+                            data-cy={`delete-report-btn${key}`}
+                            onClick={() => deleteUser(user._id)}
+                            className="inline-block px-6 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
+                          >
+                            <i className="leading-tight fa fa-recycle text-xs"></i>
                           </a>
                         </td>
                       </tr>

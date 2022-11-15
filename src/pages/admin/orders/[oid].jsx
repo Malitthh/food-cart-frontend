@@ -157,7 +157,7 @@ const SingleOrder = () => {
                                       <li>
                                         <strong>Status:</strong>{" "}
                                         <span class="label label-danger">
-                                          Pending
+                                          {singleOrder.status}
                                         </span>
                                       </li>
                                    
@@ -169,30 +169,30 @@ const SingleOrder = () => {
                                          {" "}
                                         <input
                                           type="radio"
-                                          id="pending"
+                                          id="processing"
                                           name="order_status"
-                                          value="pending"
+                                          value="processing"
                                         />
-                                          <label for="pending">Pending</label>
+                                          <label for="processing">Processing</label>
                                         <br />
                                          {" "}
                                         <input
                                           type="radio"
-                                          id="cancel"
+                                          id="shipped"
                                           name="order_status"
-                                          value="cancel"
+                                          value="shipped"
                                         />
-                                          <label for="cancel">Cancel </label>
+                                          <label for="shipped"> Shipped </label>
                                         <br />
                                          {" "}
                                         <input
                                           type="radio"
-                                          id="complete"
+                                          id="delivered"
                                           name="order_status"
-                                          value="complete"
+                                          value="delivered"
                                         />
                                          {" "}
-                                        <label for="complete">Complete</label>
+                                        <label for="delivered">Delivered</label>
                                         <button className="btn btn-primary gap-2 btn-sm" style={{ float: 'right'}}>
                                           Update Order Status
                                         </button>
