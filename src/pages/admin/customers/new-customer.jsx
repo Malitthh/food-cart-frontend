@@ -132,7 +132,7 @@ const NewCustomer = () => {
               className="new-report btn btn-primary gap-2 btn-sm"
             >
               <i className="fa fa-plus" aria-hidden="true"></i>
-              New Customer
+              &nbsp;&nbsp;New Customer
             </a>
           </div>
         </nav>
@@ -144,7 +144,7 @@ const NewCustomer = () => {
               <form>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="name">Name</label>
+                    <label htmlFor="name"><b>Name</b></label>
                     <input
                       type="text"
                       className="form-control"
@@ -158,7 +158,7 @@ const NewCustomer = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email"><b>Email</b></label>
                     <input
                       type="text"
                       className="form-control"
@@ -173,7 +173,103 @@ const NewCustomer = () => {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="costPrice">Password</label>
+                    <label htmlFor="name"><b>Mobile No</b></label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="mobileNo"
+                      name="mobileNo"
+                      onChange={onChangeInput}
+                      value={userInfo.mobileNo}
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["mobileNo"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="nic"><b>NIC</b></label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="email"
+                      onChange={onChangeInput}
+                      value={userInfo.nic}
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["nic"]}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="gender"><b>Gender</b>
+                    </label>
+                    <select className="form-control">
+                      <option disabled>Select your Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["dob"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="address"><b>Address</b>
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={onChangeInput}
+                      value={userInfo.address}
+                      id="mobileNo"
+                      name="mobileNo"
+                      placeholder="Enter your address here"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["address"]}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="province"><b>Province</b>
+                    </label>
+                    <select className="form-control">
+                      <option disabled>Select your Province</option>
+                      <option value="southern">Southern</option>
+                      <option value="central">Central</option>
+                      <option value="northwest">North western</option>
+                      <option value="uva">Uva</option>
+                      <option value="sabaragamuwa">Sabaragamuwa</option>
+                      <option value="west">West</option>
+                      <option value="eastern">Eastern</option>
+                      <option value="northen">Northen</option>
+                      <option value="northCentral">North Central</option>
+                    </select>
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["dob"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="address"><b>Address</b>
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={onChangeInput}
+                      value={userInfo.address}
+                      id="mobileNo"
+                      name="mobileNo"
+                      placeholder="Enter your address here"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["address"]}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="password"><b>Password</b></label>
                     <input
                       type="password"
                       className="form-control"
@@ -188,7 +284,7 @@ const NewCustomer = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="passwordConfirm">Confirm Password</label>
+                    <label htmlFor="passwordConfirm"><b>Confirm Password</b></label>
                     <input
                       type="password"
                       className="form-control"
@@ -204,13 +300,22 @@ const NewCustomer = () => {
                   </div>
                 </div>
                 <div className="form-row">
+                <div className="form-group col-md-6">
                   <button
                     data-cy="save-new-report-btn"
                     onClick={(e) => validateBeforeSave(e)}
-                    className="btn btn-primary"
+                    className="btn btn-success"
                   >
                     Save
+                  </button> &nbsp;
+                  <button
+                    data-cy="save-new-report-btn"
+                    onClick={(e) => validateBeforeSave(e)}
+                    className="btn btn-warning"
+                  >
+                    Reset
                   </button>
+                  </div>
                 </div>
               </form>
             </div>

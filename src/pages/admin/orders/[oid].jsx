@@ -11,7 +11,7 @@ const SingleOrder = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { oid } = router.query;
-  const [reportData, setReportData] = useState();
+  const [status, setStatus] = useState();
   const { orders } = useSelector((state) => state);
   const { allOrders, singleOrder } = orders;
   console.log(orders, "or", singleOrder);
@@ -34,6 +34,11 @@ const SingleOrder = () => {
     singleOrder?.orderItems?.reduce(function (sum, item) {
       return sum + item.price * item.quantity;
     }, 0);
+
+  const updateOrderStatus = () => {
+    // singleOrder.status = status
+    // dispatch(updateOrderStart(singleOrder));
+  };
 
   return (
     <div className="min-h-full">
@@ -153,43 +158,53 @@ const SingleOrder = () => {
                                           {singleOrder.status}
                                         </span>
                                       </li>
-                                   
                                     </ul>
-                                    <div style={{ borderStyle: 'dotted', border: 'dashed red', marginTop: '10px', padding: '5px'}}>
-                                        <hr />
-                                        <strong>Status Update:</strong>
-                                        <br />
-                                         {" "}
-                                        <input
-                                          type="radio"
-                                          id="processing"
-                                          name="order_status"
-                                          value="processing"
-                                        />
-                                          <label for="processing">Processing</label>
-                                        <br />
-                                         {" "}
-                                        <input
-                                          type="radio"
-                                          id="shipped"
-                                          name="order_status"
-                                          value="shipped"
-                                        />
-                                          <label for="shipped"> Shipped </label>
-                                        <br />
-                                         {" "}
-                                        <input
-                                          type="radio"
-                                          id="delivered"
-                                          name="order_status"
-                                          value="delivered"
-                                        />
-                                         {" "}
-                                        <label for="delivered">Delivered</label>
-                                        <button className="btn btn-primary gap-2 btn-sm" style={{ float: 'right'}}>
-                                          Update Order Status
-                                        </button>
-                                      </div>
+                                    <div
+                                      style={{
+                                        borderStyle: "dotted",
+                                        border: "dashed red",
+                                        marginTop: "10px",
+                                        padding: "5px",
+                                      }}
+                                    >
+                                      <hr />
+                                      <strong>Status Update:</strong>
+                                      <br /> {" "}
+                                      <input
+                                        type="radio"
+                                        id="processing"
+                                        name="order_status"
+                                        value="processing"
+                                        onChange={() => setStatus("processing")}
+                                      />
+                                       {" "}
+                                      <label for="processing">Processing</label>
+                                      <br /> {" "}
+                                      <input
+                                        type="radio"
+                                        id="shipped"
+                                        name="order_status"
+                                        value="shipped"
+                                        onChange={() => setStatus("shipped")}
+                                      />
+                                        <label for="shipped"> Shipped </label>
+                                      <br /> {" "}
+                                      <input
+                                        type="radio"
+                                        id="delivered"
+                                        name="order_status"
+                                        value="delivered"
+                                        onChange={() => setStatus("delivered")}
+                                      />
+                                        <label for="delivered">Delivered</label>
+                                      <button
+                                        onClick={() => updateOrderStatus()}
+                                        className="btn btn-primary gap-2 btn-sm"
+                                        style={{ float: "right" }}
+                                      >
+                                        Update Order Status
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>

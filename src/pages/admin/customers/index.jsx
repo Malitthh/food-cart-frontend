@@ -49,7 +49,7 @@ const CustomerIndex = () => {
               className="new-report btn btn-primary gap-2 btn-sm"
             >
               <i className="fa fa-plus" aria-hidden="true"></i>
-              New Customer
+              &nbsp;&nbsp;New Customer
             </a>
           </div>
         </nav>
@@ -62,7 +62,7 @@ const CustomerIndex = () => {
                 <thead>
                   <tr>
                     <th></th>
-                    <th>Name</th>
+                    <th><b>Name</b></th>
                     <th>Email</th>
                     <th>Role</th>
                     <th></th>
@@ -82,8 +82,8 @@ const CustomerIndex = () => {
                             href={`customers/${user._id}`}
                             className="inline-block px-6 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
                           >
-                            <i className="leading-tight fa fa-eye text-xs"></i>
-                          </a>
+                            <i className="leading-tight fa fa-pencil text-xs"></i>
+                          </a> &nbsp;&nbsp;
 
                           <a
                             data-cy={`delete-report-btn${key}`}

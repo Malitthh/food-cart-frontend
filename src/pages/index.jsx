@@ -23,8 +23,8 @@ const Home = () => {
       <HeaderBar/>
       <PageContain>
         <MainContent>
-        {/* <CarouselBar/> */}
-            <MainSlide/>
+        <CarouselBar/>
+            {/* <MainSlide/> */}
             <Banners/>
             <ProductTabs/>
             <Brands/>

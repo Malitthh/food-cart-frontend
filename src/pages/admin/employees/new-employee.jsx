@@ -73,14 +73,12 @@ const NewCustomer = () => {
    * OnSubmit method to invoke the database call
    */
   const onSubmit = async () => {
-
     let user = userInfo;
-    user.role = 'employee';
+    user.role = "employee";
     dispatch(addUserStart(user));
     toast.success("Successfully Added !");
 
-   // router.push("/admin/products");
-
+    // router.push("/admin/products");
   };
 
   /**
@@ -92,7 +90,6 @@ const NewCustomer = () => {
     e.preventDefault();
     console.log(userInfo, "pp");
     onSubmit();
-
   };
 
   /**
@@ -132,7 +129,7 @@ const NewCustomer = () => {
               className="new-report btn btn-primary gap-2 btn-sm"
             >
               <i className="fa fa-plus" aria-hidden="true"></i>
-              New Customer
+              &nbsp;&nbsp;New Customer
             </a>
           </div>
         </nav>
@@ -144,7 +141,9 @@ const NewCustomer = () => {
               <form>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="name">Name</label>
+                    <label htmlFor="name">
+                      <b>Name</b>
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -158,7 +157,9 @@ const NewCustomer = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email">
+                      <b>Email</b>
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -173,7 +174,143 @@ const NewCustomer = () => {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="costPrice">Password</label>
+                    <label htmlFor="Address">
+                      <b>Address</b>
+                    </label>
+                    <input
+                      type="address"
+                      className="form-control"
+                      onChange={onChangeInput}
+                      value={userInfo.address}
+                      id="address"
+                      name="address"
+                      placeholder="Enter your addresss here"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["address"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="nic">
+                      <b>NIC</b>
+                    </label>
+                    <input
+                      type="number/text"
+                      className="form-control"
+                      placeholder=""
+                      onChange={onChangeInput}
+                      value={userInfo.nic}
+                      id="nic"
+                      name="nic"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["nic"]}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="dob">
+                      <b>Date of Birth</b>
+                    </label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      onChange={onChangeInput}
+                      value={userInfo.dob}
+                      id="dob"
+                      name="dob"
+                      placeholder=""
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["dob"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="mobileNo">
+                      <b>Mobile No</b>
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      onChange={onChangeInput}
+                      value={userInfo.phoneNo}
+                      id="mobileNo"
+                      name="mobileNo"
+                      placeholder="Enter your mobile no here"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["mobileNo"]}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="gender">
+                      <b>Gender</b>
+                    </label>
+                    <select className="form-control">
+                      <option disabled>Select your Gender</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                    </select>
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["gender"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="joinDate">
+                      <b>Join Date</b>
+                    </label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      placeholder=""
+                      onChange={onChangeInput}
+                      value={userInfo.joinDate}
+                      id="joinDate"
+                      name="joinDate"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["joinDate"]}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="department"><b>Department</b></label>
+                    <select className="form-control">
+                      <option value="volvo" disabled>Select your department</option>
+                      <option value="saab">IT</option>
+                      <option value="mercedes">HR</option>
+                    </select>
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["department"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="salary">
+                      <b>Salary</b>
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      placeholder=""
+                      onChange={onChangeInput}
+                      value={userInfo.salary}
+                      id="salary"
+                      name="salary"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["salary"]}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="password">
+                      <b>Password</b>
+                    </label>
                     <input
                       type="password"
                       className="form-control"
@@ -188,7 +325,9 @@ const NewCustomer = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="passwordConfirm">Confirm Password</label>
+                    <label htmlFor="passwordConfirm">
+                      <b>Confirm Password</b>
+                    </label>
                     <input
                       type="password"
                       className="form-control"
@@ -204,13 +343,15 @@ const NewCustomer = () => {
                   </div>
                 </div>
                 <div className="form-row">
-                  <button
-                    data-cy="save-new-report-btn"
-                    onClick={(e) => validateBeforeSave(e)}
-                    className="btn btn-primary"
-                  >
-                    Save
-                  </button>
+                  <div className="form-group col-md-6">
+                    <button
+                      data-cy="save-new-report-btn"
+                      onClick={(e) => validateBeforeSave(e)}
+                      className="btn btn-primary"
+                    >
+                      Save
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>

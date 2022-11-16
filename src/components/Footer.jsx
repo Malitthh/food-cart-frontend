@@ -11,7 +11,7 @@ const Footer = () => {
                                 <i className="biolife-icon icon-head-phone"></i>
                                 <p className="r-info">
                                     <span>Got Questions ?</span>
-                                    <span>(700)  9001-1909  (900) 689 -66</span>
+                                    <span>(+94) (81) 2447441</span>
                                 </p>
                             </div>
                             <div className="newsletter-block layout-01">
@@ -29,7 +29,7 @@ const Footer = () => {
                                         <ul className="menu">
                                             <li><a href="#">About Us</a></li>
                                             <li><a href="#">About Our Shop</a></li>
-                                            <li><a href="#">Secure Shopping</a></li>
+                                            <li><a href="#">Contact Us</a></li>
                                             <li><a href="#">Delivery infomation</a></li>
                                             <li><a href="#">Privacy Policy</a></li>
                                             <li><a href="#">Our Sitemap</a></li>
@@ -59,19 +59,19 @@ const Footer = () => {
                                     <li>
                                         <p className="info-item">
                                             <i className="biolife-icon icon-location"></i>
-                                            <b className="desc">7563 St. Vicent Place, Glasgow, Greater Newyork NH7689, UK </b>
+                                            <b className="desc">68/13 3rd Cross Street, 11, Kandy, Sri Lanka</b>
                                         </p>
                                     </li>
                                     <li>
                                         <p className="info-item">
                                             <i className="biolife-icon icon-phone"></i>
-                                            <b className="desc">Phone: (+067) 234 789  (+068) 222 888</b>
+                                            <b className="desc">Phone: (+94) ( 081) 2447441</b>
                                         </p>
                                     </li>
                                     <li>
                                         <p className="info-item">
                                             <i className="biolife-icon icon-letter"></i>
-                                            <b className="desc">Email:  contact@company.com</b>
+                                            <b className="desc">Email: foodCart@gmail.com</b>
                                         </p>
                                     </li>
                                     <li>
