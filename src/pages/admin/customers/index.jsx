@@ -88,9 +88,9 @@ const CustomerIndex = () => {
                           <a
                             data-cy={`delete-report-btn${key}`}
                             onClick={() => deleteUser(user._id)}
-                            className="inline-block px-6 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
+                            className="inline-block px-6 py-3 mb-0 mr-2 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
                           >
-                            <i className="leading-tight fa fa-recycle text-xs"></i>
+                            <i className="leading-tight fa fa-trash-o text-xs"></i>
                           </a>
                         </td>
                       </tr>
