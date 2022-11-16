@@ -4,6 +4,7 @@ import NavBar from "src/components/admin/NavBar";
 import { getUserStart, deleteUserStart } from "../../../store/users/actions";
 import { apiUrl, clientBaseURLImages } from "config";
 import queryString from "query-string";
+import { toast } from "react-toastify";
 
 const CustomerIndex = () => {
   const dispatch = useDispatch();
@@ -14,12 +15,12 @@ const CustomerIndex = () => {
 
   const featchOnLoad = async () => {
     let role = "customer";
-
     dispatch(getUserStart(role));
   };
 
   const deleteUser = async (id) => {
     dispatch(deleteUserStart(id));
+    toast.success("Successfully Deleted !");
   };
 
   useEffect(() => {
@@ -29,7 +30,6 @@ const CustomerIndex = () => {
   return (
     <div className="min-h-full">
       <NavBar />
-
       <div className="container">
         <nav className="biolife-nav">
           <ul>

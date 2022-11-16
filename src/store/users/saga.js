@@ -13,7 +13,7 @@ import {
 } from './actions'
 
 /**
- * Add product start saga funtion to invoke the API call
+ * Add user start saga funtion to invoke the API call
  * @param {*}  
  */
 function* addUserStart({type, payload}) {
@@ -29,7 +29,7 @@ function* addUserStart({type, payload}) {
 }
 
 /**
- * Add product start saga funtion to invoke the API call
+ * Add user start saga funtion to invoke the API call
  * @param {*}  
  */
  function* getUserStart({type, payload}) {
@@ -61,13 +61,30 @@ function* addUserStart({type, payload}) {
 }
 
 /**
+ * delete user saga funtion to invoke the API call
+ * @param {*}  
+ */
+ function* updateUserStart({type, payload}) {
+    console.log(payload, "pay")
+    try {
+        const response = yield UserService.updateUser(payload)
+        yield put(updateUserSuccess(response.data.data.users))
+        console.log(response.data.data.users,"saga")
+    } catch (err) {
+        yield put(updateUserError(err))
+        console.log(err, "err")
+    }
+}
+
+/**
  * Main Saga for users saga
  */
 function* UsersSaga() {
     yield* [
         takeEvery(USER_TYPES.ADD_USER_START, addUserStart),
         takeEvery(USER_TYPES.GET_USER_START, getUserStart),
-        takeEvery(USER_TYPES.DELETE_USER_START, deleteUserStart)
+        takeEvery(USER_TYPES.DELETE_USER_START, deleteUserStart),
+        takeEvery(USER_TYPES.UPDATE_USER_START, updateUserStart)
     ]
 }
 

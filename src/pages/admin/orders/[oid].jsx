@@ -15,13 +15,6 @@ const SingleOrder = () => {
   const { orders } = useSelector((state) => state);
   const { allOrders, singleOrder } = orders;
   console.log(orders, "or", singleOrder);
-  // const featchOnLoad = async () => {
-  //   dispatch(getOneOrderStart(oid));
-  // };
-
-  // useEffect(() => {
-  //   featchOnLoad();
-  // }, [oid]);
 
   useEffect(() => {
     if (!oid) {
