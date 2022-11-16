@@ -5,9 +5,11 @@ import { getUserStart, deleteUserStart } from "../../../store/users/actions";
 import { apiUrl, clientBaseURLImages } from "config";
 import queryString from "query-string";
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const CustomerIndex = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { users, auth } = useSelector((state) => state);
   const { allUsers } = users;
 
@@ -21,6 +23,7 @@ const CustomerIndex = () => {
   const deleteUser = async (id) => {
     dispatch(deleteUserStart(id));
     toast.success("Successfully Deleted !");
+    router.reload(window.location.pathname)
   };
 
   useEffect(() => {
