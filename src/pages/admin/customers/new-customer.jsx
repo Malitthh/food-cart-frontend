@@ -142,6 +142,7 @@ const NewCustomer = () => {
           <div className="container mx-2">
             <div className="overflow-x-auto">
               <form>
+              <div className="form-row col-md-12">
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="name"><b>Name</b></label>
@@ -191,7 +192,8 @@ const NewCustomer = () => {
                     <input
                       type="text"
                       className="form-control"
-                      id="email"
+                      id="nic"
+                      name="nic"
                       onChange={onChangeInput}
                       value={userInfo.nic}
                     />
@@ -221,8 +223,8 @@ const NewCustomer = () => {
                       className="form-control"
                       onChange={onChangeInput}
                       value={userInfo.address}
-                      id="mobileNo"
-                      name="mobileNo"
+                      id="address"
+                      name="address"
                       placeholder="Enter your address here"
                     />
                     <p className="text-red-500 text-xs italic">
@@ -247,27 +249,13 @@ const NewCustomer = () => {
                       <option value="northCentral">North Central</option>
                     </select>
                     <p className="text-red-500 text-xs italic">
-                      {errors && errors["dob"]}
-                    </p>
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="address"><b>Address</b>
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      onChange={onChangeInput}
-                      value={userInfo.address}
-                      id="mobileNo"
-                      name="mobileNo"
-                      placeholder="Enter your address here"
-                    />
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["address"]}
+                      {errors && errors["province"]}
                     </p>
                   </div>
                 </div>
-                <div className="form-row">
+                </div>
+                <div className="form-row col-md-12">
+              <br/>
                   <div className="form-group col-md-6">
                     <label htmlFor="password"><b>Password</b></label>
                     <input
