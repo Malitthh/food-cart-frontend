@@ -3,9 +3,12 @@ import { useSelector, useDispatch } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
 import { getProductStart, deleteProductStart } from "../../../store/products/actions";
 import { apiUrl, clientBaseURLImages } from "config";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const ProductIndex = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { products, auth } = useSelector((state) => state);
   const { allProducts } = products;
 
@@ -16,6 +19,11 @@ const ProductIndex = () => {
   useEffect(() => {
     featchOnLoad();
   }, []);
+
+  const deleteProduct = async (id) => {
+    dispatch(deleteProductStart(id));
+    toast.success("Successfully Deleted !");
+  };
 
   return (
     <div className="min-h-full">
@@ -87,7 +95,7 @@ const ProductIndex = () => {
 
                           <a
                             data-cy={`delete-report-btn${key}`}
-                            onClick={() => deleteProduct(user._id)}
+                            onClick={() => deleteProduct(product._id)}
                             className="inline-block px-6 py-3 mb-0 mr-2 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
                           >
                             <i className="leading-tight fa fa-trash-o text-xs"></i>

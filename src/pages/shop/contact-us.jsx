@@ -42,12 +42,11 @@ const contactUs = () => {
                     <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                         <div className="contact-info-container sm-margin-top-27px xs-margin-bottom-60px xs-margin-top-60px">
                             <h4 className="box-title">Our Contact</h4>
-                            <p className="frst-desc">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
                             <ul className="addr-info">
                                 <li>
                                     <div className="if-item">
                                         <b className="tie">Addess:</b>
-                                        <p className="dsc"> 68/13 3rd Cross Street, 11<br/>Kandy<br/> Colombo <br/>Sri Lanka</p>
+                                        <p className="dsc"> No 68/13A 3rd Cross Street, 11<br/>Kandy<br/> Sri Lanka</p>
                                     </div>
                                 </li>
                                 <li>

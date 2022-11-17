@@ -27,7 +27,6 @@ const ShopItem = ({product}) => {
           </a>
         </div>
         <div className="info">
-          <b className="categories">{product.category}</b>
           <h4 className="product-title">
             <a href="#" className="pr-name">
             {product.productName}
@@ -36,12 +35,11 @@ const ShopItem = ({product}) => {
           <div className="price">
             <ins>
               <span className="price-amount">
-                <span className="currencySymbol">LKR</span>{product.price}
+                <span className="currencySymbol">LKR</span>&nbsp;{product.price}
               </span>
             </ins>
             <del>
               <span className="price-amount">
-                <span className="currencySymbol">£</span>95.00
               </span>
             </del>
           </div>

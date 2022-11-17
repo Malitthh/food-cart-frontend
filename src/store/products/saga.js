@@ -85,7 +85,7 @@ function* addProductStart({type, payload}) {
     console.log(payload, "delete")
     try {
         const response = yield ProductsService.deleteProduct(payload)
-        yield put(deleteProductSuccess(response.data.data.products))
+        yield put(deleteProductSuccess(response.data.products))
         console.log(response.data.data.products,"saga")
     } catch (err) {
         yield put(deleteProductError(err))
