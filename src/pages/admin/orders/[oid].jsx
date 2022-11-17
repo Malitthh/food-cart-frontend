@@ -102,7 +102,7 @@ const SingleOrder = () => {
                           <div class="col-lg-6">
                             <div class="invoice-from">
                               <ul class="list-unstyled text-right">
-                                <li><i><b>Food cart (Pvt) Ltd.</b></i></li>
+                                <li><i><b>Food Cart (Pvt) Ltd.</b></i></li>
                                 <li>No 68/13A 3rd Cross street, 11</li>
                                 <li>Kandy</li>
                                 <li>Sri Lanka</li>
