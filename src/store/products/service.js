@@ -37,7 +37,7 @@ class ProductsService {
       },
     });
 
-    static deleteProduct = () =>
+    static deleteProduct = (id) =>
     axios.delete(`${apiUrl}/v1/products/${id}`,{
       headers: {
         "Content-Type": "application/json",

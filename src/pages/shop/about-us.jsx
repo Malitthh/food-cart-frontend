@@ -8,7 +8,7 @@ const aboutUs = () => {
       <HeaderBar />
       
       <div className="hero-section hero-background">
-        <h1 className="page-title">Organic Fruits</h1>
+        <h1 className="page-title">About Us</h1>
       </div>
 
       <div className="container">
@@ -28,25 +28,7 @@ const aboutUs = () => {
 
       <div className="page-contain about-us">
         <div id="main-content" className="main-content">
-          <div className="welcome-us-block">
-            <div className="container">
-              <h4 className="title">Welcome to Biolife store!</h4>
-              <div className="text-wraper">
-                <p className="text-info">
-                  Contrary to popular belief, Lorem Ipsum is not simply random
-                  text. It has roots in a piece of classical Latin literature
-                  from 45 BC, making it over 2000 years old. Richard McClintock,
-                  a Latin professor at Hampden-Sydney College in Virginia,
-                  looked up one of the more obscure Latin words, consectetur,
-                </p>
-                <p className="qt-text">
-                  “There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form.”
-                </p>
-              </div>
-            </div>
-          </div>
+          
 
           <div className="why-choose-us-block">
             <div className="container">
@@ -152,6 +134,28 @@ const aboutUs = () => {
                     </li>
                   </ul>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="welcome-us-block">
+            <div className="container">
+              <div className="text-wraper">
+                <p className="text-info">
+                Decentralized supply system that let customers buy products online and warehouse managers 
+                maintain track of stock levels. Customers are let down by poorly managed inventory, 
+                and too much money is locked up in slower sales and warehouses.
+                 This method speeds up the process by getting rid of paperwork, human error, 
+                 and manual delays. This supply management system will be able to monitor finances, 
+                 deliveries, and available inventories; it will also be able to alert a warehouse manager 
+                 when it's time to place another order and how much to buy. An online application that
+                  focuses on supply control and generation is called a supply management system.
+                </p>
+                <p className="qt-text">
+                  “There are many variations of passages of Lorem Ipsum
+                  available, but the majority have suffered alteration in some
+                  form.”
+                </p>
               </div>
             </div>
           </div>

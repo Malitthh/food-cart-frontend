@@ -114,9 +114,7 @@ const updateProduct = () => {
 
     dispatch(updateProductStart(product));
     toast.success("Successfully Added !");
-
-   // router.push("/admin/products");
-
+    router.push("/admin/products");
   };
 
   /**
@@ -245,7 +243,7 @@ const updateProduct = () => {
                       type="number"
                       className="form-control"
                       onChange={onChangeInput}
-                      value={productInfo.customerName}
+                      value={productInfo.costPrice}
                       id="costPrice"
                       name="costPrice"
                       placeholder=""
