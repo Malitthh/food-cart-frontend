@@ -12,26 +12,6 @@ const Home = () => {
 
   console.log(auth, "auth");
 
-  // useEffect(() => {
-  //   // get uuid's from state and loop it and read files in db folder
-  //   const fileList = damageReports.getData;
-  //   fileList.forEach((file) => {
-  //     fetch(`/db/${file.uuid}.json`)
-  //       .then((response) => {
-  //         return response.json(); //parse json
-  //       })
-  //       .then((data) => {
-  //         let modifyData = data;
-  //         // adding uuid to the objects to identfy them
-  //         modifyData.uuid = file.uuid;
-  //         setDamageReportsData((damageReportsData) => [
-  //           ...damageReportsData,
-  //           modifyData,
-  //         ]);
-  //       });
-  //   });
-  // }, []);
-
   return (
     <div className="min-h-full">
       <NavBar />

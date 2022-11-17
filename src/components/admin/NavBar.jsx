@@ -1,13 +1,31 @@
-import { useSelector } from "react-redux";
+
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
+import { logoutStart } from "../../store/auth/actions";
+
 
 const NavBar = () => {
   const { cart, auth } = useSelector((state) => state);
   const { user, status } = auth;
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  
+  useEffect(() => {
+    if (status === "success")
+      if (user.role === "admin") {
+        router.push("/admin");
+      } else {
+        router.push("/");
+      }
+  }, []);
 
   const logout = () => {
+    dispatch(logoutStart());
     localStorage.clear();
+
+    console.log(auth, "user")
     router.push("/");
   }
 

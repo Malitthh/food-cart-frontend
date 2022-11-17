@@ -2,40 +2,45 @@ import React, { useState, useEffect } from "react";
 import HeaderBar from "src/components/HeaderBar";
 import Footer from "src/components/Footer";
 import { useSelector, useDispatch } from "react-redux";
-import { loginStart } from "../../store/auth/actions";
+import { signupStart } from "../../store/auth/actions";
 import { useRouter } from "next/router";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
-import { AuthSchema } from "../../schema/authSchema";
+import { RegSchema } from "../../schema/authSchema";
 import { toast } from "react-toastify";
 
-const Login = () => {
+const RegCustomer = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [authInfo, setAuthInfo] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
-  const [errors, setErrors] = useState([]);
   const { auth } = useSelector((state) => state);
   const { status, user, getError } = auth;
 
+  const [errors, setErrors] = useState([]);
+
+
   useEffect(() => {
     if (status === "success") {
-      if (user.role === "admin") {
-          router.push("/admin");
-        } else {
-          router.push("/");
+        if (user.role === "admin") {
+            router.push("/admin");
+          } else {
+            router.push("/");
+          }
+    } else {
+        if(getError !== null) {
+            toast.error(getError.message);
         }
-  } else {
-      if(getError !== null) {
-          toast.error(getError.message);
-      }
-  }
+    }
+      
   }, [auth]);
 
   const login = () => {
-    console.log("hi", authInfo);
-    dispatch(loginStart(authInfo));
+    const user =  authInfo;
+    user.role = 'customer'
+    dispatch(signupStart(user));
+  
   };
 
   const onChangeInput = (e) => {
@@ -44,7 +49,7 @@ const Login = () => {
   };
 
   const validateField = (name, value) => {
-    const errMsg = validateProperty(name, value, AuthSchema);
+    const errMsg = validateProperty(name, value, RegSchema);
 
     if (errMsg) {
       errors[name] = errMsg;
@@ -54,7 +59,7 @@ const Login = () => {
   };
 
   const validateBeforeSave = () => {
-    const err = validateForm(authInfo, AuthSchema);
+    const err = validateForm(authInfo, RegSchema);
     console.log(err, "errrrr");
     if (err) {
       setErrors(err);
@@ -94,6 +99,22 @@ const Login = () => {
                   <form action="#" name="frm-login" method="post">
                     <p className="form-row">
                       <label for="fid-name">
+                        Name:<span className="requite">*</span>
+                      </label>
+                      <input
+                        required
+                        id="name"
+                        type="text"
+                        onChange={onChangeInput}
+                        value={authInfo.name}
+                        className="txt-input"
+                      />
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["name"]}
+                      </p>
+                    </p>
+                    <p className="form-row">
+                      <label for="fid-name">
                         Email Address:<span className="requite">*</span>
                       </label>
                       <input
@@ -124,17 +145,31 @@ const Login = () => {
                         {errors && errors["password"]}
                       </p>
                     </p>
+                    <p className="form-row">
+                      <label for="fid-pass">
+                      Password Confirm:<span className="requite">*</span>
+                      </label>
+                      <input
+                        required
+                        id="passwordConfirm"
+                        type="password"
+                        onChange={onChangeInput}
+                        value={authInfo.passwordConfirm}
+                        className="txt-input"
+                      />
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["password"]}
+                      </p>
+                    </p>
+                    
                     <p className="form-row wrap-btn">
                       <button
                         className="btn btn-submit btn-bold"
                         type="button"
                         onClick={() => validateBeforeSave()}
                       >
-                        sign in
+                        sign up
                       </button>
-                      <a href="#" className="link-to-help">
-                        Forgot your password
-                      </a>
                     </p>
                   </form>
                 </div>
@@ -142,9 +177,9 @@ const Login = () => {
               <div className="col-lg-3 col-md-3 col-sm-3 col-xs-12">
                 <div className="register-in-container">
                   <div className="intro">
-                    <h4 className="box-title">New Customer?</h4>
+                    <h4 className="box-title">already registered?</h4>
                     <p className="sub-title">
-                      Create an account as a customer:
+                      No need to register again
                     </p>
                     <ul className="lis">
                       {/* <li>Check out faster</li>
@@ -152,8 +187,8 @@ const Login = () => {
                       <li>Track new orders</li>
                       <li>Save items to your Wishlist</li> */}
                     </ul>
-                    <a href="/auth/reg-customer" class="btn btn-bold">
-                      Become a Customer
+                    <a href="/auth/login" class="btn btn-bold">
+                      Login
                     </a>
                   </div>
                 </div>
@@ -186,4 +221,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default RegCustomer;
