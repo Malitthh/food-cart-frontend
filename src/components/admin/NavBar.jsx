@@ -1,15 +1,22 @@
 import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 
 const NavBar = () => {
   const { cart, auth } = useSelector((state) => state);
   const { user, status } = auth;
+  const router = useRouter();
+
+  const logout = () => {
+    localStorage.clear();
+    router.push("/");
+  }
 
   return (
     <>
       <header id="header" className="header-area style-01 layout-03">
         <div
           className="header-top bg-main hidden-xs"
-          style={{ backgroundColor: "#c49a6e" }}
+          style={{ backgroundColor: "black" }}
         >
           <div className="container">
             <div className="top-bar left">
@@ -17,11 +24,11 @@ const NavBar = () => {
                 <li>
                   <a href="#">
                     <i className="fa fa-envelope" aria-hidden="true"></i>
-                    Organic@company.com
+                    foodcart@gmail.com
                   </a>
                 </li>
                 <li>
-                  <a href="#">ADMIN PORTAL</a>
+                  <a href="#"><b>ADMIN PORTAL</b></a>
                 </li>
               </ul>
             </div>
@@ -60,14 +67,22 @@ const NavBar = () => {
                       {user.name}
                     </a>
                   </li>
+                  <li>
+                    <a onClick={() => logout()}
+                       className="btn btn-danger btn-sm"
+                    >
+                      Logout
+                    </a>
+                  </li>
                 </ul>
+                
               )}
             </div>
           </div>
         </div>
         <div
           className="header-middle biolife-sticky-object"
-          style={{ backgroundColor: "#3aa353" }}
+          style={{ backgroundColor: "white" }}
         >
           <div className="container">
             <div className="row">

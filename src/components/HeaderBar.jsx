@@ -16,8 +16,8 @@ const HeaderBar = () => {
                     <div className="container">
                         <div className="top-bar left">
                             <ul className="horizontal-menu">
-                                <li><a href="#"><i className="fa fa-envelope" aria-hidden="true"></i>Organic@company.com</a></li>
-                                <li><a href="#">Free Shipping for all Order of $99</a></li>
+                                <li><a href="#"><i className="fa fa-envelope" aria-hidden="true"></i>foodcart@gmail.com</a></li>
+                                <li><a href="#">Free Shipping for all Order of LKR</a></li>
                             </ul>
                         </div>
                         <div className="top-bar right">
@@ -77,14 +77,6 @@ const HeaderBar = () => {
                                             </form>
                                         </div>
                                     </div>
-                                    {/* <div className="wishlist-block hidden-sm hidden-xs">
-                                        <a href="#" className="link-to">
-                                            <span className="icon-qty-combine">
-                                                <i className="icon-heart-bold biolife-icon"></i>
-                                                <span className="qty">4</span>
-                                            </span>
-                                        </a>
-                                    </div> */}
                                     <div className="minicart-block">
                                         <div className="minicart-contain">
                                             <a href="" className="link-to">
@@ -146,19 +138,11 @@ const HeaderBar = () => {
                     <div className="container">
                         <div className="row">
                             <div className="col-lg-3 col-md-4" >
-                                <a href="/shop/products">
-                                <div className="vertical-menu vertical-category-block">
-                                    <div className="block-title">
-                                        <span className="menu-icon">
-                                            <span className="line-1"></span>
-                                            <span className="line-2"></span>
-                                            <span className="line-3"></span>
-                                        </span>
-                                        <span className="menu-title">Shop Now</span>
-                                        <span className="angle" data-tgleclassName="fa fa-shopping-cart"><i className="fa fa-shopping-cart" aria-hidden="true"></i></span>
-                                    </div>
+                                <div className="block-title">
+                                <p className="buttons">
+                                    <a href="/shop/products" className="btn btn-bold" style={{width: "-webkit-fill-available"}}>Shop now</a>
+                                </p>
                                 </div>
-                                </a>
                             </div>
                             <div className="col-lg-9 col-md-8 padding-top-2px">
                                 <div className="header-search-bar layout-01">
@@ -180,7 +164,7 @@ const HeaderBar = () => {
                                     </form>
                                 </div>
                                 <div className="live-info">
-                                    <p className="telephone"><i className="fa fa-phone" aria-hidden="true"></i><b className="phone-number">(+900) 123 456 7891</b></p>
+                                    <p className="telephone"><i className="fa fa-phone" aria-hidden="true"></i><b className="phone-number">(+94) (81) 2447441</b></p>
                                     <p className="working-time">Mon-Fri: 8:30am-7:30pm; Sat-Sun: 9:30am-4:30pm</p>
                                 </div>
                             </div>

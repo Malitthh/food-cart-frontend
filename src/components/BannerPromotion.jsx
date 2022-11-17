@@ -15,8 +15,7 @@ const BannerPromotion = () => {
                                 <b className="second-line">Vegetable Always fresh</b>
                                 <p className="third-line">Food Heaven Made Easy sounds like the name of an amazingly delicious food delivery service, but don't be fooled...</p>
                                 <div className="product-detail">
-                                    <p className="txt-price"><span>Only:</span>$8.00</p>
-                                    <a href="#" className="btn add-to-cart-btn">add to cart</a>
+                                    <p className="txt-price"><span>Only:</span>Rs.80/=</p>
                                 </div>
                             </div>
                         </div>
@@ -33,10 +32,6 @@ const BannerPromotion = () => {
                                 <b className="first-line">Food Heaven Made</b>
                                 <span className="second-line">Easy <i>Healthy, Happy Life</i></span>
                                 <p className="third-line">Food Heaven Made Easy sounds like the name of an amazingly delicious food delivery service, but don't be fooled. The blog is actually a compilation of recipes, cooking videos, and nutrition tips.</p>
-                                <p className="buttons">
-                                    <a href="#" className="btn btn-bold">Read More</a>
-                                    <a href="#" className="btn btn-thin">View Menu Now</a>
-                                </p>
                             </div>
                         </div>
                     </div>

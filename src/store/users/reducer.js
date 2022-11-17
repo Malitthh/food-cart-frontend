@@ -1,6 +1,6 @@
 import { USER_TYPES } from "./actions";
 
-// Initial state of the DaageReport Reducer
+// Initial state of the users Reducer
 const INITIAL_STATE = {
   isLoading: false,
   getUser: [],
@@ -10,7 +10,7 @@ const INITIAL_STATE = {
 };
 
 /**
- * Main Reducer function for Damage Reports
+ * Main Reducer function for users
  *
  * @param {object} state
  * @param {const} type

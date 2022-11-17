@@ -25,7 +25,7 @@ const Home = () => {
       <PageContain>
         <MainContent>
         <CarouselBar/>
-            <MainSlide/>
+            {/* <MainSlide/> */}
             <Banners/>
             <ProductTabs/>
             <Brands/>

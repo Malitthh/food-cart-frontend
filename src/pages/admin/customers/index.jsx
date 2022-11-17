@@ -1,21 +1,29 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
-import { getUserStart } from "../../../store/users/actions";
+import { getUserStart, deleteUserStart } from "../../../store/users/actions";
 import { apiUrl, clientBaseURLImages } from "config";
-import queryString from 'query-string'
+import queryString from "query-string";
+import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 
 const CustomerIndex = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { users, auth } = useSelector((state) => state);
   const { allUsers } = users;
 
-  console.log(allUsers, "uu")
+  console.log(allUsers, "uu");
 
   const featchOnLoad = async () => {
-    let role = 'customer'
-    
+    let role = "customer";
     dispatch(getUserStart(role));
+  };
+
+  const deleteUser = async (id) => {
+    dispatch(deleteUserStart(id));
+    toast.success("Successfully Deleted !");
+    router.reload(window.location.pathname)
   };
 
   useEffect(() => {
@@ -25,7 +33,6 @@ const CustomerIndex = () => {
   return (
     <div className="min-h-full">
       <NavBar />
-
       <div className="container">
         <nav className="biolife-nav">
           <ul>
@@ -35,17 +42,17 @@ const CustomerIndex = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Customers</span>
+              <span className="current-page"><b>Customers</b></span>
             </li>
           </ul>
-          <div style={{ float: "right" }}>
+          <div style={{ float: "right", backgroundColor:"black", color:"white", borderRadius:"5px" }}>
             <a
               data-cy="link-new-report"
               href="/admin/customers/new-customer"
-              className="new-report btn btn-primary gap-2 btn-sm"
+              className="btn btn-sm"
             >
               <i className="fa fa-plus" aria-hidden="true"></i>
-              New Customer
+              &nbsp;&nbsp;New Customer
             </a>
           </div>
         </nav>
@@ -56,11 +63,13 @@ const CustomerIndex = () => {
             <div className="overflow-x-auto">
               <table className="table w-full">
                 <thead>
-                  <tr>
+                  <tr  style={{backgroundColor:"#ecf0e2"}}>
                     <th></th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
+                    <th><b>Name</b></th>
+                    <th><b>Email</b></th>
+                    <th><b>Contact No</b></th>
+                    <th><b>NIC</b></th>
+                    <th><b>Role</b></th>
                     <th></th>
                   </tr>
                 </thead>
@@ -68,9 +77,11 @@ const CustomerIndex = () => {
                   {allUsers &&
                     allUsers.map((user, key) => (
                       <tr key={key} className={key % 2 === 1 ? "active" : ""}>
-                        <td>{key+1}</td>
+                        <td>{key + 1}</td>
                         <td>{user.name}</td>
                         <td>{user.email}</td>
+                        <td>{user.mobileNo}</td>
+                        <td>{user.nic}</td>
                         <td>{user.role}</td>
                         <td>
                           <a
@@ -78,7 +89,15 @@ const CustomerIndex = () => {
                             href={`customers/${user._id}`}
                             className="inline-block px-6 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
                           >
-                            <i className="leading-tight fa fa-eye text-xs"></i>
+                            <i className="leading-tight fa fa-pencil text-xs"></i>
+                          </a> &nbsp;&nbsp;
+
+                          <a
+                            data-cy={`delete-report-btn${key}`}
+                            onClick={() => deleteUser(user._id)}
+                            className="inline-block px-6 py-3 mb-0 mr-2 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
+                          >
+                            <i className="leading-tight fa fa-trash-o text-xs"></i>
                           </a>
                         </td>
                       </tr>

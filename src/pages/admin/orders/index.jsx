@@ -30,19 +30,9 @@ const OrderIndex = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Orders</span>
+              <span className="current-page"><b>Orders</b></span>
             </li>
           </ul>
-          <div style={{ float: "right" }}>
-            <a
-              data-cy="link-new-report"
-              href="/admin/products/new-product"
-              className="new-report btn btn-primary gap-2 btn-sm"
-            >
-              <i className="fa fa-plus" aria-hidden="true"></i>
-              All Orders
-            </a>
-          </div>
         </nav>
       </div>
       <main>
@@ -51,10 +41,10 @@ const OrderIndex = () => {
             <div className="overflow-x-auto">
               <table className="table w-full">
                 <thead>
-                  <tr>
-                    <th>Customer Name</th>
-                    <th>Email</th>
-                    <th>Status</th>
+                  <tr style={{backgroundColor:"#ecf0e2"}}>
+                    <th><b>Customer Name</b></th>
+                    <th><b>Email</b></th>
+                    <th><b>Status</b></th>
                     <th></th>
                   </tr>
                 </thead>

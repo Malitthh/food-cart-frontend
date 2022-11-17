@@ -11,17 +11,10 @@ const SingleOrder = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { oid } = router.query;
-  const [reportData, setReportData] = useState();
+  const [status, setStatus] = useState();
   const { orders } = useSelector((state) => state);
   const { allOrders, singleOrder } = orders;
   console.log(orders, "or", singleOrder);
-  // const featchOnLoad = async () => {
-  //   dispatch(getOneOrderStart(oid));
-  // };
-
-  // useEffect(() => {
-  //   featchOnLoad();
-  // }, [oid]);
 
   useEffect(() => {
     if (!oid) {
@@ -42,6 +35,11 @@ const SingleOrder = () => {
       return sum + item.price * item.quantity;
     }, 0);
 
+  const updateOrderStatus = () => {
+    // singleOrder.status = status
+    // dispatch(updateOrderStart(singleOrder));
+  };
+
   return (
     <div className="min-h-full">
       <NavBar />
@@ -55,10 +53,14 @@ const SingleOrder = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Orders</span>
+              <a href="/admin/orders" className="permal-link">
+                Order List
+              </a>
             </li>
-          </ul>
-          <div style={{ float: "right" }}>
+            <li className="nav-item">
+              <span className="current-page"><b>Orders Details</b></span>
+            </li>
+            <div style={{ float: "right" }}>
             <a
               data-cy="link-new-report"
               href="/admin/orders"
@@ -68,6 +70,7 @@ const SingleOrder = () => {
               BACK
             </a>
           </div>
+          </ul>   
         </nav>
       </div>
       <main>
@@ -93,9 +96,9 @@ const SingleOrder = () => {
                           <div class="col-lg-6">
                             <div class="invoice-from">
                               <ul class="list-unstyled text-right">
-                                <li>Dash LLC</li>
-                                <li>2500 Ridgepoint Dr, Suite 105-C</li>
-                                <li>Austin TX 78754</li>
+                                <li>Food cart</li>
+                                <li>No 68/13A 3rd Cross street, 11</li>
+                                <li>Kandy - Sri Lanka</li>
                                 <li>VAT Number EU826113958</li>
                               </ul>
                             </div>
@@ -157,46 +160,56 @@ const SingleOrder = () => {
                                       <li>
                                         <strong>Status:</strong>{" "}
                                         <span class="label label-danger">
-                                          Pending
+                                          {singleOrder.status}
                                         </span>
                                       </li>
-                                   
                                     </ul>
-                                    <div style={{ borderStyle: 'dotted', border: 'dashed red', marginTop: '10px', padding: '5px'}}>
-                                        <hr />
-                                        <strong>Status Update:</strong>
-                                        <br />
-                                         {" "}
-                                        <input
-                                          type="radio"
-                                          id="pending"
-                                          name="order_status"
-                                          value="pending"
-                                        />
-                                          <label for="pending">Pending</label>
-                                        <br />
-                                         {" "}
-                                        <input
-                                          type="radio"
-                                          id="cancel"
-                                          name="order_status"
-                                          value="cancel"
-                                        />
-                                          <label for="cancel">Cancel </label>
-                                        <br />
-                                         {" "}
-                                        <input
-                                          type="radio"
-                                          id="complete"
-                                          name="order_status"
-                                          value="complete"
-                                        />
-                                         {" "}
-                                        <label for="complete">Complete</label>
-                                        <button className="btn btn-primary gap-2 btn-sm" style={{ float: 'right'}}>
-                                          Update Order Status
-                                        </button>
-                                      </div>
+                                    <div
+                                      style={{
+                                        borderStyle: "dotted",
+                                        border: "dashed red",
+                                        marginTop: "10px",
+                                        padding: "5px",
+                                      }}
+                                    >
+                                      <hr />
+                                      <strong>Status Update:</strong>
+                                      <br /> {" "}
+                                      <input
+                                        type="radio"
+                                        id="processing"
+                                        name="order_status"
+                                        value="processing"
+                                        onChange={() => setStatus("processing")}
+                                      />
+                                       {" "}
+                                      <label for="processing">Processing</label>
+                                      <br /> {" "}
+                                      <input
+                                        type="radio"
+                                        id="shipped"
+                                        name="order_status"
+                                        value="shipped"
+                                        onChange={() => setStatus("shipped")}
+                                      />
+                                        <label for="shipped"> Shipped </label>
+                                      <br /> {" "}
+                                      <input
+                                        type="radio"
+                                        id="delivered"
+                                        name="order_status"
+                                        value="delivered"
+                                        onChange={() => setStatus("delivered")}
+                                      />
+                                        <label for="delivered">Delivered</label>
+                                      <button
+                                        onClick={() => updateOrderStatus()}
+                                        className="btn btn-primary gap-2 btn-sm"
+                                        style={{ float: "right" }}
+                                      >
+                                        Update Order Status
+                                      </button>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -205,14 +218,12 @@ const SingleOrder = () => {
                               <div class="table-responsive">
                                 <table class="table table-bordered">
                                   <thead>
-                                    <tr>
-                                      <th class="per70 text-center">Name</th>
-                                      <th class="per70 text-center">Image</th>
-                                      <th class="per5 text-center">
-                                        Unit Price
-                                      </th>
-                                      <th class="per5 text-center">Qty</th>
-                                      <th class="per25 text-center">Total</th>
+                                    <tr style={{backgroundColor:"#ecf0e2"}}>
+                                      <th class="per70 text-center"><b>Name</b></th>
+                                      <th class="per70 text-center"><b>Image</b></th>
+                                      <th class="per5 text-center"><b> Unit Price</b></th>
+                                      <th class="per5 text-center"><b>Qty</b></th>
+                                      <th class="per25 text-center"><b>Total</b></th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -246,25 +257,25 @@ const SingleOrder = () => {
                                   <tfoot>
                                     <tr>
                                       <th colspan="4" class="text-right">
-                                        Sub Total:
+                                       <b> Sub Total :</b>
                                       </th>
                                       <th class="text-right">LKR {sum}.00</th>
                                     </tr>
                                     <tr>
                                       <th colspan="4" class="text-right">
-                                        TAX:
+                                        <b>TAX :</b>
                                       </th>
                                       <th class="text-right">LKR 00.00</th>
                                     </tr>
                                     <tr>
                                       <th colspan="4" class="text-right">
-                                        Credit:
+                                       <b> Credit :</b>
                                       </th>
                                       <th class="text-right">LKR 00.00</th>
                                     </tr>
                                     <tr>
                                       <th colspan="4" class="text-right">
-                                        Total:
+                                        <b>Total :</b>
                                       </th>
                                       <th class="text-right">
                                         <b>LKR {sum}.00</b>

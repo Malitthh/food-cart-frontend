@@ -30,17 +30,17 @@ const ProductIndex = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Products</span>
+              <span className="current-page"><b>Products</b></span>
             </li>
           </ul>
-          <div style={{ float: "right" }}>
-            <a
+          <div style={{ float: "right", backgroundColor:"black", color:"white", borderRadius:"5px"}}>
+            <a 
               data-cy="link-new-report"
               href="/admin/products/new-product"
-              className="new-report btn btn-primary gap-2 btn-sm"
+              className="btn gap-2 btn-sm .hover-item"
             >
               <i className="fa fa-plus" aria-hidden="true"></i>
-              New Product
+              &nbsp;&nbsp;New Product
             </a>
           </div>
         </nav>
@@ -51,13 +51,13 @@ const ProductIndex = () => {
             <div className="overflow-x-auto">
               <table className="table w-full">
                 <thead>
-                  <tr>
+                  <tr style={{backgroundColor:"#ecf0e2"}}>
                     <th></th>
-                    <th>Product Name</th>
-                    <th>Category</th>
-                    <th>Cost Price</th>
-                    <th>Market Price</th>
-                    <th>Stock In hand</th>
+                    <th><b>Product Name</b></th>
+                    <th><b>Category</b></th>
+                    <th><b>Cost Price</b></th>
+                    <th><b>Market Price</b></th>
+                    <th><b>Stock In hand</b></th>
                     <th></th>
                   </tr>
                 </thead>
@@ -82,7 +82,15 @@ const ProductIndex = () => {
                             href={`products/${product._id}`}
                             className="inline-block px-6 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
                           >
-                            <i className="leading-tight fa fa-eye text-xs"></i>
+                            <i className="leading-tight fa fa-pencil text-xs"></i>
+                          </a> &nbsp;&nbsp;
+
+                          <a
+                            data-cy={`delete-report-btn${key}`}
+                            onClick={() => deleteUser(user._id)}
+                            className="inline-block px-6 py-3 mb-0 mr-2 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
+                          >
+                            <i className="leading-tight fa fa-trash-o text-xs"></i>
                           </a>
                         </td>
                       </tr>

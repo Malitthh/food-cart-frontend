@@ -32,17 +32,17 @@ const Index = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Suppliers</span>
+              <span className="current-page"><b>Suppliers</b></span>
             </li>
           </ul>
-          <div style={{ float: "right" }}>
+          <div style={{ float: "right", backgroundColor:"black", color:"white", borderRadius:"5px"}}>
             <a
               data-cy="link-new-report"
               href="/admin/suppliers/new-supplier"
-              className="new-report btn btn-primary gap-2 btn-sm"
+              className="new-report btn gap-2 btn-sm"
             >
               <i className="fa fa-plus" aria-hidden="true"></i>
-              New Supplier
+              &nbsp;&nbsp; New Supplier
             </a>
           </div>
         </nav>
@@ -53,11 +53,12 @@ const Index = () => {
             <div className="overflow-x-auto">
               <table className="table w-full">
                 <thead>
-                  <tr>
+                  <tr style={{backgroundColor:"#ecf0e2"}}>
                     <th></th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
+                    <th><b>Name</b></th>
+                    <th><b>Email</b></th>
+                    <th><b>Contact No</b></th>
+                    <th><b>Role</b></th>
                     <th></th>
                   </tr>
                 </thead>
@@ -68,14 +69,23 @@ const Index = () => {
                         <td>{key+1}</td>
                         <td>{user.name}</td>
                         <td>{user.email}</td>
+                        <td>{user.mobileNo}</td>
                         <td>{user.role}</td>
                         <td>
                           <a
                             data-cy={`view-report-btn${key}`}
-                            href={`customers/${user._id}`}
+                            href={`suppliers/${user._id}`}
                             className="inline-block px-6 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
                           >
-                            <i className="leading-tight fa fa-eye text-xs"></i>
+                            <i className="leading-tight fa fa-pencil text-xs"></i>
+                          </a> &nbsp;&nbsp;
+
+                          <a
+                            data-cy={`delete-report-btn${key}`}
+                            onClick={() => deleteUser(user._id)}
+                            className="inline-block px-6 py-3 mb-0 mr-2 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
+                          >
+                            <i className="leading-tight fa fa-trash-o text-xs"></i>
                           </a>
                         </td>
                       </tr>

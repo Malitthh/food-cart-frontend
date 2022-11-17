@@ -121,19 +121,14 @@ const NewCustomer = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Customers</span>
+              <a href="/admin/suppliers" className="permal-link">
+                Suppliers
+              </a>
+            </li>
+            <li className="nav-item">
+              <span className="current-page"><b>New Suppliers</b></span>
             </li>
           </ul>
-          <div style={{ float: "right" }}>
-            <a
-              data-cy="link-new-report"
-              href="/admin/customers/new-customer"
-              className="new-report btn btn-primary gap-2 btn-sm"
-            >
-              <i className="fa fa-plus" aria-hidden="true"></i>
-              New Customer
-            </a>
-          </div>
         </nav>
       </div>
       <main>
@@ -143,7 +138,7 @@ const NewCustomer = () => {
               <form>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="name">Name</label>
+                    <label htmlFor="name"><b>Name : </b></label>
                     <input
                       type="text"
                       className="form-control"
@@ -151,19 +146,21 @@ const NewCustomer = () => {
                       name="name"
                       onChange={onChangeInput}
                       value={userInfo.name}
+                      placeholder="Enter your name here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["name"]}
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="email">Email</label>
+                    <label htmlFor="email"><b>Email : </b></label>
                     <input
                       type="text"
                       className="form-control"
                       id="email"
                       onChange={onChangeInput}
                       value={userInfo.email}
+                      placeholder="Enter your email here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["email"]}
@@ -172,7 +169,72 @@ const NewCustomer = () => {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="costPrice">Password</label>
+                    <label htmlFor="address"><b>Address : </b></label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={onChangeInput}
+                      value={userInfo.address}
+                      id="address"
+                      name="address"
+                      placeholder="Enter your address here"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["address"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="mobileNo"><b>Contact No : </b></label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={onChangeInput}
+                      value={userInfo.mobileNo}
+                      id="mobileNo"
+                      name="mobileNo"
+                      placeholder="Enter your contact no here"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["mobileNo"]}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-row">
+                <div className="form-group col-md-6">
+                    <label htmlFor="joinDate">
+                      <b>Date of Join</b>
+                    </label>
+                    <input
+                      type="date"
+                      className="form-control"
+                      onChange={onChangeInput}
+                      value={userInfo.joinDate}
+                      id="joinDate"
+                      name="joinDate"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["joinDate"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="joinDate">
+                      <b>What does he/she supply?</b>
+                    </label>
+                    <select className="form-control">
+                      <option value="" disabled="disabled" selected="true">Select a category here</option>
+                      <option value="Fruits&nuts">Fruits & nuts</option>
+                      <option value="Vegetables">Vegetables</option>
+                      <option value="Berries">Berries</option>
+                      <option value="Butter&Eggs">Butter & Eggs</option>
+                    </select>
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["joinDate"]}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="password"><b>Password</b></label>
                     <input
                       type="password"
                       className="form-control"
@@ -180,22 +242,22 @@ const NewCustomer = () => {
                       value={userInfo.password}
                       id="password"
                       name="password"
-                      placeholder=""
+                      placeholder="Enter your password here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["password"]}
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="passwordConfirm">Confirm Password</label>
+                    <label htmlFor="passwordConfirm"><b>Confirm Password</b></label>
                     <input
                       type="password"
                       className="form-control"
-                      placeholder=""
                       onChange={onChangeInput}
                       value={userInfo.passwordConfirm}
                       id="passwordConfirm"
                       name="passwordConfirm"
+                      placeholder="Re-Enter your password here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["passwordConfirm"]}
@@ -203,13 +265,29 @@ const NewCustomer = () => {
                   </div>
                 </div>
                 <div className="form-row">
+                <div className="form-group col-md-6">
                   <button
                     data-cy="save-new-report-btn"
                     onClick={(e) => validateBeforeSave(e)}
-                    className="btn btn-primary"
+                    className="btn btn-success"
                   >
                     Save
-                  </button>
+                  </button> &nbsp;
+                  <button
+                    data-cy="save-new-report-btn"
+                    onClick={(e) => validateBeforeSave(e)}
+                    className="btn btn-warning"
+                  >
+                    Reset
+                  </button> &nbsp;
+                  <a 
+                    data-cy="link-new-report"
+                    href="/admin/suppliers"
+                    className="new-report btn btn-danger gap- btn-sm"
+                  > Cancel
+                   
+                  </a>
+                  </div>
                 </div>
               </form>
             </div>

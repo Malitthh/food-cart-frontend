@@ -7,7 +7,7 @@ import { addUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
-import { ProductSchema } from "../../../schema/productSchema";
+import { CustomerSchema } from "../../../schema/customerSchema";
 
 const NewCustomer = () => {
   const router = useRouter();
@@ -16,43 +16,7 @@ const NewCustomer = () => {
   const [files, setFile] = useState([]);
   const [errors, setErrors] = useState([]);
   const [message, setMessage] = useState();
-  /**
-   * set image
-   * @param {*} e
-   * @returns
-   */
-  const handleImageFile = (e) => {
-    setMessage("");
-    let file = e.target.files;
 
-    for (let i = 0; i < file.length; i++) {
-      const fileType = file[i]["type"];
-      const validImageTypes = [
-        "image/gif",
-        "image/jpeg",
-        "image/png",
-        "image/webp",
-      ];
-      if (validImageTypes.includes(fileType)) {
-        setFile([...files, file[i]]);
-      } else {
-        setMessage("only images accepted");
-      }
-    }
-  };
-
-  /**
-   * Remove added image before upload
-   * @param {*} i
-   */
-  const removeImage = (i) => {
-    setFile(files.filter((x) => x.name !== i));
-  };
-
-  /**
-   * set vehicle makde and model
-   * @param {*} e
-   */
   const onChangeCategory = (e) => {
     setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
     console.log(e.target.value, e.target.id);
@@ -60,12 +24,12 @@ const NewCustomer = () => {
   };
 
   /**
-   * set customer name, mobile no and vehicle no
+   * set customer name
    * @param {*} e
    */
   const onChangeInput = (e) => {
     console.log(e.target.id, e.target.value);
-    //validateField(e.target.id, e.target.value);
+    validateField(e.target.id, e.target.value);
     setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
   };
 
@@ -73,14 +37,12 @@ const NewCustomer = () => {
    * OnSubmit method to invoke the database call
    */
   const onSubmit = async () => {
-
     let user = userInfo;
-    user.role = 'customer';
+    user.role = "customer";
     dispatch(addUserStart(user));
     toast.success("Successfully Added !");
 
-   // router.push("/admin/products");
-
+    router.push("/admin/customers");
   };
 
   /**
@@ -90,9 +52,13 @@ const NewCustomer = () => {
 
   const validateBeforeSave = (e) => {
     e.preventDefault();
-    console.log(userInfo, "pp");
-    onSubmit();
-
+    const err = validateForm(userInfo, CustomerSchema);
+    console.log(err, "errrrr");
+    if (err) {
+      setErrors(err);
+    } else {
+      onSubmit();
+    }
   };
 
   /**
@@ -101,7 +67,7 @@ const NewCustomer = () => {
    * @param {*} value
    */
   const validateField = (name, value) => {
-    const errMsg = validateProperty(name, value, ProductSchema);
+    const errMsg = validateProperty(name, value, CustomerSchema);
 
     if (errMsg) {
       errors[name] = errMsg;
@@ -122,19 +88,14 @@ const NewCustomer = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Customers</span>
+              <a href="/admin/customers" className="permal-link">
+                Customer
+              </a>
+            </li>
+            <li className="nav-item">
+              <span className="current-page"><b>New Customer</b></span>
             </li>
           </ul>
-          <div style={{ float: "right" }}>
-            <a
-              data-cy="link-new-report"
-              href="/admin/customers/new-customer"
-              className="new-report btn btn-primary gap-2 btn-sm"
-            >
-              <i className="fa fa-plus" aria-hidden="true"></i>
-              New Customer
-            </a>
-          </div>
         </nav>
       </div>
       <main>
@@ -142,38 +103,139 @@ const NewCustomer = () => {
           <div className="container mx-2">
             <div className="overflow-x-auto">
               <form>
-                <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label htmlFor="name">Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="name"
-                      name="name"
-                      onChange={onChangeInput}
-                      value={userInfo.name}
-                    />
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["name"]}
-                    </p>
+                <div className="form-row col-md-12">
+                  <div className="form-row">
+                    <div className="form-group col-md-6">
+                      <label htmlFor="name">
+                        <b>Name : </b>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="name"
+                        name="name"
+                        onChange={onChangeInput}
+                        value={userInfo.name}
+                        placeholder="Enter your name here"
+                      />
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["name"]}
+                      </p>
+                    </div>
+                    <div className="form-group col-md-6">
+                      <label htmlFor="email">
+                        <b>Email : </b>
+                      </label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        id="email"
+                        onChange={onChangeInput}
+                        value={userInfo.email}
+                        placeholder="Enter your email here"
+                      />
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["email"]}
+                      </p>
+                    </div>
                   </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="email">Email</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="email"
-                      onChange={onChangeInput}
-                      value={userInfo.email}
-                    />
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["email"]}
-                    </p>
+                  <div className="form-row">
+                    <div className="form-group col-md-6">
+                      <label htmlFor="mobileNo">
+                        <b>Contact No : </b>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="mobileNo"
+                        name="mobileNo"
+                        onChange={onChangeInput}
+                        value={userInfo.mobileNo}
+                        placeholder="Enter your contact no here"
+                      />
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["mobileNo"]}
+                      </p>
+                    </div>
+                    <div className="form-group col-md-6">
+                      <label htmlFor="nic">
+                        <b>NIC : </b>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="nic"
+                        name="nic"
+                        onChange={onChangeInput}
+                        value={userInfo.nic}
+                        placeholder="Enter your NIC here"
+                      />
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["nic"]}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <div className="form-row">
+                  <div className="form-row">
+                    <div className="form-group col-md-6">
+                      <label htmlFor="gender">
+                        <b>Gender : </b>
+                      </label>
+                      <select className="form-control">
+                        <option disabled="disabled" selected="true">Select your Gender here</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                      </select>
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["dob"]}
+                      </p>
+                    </div>
+                    <div className="form-group col-md-6">
+                      <label htmlFor="address">
+                        <b>Address : </b>
+                      </label>
+                      <select className="form-control">
+                        <option disabled="disabled" selected="true">Select your province here</option>
+                        <option value="southern">Southern</option>
+                        <option value="central">Central</option>
+                        <option value="northwest">North western</option>
+                        <option value="uva">Uva</option>
+                        <option value="sabaragamuwa">Sabaragamuwa</option>
+                        <option value="west">West</option>
+                        <option value="eastern">Eastern</option>
+                        <option value="northen">Northen</option>
+                        <option value="northCentral">North Central</option>
+                      </select>
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["province"]}
+                      </p>
+                      
+                    </div>
+                  </div>
+                  <div className="form-row">
+                    <div className="form-group col-md-12">
+                      <label htmlFor="province">
+                        <b>Address : </b>
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        onChange={onChangeInput}
+                        value={userInfo.address}
+                        id="address"
+                        name="address"
+                        placeholder="Enter your address here"
+                      />
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["address"]}
+                      </p>
+                    </div>
+                  </div>
+                
+                <div className="form-row">      
                   <div className="form-group col-md-6">
-                    <label htmlFor="costPrice">Password</label>
+                    <label htmlFor="password">
+                      <b>Password : </b>
+                    </label>
                     <input
                       type="password"
                       className="form-control"
@@ -181,22 +243,24 @@ const NewCustomer = () => {
                       value={userInfo.password}
                       id="password"
                       name="password"
-                      placeholder=""
+                      placeholder="Enter your password here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["password"]}
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="passwordConfirm">Confirm Password</label>
+                    <label htmlFor="passwordConfirm">
+                      <b>Confirm Password : </b>
+                    </label>
                     <input
                       type="password"
                       className="form-control"
-                      placeholder=""
                       onChange={onChangeInput}
                       value={userInfo.passwordConfirm}
                       id="passwordConfirm"
                       name="passwordConfirm"
+                      placeholder="Re-Enter your password here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["passwordConfirm"]}
@@ -204,13 +268,31 @@ const NewCustomer = () => {
                   </div>
                 </div>
                 <div className="form-row">
-                  <button
-                    data-cy="save-new-report-btn"
-                    onClick={(e) => validateBeforeSave(e)}
-                    className="btn btn-primary"
-                  >
-                    Save
-                  </button>
+                  <div className="form-group col-md-6">
+                    <button
+                      data-cy="save-new-report-btn"
+                      onClick={(e) => validateBeforeSave(e)}
+                      className="btn btn-success"
+                    >
+                      Save
+                    </button>{" "}
+                    &nbsp;
+                    <button
+                      data-cy="save-new-report-btn"
+                      onClick={(e) => validateBeforeSave(e)}
+                      className="btn btn-warning"
+                    >
+                      Reset
+                    </button> &nbsp;
+                    <a 
+                    data-cy="link-new-report"
+                    href="/admin/customers"
+                    className="new-report btn btn-danger gap- btn-sm"
+                  > Cancel
+                   
+                  </a>
+                  </div>
+                </div>
                 </div>
               </form>
             </div>

@@ -5,23 +5,25 @@ import 'react-responsive-carousel/lib/styles/carousel.min.css';
 const CarouselBar = () => {
     return (
 			<div>
-		
-			<Carousel showThumbs={false} interval={8000} autoPlay={true}>
+				<Carousel 
+					showThumbs={false} 
+					interval={8000} 
+					autoPlay={true}
+					showStatus={false}
+				>
 				<div>
-					<img src="assets/images/HeaderImages1Edited.jpg" width="1920px" height="550px"/>
-
+					<img src="assets/images/ImageEdited1.jpg"/>
 				</div>
 				<div>
-					<img src="assets/images/HeaderImages2Edited.jpg" width="1920px" height="550px" />
+					<img src="assets/images/ImageEdited2.jpg" />
 				</div>
 				<div>
-					<img src="assets/images/HeaderImages3Edited.jpg" width="1920px" height="550px"/>
+					<img src="assets/images/ImageEdited3.jpg"/>
 				</div>
 				<div>
-					<img src="assets/images/HeaderImages4Edited.jpg" width="1920px" height="550px"/>
+					<img src="assets/images/ImageEdited4.jpg"/>
 				</div>
-				
-			</Carousel>
+				</Carousel>
 			</div>
 		);
 	}

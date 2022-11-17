@@ -158,7 +158,7 @@ const NewProduct = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Products</span>
+              <span className="current-page"><b>Products</b></span>
             </li>
           </ul>
           <div style={{ float: "right" }}>
@@ -180,7 +180,7 @@ const NewProduct = () => {
               <form>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="name">Product Name</label>
+                    <label htmlFor="productName"><b>Product Name : </b></label>
                     <input
                       type="text"
                       className="form-control"
@@ -188,20 +188,21 @@ const NewProduct = () => {
                       name="productName"
                       onChange={onChangeInput}
                       value={productInfo.productName}
+                      placeholder="Enter product name here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["productName"]}
                     </p>
                   </div>
                   <div className="form-group col-md-4">
-                    <label htmlFor="category">Category</label>
-                    <select
+                    <label htmlFor="category"><b>Category : </b></label>
+                    <select selected="true"
                       id="category"
                       className="form-control"
                       onChange={onChangeCategory}
                       value={productInfo.category}
                     >
-                      <option selected>Choose a Category</option>
+                      <option selected disabled>Choose a Category</option>
                       <option value="fruit_nuts">Fruit & Nuts</option>
                       <option value="vegetables">Vegetables</option>
                       <option value="berries">Berries</option>
@@ -212,7 +213,7 @@ const NewProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-2">
-                    <label htmlFor="stock">Stock in Hand</label>
+                    <label htmlFor="stock"><b>Stock in Hand</b></label>
                     <input
                       type="number"
                       className="form-control"
@@ -227,7 +228,7 @@ const NewProduct = () => {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="costPrice">Cost Price</label>
+                    <label htmlFor="costPrice"><b>Cost Price</b></label>
                     <input
                       type="number"
                       className="form-control"
@@ -242,7 +243,7 @@ const NewProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="marketPrice">Market Price</label>
+                    <label htmlFor="marketPrice"><b>Market Price</b></label>
                     <input
                       type="number"
                       className="form-control"
@@ -259,7 +260,7 @@ const NewProduct = () => {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="costPrice">Remarks</label>
+                    <label htmlFor="costPrice"><b>Remarks</b></label>
                     <input
                       type="text"
                       className="form-control"
@@ -274,7 +275,7 @@ const NewProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="images">Images</label>
+                    <label htmlFor="images"><b>Images</b></label>
                     <input
                       type="file"
                       onChange={handleImageFile}
@@ -308,13 +309,29 @@ const NewProduct = () => {
                   </div>
                 </div>
                 <div className="form-row">
+                <div className="form-group col-md-6">
                   <button
                     data-cy="save-new-report-btn"
                     onClick={(e) => validateBeforeSave(e)}
-                    className="btn btn-primary"
+                    className="btn btn-success"
                   >
                     Save
-                  </button>
+                  </button> &nbsp;
+                  <button
+                    data-cy="save-new-report-btn"
+                    // onClick={(e) => validateBeforeSave(e)}
+                    className="btn btn-warning"
+                  >
+                    Reset
+                  </button> &nbsp;
+                  <a 
+                    data-cy="link-new-report"
+                    href="/admin/products"
+                    className="new-report btn btn-danger gap- btn-sm"
+                  > Cancel
+                   
+                  </a>
+                </div>
                 </div>
               </form>
             </div>

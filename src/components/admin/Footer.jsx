@@ -59,7 +59,7 @@ const Footer = () => {
                                     <li>
                                         <p className="info-item">
                                             <i className="biolife-icon icon-location"></i>
-                                            <b className="desc">No 68/13A 3rd Cross Street, 11, Kandy, Sri Lanka</b>
+                                            <b className="desc">68/13 3rd Cross Street, 11, Kandy, Sri Lanka</b>
                                         </p>
                                     </li>
                                     <li>
@@ -71,7 +71,7 @@ const Footer = () => {
                                     <li>
                                         <p className="info-item">
                                             <i className="biolife-icon icon-letter"></i>
-                                            <b className="desc">Email: foodcart@gmail.com</b>
+                                            <b className="desc">Email: foodCart@gmail.com</b>
                                         </p>
                                     </li>
                                     <li>
