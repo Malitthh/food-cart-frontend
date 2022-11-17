@@ -58,19 +58,20 @@ const SingleOrder = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page"><b>Orders Details</b></span>
-            </li>
-            <div style={{ float: "right" }}>
-            <a
-              data-cy="link-new-report"
-              href="/admin/orders"
-              className="new-report btn btn-primary gap-2 btn-sm"
-            >
-              <i className="fa fa-plus" aria-hidden="true"></i>
-              BACK
-            </a>
-          </div>
-          </ul>   
+              <span className="current-page">
+                <b>Orders Details</b>
+              </span>
+            </li> </ul><br/>
+            <div style={{ float: "left" }}>
+              <a
+                data-cy="link-new-report"
+                href="/admin/orders"
+                className="new-report btn btn-warning gap-2 btn-sm"
+              >
+                <i className="fa fa-angle-left" aria-hidden="true"></i>
+                &nbsp;&nbsp;BACK
+              </a>
+            </div>
         </nav>
       </div>
       <main>
@@ -86,79 +87,96 @@ const SingleOrder = () => {
                           <div class="col-lg-6">
                             <div class="invoice-logo">
                               <img
-                                width="100"
+                                width="150"
                                 src="/assets/images/Logo.jpg"
                                 alt="Invoice logo"
                               />
                             </div>
-                          </div>
+                            <br />
+                            <div style={{ paddingLeft: "15px", color:"#b19a1a" }}>
+                              <b>Date & Time :</b> 2022-11-15 11.30 P.M <br/>
+                                Order No: EU826113958
+                            </div>
+                          </div><br/> <br/>
 
                           <div class="col-lg-6">
                             <div class="invoice-from">
                               <ul class="list-unstyled text-right">
-                                <li>Food cart</li>
+                                <li><i><b>Food cart (Pvt) Ltd.</b></i></li>
                                 <li>No 68/13A 3rd Cross street, 11</li>
-                                <li>Kandy - Sri Lanka</li>
-                                <li>VAT Number EU826113958</li>
+                                <li>Kandy</li>
+                                <li>Sri Lanka</li>
                               </ul>
                             </div>
                           </div>
 
                           <div class="col-lg-12">
-                            <div className="row pb-5 p-5">
-                              <div className="col-md-3">
-                                <p className="font-weight-bold mb-4">
-                                  <b>Billing Address</b>
-                                </p>
-                                <p className="mb-1">
-                                  {singleOrder.billingAddress?.name}
-                                </p>
-                                <p>{singleOrder.billingAddress?.mobile}</p>
-                                <p className="mb-1">
-                                  {singleOrder.billingAddress?.addressLine1},{" "}
-                                  {singleOrder.billingAddress?.addressLine2}
-                                </p>
-                                <p className="mb-1">
-                                  {singleOrder.billingAddress?.city},{" "}
-                                  {singleOrder.billingAddress?.postalCode}
-                                </p>
-                              </div>
-
-                              <div className="col-md-3 text-left">
-                                <p className="font-weight-bold mb-4">
-                                  <b>Shipping Address</b>
-                                </p>
-                                <p className="mb-1">
-                                  {singleOrder.shippingAddress?.name}
-                                </p>
-                                <p>{singleOrder.shippingAddress?.mobile}</p>
-                                <p className="mb-1">
-                                  {singleOrder.shippingAddress?.addressLine1},{" "}
-                                  {singleOrder.shippingAddress?.addressLine2}
-                                </p>
-                                <p className="mb-1">
-                                  {singleOrder.shippingAddress?.city},{" "}
-                                  {singleOrder.shippingAddress?.postalCode}
-                                </p>
+                            <div className="row pb-3 p-1">
+                              <div className="col-md-6 text-left">
+                                <div>
+                                  <div class="col-md-12">
+                                    <strong style={{ color: "#676767" }}>
+                                      BILLING NAME | CONTACT NO
+                                    </strong>
+                                    <ul class="list-unstyled mb0">
+                                      <li>
+                                        {singleOrder.billingAddress?.name} |{" "}
+                                        {singleOrder.billingAddress?.mobile}
+                                      </li>
+                                    </ul> <br/>
+                                    <strong style={{ color: "#676767" }}>
+                                      BILLING ADDRESS | CITY | POSTAL CODE
+                                    </strong>
+                                    <ul class="list-unstyled mb0">
+                                      <li>
+                                        {singleOrder.billingAddress ?.addressLine1},{" "}
+                                        {singleOrder.billingAddress ?.addressLine2 }{" "}
+                                        | {singleOrder.billingAddress?.city}, |{" "}
+                                        {singleOrder.billingAddress?.postalCode}
+                                      </li>
+                                    </ul>
+                                    <br />
+                                    <strong style={{ color: "#90910ff2" }}>
+                                      SHIPPING NAME | CONTACT NO
+                                    </strong>
+                                    <ul class="list-unstyled mb0">
+                                      <li>
+                                        {singleOrder.shippingAddress?.name} |{" "}
+                                        {singleOrder.shippingAddress?.mobile}
+                                      </li>
+                                    </ul>
+                                    <strong style={{ color: "#90910ff2" }}>
+                                      SHIPPING ADDRESS | CITY | POSTAL CODE
+                                    </strong>
+                                    <ul class="list-unstyled mb0">
+                                      <li>
+                                        {singleOrder.shippingAddress?.addressLine1 } ,{" "}
+                                        {singleOrder.shippingAddress?.addressLine2}{" "}
+                                        | {singleOrder.shippingAddress?.city} |{" "}
+                                        {singleOrder.shippingAddress?.postalCode }
+                                      </li>
+                                    </ul>
+                                  </div>
+                                </div>
                               </div>
 
                               <div className="col-md-6 text-left">
                                 <div class="invoice-details mt25">
-                                  <div class="well">
-                                    <ul class="list-unstyled mb0">
+                                  <div class="well" style={{border:"none", paddingTop:"1px", backgroundColor:"#f6f7e9", borderRadius:"5px"}}>
+                                    <ul class="list-unstyled">
                                       <li>
-                                        <strong>Invoice</strong> #936988
+                                        <strong>Invoice : </strong> #936988
                                       </li>
                                       <li>
-                                        <strong>Invoice Date:</strong> Monday,
+                                        <strong>Invoice Date :</strong> Monday,
                                         October 10th, 2022
                                       </li>
                                       <li>
-                                        <strong>Due Date:</strong> Thursday,
+                                        <strong>Due Date :</strong> Thursday,
                                         December 01st, 2022
                                       </li>
                                       <li>
-                                        <strong>Status:</strong>{" "}
+                                        <strong>Status : </strong>{" "}
                                         <span class="label label-danger">
                                           {singleOrder.status}
                                         </span>
@@ -204,8 +222,11 @@ const SingleOrder = () => {
                                         <label for="delivered">Delivered</label>
                                       <button
                                         onClick={() => updateOrderStatus()}
-                                        className="btn btn-primary gap-2 btn-sm"
-                                        style={{ float: "right" }}
+                                        className="btn btn-success gap-2 btn-sm"
+                                        style={{
+                                          float: "right",
+                                          borderRadius: "5px",
+                                        }}
                                       >
                                         Update Order Status
                                       </button>
@@ -218,12 +239,22 @@ const SingleOrder = () => {
                               <div class="table-responsive">
                                 <table class="table table-bordered">
                                   <thead>
-                                    <tr style={{backgroundColor:"#ecf0e2"}}>
-                                      <th class="per70 text-center"><b>Name</b></th>
-                                      <th class="per70 text-center"><b>Image</b></th>
-                                      <th class="per5 text-center"><b> Unit Price</b></th>
-                                      <th class="per5 text-center"><b>Qty</b></th>
-                                      <th class="per25 text-center"><b>Total</b></th>
+                                    <tr style={{ backgroundColor: "#ecf0e2"}}>
+                                      <th class="per70 text-center">
+                                        <b>Name</b>
+                                      </th>
+                                      <th class="per70 text-center">
+                                        <b>Image</b>
+                                      </th>
+                                      <th class="per5 text-center">
+                                        <b> Unit Price</b>
+                                      </th>
+                                      <th class="per5 text-center">
+                                        <b>Qty</b>
+                                      </th>
+                                      <th class="per25 text-center">
+                                        <b>Amount</b>
+                                      </th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -240,13 +271,12 @@ const SingleOrder = () => {
                                               />
                                             </td>
                                             <td class="text-right">
-                                              LKR {product.price}.00
+                                               {product.price}.00
                                             </td>
                                             <td class="text-center">
                                               {product.quantity}
                                             </td>
-                                            <td class="text-right">
-                                              LKR{" "}
+                                            <td class="text-right">{" "}
                                               {product.price * product.quantity}
                                               .00
                                             </td>
@@ -257,25 +287,25 @@ const SingleOrder = () => {
                                   <tfoot>
                                     <tr>
                                       <th colspan="4" class="text-right">
-                                       <b> Sub Total :</b>
+                                        Sub Total
                                       </th>
-                                      <th class="text-right">LKR {sum}.00</th>
+                                      <th class="text-right"> {sum}.00</th>
                                     </tr>
                                     <tr>
                                       <th colspan="4" class="text-right">
-                                        <b>TAX :</b>
+                                        Discount
                                       </th>
-                                      <th class="text-right">LKR 00.00</th>
+                                      <th class="text-right"> 00.00</th>
                                     </tr>
                                     <tr>
                                       <th colspan="4" class="text-right">
-                                       <b> Credit :</b>
+                                        Service Charge
                                       </th>
-                                      <th class="text-right">LKR 00.00</th>
+                                      <th class="text-right"> 00.00</th>
                                     </tr>
                                     <tr>
                                       <th colspan="4" class="text-right">
-                                        <b>Total :</b>
+                                        <b>Total Amount </b>
                                       </th>
                                       <th class="text-right">
                                         <b>LKR {sum}.00</b>
@@ -284,6 +314,7 @@ const SingleOrder = () => {
                                   </tfoot>
                                 </table>
                               </div>
+                              <p style={{float:"right", fontSize:"12px"}}>All amounts are in Sri lankan rupees (LKR)</p>
                             </div>
                           </div>
                         </div>
