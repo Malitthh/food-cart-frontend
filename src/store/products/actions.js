@@ -17,6 +17,10 @@ export const PRODUCTS_TYPES = {
     DELETE_PRODUCT_START: "DELETE_PRODUCT_START",
     DELETE_PRODUCT_SUCCESS: "DELETE_PRODUCT_SUCCESS",
     DELETE_PRODUCT_ERROR: "DELETE_PRODUCT_ERROR",
+
+    GET_SINGLE_PRODUCT_START: "GET_SINGLE_PRODUCT_START",
+    GET_SINGLE_PRODUCT_SUCCESS: "GET_SINGLE_PRODUCT_SUCCESS",
+    GET_SINGLE_PRODUCT_ERROR: "GET_SINGLE_PRODUCT_ERROR",
 };
  
 /**
@@ -44,3 +48,8 @@ export const updateProductError = (payload) => ({type: PRODUCTS_TYPES.UPDATE_PRO
 export const deleteProductStart = (payload) => ({ type: PRODUCTS_TYPES.DELETE_PRODUCT_START, payload})
 export const deleteProductSuccess = (payload) => ({ type: PRODUCTS_TYPES.DELETE_PRODUCT_SUCCESS, payload})
 export const deleteProductError = (payload) => ({type: PRODUCTS_TYPES.DELETE_PRODUCT_ERROR, payload})
+
+/** GET PRODUCTS ACTIONS */
+export const getSingleProductStart = (payload) => ({ type: PRODUCTS_TYPES.GET_SINGLE_PRODUCT_START, payload})
+export const getSingleProductSuccess = (payload) => ({ type: PRODUCTS_TYPES.GET_SINGLE_PRODUCT_SUCCESS, payload})
+export const getSingleProductError = (payload) => ({type: PRODUCTS_TYPES.GET_SINGLE_PRODUCT_ERROR, payload})

@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { apiUrl, clientBaseURL } from "config";
 import axios from "axios";
-import { useDispatch } from "react-redux";
-import { updateProductStart } from "../../../store/products/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { updateProductStart, getSingleProductStart } from "../../../store/products/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { ProductSchema } from "../../../schema/productSchema";
+
 
 const updateProduct = () => {
   const router = useRouter();
@@ -16,6 +17,22 @@ const updateProduct = () => {
   const [files, setFile] = useState([]);
   const [errors, setErrors] = useState([]);
   const [message, setMessage] = useState();
+  const { products, auth } = useSelector((state) => state);
+  const { singleProduct } = products;
+  console.log(singleProduct, "sg")
+  const { pid } = router.query;
+
+  useEffect(() => {
+    if (!pid) {
+      return;
+    }
+
+    const featchOnLoad = async () => {
+      dispatch(getSingleProductStart(pid));
+      setProductInfo(singleProduct)
+    };
+    featchOnLoad();
+  }, [pid]);
   /**
    * set image
    * @param {*} e
@@ -95,7 +112,7 @@ const updateProduct = () => {
     let product = productInfo;
     product.photos = imgs;
 
-    dispatch(addProductStart(product));
+    dispatch(updateProductStart(product));
     toast.success("Successfully Added !");
 
    // router.push("/admin/products");

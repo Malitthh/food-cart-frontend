@@ -8,6 +8,8 @@ import {
     getProductError,
     updateProductSuccess,
     updateProductError,
+    getSingleProductError,
+    getSingleProductSuccess,
     deleteProductSuccess,
     deleteProductError
 } from './actions'
@@ -44,12 +46,63 @@ function* addProductStart({type, payload}) {
 }
 
 /**
+ * Add a single product start saga funtion to invoke the API call
+ * @param {*}  
+ */
+ function* getSingleProductStart({type, payload}) {
+    try {
+        const response = yield ProductsService.getSingleProduct(payload)
+        yield put(getSingleProductSuccess(response.data.product))
+        console.log(response.data.product,"saga")
+    } catch (err) {
+        yield put(getSingleProductError(err))
+        console.log(err, "err")
+    }
+}
+
+/**
+ * Update product saga funtion to invoke the API call
+ * @param {*}  
+ */
+ function* updateProductStart({type, payload}) {
+    console.log(payload, "UPDATE YEKA")
+    try {
+        const response = yield ProductsService.updateProduct(payload)
+        yield put(updateProductSuccess(response.data.data.products))
+        console.log(response.data.data.products,"saga")
+    } catch (err) {
+        yield put(updateProductError(err))
+        console.log(err, "err")
+    }
+}
+
+
+/**
+ * delete product saga funtion to invoke the API call
+ * @param {*}  
+ */
+ function* deleteProductStart({type, payload}) {
+    console.log(payload, "delete")
+    try {
+        const response = yield ProductsService.deleteProduct(payload)
+        yield put(deleteProductSuccess(response.data.data.products))
+        console.log(response.data.data.products,"saga")
+    } catch (err) {
+        yield put(deleteProductError(err))
+        console.log(err, "err")
+    }
+}
+
+/**
  * Main Saga for Damage Reports
  */
 function* productsSaga() {
     yield* [
         takeEvery(PRODUCTS_TYPES.ADD_PRODUCT_START, addProductStart),
-        takeEvery(PRODUCTS_TYPES.GET_PRODUCT_START, getProductStart)
+        takeEvery(PRODUCTS_TYPES.GET_PRODUCT_START, getProductStart),
+        takeEvery(PRODUCTS_TYPES.DELETE_PRODUCT_START, deleteProductStart),
+        takeEvery(PRODUCTS_TYPES.GET_SINGLE_PRODUCT_START, getSingleProductStart),
+        takeEvery(PRODUCTS_TYPES.UPDATE_PRODUCT_START, updateProductStart),
     ]
 }
 

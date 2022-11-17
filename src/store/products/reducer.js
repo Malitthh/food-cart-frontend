@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   isLoading: false,
   getProducts: [],
   allProducts: [],
+  singleProduct:{},
   getError: "",
   getUpdatedProduct: {},
 };
@@ -54,6 +55,15 @@ export default function products(state = INITIAL_STATE, { type, payload }) {
 
     case PRODUCTS_TYPES.DELETE_PRODUCT_ERROR:
       return setGetDeleteProductsError(state, payload);
+
+    case PRODUCTS_TYPES.GET_SINGLE_PRODUCT_START:
+      return setGetSingleProductsStart(state);
+
+    case PRODUCTS_TYPES.GET_SINGLE_PRODUCT_SUCCESS:
+      return setGetSingleProductsSuccess(state, payload);
+
+    case PRODUCTS_TYPES.GET_SINGLE_PRODUCT_ERROR:
+      return setGetSingleProductsError(state, payload);
 
     default:
       return state;
@@ -143,6 +153,28 @@ const setGetDeleteProductsSuccess = (state, payload) => ({
 });
 
 const setGetDeleteProductsError = (state, payload) => ({
+  ...state,
+  isLoading: false,
+  getError: payload,
+});
+
+/**
+ ************** Get Single Products **************
+ */
+ const setGetSingleProductsStart = (state) => ({
+  ...state,
+  isLoading: true,
+  getError: null,
+});
+
+const setGetSingleProductsSuccess = (state, payload) => ({
+  ...state,
+  isLoading: false,
+  singleProduct: payload,
+  getError: null,
+});
+
+const setGetSingleProductsError = (state, payload) => ({
   ...state,
   isLoading: false,
   getError: payload,

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
-import { getProductStart } from "../../../store/products/actions";
+import { getProductStart, deleteProductStart } from "../../../store/products/actions";
 import { apiUrl, clientBaseURLImages } from "config";
 
 const ProductIndex = () => {
@@ -87,7 +87,7 @@ const ProductIndex = () => {
 
                           <a
                             data-cy={`delete-report-btn${key}`}
-                            onClick={() => deleteUser(user._id)}
+                            onClick={() => deleteProduct(user._id)}
                             className="inline-block px-6 py-3 mb-0 mr-2 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
                           >
                             <i className="leading-tight fa fa-trash-o text-xs"></i>

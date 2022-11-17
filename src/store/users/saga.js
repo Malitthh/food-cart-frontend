@@ -61,7 +61,7 @@ function* addUserStart({type, payload}) {
 }
 
 /**
- * delete user saga funtion to invoke the API call
+ * update user saga funtion to invoke the API call
  * @param {*}  
  */
  function* updateUserStart({type, payload}) {
