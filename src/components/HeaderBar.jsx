@@ -16,7 +16,7 @@ const HeaderBar = () => {
                     <div className="container">
                         <div className="top-bar left">
                             <ul className="horizontal-menu">
-                                <li><a href="#"><i className="fa fa-envelope" aria-hidden="true"></i>foodCart@gmail.com</a></li>
+                                <li><a href="#"><i className="fa fa-envelope" aria-hidden="true"></i>foodcart@gmail.com</a></li>
                                 <li><a href="#">Free Shipping for all Order of LKR</a></li>
                             </ul>
                         </div>

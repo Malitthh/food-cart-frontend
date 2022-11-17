@@ -87,19 +87,14 @@ const updateCustomer = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Customers</span>
+              <a href="/admin/customers" className="permal-link">
+                Customers
+              </a>
+            </li>
+            <li className="nav-item">
+              <span className="current-page"><b>Edit Customer</b></span>
             </li>
           </ul>
-          <div style={{ float: "right" }}>
-            <a
-              data-cy="link-new-report"
-              href="/admin/customers/new-customer"
-              className="new-report btn btn-primary gap-2 btn-sm"
-            >
-              <i className="fa fa-plus" aria-hidden="true"></i>
-              Update Customer
-            </a>
-          </div>
         </nav>
       </div>
       <main>
@@ -111,7 +106,7 @@ const updateCustomer = () => {
                   <div className="form-row">
                     <div className="form-group col-md-6">
                       <label htmlFor="name">
-                        <b>Name</b>
+                        <b>Name : </b>
                       </label>
                       <input
                         type="text"
@@ -120,6 +115,7 @@ const updateCustomer = () => {
                         name="name"
                         onChange={onChangeInput}
                         value={userInfo.name}
+                        placeholder="Enter your name here"
                       />
                       <p className="text-red-500 text-xs italic">
                         {errors && errors["name"]}
@@ -127,14 +123,15 @@ const updateCustomer = () => {
                     </div>
                     <div className="form-group col-md-6">
                       <label htmlFor="email">
-                        <b>Email</b>
+                        <b>Email : </b>
                       </label>
                       <input
-                        type="text"
+                        type="email"
                         className="form-control"
                         id="email"
                         onChange={onChangeInput}
                         value={userInfo.email}
+                        placeholder="Enter your email here"
                       />
                       <p className="text-red-500 text-xs italic">
                         {errors && errors["email"]}
@@ -143,8 +140,8 @@ const updateCustomer = () => {
                   </div>
                   <div className="form-row">
                     <div className="form-group col-md-6">
-                      <label htmlFor="name">
-                        <b>Mobile No</b>
+                      <label htmlFor="mobileNo">
+                        <b>Contact No : </b>
                       </label>
                       <input
                         type="text"
@@ -153,6 +150,7 @@ const updateCustomer = () => {
                         name="mobileNo"
                         onChange={onChangeInput}
                         value={userInfo.mobileNo}
+                        placeholder="Enter your contact no here"
                       />
                       <p className="text-red-500 text-xs italic">
                         {errors && errors["mobileNo"]}
@@ -160,7 +158,7 @@ const updateCustomer = () => {
                     </div>
                     <div className="form-group col-md-6">
                       <label htmlFor="nic">
-                        <b>NIC</b>
+                        <b>NIC : </b>
                       </label>
                       <input
                         type="text"
@@ -169,6 +167,7 @@ const updateCustomer = () => {
                         name="nic"
                         onChange={onChangeInput}
                         value={userInfo.nic}
+                        placeholder="Enter your NIC here"
                       />
                       <p className="text-red-500 text-xs italic">
                         {errors && errors["nic"]}
@@ -178,10 +177,10 @@ const updateCustomer = () => {
                   <div className="form-row">
                     <div className="form-group col-md-6">
                       <label htmlFor="gender">
-                        <b>Gender</b>
+                        <b>Gender : </b>
                       </label>
                       <select className="form-control">
-                        <option disabled>Select your Gender</option>
+                        <option disabled="disabled" selected="true">Select your Gender here</option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                       </select>
@@ -190,8 +189,31 @@ const updateCustomer = () => {
                       </p>
                     </div>
                     <div className="form-group col-md-6">
+                      <label htmlFor="province">
+                        <b>Province : </b>
+                      </label>
+                      <select className="form-control">
+                        <option disabled="disabled" selected="true">Select your province here</option>
+                        <option value="southern">Southern</option>
+                        <option value="central">Central</option>
+                        <option value="northwest">North western</option>
+                        <option value="uva">Uva</option>
+                        <option value="sabaragamuwa">Sabaragamuwa</option>
+                        <option value="west">West</option>
+                        <option value="eastern">Eastern</option>
+                        <option value="northen">Northen</option>
+                        <option value="northCentral">North Central</option>
+                      </select>
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["province"]}
+                      </p>
+                      
+                    </div>
+                  </div>
+                  <div className="form-row">
+                    <div className="form-group col-md-12">
                       <label htmlFor="address">
-                        <b>Address</b>
+                        <b>Address : </b>
                       </label>
                       <input
                         type="text"
@@ -207,34 +229,11 @@ const updateCustomer = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="form-row">
-                    <div className="form-group col-md-6">
-                      <label htmlFor="province">
-                        <b>Province</b>
-                      </label>
-                      <select className="form-control">
-                        <option disabled>Select your Province</option>
-                        <option value="southern">Southern</option>
-                        <option value="central">Central</option>
-                        <option value="northwest">North western</option>
-                        <option value="uva">Uva</option>
-                        <option value="sabaragamuwa">Sabaragamuwa</option>
-                        <option value="west">West</option>
-                        <option value="eastern">Eastern</option>
-                        <option value="northen">Northen</option>
-                        <option value="northCentral">North Central</option>
-                      </select>
-                      <p className="text-red-500 text-xs italic">
-                        {errors && errors["province"]}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="form-row col-md-12">
-                  <br />
+                
+                <div className="form-row">      
                   <div className="form-group col-md-6">
                     <label htmlFor="password">
-                      <b>Password</b>
+                      <b>Password : </b>
                     </label>
                     <input
                       type="password"
@@ -243,7 +242,7 @@ const updateCustomer = () => {
                       value={userInfo.password}
                       id="password"
                       name="password"
-                      placeholder=""
+                      placeholder="Enter your password here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["password"]}
@@ -251,16 +250,16 @@ const updateCustomer = () => {
                   </div>
                   <div className="form-group col-md-6">
                     <label htmlFor="passwordConfirm">
-                      <b>Confirm Password</b>
+                      <b>Confirm Password : </b>
                     </label>
                     <input
                       type="password"
                       className="form-control"
-                      placeholder=""
                       onChange={onChangeInput}
                       value={userInfo.passwordConfirm}
                       id="passwordConfirm"
                       name="passwordConfirm"
+                      placeholder="Re-Enter your password here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["passwordConfirm"]}
@@ -283,8 +282,16 @@ const updateCustomer = () => {
                       className="btn btn-warning"
                     >
                       Reset
-                    </button>
+                    </button> &nbsp;
+                    <a 
+                    data-cy="link-new-report"
+                    href="/admin/customers"
+                    className="new-report btn btn-danger gap- btn-sm"
+                  > Cancel
+                   
+                  </a>
                   </div>
+                </div>
                 </div>
               </form>
             </div>

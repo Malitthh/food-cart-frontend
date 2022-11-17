@@ -1,177 +1,334 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { apiUrl, clientBaseURL } from "config";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { updateProductStart } from "../../../store/products/actions";
 import NavBar from "src/components/admin/NavBar";
-// import ImageGallery from "react-image-gallery";
+import { toast } from "react-toastify";
+import { validateForm, validateProperty } from "src/helpers/validationHeper";
+import { ProductSchema } from "../../../schema/productSchema";
 
-const SingleProduct = () => {
+const updateProduct = () => {
   const router = useRouter();
-  const { pid } = router.query;
-  const [reportData, setReportData] = useState();
-  
-  // Read the json file related with pid
-  useEffect(() => {
-    fetch(`/db/${pid}.json`)
-      .then((response) => {
-        return response.json(); //parse json
-      })
-      .then((data) => {
-        setReportData(data);
-      });
-  }, [pid, reportData]);
+  const dispatch = useDispatch();
+  const [productInfo, setProductInfo] = useState({});
+  const [files, setFile] = useState([]);
+  const [errors, setErrors] = useState([]);
+  const [message, setMessage] = useState();
+  /**
+   * set image
+   * @param {*} e
+   * @returns
+   */
+  const handleImageFile = (e) => {
+    setMessage("");
+    let file = e.target.files;
 
-  const images = [];
+    for (let i = 0; i < file.length; i++) {
+      const fileType = file[i]["type"];
+      const validImageTypes = [
+        "image/gif",
+        "image/jpeg",
+        "image/png",
+        "image/webp",
+      ];
+      if (validImageTypes.includes(fileType)) {
+        setFile([...files, file[i]]);
+      } else {
+        setMessage("only images accepted");
+      }
+    }
+  };
 
-  // set image data to send image slider
-  if (reportData)
-    reportData.photo.map((file) => {
-      images.push({
-        original: file.url,
-        thumbnail: file.url,
-      });
-    });
+  /**
+   * Remove added image before upload
+   * @param {*} i
+   */
+  const removeImage = (i) => {
+    setFile(files.filter((x) => x.name !== i));
+  };
+
+  /**
+   * set vehicle makde and model
+   * @param {*} e
+   */
+  const onChangeCategory = (e) => {
+    setProductInfo({ ...productInfo, [e.target.id]: e.target.value });
+    console.log(e.target.value, e.target.id);
+    //validateField("vMakeModel", e.value);
+  };
+
+  /**
+   * set customer name, mobile no and vehicle no
+   * @param {*} e
+   */
+  const onChangeInput = (e) => {
+    console.log(e.target.id, e.target.value);
+    validateField(e.target.id, e.target.value);
+    setProductInfo({ ...productInfo, [e.target.id]: e.target.value });
+  };
+
+  /**
+   * OnSubmit method to invoke the database call
+   */
+  const onSubmit = async () => {
+    //  e.preventDefault()
+    const formData = new FormData();
+    const config = {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    };
+    const imgs = [];
+    const imgUploadUrl = `${clientBaseURL}/upload`;
+
+    for (var i = 0; i < files.length; i++) {
+      formData.append("image", files[i]);
+      formData.append("destination", "images");
+      formData.append("create_thumbnail", true);
+
+      const image = await axios.post(imgUploadUrl, formData, config);
+      imgs.push(image.data);
+    }
+
+    let product = productInfo;
+    product.photos = imgs;
+
+    dispatch(addProductStart(product));
+    toast.success("Successfully Added !");
+
+   // router.push("/admin/products");
+
+  };
+
+  /**
+   * Validate Form
+   * @param {*} e
+   */
+
+  const validateBeforeSave = (e) => {
+    e.preventDefault();
+    // create damageReport object to validate againts DamageReportSchema
+    // const drObject = {
+    //   customerName: productInfo.customerName,
+    //   vehicleNo: productInfo.vehicleNo,
+    //   mobileNo: productInfo.mobileNo,
+    //   description: productInfo.description,
+    //   vMakeModel: vMakeModels.make,
+    // };
+    console.log(productInfo, "pp");
+    onSubmit();
+    // dispatch(addProductsStart(productInfo))
+    // const hasErrors = validateForm(drObject, ProductSchema);
+    // if (hasErrors) {
+    //   setErrors(hasErrors);
+    //   e.preventDefault();
+    //   setShowForm("");
+    // } else {
+    //   e.preventDefault();
+    //   setShowForm("modal-open");
+    // }
+  };
+
+  /**
+   * Validate single field on the fly
+   * @param {*} name
+   * @param {*} value
+   */
+  const validateField = (name, value) => {
+    const errMsg = validateProperty(name, value, ProductSchema);
+
+    if (errMsg) {
+      errors[name] = errMsg;
+    } else {
+      delete errors[name];
+    }
+  };
 
   return (
     <div className="min-h-full">
       <NavBar />
-      <header className="bg-white shadow">
-        <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-          <div className="float-right">
-            <a data-cy="back-btn" href="/" className="btn gap-2 btn-sm">
-              <i className="fa fa-arrow-left" aria-hidden="true"></i>
-              Back
-            </a>
-          </div>
-          <h2 className="text-1xl font-bold tracking-tight text-gray-900">
-            Damage Report
-          </h2>
-          <h6>REF NO: {pid && pid.toUpperCase()}</h6>
-        </div>
-      </header>
+      <div className="container">
+        <nav className="biolife-nav">
+          <ul>
+            <li className="nav-item">
+              <a href="/admin" className="permal-link">
+                Dashboard
+              </a>
+            </li>
+            <li className="nav-item">
+              <a href="/admin/products" className="permal-link">
+                Products
+              </a>
+            </li>
+            <li className="nav-item">
+              <span className="current-page"><b>Edit Products</b></span>
+            </li>
+          </ul>
+        </nav>
+      </div>
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap">
-            <div className="container mx-auto">
-              <div className="flex flex-wrap">
-                <div className="w-full md:w-1/2 px-3">
-                  {/* <ImageGallery items={images} originalHeight={10} /> */}
+          <div className="container mx-2">
+            <div className="overflow-x-auto">
+              <form>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="productName"><b>Product Name : </b></label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="productName"
+                      name="productName"
+                      onChange={onChangeInput}
+                      value={productInfo.productName}
+                      placeholder="Enter product name here"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["productName"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-4">
+                    <label htmlFor="category"><b>Category : </b></label>
+                    <select selected="true"
+                      id="category"
+                      className="form-control"
+                      onChange={onChangeCategory}
+                      value={productInfo.category}
+                    >
+                      <option selected disabled>Choose a Category</option>
+                      <option value="fruit_nuts">Fruit & Nuts</option>
+                      <option value="vegetables">Vegetables</option>
+                      <option value="berries">Berries</option>
+                      <option value="butter_eggs">Butter & Rggs</option>
+                    </select>
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["category"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-2">
+                    <label htmlFor="stock"><b>Stock in Hand</b></label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="stock"
+                      onChange={onChangeInput}
+                      value={productInfo.stock}
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["stock"]}
+                    </p>
+                  </div>
                 </div>
-                <div className="w-full md:w-1/2 px-3">
-                  <div className="w-full">
-                    <div className="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
-                      <div className="flex-auto p-4">
-                        <h6 className="my-4 font-bold leading-tight uppercase text-xs text-slate-500">
-                          Summary
-                        </h6>
-                        <ul className="flex flex-col pl-0 mb-0 rounded-lg">
-                          <li className="relative flex justify-between px-4 py-2 pl-0 mb-1 bg-white border-0 border-t-0 rounded-b-inherit text-inherit rounded-xl">
-                            <div className="flex items-center">
-                              <button className="leading-pro ease-soft-in text-xs bg-150 w-6.35 h-6.35 p-1.2 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-pointer items-center justify-center border border-solid border-slate-700 border-transparent bg-transparent text-center align-middle font-bold uppercase text-slate-700 transition-all hover:opacity-75">
-                                <i className="fas fa-user text-3xs"></i>
-                              </button>
-                              <div className="flex flex-col">
-                                <h6 className="mb-1 leading-normal text-sm text-slate-700">
-                                  Customer Name
-                                </h6>
-                                <span className="leading-tight text-xs"></span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col items-center justify-center">
-                              <p className="flex items-center m-0 font-semibold leading-normal text-sm text-slate-700">
-                                {reportData && reportData.customer.customerName}
-                              </p>
-                            </div>
-                          </li>
-                          <li className="relative flex justify-between px-4 py-2 pl-0 mb-1 bg-white border-0 border-t-0 rounded-b-inherit text-inherit rounded-xl">
-                            <div className="flex items-center">
-                              <button className="leading-pro ease-soft-in text-xs bg-150 w-6.35 h-6.35 p-1.2 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-pointer items-center justify-center border border-solid border-slate-700 border-transparent bg-transparent text-center align-middle font-bold uppercase text-slate-700 transition-all hover:opacity-75">
-                                <i className="fas fa-phone text-3xs"></i>
-                              </button>
-                              <div className="flex flex-col">
-                                <h6 className="mb-1 leading-normal text-sm text-slate-700">
-                                  Mobile No
-                                </h6>
-                                <span className="leading-tight text-xs"></span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col items-center justify-center">
-                              <p className="flex items-center m-0 font-semibold leading-normal text-sm text-slate-700">
-                                {reportData && reportData.customer.mobileNo}
-                              </p>
-                            </div>
-                          </li>
-                          <li className="relative flex justify-between px-4 py-2 pl-0 mb-1 bg-white border-0 border-t-0 rounded-b-inherit text-inherit rounded-xl">
-                            <div className="flex items-center">
-                              <button className="leading-pro ease-soft-in text-xs bg-150 w-6.35 h-6.35 p-1.2 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-pointer items-center justify-center border border-solid border-slate-700 border-transparent bg-transparent text-center align-middle font-bold uppercase text-slate-700 transition-all hover:opacity-75">
-                                <i className="fas fa-car text-3xs"></i>
-                              </button>
-                              <div className="flex flex-col">
-                                <h6 className="mb-1 leading-normal text-sm text-slate-700">
-                                  Make
-                                </h6>
-                                <span className="leading-tight text-xs"></span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col items-center justify-center">
-                              <p className="flex items-center m-0 font-semibold leading-normal text-sm text-slate-700">
-                                {reportData && (
-                                  <img
-                                    src={`https://vl.imgix.net/img/${reportData.vehicle.make
-                                      .replace(/\W+/g, "-")
-                                      .toLowerCase()}-logo.png`}
-                                    alt={reportData.vehicle.make}
-                                    className="h-6 inline-block mr-2"
-                                  />
-                                )}
-                                {reportData && reportData.vehicle.make}
-                              </p>
-                            </div>
-                          </li>
-                          <li className="relative flex justify-between px-4 py-2 pl-0 mb-2 bg-white border-0 border-t-0 rounded-b-inherit text-inherit rounded-xl">
-                            <div className="flex items-center">
-                              <button className="leading-pro ease-soft-in text-xs bg-150 w-6.35 h-6.35 p-1.2 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-pointer items-center justify-center border border-solid border-slate-700 border-transparent bg-transparent text-center align-middle font-bold uppercase text-slate-700 transition-all hover:opacity-75">
-                                <i className="fas fa-car text-3xs"></i>
-                              </button>
-                              <div className="flex flex-col">
-                                <h6 className="mb-1 leading-normal text-sm text-slate-700">
-                                  Model
-                                </h6>
-                                <span className="leading-tight text-xs"></span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col items-center justify-center">
-                              <p className="flex items-center m-0 font-semibold leading-normal text-sm text-slate-700">
-                                {reportData && reportData.vehicle.model}
-                              </p>
-                            </div>
-                          </li>
-                          <li className="relative flex justify-between px-4 py-2 pl-0 mb-2 bg-white border-0 border-t-0 rounded-b-inherit text-inherit rounded-xl">
-                            <div className="flex items-center">
-                              <button className="leading-pro ease-soft-in text-xs bg-150 w-6.35 h-6.35 p-1.2 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-pointer items-center justify-center border border-solid border-slate-700 border-transparent bg-transparent text-center align-middle font-bold uppercase text-slate-700 transition-all hover:opacity-75">
-                                <i className="fas fa-car text-3xs"></i>
-                              </button>
-                              <div className="flex flex-col">
-                                <h6 className="mb-1 leading-normal text-sm text-slate-700">
-                                  Vehicle No
-                                </h6>
-                                <span className="leading-tight text-xs"></span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col items-center justify-center">
-                              <p className="flex items-center m-0 font-semibold leading-normal text-sm text-slate-700">
-                                {reportData && reportData.vehicle.vehicleNo}
-                              </p>
-                            </div>
-                          </li>
-                        </ul>
-                        <p className="mt-10">Description</p>
-                        <p className="mb-10 text-xs">
-                          {reportData && reportData.description}
-                        </p>
-                      </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="costPrice"><b>Cost Price</b></label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      onChange={onChangeInput}
+                      value={productInfo.customerName}
+                      id="costPrice"
+                      name="costPrice"
+                      placeholder=""
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["costPrice"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="marketPrice"><b>Market Price</b></label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      placeholder=""
+                      onChange={onChangeInput}
+                      value={productInfo.price}
+                      id="price"
+                      name="price"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["price"]}
+                    </p>
+                  </div>
+                </div>
+                <div className="form-row">
+                  <div className="form-group col-md-6">
+                    <label htmlFor="costPrice"><b>Remarks</b></label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      onChange={onChangeInput}
+                      value={productInfo.description}
+                      id="description"
+                      name="description"
+                      placeholder=""
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["description"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-6">
+                    <label htmlFor="images"><b>Images</b></label>
+                    <input
+                      type="file"
+                      onChange={handleImageFile}
+                      className="form-control"
+                      placeholder=""
+                      multiple="multiple"
+                      name="files[]"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["price"]}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {files.map((file, key) => {
+                        return (
+                          <div key={key} className="overflow-hidden relative">
+                            <i
+                              onClick={() => {
+                                removeImage(file.name);
+                              }}
+                              className="fa fa-close absolute right-1 hover:text-white cursor-pointer"
+                            ></i>
+                            <img
+                              style={{ height: "100px" }}
+                              src={URL.createObjectURL(file)}
+                            />
+                          </div>
+                        );
+                      })}
                     </div>
                   </div>
                 </div>
-              </div>
+                <div className="form-row">
+                <div className="form-group col-md-6">
+                  <button
+                    data-cy="save-new-report-btn"
+                    onClick={(e) => validateBeforeSave(e)}
+                    className="btn btn-success"
+                  >
+                    Save
+                  </button> &nbsp;
+                  <button
+                    data-cy="save-new-report-btn"
+                    // onClick={(e) => validateBeforeSave(e)}
+                    className="btn btn-warning"
+                  >
+                    Reset
+                  </button> &nbsp;
+                  <a 
+                    data-cy="link-new-report"
+                    href="/admin/products"
+                    className="new-report btn btn-danger gap- btn-sm"
+                  > Cancel
+                   
+                  </a>
+                </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>
@@ -180,4 +337,4 @@ const SingleProduct = () => {
   );
 };
 
-export default SingleProduct;
+export default updateProduct;

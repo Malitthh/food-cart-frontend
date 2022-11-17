@@ -926,7 +926,8 @@ body {
 }
 .header-top .right .horizontal-menu > li > a {
   display: inline-block;
-  line-height: 42px;
+  line-height: 20px !important;
+  margin-top: 4px;
 }
 .header-top .right .nice-select {
   padding-left: 0;
@@ -14759,4 +14760,20 @@ body.open-quickview-block .biolife-quickview-block {
   .biolife-carousel.nav-none-on-mobile.nav-center-03 .slick-arrow.next {
     display: none !important;
   }
+}
+
+.hover-item {
+  background-color: white;
+}
+
+.hover-item:hover {
+	background-color: white;
+}
+
+a.new-report.btn.btn-danger.gap-.btn-sm {
+  padding: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+  font-size: x-small;
+}
 }

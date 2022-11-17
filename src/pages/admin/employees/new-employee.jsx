@@ -119,19 +119,14 @@ const NewCustomer = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Customers</span>
+              <a href="/admin/employees" className="permal-link">
+                Employees
+              </a>
+            </li>
+            <li className="nav-item">
+              <span className="current-page"><b>New Employee</b></span>
             </li>
           </ul>
-          <div style={{ float: "right" }}>
-            <a
-              data-cy="link-new-report"
-              href="/admin/customers/new-customer"
-              className="new-report btn btn-primary gap-2 btn-sm"
-            >
-              <i className="fa fa-plus" aria-hidden="true"></i>
-              &nbsp;&nbsp;New Customer
-            </a>
-          </div>
         </nav>
       </div>
       <main>
@@ -151,6 +146,7 @@ const NewCustomer = () => {
                       name="name"
                       onChange={onChangeInput}
                       value={userInfo.name}
+                      placeholder="Enter your name here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["name"]}
@@ -166,6 +162,7 @@ const NewCustomer = () => {
                       id="email"
                       onChange={onChangeInput}
                       value={userInfo.email}
+                      placeholder="Enter your email here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["email"]}
@@ -178,7 +175,7 @@ const NewCustomer = () => {
                       <b>Address</b>
                     </label>
                     <input
-                      type="address"
+                      type="text"
                       className="form-control"
                       onChange={onChangeInput}
                       value={userInfo.address}
@@ -197,11 +194,11 @@ const NewCustomer = () => {
                     <input
                       type="number/text"
                       className="form-control"
-                      placeholder=""
                       onChange={onChangeInput}
                       value={userInfo.nic}
                       id="nic"
                       name="nic"
+                      placeholder="Enter your NIC here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["nic"]}
@@ -220,7 +217,6 @@ const NewCustomer = () => {
                       value={userInfo.dob}
                       id="dob"
                       name="dob"
-                      placeholder=""
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["dob"]}
@@ -228,10 +224,10 @@ const NewCustomer = () => {
                   </div>
                   <div className="form-group col-md-6">
                     <label htmlFor="mobileNo">
-                      <b>Mobile No</b>
+                      <b>Contact No</b>
                     </label>
                     <input
-                      type="number"
+                      type="text"
                       className="form-control"
                       onChange={onChangeInput}
                       value={userInfo.phoneNo}
@@ -250,7 +246,7 @@ const NewCustomer = () => {
                       <b>Gender</b>
                     </label>
                     <select className="form-control">
-                      <option disabled>Select your Gender</option>
+                      <option value="" selected="true" disabled="disabled">Select your Gender here</option>
                       <option value="male">Male</option>
                       <option value="female">Female</option>
                     </select>
@@ -265,7 +261,6 @@ const NewCustomer = () => {
                     <input
                       type="date"
                       className="form-control"
-                      placeholder=""
                       onChange={onChangeInput}
                       value={userInfo.joinDate}
                       id="joinDate"
@@ -280,9 +275,10 @@ const NewCustomer = () => {
                   <div className="form-group col-md-6">
                     <label htmlFor="department"><b>Department</b></label>
                     <select className="form-control">
-                      <option value="volvo" disabled>Select your department</option>
-                      <option value="saab">IT</option>
-                      <option value="mercedes">HR</option>
+                      <option value="" disabled="disabled" selected="true">Select your department here</option>
+                      <option value="IT">IT</option>
+                      <option value="HR">HR</option>
+                      <option value="Sales">Sales</option>
                     </select>
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["department"]}
@@ -295,11 +291,11 @@ const NewCustomer = () => {
                     <input
                       type="text"
                       className="form-control"
-                      placeholder=""
                       onChange={onChangeInput}
                       value={userInfo.salary}
                       id="salary"
                       name="salary"
+                      placeholder="Enter your salary here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["salary"]}
@@ -318,7 +314,7 @@ const NewCustomer = () => {
                       value={userInfo.password}
                       id="password"
                       name="password"
-                      placeholder=""
+                      placeholder="Enter your password here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["password"]}
@@ -330,12 +326,12 @@ const NewCustomer = () => {
                     </label>
                     <input
                       type="password"
-                      className="form-control"
-                      placeholder=""
+                      className="form-control"  
                       onChange={onChangeInput}
                       value={userInfo.passwordConfirm}
                       id="passwordConfirm"
                       name="passwordConfirm"
+                      placeholder="Re-Enter your password here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["passwordConfirm"]}
@@ -347,10 +343,24 @@ const NewCustomer = () => {
                     <button
                       data-cy="save-new-report-btn"
                       onClick={(e) => validateBeforeSave(e)}
-                      className="btn btn-primary"
+                      className="btn btn-success"
                     >
                       Save
-                    </button>
+                    </button> &nbsp;
+                    <button
+                      data-cy="reset-new-report-btn"
+                      // onClick={(e) => validateBeforeSave(e)}
+                      className="btn btn-warning"
+                    >
+                      Reset
+                    </button> &nbsp;
+                    <a 
+                      data-cy="link-new-report"
+                      href="/admin/employees"
+                      className="new-report btn btn-danger gap- btn-sm"
+                    > Cancel
+                   
+                    </a>
                   </div>
                 </div>
               </form>

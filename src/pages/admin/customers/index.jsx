@@ -42,14 +42,14 @@ const CustomerIndex = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Customers</span>
+              <span className="current-page"><b>Customers</b></span>
             </li>
           </ul>
-          <div style={{ float: "right" }}>
+          <div style={{ float: "right", backgroundColor:"black", color:"white", borderRadius:"5px" }}>
             <a
               data-cy="link-new-report"
               href="/admin/customers/new-customer"
-              className="new-report btn btn-primary gap-2 btn-sm"
+              className="btn btn-sm"
             >
               <i className="fa fa-plus" aria-hidden="true"></i>
               &nbsp;&nbsp;New Customer
@@ -63,11 +63,13 @@ const CustomerIndex = () => {
             <div className="overflow-x-auto">
               <table className="table w-full">
                 <thead>
-                  <tr>
+                  <tr  style={{backgroundColor:"#ecf0e2"}}>
                     <th></th>
                     <th><b>Name</b></th>
-                    <th>Email</th>
-                    <th>Role</th>
+                    <th><b>Email</b></th>
+                    <th><b>Contact No</b></th>
+                    <th><b>NIC</b></th>
+                    <th><b>Role</b></th>
                     <th></th>
                   </tr>
                 </thead>
@@ -78,6 +80,8 @@ const CustomerIndex = () => {
                         <td>{key + 1}</td>
                         <td>{user.name}</td>
                         <td>{user.email}</td>
+                        <td>{user.mobileNo}</td>
+                        <td>{user.nic}</td>
                         <td>{user.role}</td>
                         <td>
                           <a

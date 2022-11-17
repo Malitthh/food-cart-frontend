@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
 import PreviousReports from "src/components/admin/PreviousReports";
+import Footer from "../../components/admin/Footer"
 
 const Home = () => {
   // set damage report data to usestate
@@ -85,7 +86,8 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </main>
+      </main><br/>
+      <Footer/>
     </div>
   );
 };

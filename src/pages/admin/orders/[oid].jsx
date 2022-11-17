@@ -53,10 +53,14 @@ const SingleOrder = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Orders</span>
+              <a href="/admin/orders" className="permal-link">
+                Order List
+              </a>
             </li>
-          </ul>
-          <div style={{ float: "right" }}>
+            <li className="nav-item">
+              <span className="current-page"><b>Orders Details</b></span>
+            </li>
+            <div style={{ float: "right" }}>
             <a
               data-cy="link-new-report"
               href="/admin/orders"
@@ -66,6 +70,7 @@ const SingleOrder = () => {
               BACK
             </a>
           </div>
+          </ul>   
         </nav>
       </div>
       <main>
@@ -91,9 +96,9 @@ const SingleOrder = () => {
                           <div class="col-lg-6">
                             <div class="invoice-from">
                               <ul class="list-unstyled text-right">
-                                <li>Dash LLC</li>
-                                <li>2500 Ridgepoint Dr, Suite 105-C</li>
-                                <li>Austin TX 78754</li>
+                                <li>Food cart</li>
+                                <li>No 68/13A 3rd Cross street, 11</li>
+                                <li>Kandy - Sri Lanka</li>
                                 <li>VAT Number EU826113958</li>
                               </ul>
                             </div>
@@ -213,14 +218,12 @@ const SingleOrder = () => {
                               <div class="table-responsive">
                                 <table class="table table-bordered">
                                   <thead>
-                                    <tr>
-                                      <th class="per70 text-center">Name</th>
-                                      <th class="per70 text-center">Image</th>
-                                      <th class="per5 text-center">
-                                        Unit Price
-                                      </th>
-                                      <th class="per5 text-center">Qty</th>
-                                      <th class="per25 text-center">Total</th>
+                                    <tr style={{backgroundColor:"#ecf0e2"}}>
+                                      <th class="per70 text-center"><b>Name</b></th>
+                                      <th class="per70 text-center"><b>Image</b></th>
+                                      <th class="per5 text-center"><b> Unit Price</b></th>
+                                      <th class="per5 text-center"><b>Qty</b></th>
+                                      <th class="per25 text-center"><b>Total</b></th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -254,25 +257,25 @@ const SingleOrder = () => {
                                   <tfoot>
                                     <tr>
                                       <th colspan="4" class="text-right">
-                                        Sub Total:
+                                       <b> Sub Total :</b>
                                       </th>
                                       <th class="text-right">LKR {sum}.00</th>
                                     </tr>
                                     <tr>
                                       <th colspan="4" class="text-right">
-                                        TAX:
+                                        <b>TAX :</b>
                                       </th>
                                       <th class="text-right">LKR 00.00</th>
                                     </tr>
                                     <tr>
                                       <th colspan="4" class="text-right">
-                                        Credit:
+                                       <b> Credit :</b>
                                       </th>
                                       <th class="text-right">LKR 00.00</th>
                                     </tr>
                                     <tr>
                                       <th colspan="4" class="text-right">
-                                        Total:
+                                        <b>Total :</b>
                                       </th>
                                       <th class="text-right">
                                         <b>LKR {sum}.00</b>

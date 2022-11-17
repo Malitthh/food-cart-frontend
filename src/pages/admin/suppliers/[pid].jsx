@@ -1,183 +1,267 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
-// import ImageGallery from "react-image-gallery";
+import { toast } from "react-toastify";
+import { validateForm, validateProperty } from "src/helpers/validationHeper";
 
-const Customer = () => {
+const updateSupplier = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const { users, auth } = useSelector((state) => state);
+  const { allUsers } = users;
+  const [userInfo, setUserInfo] = useState({});
+  const [files, setFile] = useState([]);
+  const [errors, setErrors] = useState([]);
+  const [message, setMessage] = useState();
+
   const { pid } = router.query;
-  const [reportData, setReportData] = useState();
-  
-  // Read the json file related with pid
+
   useEffect(() => {
-    fetch(`/db/${pid}.json`)
-      .then((response) => {
-        return response.json(); //parse json
-      })
-      .then((data) => {
-        setReportData(data);
-      });
-  }, [pid, reportData]);
+    if (!pid) {
+      return;
+    }
 
-  const images = [];
+    const featchOnLoad = async () => {
+      const result = allUsers.filter((user) => user._id === pid);
+      setUserInfo(result[0]);
+      console.log(result[0], "all");
+    };
+    featchOnLoad();
+  }, [pid]);
 
-  // set image data to send image slider
-  if (reportData)
-    reportData.photo.map((file) => {
-      images.push({
-        original: file.url,
-        thumbnail: file.url,
-      });
-    });
+  /**
+   * set customer name, mobile no and vehicle no
+   * @param {*} e
+   */
+  const onChangeInput = (e) => {
+    console.log(e.target.id, e.target.value);
+    setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
+  };
+
+  /**
+   * OnSubmit method to invoke the database call
+   */
+  const onSubmit = async () => {
+    dispatch(updateUserStart(userInfo));
+    toast.success("Successfully Updated !");
+    router.push("/admin/suppliers");
+  };
+
+  /**
+   * Validate Form
+   * @param {*} e
+   */
+
+  const validateBeforeSave = (e) => {
+    e.preventDefault();
+    console.log(userInfo, "pp");
+    onSubmit();
+  };
+
+  /**
+   * Validate single field on the fly
+   * @param {*} name
+   * @param {*} value
+   */
+  const validateField = (name, value) => {
+    const errMsg = validateProperty(name, value, ProductSchema);
+
+    if (errMsg) {
+      errors[name] = errMsg;
+    } else {
+      delete errors[name];
+    }
+  };
 
   return (
     <div className="min-h-full">
-      <NavBar />
-      <header className="bg-white shadow">
-        <div className="mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8">
-          <div className="float-right">
-            <a data-cy="back-btn" href="/" className="btn gap-2 btn-sm">
-              <i className="fa fa-arrow-left" aria-hidden="true"></i>
-              Back
+    <NavBar />
+    <div className="container">
+      <nav className="biolife-nav">
+        <ul>
+          <li className="nav-item">
+            <a href="/admin" className="permal-link">
+              Dashboard
             </a>
-          </div>
-          <h2 className="text-1xl font-bold tracking-tight text-gray-900">
-            Damage Report
-          </h2>
-          <h6>REF NO: {pid && pid.toUpperCase()}</h6>
-        </div>
-      </header>
-      <main>
-        <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap">
-            <div className="container mx-auto">
-              <div className="flex flex-wrap">
-                <div className="w-full md:w-1/2 px-3">
-                  <ImageGallery items={images} originalHeight={10} />
+          </li>
+          <li className="nav-item">
+            <a href="/admin/suppliers" className="permal-link">
+              Suppliers
+            </a>
+          </li>
+          <li className="nav-item">
+            <span className="current-page"><b>Edit Suppliers</b></span>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <main>
+      <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+        <div className="container mx-2">
+          <div className="overflow-x-auto">
+            <form>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="name"><b>Name : </b></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    name="name"
+                    onChange={onChangeInput}
+                    value={userInfo.name}
+                    placeholder="Enter your name here"
+                  />
+                  <p className="text-red-500 text-xs italic">
+                    {errors && errors["name"]}
+                  </p>
                 </div>
-                <div className="w-full md:w-1/2 px-3">
-                  <div className="w-full">
-                    <div className="relative flex flex-col min-w-0 break-words bg-white shadow-soft-xl rounded-2xl bg-clip-border">
-                      <div className="flex-auto p-4">
-                        <h6 className="my-4 font-bold leading-tight uppercase text-xs text-slate-500">
-                          Summary
-                        </h6>
-                        <ul className="flex flex-col pl-0 mb-0 rounded-lg">
-                          <li className="relative flex justify-between px-4 py-2 pl-0 mb-1 bg-white border-0 border-t-0 rounded-b-inherit text-inherit rounded-xl">
-                            <div className="flex items-center">
-                              <button className="leading-pro ease-soft-in text-xs bg-150 w-6.35 h-6.35 p-1.2 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-pointer items-center justify-center border border-solid border-slate-700 border-transparent bg-transparent text-center align-middle font-bold uppercase text-slate-700 transition-all hover:opacity-75">
-                                <i className="fas fa-user text-3xs"></i>
-                              </button>
-                              <div className="flex flex-col">
-                                <h6 className="mb-1 leading-normal text-sm text-slate-700">
-                                  Customer Name
-                                </h6>
-                                <span className="leading-tight text-xs"></span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col items-center justify-center">
-                              <p className="flex items-center m-0 font-semibold leading-normal text-sm text-slate-700">
-                                {reportData && reportData.customer.customerName}
-                              </p>
-                            </div>
-                          </li>
-                          <li className="relative flex justify-between px-4 py-2 pl-0 mb-1 bg-white border-0 border-t-0 rounded-b-inherit text-inherit rounded-xl">
-                            <div className="flex items-center">
-                              <button className="leading-pro ease-soft-in text-xs bg-150 w-6.35 h-6.35 p-1.2 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-pointer items-center justify-center border border-solid border-slate-700 border-transparent bg-transparent text-center align-middle font-bold uppercase text-slate-700 transition-all hover:opacity-75">
-                                <i className="fas fa-phone text-3xs"></i>
-                              </button>
-                              <div className="flex flex-col">
-                                <h6 className="mb-1 leading-normal text-sm text-slate-700">
-                                  Mobile No
-                                </h6>
-                                <span className="leading-tight text-xs"></span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col items-center justify-center">
-                              <p className="flex items-center m-0 font-semibold leading-normal text-sm text-slate-700">
-                                {reportData && reportData.customer.mobileNo}
-                              </p>
-                            </div>
-                          </li>
-                          <li className="relative flex justify-between px-4 py-2 pl-0 mb-1 bg-white border-0 border-t-0 rounded-b-inherit text-inherit rounded-xl">
-                            <div className="flex items-center">
-                              <button className="leading-pro ease-soft-in text-xs bg-150 w-6.35 h-6.35 p-1.2 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-pointer items-center justify-center border border-solid border-slate-700 border-transparent bg-transparent text-center align-middle font-bold uppercase text-slate-700 transition-all hover:opacity-75">
-                                <i className="fas fa-car text-3xs"></i>
-                              </button>
-                              <div className="flex flex-col">
-                                <h6 className="mb-1 leading-normal text-sm text-slate-700">
-                                  Make
-                                </h6>
-                                <span className="leading-tight text-xs"></span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col items-center justify-center">
-                              <p className="flex items-center m-0 font-semibold leading-normal text-sm text-slate-700">
-                                {reportData && (
-                                  <img
-                                    src={`https://vl.imgix.net/img/${reportData.vehicle.make
-                                      .replace(/\W+/g, "-")
-                                      .toLowerCase()}-logo.png`}
-                                    alt={reportData.vehicle.make}
-                                    className="h-6 inline-block mr-2"
-                                  />
-                                )}
-                                {reportData && reportData.vehicle.make}
-                              </p>
-                            </div>
-                          </li>
-                          <li className="relative flex justify-between px-4 py-2 pl-0 mb-2 bg-white border-0 border-t-0 rounded-b-inherit text-inherit rounded-xl">
-                            <div className="flex items-center">
-                              <button className="leading-pro ease-soft-in text-xs bg-150 w-6.35 h-6.35 p-1.2 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-pointer items-center justify-center border border-solid border-slate-700 border-transparent bg-transparent text-center align-middle font-bold uppercase text-slate-700 transition-all hover:opacity-75">
-                                <i className="fas fa-car text-3xs"></i>
-                              </button>
-                              <div className="flex flex-col">
-                                <h6 className="mb-1 leading-normal text-sm text-slate-700">
-                                  Model
-                                </h6>
-                                <span className="leading-tight text-xs"></span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col items-center justify-center">
-                              <p className="flex items-center m-0 font-semibold leading-normal text-sm text-slate-700">
-                                {reportData && reportData.vehicle.model}
-                              </p>
-                            </div>
-                          </li>
-                          <li className="relative flex justify-between px-4 py-2 pl-0 mb-2 bg-white border-0 border-t-0 rounded-b-inherit text-inherit rounded-xl">
-                            <div className="flex items-center">
-                              <button className="leading-pro ease-soft-in text-xs bg-150 w-6.35 h-6.35 p-1.2 rounded-3.5xl tracking-tight-soft bg-x-25 mr-4 mb-0 flex cursor-pointer items-center justify-center border border-solid border-slate-700 border-transparent bg-transparent text-center align-middle font-bold uppercase text-slate-700 transition-all hover:opacity-75">
-                                <i className="fas fa-car text-3xs"></i>
-                              </button>
-                              <div className="flex flex-col">
-                                <h6 className="mb-1 leading-normal text-sm text-slate-700">
-                                  Vehicle No
-                                </h6>
-                                <span className="leading-tight text-xs"></span>
-                              </div>
-                            </div>
-                            <div className="flex flex-col items-center justify-center">
-                              <p className="flex items-center m-0 font-semibold leading-normal text-sm text-slate-700">
-                                {reportData && reportData.vehicle.vehicleNo}
-                              </p>
-                            </div>
-                          </li>
-                        </ul>
-                        <p className="mt-10">Description</p>
-                        <p className="mb-10 text-xs">
-                          {reportData && reportData.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                <div className="form-group col-md-6">
+                  <label htmlFor="email"><b>Email : </b></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="email"
+                    onChange={onChangeInput}
+                    value={userInfo.email}
+                    placeholder="Enter your email here"
+                  />
+                  <p className="text-red-500 text-xs italic">
+                    {errors && errors["email"]}
+                  </p>
                 </div>
               </div>
-            </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="address"><b>Address : </b></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    onChange={onChangeInput}
+                    value={userInfo.address}
+                    id="address"
+                    name="address"
+                    placeholder="Enter your address here"
+                  />
+                  <p className="text-red-500 text-xs italic">
+                    {errors && errors["address"]}
+                  </p>
+                </div>
+                <div className="form-group col-md-6">
+                  <label htmlFor="mobileNo"><b>Contact No : </b></label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    onChange={onChangeInput}
+                    value={userInfo.mobileNo}
+                    id="mobileNo"
+                    name="mobileNo"
+                    placeholder="Enter your contact no here"
+                  />
+                  <p className="text-red-500 text-xs italic">
+                    {errors && errors["mobileNo"]}
+                  </p>
+                </div>
+              </div>
+              <div className="form-row">
+              <div className="form-group col-md-6">
+                  <label htmlFor="joinDate">
+                    <b>Date of Join</b>
+                  </label>
+                  <input
+                    type="date"
+                    className="form-control"
+                    onChange={onChangeInput}
+                    value={userInfo.joinDate}
+                    id="joinDate"
+                    name="joinDate"
+                  />
+                  <p className="text-red-500 text-xs italic">
+                    {errors && errors["joinDate"]}
+                  </p>
+                </div>
+                <div className="form-group col-md-6">
+                  <label htmlFor="joinDate">
+                    <b>What does he/she supply?</b>
+                  </label>
+                  <select className="form-control">
+                    <option value="" disabled="disabled" selected="true">Select a category here</option>
+                    <option value="Fruits&nuts">Fruits & nuts</option>
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Berries">Berries</option>
+                    <option value="Butter&Eggs">Butter & Eggs</option>
+                  </select>
+                  <p className="text-red-500 text-xs italic">
+                    {errors && errors["joinDate"]}
+                  </p>
+                </div>
+              </div>
+              <div className="form-row">
+                <div className="form-group col-md-6">
+                  <label htmlFor="password"><b>Password</b></label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    onChange={onChangeInput}
+                    value={userInfo.password}
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password here"
+                  />
+                  <p className="text-red-500 text-xs italic">
+                    {errors && errors["password"]}
+                  </p>
+                </div>
+                <div className="form-group col-md-6">
+                  <label htmlFor="passwordConfirm"><b>Confirm Password</b></label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    onChange={onChangeInput}
+                    value={userInfo.passwordConfirm}
+                    id="passwordConfirm"
+                    name="passwordConfirm"
+                    placeholder="Re-Enter your password here"
+                  />
+                  <p className="text-red-500 text-xs italic">
+                    {errors && errors["passwordConfirm"]}
+                  </p>
+                </div>
+              </div>
+              <div className="form-row">
+              <div className="form-group col-md-6">
+                <button
+                  data-cy="save-new-report-btn"
+                  onClick={(e) => validateBeforeSave(e)}
+                  className="btn btn-success"
+                >
+                  Save
+                </button> &nbsp;
+                <button
+                  data-cy="save-new-report-btn"
+                  onClick={(e) => validateBeforeSave(e)}
+                  className="btn btn-warning"
+                >
+                  Reset
+                </button> &nbsp;
+                <a 
+                  data-cy="link-new-report"
+                  href="/admin/suppliers"
+                  className="new-report btn btn-danger gap- btn-sm"
+                > Cancel
+                 
+                </a>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
-      </main>
-    </div>
+      </div>
+    </main>
+  </div>
   );
 };
 
-export default Customer;
+export default updateSupplier;
