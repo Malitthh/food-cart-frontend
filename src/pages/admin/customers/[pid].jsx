@@ -5,6 +5,7 @@ import { updateUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
+import { CustomerSchemaUpdate } from "../../../schema/customerSchema";
 
 const updateCustomer = () => {
   const token =  window.localStorage.getItem('@token');

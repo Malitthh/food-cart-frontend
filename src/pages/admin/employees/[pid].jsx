@@ -5,7 +5,7 @@ import { updateUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
-import { EmployeeSchema } from "../../../schema/customerSchema";
+import { EmployeeSchemaUpdate } from "../../../schema/customerSchema";
 
 const updateEmployee = () => {
   const router = useRouter();
@@ -86,7 +86,8 @@ const updateEmployee = () => {
 
   const validateBeforeSave = (e) => {
     e.preventDefault();
-    const err = validateForm(userInfo, EmployeeSchema);
+    const err = validateForm(userInfo, EmployeeSchemaUpdate);
+    console.log(err, "update")
     if (err) {
       setErrors(err);
     } else {
@@ -100,7 +101,7 @@ const updateEmployee = () => {
    * @param {*} value
    */
   const validateField = (name, value) => {
-    const errMsg = validateProperty(name, value, ProductSchema);
+    const errMsg = validateProperty(name, value, EmployeeSchemaUpdate);
 
     if (errMsg) {
       errors[name] = errMsg;
