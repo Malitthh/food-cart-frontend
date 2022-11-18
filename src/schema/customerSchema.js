@@ -36,7 +36,7 @@ export const CustomerSchemaUpdate = {
 };
 
 export const EmployeeSchema = {
-  name: JOI.string().required().label("Customer Name "),
+  name: JOI.string().required().label("Employee Name "),
   email: JOI.string().required().label("Email Address"),
   mobileNo: JOI.string()
     .length(10)
@@ -56,7 +56,7 @@ export const EmployeeSchema = {
 };
 
 export const EmployeeSchemaUpdate = {
-  name: JOI.string().required().label("Customer Name "),
+  name: JOI.string().required().label("Employee Name "),
   email: JOI.string().required().label("Email Address"),
   mobileNo: JOI.string()
     .length(10)
@@ -73,6 +73,43 @@ export const EmployeeSchemaUpdate = {
   joinDate: JOI.any().allow(),
   dept: JOI.any().allow(),
   gender: JOI.any().allow(),
+  activated: JOI.any().allow(),
+  _id: JOI.any().allow(),
+  __v: JOI.any().allow(),
+};
+
+
+
+export const SupplierSchema = {
+  name: JOI.string().required().label("Supplier Name "),
+  email: JOI.string().required().label("Email Address"),
+  mobileNo: JOI.string()
+    .length(10)
+    .regex(/^[0-9]+$/)
+    .required()
+    .label("Mobile No"),
+  address: JOI.string().required().label("address"),
+  password: JOI.any().allow(),
+  passwordConfirm: JOI.any().allow(),
+  role: JOI.any().allow(),
+  joinDate: JOI.any().allow(),
+  category: JOI.any().allow(),
+};
+
+export const SupplierSchemaUpdate = {
+  name: JOI.string().required().label("Supplier Name "),
+  email: JOI.string().required().label("Email Address"),
+  mobileNo: JOI.string()
+    .length(10)
+    .regex(/^[0-9]+$/)
+    .required()
+    .label("Mobile No"),
+  address: JOI.string().required().label("address"),
+  password: JOI.any().allow(),
+  passwordConfirm: JOI.any().allow(),
+  role: JOI.any().allow(),
+  category: JOI.any().allow(),
+  joinDate: JOI.any().allow(),
   activated: JOI.any().allow(),
   _id: JOI.any().allow(),
   __v: JOI.any().allow(),
