@@ -8,7 +8,7 @@ import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { CustomerSchemaUpdate } from "../../../schema/customerSchema";
 
 const updateCustomer = () => {
-  const token =  window.localStorage.getItem('@token');
+  const token = window.localStorage.getItem("@token");
   const router = useRouter();
   const dispatch = useDispatch();
   const { users, auth } = useSelector((state) => state);
@@ -19,7 +19,55 @@ const updateCustomer = () => {
   const [message, setMessage] = useState();
 
   const { pid } = router.query;
+  const gender = [
+    {
+      label: "Male",
+      value: "M",
+    },
+    {
+      label: "Female",
+      value: "F",
+    },
+  ];
 
+  const province = [
+    {
+      label: "Southern",
+      value: "southern",
+    },
+    {
+      label: "Central",
+      value: "central",
+    },
+    {
+      label: "North western",
+      value: "northwest",
+    },
+    {
+      label: "Uva",
+      value: "uva",
+    },
+    {
+      label: "Sabaragamuwa",
+      value: "sabaragamuwa",
+    },
+    {
+      label: "West",
+      value: "west",
+    },
+    {
+      label: "Eastern",
+      value: "eastern",
+    },
+    {
+      label: "Northen",
+      value: "northen",
+    },
+    {
+      label: "North Central",
+      value: "northCentral",
+    },
+  ];
   useEffect(() => {
     if (!pid) {
       return;
@@ -48,10 +96,10 @@ const updateCustomer = () => {
   const onSubmit = async () => {
     const payload = {
       data: userInfo,
-      token
-    }
+      token,
+    };
     dispatch(updateUserStart(payload));
-   // router.push("/admin/customers");
+    // router.push("/admin/customers");
   };
 
   /**
@@ -97,7 +145,9 @@ const updateCustomer = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page"><b>Edit Customer</b></span>
+              <span className="current-page">
+                <b>Edit Customer</b>
+              </span>
             </li>
           </ul>
         </nav>
@@ -184,10 +234,24 @@ const updateCustomer = () => {
                       <label htmlFor="gender">
                         <b>Gender : </b>
                       </label>
-                      <select className="form-control">
-                        <option disabled="disabled" selected="true">Select your Gender here</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                      <select
+                        className="form-control"
+                        name="gender"
+                        id="gender"
+                        value={userInfo.gender}
+                        onChange={(e) =>
+                          setUserInfo({
+                            ...userInfo,
+                            [e.target.id]: e.target.value,
+                          })
+                        }
+                      >
+                        <option value="" disabled="disabled">
+                          Select your Gender here
+                        </option>
+                        {gender.map((option) => (
+                          <option value={option.value}>{option.label}</option>
+                        ))}
                       </select>
                       <p className="text-red-500 text-xs italic">
                         {errors && errors["dob"]}
@@ -197,22 +261,29 @@ const updateCustomer = () => {
                       <label htmlFor="province">
                         <b>Province : </b>
                       </label>
-                      <select className="form-control">
-                        <option disabled="disabled" selected="true">Select your province here</option>
-                        <option value="southern">Southern</option>
-                        <option value="central">Central</option>
-                        <option value="northwest">North western</option>
-                        <option value="uva">Uva</option>
-                        <option value="sabaragamuwa">Sabaragamuwa</option>
-                        <option value="west">West</option>
-                        <option value="eastern">Eastern</option>
-                        <option value="northen">Northen</option>
-                        <option value="northCentral">North Central</option>
+                      <select
+                        className="form-control"
+                        name="province"
+                        id="province"
+                        value={userInfo.province}
+                        onChange={(e) =>
+                          setUserInfo({
+                            ...userInfo,
+                            [e.target.id]: e.target.value,
+                          })
+                        }
+                      >
+                        <option disabled="disabled" selected="true">
+                          Select your province here
+                        </option>
+                        {province.map((option) => (
+                          <option value={option.value}>{option.label}</option>
+                        ))}
                       </select>
+
                       <p className="text-red-500 text-xs italic">
                         {errors && errors["province"]}
                       </p>
-                      
                     </div>
                   </div>
                   <div className="form-row">
@@ -234,69 +305,71 @@ const updateCustomer = () => {
                       </p>
                     </div>
                   </div>
-                
-                <div className="form-row">      
-                  <div className="form-group col-md-6">
-                    <label htmlFor="password">
-                      <b>Password : </b>
-                    </label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      onChange={onChangeInput}
-                      value={userInfo.password}
-                      id="password"
-                      name="password"
-                      placeholder="Enter your password here"
-                    />
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["password"]}
-                    </p>
+
+                  <div className="form-row">
+                    <div className="form-group col-md-6">
+                      <label htmlFor="password">
+                        <b>Password : </b>
+                      </label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        onChange={onChangeInput}
+                        value={userInfo.password}
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password here"
+                      />
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["password"]}
+                      </p>
+                    </div>
+                    <div className="form-group col-md-6">
+                      <label htmlFor="passwordConfirm">
+                        <b>Confirm Password : </b>
+                      </label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        onChange={onChangeInput}
+                        value={userInfo.passwordConfirm}
+                        id="passwordConfirm"
+                        name="passwordConfirm"
+                        placeholder="Re-Enter your password here"
+                      />
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["passwordConfirm"]}
+                      </p>
+                    </div>
                   </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="passwordConfirm">
-                      <b>Confirm Password : </b>
-                    </label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      onChange={onChangeInput}
-                      value={userInfo.passwordConfirm}
-                      id="passwordConfirm"
-                      name="passwordConfirm"
-                      placeholder="Re-Enter your password here"
-                    />
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["passwordConfirm"]}
-                    </p>
+                  <div className="form-row">
+                    <div className="form-group col-md-6">
+                      <button
+                        data-cy="save-new-report-btn"
+                        onClick={(e) => validateBeforeSave(e)}
+                        className="btn btn-success"
+                      >
+                        Save
+                      </button>{" "}
+                      &nbsp;
+                      <button
+                        data-cy="save-new-report-btn"
+                        // onClick={(e) => validateBeforeSave(e)}
+                        className="btn btn-warning"
+                      >
+                        Reset
+                      </button>{" "}
+                      &nbsp;
+                      <a
+                        data-cy="link-new-report"
+                        href="/admin/customers"
+                        className="new-report btn btn-danger gap- btn-sm"
+                      >
+                        {" "}
+                        Cancel
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <button
-                      data-cy="save-new-report-btn"
-                      onClick={(e) => validateBeforeSave(e)}
-                      className="btn btn-success"
-                    >
-                      Save
-                    </button>{" "}
-                    &nbsp;
-                    <button
-                      data-cy="save-new-report-btn"
-                      // onClick={(e) => validateBeforeSave(e)}
-                      className="btn btn-warning"
-                    >
-                      Reset
-                    </button> &nbsp;
-                    <a 
-                      data-cy="link-new-report"
-                      href="/admin/customers"
-                      className="new-report btn btn-danger gap- btn-sm"
-                  > Cancel
-                   
-                  </a>
-                  </div>
-                </div>
                 </div>
               </form>
             </div>
