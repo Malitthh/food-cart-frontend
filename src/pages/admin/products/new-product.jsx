@@ -171,7 +171,7 @@ const NewProduct = () => {
             <div className="overflow-x-auto">
               <form>
                 <div className="form-row">
-                  <div className="form-group col-md-6">
+                  <div className="form-group col-md-4">
                     <label htmlFor="productName"><b>Product Name : </b></label>
                     <input
                       type="text"
@@ -206,7 +206,18 @@ const NewProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-2">
-                    <label htmlFor="stock"><b>Stock in Hand (Kg)</b></label>
+                    <label htmlFor="stock"><b>Type</b></label>
+                    <select className="form-control" name="type" id="type">
+                        <option disabled="disabled" selected="true">Choose a type</option>
+                        <option value="kg">Kg</option>
+                        <option value="qty">Quantity</option>
+                      </select>
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["stock"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-2">
+                    <label htmlFor="stock"><b>Stock in Hand</b></label>
                     <input
                       type="number"
                       className="form-control"

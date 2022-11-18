@@ -210,7 +210,7 @@ const updateProduct = () => {
             <div className="overflow-x-auto">
               <form>
                 <div className="form-row">
-                  <div className="form-group col-md-6">
+                  <div className="form-group col-md-4">
                     <label htmlFor="productName">
                       <b>Product Name : </b>
                     </label>
@@ -244,10 +244,24 @@ const updateProduct = () => {
                       <option value="fruit_nuts">Fruit & Nuts</option>
                       <option value="vegetables">Vegetables</option>
                       <option value="berries">Berries</option>
-                      <option value="butter_eggs">Butter & Rggs</option>
+                      <option value="butter_eggs">Butter & Eggs</option>
+                      <option value="rice">Rice</option>
                     </select>
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["category"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-2">
+                    <label htmlFor="type">
+                      <b>Type</b>
+                    </label>
+                    <select className="form-control" name="type" id="type">
+                        <option disabled="disabled" selected="true">Choose a type</option>
+                        <option value="kg">Kg</option>
+                        <option value="qty">Quantity</option>
+                      </select>
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["stock"]}
                     </p>
                   </div>
                   <div className="form-group col-md-2">
