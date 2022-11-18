@@ -61,7 +61,7 @@ const ReportIndex = () => {
                       </a>
                     </li>
                     <li className="tab-element">
-                      <a href="#tab01_3rd" className="tab-link">
+                      <a href="/admin/reports/stocks" className="tab-link">
                         <span className="biolife-icon icon-schedule"></span>
                         Stock
                       </a>
