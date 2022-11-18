@@ -7,65 +7,21 @@ import { addUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
-import { ProductSchema } from "../../../schema/productSchema";
+import { EmployeeSchema } from "../../../schema/customerSchema";
 
 const NewCustomer = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [userInfo, setUserInfo] = useState({});
-  const [files, setFile] = useState([]);
   const [errors, setErrors] = useState([]);
-  const [message, setMessage] = useState();
-  /**
-   * set image
-   * @param {*} e
-   * @returns
-   */
-  const handleImageFile = (e) => {
-    setMessage("");
-    let file = e.target.files;
-
-    for (let i = 0; i < file.length; i++) {
-      const fileType = file[i]["type"];
-      const validImageTypes = [
-        "image/gif",
-        "image/jpeg",
-        "image/png",
-        "image/webp",
-      ];
-      if (validImageTypes.includes(fileType)) {
-        setFile([...files, file[i]]);
-      } else {
-        setMessage("only images accepted");
-      }
-    }
-  };
+  const token =  window.localStorage.getItem('@token');
 
   /**
-   * Remove added image before upload
-   * @param {*} i
-   */
-  const removeImage = (i) => {
-    setFile(files.filter((x) => x.name !== i));
-  };
-
-  /**
-   * set vehicle makde and model
-   * @param {*} e
-   */
-  const onChangeCategory = (e) => {
-    setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
-    console.log(e.target.value, e.target.id);
-    //validateField("vMakeModel", e.value);
-  };
-
-  /**
-   * set customer name, mobile no and vehicle no
+   * 
    * @param {*} e
    */
   const onChangeInput = (e) => {
-    console.log(e.target.id, e.target.value);
-    //validateField(e.target.id, e.target.value);
+    validateField(e.target.id, e.target.value);
     setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
   };
 
@@ -75,9 +31,11 @@ const NewCustomer = () => {
   const onSubmit = async () => {
     let user = userInfo;
     user.role = "employee";
-    dispatch(addUserStart(user));
-    toast.success("Successfully Added !");
-
+    const payload = {
+      data: user,
+      token
+    }
+    dispatch(addUserStart(payload));
     // router.push("/admin/products");
   };
 
@@ -88,8 +46,12 @@ const NewCustomer = () => {
 
   const validateBeforeSave = (e) => {
     e.preventDefault();
-    console.log(userInfo, "pp");
-    onSubmit();
+    const err = validateForm(userInfo, EmployeeSchema);
+    if (err) {
+      setErrors(err);
+    } else {
+      onSubmit();
+    }
   };
 
   /**
@@ -98,7 +60,7 @@ const NewCustomer = () => {
    * @param {*} value
    */
   const validateField = (name, value) => {
-    const errMsg = validateProperty(name, value, ProductSchema);
+    const errMsg = validateProperty(name, value, EmployeeSchema);
 
     if (errMsg) {
       errors[name] = errMsg;
@@ -245,10 +207,10 @@ const NewCustomer = () => {
                     <label htmlFor="gender">
                       <b>Gender</b>
                     </label>
-                    <select className="form-control">
+                    <select className="form-control" name="gender" id="gender" onChange={(e) => setUserInfo({ ...userInfo, [e.target.id]: e.target.value })}>
                       <option value="" selected="true" disabled="disabled">Select your Gender here</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
+                      <option value="M">Male</option>
+                      <option value="F">Female</option>
                     </select>
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["gender"]}
@@ -274,11 +236,11 @@ const NewCustomer = () => {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="department"><b>Department</b></label>
-                    <select className="form-control">
+                    <select className="form-control" name="dept" id="dept" onChange={(e) => setUserInfo({ ...userInfo, [e.target.id]: e.target.value })}>
                       <option value="" disabled="disabled" selected="true">Select your department here</option>
                       <option value="IT">IT</option>
                       <option value="HR">HR</option>
-                      <option value="Sales">Sales</option>
+                      <option value="SALES">Sales</option>
                     </select>
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["department"]}

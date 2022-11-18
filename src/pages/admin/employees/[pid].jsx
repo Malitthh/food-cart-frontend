@@ -5,6 +5,7 @@ import { updateUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
+import { EmployeeSchemaUpdate } from "../../../schema/customerSchema";
 
 const updateEmployee = () => {
   const router = useRouter();
@@ -12,9 +13,33 @@ const updateEmployee = () => {
   const { users, auth } = useSelector((state) => state);
   const { allUsers } = users;
   const [userInfo, setUserInfo] = useState({});
-  const [files, setFile] = useState([]);
   const [errors, setErrors] = useState([]);
-  const [message, setMessage] = useState();
+  const token = window.localStorage.getItem("@token");
+  const depts = [
+    {
+      label: "IT",
+      value: "IT",
+    },
+    {
+      label: "HR",
+      value: "HR",
+    },
+    {
+      label: "SALES",
+      value: "SALES",
+    },
+  ];
+
+  const gender = [
+    {
+      label: "Male",
+      value: "M",
+    },
+    {
+      label: "Female",
+      value: "F",
+    },
+  ];
 
   const { pid } = router.query;
 
@@ -44,9 +69,14 @@ const updateEmployee = () => {
    * OnSubmit method to invoke the database call
    */
   const onSubmit = async () => {
-    dispatch(updateUserStart(userInfo));
-    toast.success("Successfully Updated !");
-    router.push("/admin/employees");
+    let user = userInfo;
+    user.role = "employee";
+    const payload = {
+      data: user,
+      token,
+    };
+    dispatch(updateUserStart(payload));
+    // router.push("/admin/employees");
   };
 
   /**
@@ -56,8 +86,13 @@ const updateEmployee = () => {
 
   const validateBeforeSave = (e) => {
     e.preventDefault();
-    console.log(userInfo, "pp");
-    onSubmit();
+    const err = validateForm(userInfo, EmployeeSchemaUpdate);
+    console.log(err, "update")
+    if (err) {
+      setErrors(err);
+    } else {
+      onSubmit();
+    }
   };
 
   /**
@@ -66,7 +101,7 @@ const updateEmployee = () => {
    * @param {*} value
    */
   const validateField = (name, value) => {
-    const errMsg = validateProperty(name, value, ProductSchema);
+    const errMsg = validateProperty(name, value, EmployeeSchemaUpdate);
 
     if (errMsg) {
       errors[name] = errMsg;
@@ -92,7 +127,9 @@ const updateEmployee = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page"><b>Edit Employee</b></span>
+              <span className="current-page">
+                <b>Edit Employee</b>
+              </span>
             </li>
           </ul>
         </nav>
@@ -198,7 +235,7 @@ const updateEmployee = () => {
                       type="text"
                       className="form-control"
                       onChange={onChangeInput}
-                      value={userInfo.phoneNo}
+                      value={userInfo.mobileNo}
                       id="mobileNo"
                       name="mobileNo"
                       placeholder="Enter your mobile no here"
@@ -213,10 +250,23 @@ const updateEmployee = () => {
                     <label htmlFor="gender">
                       <b>Gender</b>
                     </label>
-                    <select className="form-control">
-                      <option value="" selected="true" disabled="disabled">Select your Gender here</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
+                    <select
+                      className="form-control"
+                      name="gender" id="gender"
+                      value={userInfo.gender}
+                      onChange={(e) =>
+                        setUserInfo({
+                          ...userInfo,
+                          [e.target.id]: e.target.value,
+                        })
+                      }
+                    >
+                      <option value="" disabled="disabled">
+                        Select your Gender here
+                      </option>
+                      {gender.map((option) => (
+                        <option value={option.value}>{option.label}</option>
+                      ))}
                     </select>
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["gender"]}
@@ -241,12 +291,27 @@ const updateEmployee = () => {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="department"><b>Department</b></label>
-                    <select className="form-control">
-                      <option value="" disabled="disabled" selected="true">Select your department here</option>
-                      <option value="IT">IT</option>
-                      <option value="HR">HR</option>
-                      <option value="Sales">Sales</option>
+                    <label htmlFor="department">
+                      <b>Department</b>
+                    </label>
+                    <select
+                      className="form-control"
+                      name="dept"
+                      id="dept"
+                      value={userInfo.dept}
+                      onChange={(e) =>
+                        setUserInfo({
+                          ...userInfo,
+                          [e.target.id]: e.target.value,
+                        })
+                      }
+                    >
+                      <option value="" disabled="disabled">
+                        Select your department here
+                      </option>
+                      {depts.map((option) => (
+                        <option value={option.value}>{option.label}</option>
+                      ))}
                     </select>
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["department"]}
@@ -294,7 +359,7 @@ const updateEmployee = () => {
                     </label>
                     <input
                       type="password"
-                      className="form-control"  
+                      className="form-control"
                       onChange={onChangeInput}
                       value={userInfo.passwordConfirm}
                       id="passwordConfirm"
@@ -314,20 +379,23 @@ const updateEmployee = () => {
                       className="btn btn-success"
                     >
                       Save
-                    </button> &nbsp;
+                    </button>{" "}
+                    &nbsp;
                     <button
                       data-cy="reset-new-report-btn"
                       // onClick={(e) => validateBeforeSave(e)}
                       className="btn btn-warning"
                     >
                       Reset
-                    </button> &nbsp;
-                    <a 
+                    </button>{" "}
+                    &nbsp;
+                    <a
                       data-cy="link-new-report"
                       href="/admin/employees"
                       className="new-report btn btn-danger gap- btn-sm"
-                    > Cancel
-                   
+                    >
+                      {" "}
+                      Cancel
                     </a>
                   </div>
                 </div>
