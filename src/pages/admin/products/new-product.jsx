@@ -16,6 +16,7 @@ const NewProduct = () => {
   const [files, setFile] = useState([]);
   const [errors, setErrors] = useState([]);
   const [message, setMessage] = useState();
+  const token =  window.localStorage.getItem('@token');
   /**
    * set image
    * @param {*} e
@@ -35,8 +36,9 @@ const NewProduct = () => {
       ];
       if (validImageTypes.includes(fileType)) {
         setFile([...files, file[i]]);
+        delete errors['photos'];
       } else {
-        setMessage("only images accepted");
+        toast.error("only images accepted");
       }
     }
   };
@@ -72,8 +74,29 @@ const NewProduct = () => {
   /**
    * OnSubmit method to invoke the database call
    */
-  const onSubmit = async () => {
+  const onSubmit = async (product) => {
     //  e.preventDefault()
+
+    const payload = {
+      data : product,
+      token
+    }
+
+    dispatch(addProductStart(payload));
+    setFile([])
+
+    router.push("/admin/products");
+
+  };
+
+  /**
+   * Validate Form
+   * @param {*} e
+   */
+
+  const validateBeforeSave = async (e) => {
+    e.preventDefault();
+
     const formData = new FormData();
     const config = {
       headers: {
@@ -93,42 +116,16 @@ const NewProduct = () => {
     }
 
     let product = productInfo;
-    product.photos = imgs;
 
-    dispatch(addProductStart(product));
-    toast.success("Successfully Added !");
+    if(imgs.length !== 0) product.photos = imgs; 
 
-   // router.push("/admin/products");
+    const err = validateForm(product, ProductSchema);
 
-  };
-
-  /**
-   * Validate Form
-   * @param {*} e
-   */
-
-  const validateBeforeSave = (e) => {
-    e.preventDefault();
-    // create damageReport object to validate againts DamageReportSchema
-    // const drObject = {
-    //   customerName: productInfo.customerName,
-    //   vehicleNo: productInfo.vehicleNo,
-    //   mobileNo: productInfo.mobileNo,
-    //   description: productInfo.description,
-    //   vMakeModel: vMakeModels.make,
-    // };
-    console.log(productInfo, "pp");
-    onSubmit();
-    // dispatch(addProductsStart(productInfo))
-    // const hasErrors = validateForm(drObject, ProductSchema);
-    // if (hasErrors) {
-    //   setErrors(hasErrors);
-    //   e.preventDefault();
-    //   setShowForm("");
-    // } else {
-    //   e.preventDefault();
-    //   setShowForm("modal-open");
-    // }
+    if (err) {
+      setErrors(err);
+    } else {
+      onSubmit(product);
+    }
   };
 
   /**
@@ -281,7 +278,7 @@ const NewProduct = () => {
                       name="files[]" 
                     />
                     <p className="text-red-500 text-xs italic">
-                      {errors && errors["price"]}
+                      {errors && errors["photos"]}
                     </p>
 
                     <div className="flex flex-wrap gap-2 mt-2">

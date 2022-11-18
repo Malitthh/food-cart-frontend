@@ -11,7 +11,7 @@ const ProductIndex = () => {
   const router = useRouter();
   const { products, auth } = useSelector((state) => state);
   const { allProducts } = products;
-
+  const token =  window.localStorage.getItem('@token');
   const featchOnLoad = async () => {
     dispatch(getProductStart());
   };
@@ -21,8 +21,12 @@ const ProductIndex = () => {
   }, []);
 
   const deleteProduct = async (id) => {
-    dispatch(deleteProductStart(id));
-    toast.success("Successfully Deleted !");
+    const payload = {
+      id,
+      token
+    }
+    dispatch(deleteProductStart(payload));
+   router.reload(window.location.pathname)
   };
 
   return (

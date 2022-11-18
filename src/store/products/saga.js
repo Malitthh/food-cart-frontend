@@ -93,8 +93,8 @@ function* addProductStart({type, payload}) {
     console.log(payload, "delete")
     try {
         const response = yield ProductsService.deleteProduct(payload)
-        yield put(deleteProductSuccess(response.data.products))
-        console.log(response.data.data.products,"saga")
+       // yield put(deleteProductSuccess(response.data.products))
+       // console.log(response.data.data.products,"saga")
         toast.success("Successfully Deleted !");
     } catch (err) {
         yield put(deleteProductError(err))

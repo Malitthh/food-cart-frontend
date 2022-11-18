@@ -3,12 +3,14 @@ import { useRouter } from "next/router";
 import { apiUrl, clientBaseURL } from "config";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProductStart, getSingleProductStart } from "../../../store/products/actions";
+import {
+  updateProductStart,
+  getSingleProductStart,
+} from "../../../store/products/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
-import { ProductSchema } from "../../../schema/productSchema";
-
+import { ProductSchemaUpdate } from "../../../schema/productSchema";
 
 const updateProduct = () => {
   const router = useRouter();
@@ -18,8 +20,8 @@ const updateProduct = () => {
   const [errors, setErrors] = useState([]);
   const [message, setMessage] = useState();
   const { products, auth } = useSelector((state) => state);
-  const { singleProduct } = products;
-  console.log(singleProduct, "sg")
+  const { singleProduct, allProducts } = products;
+  const token = window.localStorage.getItem("@token");
   const { pid } = router.query;
 
   useEffect(() => {
@@ -28,8 +30,9 @@ const updateProduct = () => {
     }
 
     const featchOnLoad = async () => {
-      dispatch(getSingleProductStart(pid));
-      setProductInfo(singleProduct)
+      const result = allProducts.filter((product) => product._id === pid);
+      console.log(result[0], "all");
+      setProductInfo(result[0]);
     };
     featchOnLoad();
   }, [pid]);
@@ -53,7 +56,7 @@ const updateProduct = () => {
       if (validImageTypes.includes(fileType)) {
         setFile([...files, file[i]]);
       } else {
-        setMessage("only images accepted");
+        toast.error("only images accepted");
       }
     }
   };
@@ -66,6 +69,11 @@ const updateProduct = () => {
     setFile(files.filter((x) => x.name !== i));
   };
 
+  const removeDBImage = (i) => {
+    console.log(i, "rm");
+    const imgs = productInfo.photos.filter((x) => x.uuid !== i);
+    setProductInfo({ ...productInfo, photos: imgs });
+  };
   /**
    * set vehicle makde and model
    * @param {*} e
@@ -73,7 +81,6 @@ const updateProduct = () => {
   const onChangeCategory = (e) => {
     setProductInfo({ ...productInfo, [e.target.id]: e.target.value });
     console.log(e.target.value, e.target.id);
-    //validateField("vMakeModel", e.value);
   };
 
   /**
@@ -81,7 +88,6 @@ const updateProduct = () => {
    * @param {*} e
    */
   const onChangeInput = (e) => {
-    console.log(e.target.id, e.target.value);
     validateField(e.target.id, e.target.value);
     setProductInfo({ ...productInfo, [e.target.id]: e.target.value });
   };
@@ -89,8 +95,38 @@ const updateProduct = () => {
   /**
    * OnSubmit method to invoke the database call
    */
-  const onSubmit = async () => {
+  const onSubmit = async (product) => {
     //  e.preventDefault()
+    const payload = {
+      data: product,
+      token,
+    };
+    dispatch(updateProductStart(payload));
+    router.push("/admin/products");
+  };
+
+  /**
+   * Validate Form
+   * @param {*} e
+   */
+
+  // const validateBeforeSave = (e) => {
+  //   e.preventDefault();
+
+  //   console.log(productInfo, "pp");
+  //   const hasErrors = validateForm(productInfo, ProductSchemaUpdate);
+  //   console.log(hasErrors, "pp");
+  //   if (hasErrors) {
+  //     setErrors(hasErrors);
+  //   } else {
+  //     e.preventDefault();
+  //     onSubmit();
+  //   }
+  // };
+
+  const validateBeforeSave = async (e) => {
+    e.preventDefault();
+
     const formData = new FormData();
     const config = {
       headers: {
@@ -110,40 +146,16 @@ const updateProduct = () => {
     }
 
     let product = productInfo;
-    product.photos = imgs;
 
-    dispatch(updateProductStart(product));
-    toast.success("Successfully Added !");
-    router.push("/admin/products");
-  };
+    if (imgs.length !== 0) product.photos = imgs;
 
-  /**
-   * Validate Form
-   * @param {*} e
-   */
+    const err = validateForm(product, ProductSchemaUpdate);
 
-  const validateBeforeSave = (e) => {
-    e.preventDefault();
-    // create damageReport object to validate againts DamageReportSchema
-    // const drObject = {
-    //   customerName: productInfo.customerName,
-    //   vehicleNo: productInfo.vehicleNo,
-    //   mobileNo: productInfo.mobileNo,
-    //   description: productInfo.description,
-    //   vMakeModel: vMakeModels.make,
-    // };
-    console.log(productInfo, "pp");
-    onSubmit();
-    // dispatch(addProductsStart(productInfo))
-    // const hasErrors = validateForm(drObject, ProductSchema);
-    // if (hasErrors) {
-    //   setErrors(hasErrors);
-    //   e.preventDefault();
-    //   setShowForm("");
-    // } else {
-    //   e.preventDefault();
-    //   setShowForm("modal-open");
-    // }
+    if (err) {
+      setErrors(err);
+    } else {
+      onSubmit(product);
+    }
   };
 
   /**
@@ -152,7 +164,7 @@ const updateProduct = () => {
    * @param {*} value
    */
   const validateField = (name, value) => {
-    const errMsg = validateProperty(name, value, ProductSchema);
+    const errMsg = validateProperty(name, value, ProductSchemaUpdate);
 
     if (errMsg) {
       errors[name] = errMsg;
@@ -178,7 +190,9 @@ const updateProduct = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page"><b>Edit Products</b></span>
+              <span className="current-page">
+                <b>Edit Products</b>
+              </span>
             </li>
           </ul>
         </nav>
@@ -190,7 +204,9 @@ const updateProduct = () => {
               <form>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="productName"><b>Product Name : </b></label>
+                    <label htmlFor="productName">
+                      <b>Product Name : </b>
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -205,14 +221,19 @@ const updateProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-4">
-                    <label htmlFor="category"><b>Category : </b></label>
-                    <select selected="true"
+                    <label htmlFor="category">
+                      <b>Category : </b>
+                    </label>
+                    <select
+                      selected="true"
                       id="category"
                       className="form-control"
                       onChange={onChangeCategory}
                       value={productInfo.category}
                     >
-                      <option selected disabled>Choose a Category</option>
+                      <option selected disabled>
+                        Choose a Category
+                      </option>
                       <option value="fruit_nuts">Fruit & Nuts</option>
                       <option value="vegetables">Vegetables</option>
                       <option value="berries">Berries</option>
@@ -223,7 +244,9 @@ const updateProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-2">
-                    <label htmlFor="stock"><b>Stock in Hand</b></label>
+                    <label htmlFor="stock">
+                      <b>Stock in Hand</b>
+                    </label>
                     <input
                       type="number"
                       className="form-control"
@@ -238,7 +261,9 @@ const updateProduct = () => {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="costPrice"><b>Cost Price</b></label>
+                    <label htmlFor="costPrice">
+                      <b>Cost Price</b>
+                    </label>
                     <input
                       type="number"
                       className="form-control"
@@ -253,7 +278,9 @@ const updateProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="marketPrice"><b>Market Price</b></label>
+                    <label htmlFor="marketPrice">
+                      <b>Market Price</b>
+                    </label>
                     <input
                       type="number"
                       className="form-control"
@@ -270,7 +297,9 @@ const updateProduct = () => {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="costPrice"><b>Remarks</b></label>
+                    <label htmlFor="costPrice">
+                      <b>Remarks</b>
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -285,19 +314,35 @@ const updateProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="images"><b>Images</b></label>
+                    <label htmlFor="images">
+                      <b>Images - replace current image</b>
+                    </label>
                     <input
                       type="file"
                       onChange={handleImageFile}
                       className="form-control"
                       placeholder=""
-                      multiple="multiple"
-                      name="files[]"
+                      // multiple="multiple"
+                      name="files"
                     />
                     <p className="text-red-500 text-xs italic">
-                      {errors && errors["price"]}
+                      {errors && errors["photo"]}
                     </p>
 
+                    {productInfo.photos &&
+                      productInfo.photos.map((file, key) => {
+                        return (
+                          <div key={key} className="overflow-hidden relative">
+                            {/* <i
+                              onClick={() => {
+                                removeDBImage(file.uuid);
+                              }}
+                              className="fa fa-close absolute right-1 hover:text-white cursor-pointer"
+                            ></i> */}
+                            <img style={{ height: "100px" }} src={file.url} />
+                          </div>
+                        );
+                      })}
                     <div className="flex flex-wrap gap-2 mt-2">
                       {files.map((file, key) => {
                         return (
@@ -319,29 +364,32 @@ const updateProduct = () => {
                   </div>
                 </div>
                 <div className="form-row">
-                <div className="form-group col-md-6">
-                  <button
-                    data-cy="save-new-report-btn"
-                    onClick={(e) => validateBeforeSave(e)}
-                    className="btn btn-success"
-                  >
-                    Save
-                  </button> &nbsp;
-                  <button
-                    data-cy="save-new-report-btn"
-                    // onClick={(e) => validateBeforeSave(e)}
-                    className="btn btn-warning"
-                  >
-                    Reset
-                  </button> &nbsp;
-                  <a 
-                    data-cy="link-new-report"
-                    href="/admin/products"
-                    className="new-report btn btn-danger gap- btn-sm"
-                  > Cancel
-                   
-                  </a>
-                </div>
+                  <div className="form-group col-md-6">
+                    <button
+                      data-cy="save-new-report-btn"
+                      onClick={(e) => validateBeforeSave(e)}
+                      className="btn btn-success"
+                    >
+                      Save
+                    </button>{" "}
+                    &nbsp;
+                    <button
+                      data-cy="save-new-report-btn"
+                      // onClick={(e) => validateBeforeSave(e)}
+                      className="btn btn-warning"
+                    >
+                      Reset
+                    </button>{" "}
+                    &nbsp;
+                    <a
+                      data-cy="link-new-report"
+                      href="/admin/products"
+                      className="new-report btn btn-danger gap- btn-sm"
+                    >
+                      {" "}
+                      Cancel
+                    </a>
+                  </div>
                 </div>
               </form>
             </div>

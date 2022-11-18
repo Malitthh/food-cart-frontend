@@ -6,11 +6,11 @@ import { apiUrl } from "config";
  */
 
 class ProductsService {
-  static addProduct = (payload) =>
-    axios.post(`${apiUrl}/v1/products`, payload, {
+  static addProduct = ({data, token}) =>
+    axios.post(`${apiUrl}/v1/products`, data, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc2MTg5MGM1NTc0MzNhYzY2YWIxNCIsImlhdCI6MTY2NTI5MzczNiwiZXhwIjoxNjczMDY5NzM2fQ.e3WCIabtt7uvyYIOffgp1oYL7e23yzJkT04g8WGmZFw`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -25,23 +25,23 @@ class ProductsService {
     axios.get(`${apiUrl}/v1/products/${id}`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc2MTg5MGM1NTc0MzNhYzY2YWIxNCIsImlhdCI6MTY2NTI5MzczNiwiZXhwIjoxNjczMDY5NzM2fQ.e3WCIabtt7uvyYIOffgp1oYL7e23yzJkT04g8WGmZFw`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
-    static updateProduct = (payload) =>
-    axios.patch(`${apiUrl}/v1/products/${payload._id}`, payload, {
+    static updateProduct = ({ data, token}) =>
+    axios.patch(`${apiUrl}/v1/products/${data._id}`, data, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc2MTg5MGM1NTc0MzNhYzY2YWIxNCIsImlhdCI6MTY2NTI5MzczNiwiZXhwIjoxNjczMDY5NzM2fQ.e3WCIabtt7uvyYIOffgp1oYL7e23yzJkT04g8WGmZFw`,
+          Authorization: `Bearer ${token}`,
       },
     });
 
-    static deleteProduct = (id) =>
+    static deleteProduct = ({id, token}) =>
     axios.delete(`${apiUrl}/v1/products/${id}`,{
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc2MTg5MGM1NTc0MzNhYzY2YWIxNCIsImlhdCI6MTY2NTI5MzczNiwiZXhwIjoxNjczMDY5NzM2fQ.e3WCIabtt7uvyYIOffgp1oYL7e23yzJkT04g8WGmZFw`,
+          Authorization: `Bearer ${token}`,
       },
     });
 }
