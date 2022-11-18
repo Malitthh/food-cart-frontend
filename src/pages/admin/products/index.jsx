@@ -70,6 +70,7 @@ const ProductIndex = () => {
                     <th><b>Cost Price</b></th>
                     <th><b>Market Price</b></th>
                     <th><b>Stock In hand</b></th>
+                    <th><b>Sold</b></th>
                     <th></th>
                   </tr>
                 </thead>
@@ -88,6 +89,7 @@ const ProductIndex = () => {
                         <td>{product.costPrice}</td>
                         <td>{product.price}</td>
                         <td>{product.stock}</td>
+                        <td>{product.sold}</td>
                         <td>
                           <a
                             data-cy={`view-report-btn${key}`}
