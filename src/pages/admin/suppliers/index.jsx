@@ -1,18 +1,27 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
-import { getUserStart } from "../../../store/users/actions";
-import { apiUrl, clientBaseURLImages } from "config";
-import queryString from 'query-string'
+import { getUserStart, deleteUserStart } from "../../../store/users/actions";
+import { useRouter } from "next/router";
 
 const Index = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { users, auth } = useSelector((state) => state);
   const { allUsers } = users;
-
+  const token =  window.localStorage.getItem('@token');
   const featchOnLoad = async () => {
     let role = 'supplier'
     dispatch(getUserStart(role));
+  };
+
+  const deleteUser = async (id) => {
+    const payload = {
+      id,
+      token
+    }
+    dispatch(deleteUserStart(payload));
+    router.reload(window.location.pathname)
   };
 
   useEffect(() => {

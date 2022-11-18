@@ -7,7 +7,7 @@ import { addUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
-import { ProductSchema } from "../../../schema/productSchema";
+import { SupplierSchema } from "../../../schema/customerSchema";
 
 const NewCustomer = () => {
   const router = useRouter();
@@ -15,57 +15,14 @@ const NewCustomer = () => {
   const [userInfo, setUserInfo] = useState({});
   const [files, setFile] = useState([]);
   const [errors, setErrors] = useState([]);
-  const [message, setMessage] = useState();
-  /**
-   * set image
-   * @param {*} e
-   * @returns
-   */
-  const handleImageFile = (e) => {
-    setMessage("");
-    let file = e.target.files;
-
-    for (let i = 0; i < file.length; i++) {
-      const fileType = file[i]["type"];
-      const validImageTypes = [
-        "image/gif",
-        "image/jpeg",
-        "image/png",
-        "image/webp",
-      ];
-      if (validImageTypes.includes(fileType)) {
-        setFile([...files, file[i]]);
-      } else {
-        setMessage("only images accepted");
-      }
-    }
-  };
-
-  /**
-   * Remove added image before upload
-   * @param {*} i
-   */
-  const removeImage = (i) => {
-    setFile(files.filter((x) => x.name !== i));
-  };
-
-  /**
-   * set vehicle makde and model
-   * @param {*} e
-   */
-  const onChangeCategory = (e) => {
-    setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
-    console.log(e.target.value, e.target.id);
-    //validateField("vMakeModel", e.value);
-  };
+  const token =  window.localStorage.getItem('@token');
 
   /**
    * set customer name, mobile no and vehicle no
    * @param {*} e
    */
   const onChangeInput = (e) => {
-    console.log(e.target.id, e.target.value);
-    //validateField(e.target.id, e.target.value);
+    validateField(e.target.id, e.target.value);
     setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
   };
 
@@ -74,10 +31,12 @@ const NewCustomer = () => {
    */
   const onSubmit = async () => {
     let user = userInfo;
-    user.role = 'supplier';
-    dispatch(addUserStart(user));
-    toast.success("Successfully Added !");
-
+    user.role = "supplier";
+    const payload = {
+      data: user,
+      token
+    }
+    dispatch(addUserStart(payload));
    // router.push("/admin/products");
 
   };
@@ -89,9 +48,12 @@ const NewCustomer = () => {
 
   const validateBeforeSave = (e) => {
     e.preventDefault();
-    console.log(userInfo, "pp");
-    onSubmit();
-
+    const err = validateForm(userInfo, SupplierSchema);
+    if (err) {
+      setErrors(err);
+    } else {
+      onSubmit();
+    }
   };
 
   /**
@@ -100,7 +62,7 @@ const NewCustomer = () => {
    * @param {*} value
    */
   const validateField = (name, value) => {
-    const errMsg = validateProperty(name, value, ProductSchema);
+    const errMsg = validateProperty(name, value, SupplierSchema);
 
     if (errMsg) {
       errors[name] = errMsg;
@@ -217,18 +179,18 @@ const NewCustomer = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="joinDate">
+                    <label htmlFor="category">
                       <b>What does he/she supply?</b>
                     </label>
-                    <select className="form-control">
+                    <select className="form-control" name="category" id="category" onChange={(e) => setUserInfo({ ...userInfo, [e.target.id]: e.target.value })}>
                       <option value="" disabled="disabled" selected="true">Select a category here</option>
-                      <option value="Fruits&nuts">Fruits & nuts</option>
-                      <option value="Vegetables">Vegetables</option>
-                      <option value="Berries">Berries</option>
-                      <option value="Butter&Eggs">Butter & Eggs</option>
+                      <option value="fruit_nuts">Fruit & Nuts</option>
+                      <option value="vegetables">Vegetables</option>
+                      <option value="berries">Berries</option>
+                      <option value="butter_eggs">Butter & Eggs</option>
                     </select>
                     <p className="text-red-500 text-xs italic">
-                      {errors && errors["joinDate"]}
+                      {errors && errors["category"]}
                     </p>
                   </div>
                 </div>

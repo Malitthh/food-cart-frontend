@@ -8,7 +8,6 @@ import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { CustomerSchema } from "../../../schema/customerSchema";
-// import { token } from '../.././../helpers/session'
 
 const NewCustomer = () => {
   const router = useRouter();

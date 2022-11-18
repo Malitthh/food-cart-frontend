@@ -201,7 +201,7 @@ const NewProduct = () => {
                       <option value="fruit_nuts">Fruit & Nuts</option>
                       <option value="vegetables">Vegetables</option>
                       <option value="berries">Berries</option>
-                      <option value="butter_eggs">Butter & Rggs</option>
+                      <option value="butter_eggs">Butter & Eggs</option>
                     </select>
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["category"]}
