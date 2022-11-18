@@ -42,7 +42,6 @@ const updateProduct = () => {
    * @returns
    */
   const handleImageFile = (e) => {
-    setMessage("");
     let file = e.target.files;
 
     for (let i = 0; i < file.length; i++) {
