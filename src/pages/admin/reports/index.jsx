@@ -46,37 +46,23 @@ console.log(allOrders, "test")
       </div>
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-          <div className="container mx-2">
+          <div className="container mx-3">
             <div className="biolife-service type01 biolife-service__type01 sm-margin-top-0 xs-margin-top-45px">
               <ul className="services-list">
                
-                <li>
-                  <div className="service-inner color-reverse">
-                    <span className="number">{pendingOrders.length}</span>
-                    <span className="biolife-icon icon-schedule"></span>
-                    <a className="srv-name" href="#">
-                    Number of Pending Orders
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div className="service-inner color-reverse">
-                    <span className="number">{processingOrders.length}</span>
-                    <span className="biolife-icon icon-car"></span>
-                    <a className="srv-name" href="#">
-                      Number of Processing Orders
-                    </a>
-                  </div>
-                </li>
-                <li>
-                  <div className="service-inner color-reverse">
-                    <span className="number">{shippedOrders.length}</span>
-                    <span className="biolife-icon icon-car"></span>
-                    <a className="srv-name" href="#">
-                      Number of Shipped Orders
-                    </a>
-                  </div>
-                </li>
+                <div className="tab-head tab-head__icon-top-layout icon-top-layout">
+                            <ul className="tabs md-margin-bottom-35-im xs-margin-bottom-40-im"> 
+                                <li className="tab-element" >
+                                    <a href="#tab01_2nd" className="tab-link"><span className="biolife-icon icon-car"></span>Orders</a>
+                                </li>
+                                <li className="tab-element" >
+                                    <a href="#tab01_3rd" className="tab-link"><span className="biolife-icon icon-schedule"></span>Stock</a>
+                                </li>
+                                <li className="tab-element" >
+                                    <a href="#tab01_5th" className="tab-link"><span className="biolife-icon icon-suporter"></span>Financial & Sales</a>
+                                </li>
+                            </ul>
+                        </div>
                
               </ul>
             </div>

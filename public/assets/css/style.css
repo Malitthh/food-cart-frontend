@@ -356,6 +356,9 @@ select option {
 .icon-blueberry:before {
   content: "\e930";
 }
+.icon-dollar:before {
+  content: "\e930";
+}
 /******************************************
 * Animation Effects                       *
 *******************************************/

@@ -38,27 +38,48 @@ const Home = () => {
                 <li>
                   <div className="service-inner color-reverse">
                     <span className="number">1</span>
-                    <span className="biolife-icon icon-beer"></span>
+                    <span className="biolife-icon icon-suporter"></span>
                     <a className="srv-name" href="#">
-                     Number of Orders
+                     Number of Suppliers
                     </a>
                   </div>
                 </li>
                 <li>
                   <div className="service-inner color-reverse">
                     <span className="number">2</span>
-                    <span className="biolife-icon icon-schedule"></span>
+                    <span className="biolife-icon icon-suporter"></span>
                     <a className="srv-name" href="#">
-                    Number of Pending Orders
+                    Number of Employees
                     </a>
                   </div>
                 </li>
                 <li>
                   <div className="service-inner color-reverse">
                     <span className="number">3</span>
+                    <span className="biolife-icon icon-suporter"></span>
+                    <a className="srv-name" href="#">
+                      Number of customers
+                    </a>
+                  </div>
+                </li>
+              </ul>
+              <ul className="services-list">
+                <li>
+                  <div className="service-inner color-reverse">
+                    <span className="number">1</span>
                     <span className="biolife-icon icon-car"></span>
                     <a className="srv-name" href="#">
-                      Number of Completed Orders
+                     Number of Orders
+                    </a>
+                  </div>
+                </li>
+               
+                <li>
+                  <div className="service-inner color-reverse">
+                    <span className="number">3</span>
+                    <span className="biolife-icon icon-fruits"></span>
+                    <a className="srv-name" href="#">
+                      Number of Products
                     </a>
                   </div>
                 </li>
