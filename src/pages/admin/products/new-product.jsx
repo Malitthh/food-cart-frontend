@@ -201,7 +201,8 @@ const NewProduct = () => {
                       <option value="fruit_nuts">Fruit & Nuts</option>
                       <option value="vegetables">Vegetables</option>
                       <option value="berries">Berries</option>
-                      <option value="butter_eggs">Butter & Rggs</option>
+                      <option value="butter_eggs">Butter & Eggs</option>
+                      <option value="rice">Rice</option>
                     </select>
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["category"]}
@@ -264,7 +265,7 @@ const NewProduct = () => {
                       value={productInfo.description}
                       id="description"
                       name="description"
-                      placeholder="Entetr some remarks here"
+                      placeholder="Write some remarks here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["description"]}
