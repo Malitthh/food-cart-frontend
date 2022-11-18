@@ -14,11 +14,9 @@ const NavBar = () => {
   
   useEffect(() => {
     if (status === "success")
-      if (user.role === "admin") {
-        router.push("/admin");
-      } else {
+      if (user.role !== "admin") {
         router.push("/");
-      }
+      } 
   }, []);
 
   const logout = () => {

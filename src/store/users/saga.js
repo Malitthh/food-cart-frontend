@@ -1,5 +1,7 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import UserService from './service'
+import { toast } from "react-toastify";
+
 import {
     USER_TYPES,
     addUserSuccess,
@@ -18,13 +20,13 @@ import {
  */
 function* addUserStart({type, payload}) {
     try {
-        console.log("saga", payload)
         const response = yield UserService.addUser(payload)
         yield put(addUserSuccess(response.data))
-     
+        toast.success("Successfully Added !");
     } catch (err) {
-        yield put(addUserError(err))
-        console.log(err, "err")
+        yield put(addUserError(err.response.data))
+        toast.error(err.response.data.message);
+        console.log(err.response.data, "err")
     }
 }
 
@@ -40,6 +42,7 @@ function* addUserStart({type, payload}) {
         console.log(response.data.data.users,"saga")
     } catch (err) {
         yield put(getUserError(err))
+        toast.error(err.response.data.message);
         console.log(err, "err")
     }
 }
@@ -53,9 +56,10 @@ function* addUserStart({type, payload}) {
     try {
         const response = yield UserService.deleteUser(payload)
         yield put(deleteUserSuccess(response.data.data.users))
-        console.log(response.data.data.users,"saga")
+        toast.success("Successfully Deleted !");
     } catch (err) {
         yield put(deleteUserError(err))
+        toast.error(err.response.data.message);
         console.log(err, "err")
     }
 }
@@ -69,9 +73,11 @@ function* addUserStart({type, payload}) {
     try {
         const response = yield UserService.updateUser(payload)
         yield put(updateUserSuccess(response.data.data.users))
-        console.log(response.data.data.users,"saga")
+        toast.success("Successfully Updated !");
+        
     } catch (err) {
         yield put(updateUserError(err))
+        toast.error(err.response.data.message);
         console.log(err, "err")
     }
 }

@@ -1,16 +1,15 @@
 import axios from "axios";
 import { apiUrl } from "config";
-
 /**
  * UserService, connecting with database using axios
  */
 
 class UserService {
-  static addUser = (payload) =>
-    axios.post(`${apiUrl}/v1/users`, payload, {
+  static addUser = ({ data, token}) =>
+    axios.post(`${apiUrl}/v1/users`, data, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc2MTg5MGM1NTc0MzNhYzY2YWIxNCIsImlhdCI6MTY2NTI5MzczNiwiZXhwIjoxNjczMDY5NzM2fQ.e3WCIabtt7uvyYIOffgp1oYL7e23yzJkT04g8WGmZFw`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
@@ -22,19 +21,19 @@ class UserService {
       params: { role: payload },
     });
 
-  static deleteUser = (id) =>
+  static deleteUser = ({id, token}) =>
     axios.delete(`${apiUrl}/v1/users/${id}`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc2MTg5MGM1NTc0MzNhYzY2YWIxNCIsImlhdCI6MTY2NTI5MzczNiwiZXhwIjoxNjczMDY5NzM2fQ.e3WCIabtt7uvyYIOffgp1oYL7e23yzJkT04g8WGmZFw`,
+       Authorization: `Bearer ${token}`,
       },
     });
 
-  static updateUser = (payload) =>
-    axios.patch(`${apiUrl}/v1/users/${payload._id}`, payload, {
+  static updateUser = ({data, token}) =>
+    axios.patch(`${apiUrl}/v1/users/${data._id}`, data, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTc2MTg5MGM1NTc0MzNhYzY2YWIxNCIsImlhdCI6MTY2NTI5MzczNiwiZXhwIjoxNjczMDY5NzM2fQ.e3WCIabtt7uvyYIOffgp1oYL7e23yzJkT04g8WGmZFw`,
+       Authorization: `Bearer ${token}`,
       },
     });
 }

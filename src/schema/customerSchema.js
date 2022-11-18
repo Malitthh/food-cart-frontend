@@ -12,4 +12,5 @@ export const CustomerSchema = {
   address: JOI.string().required().label("address"),
   password: JOI.any().allow(),
   passwordConfirm: JOI.any().allow(),
+  role: JOI.any().allow(),
 };

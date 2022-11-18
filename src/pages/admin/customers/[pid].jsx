@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 
 const updateCustomer = () => {
+  const token =  window.localStorage.getItem('@token');
   const router = useRouter();
   const dispatch = useDispatch();
   const { users, auth } = useSelector((state) => state);
@@ -44,9 +45,12 @@ const updateCustomer = () => {
    * OnSubmit method to invoke the database call
    */
   const onSubmit = async () => {
-    dispatch(updateUserStart(userInfo));
-    toast.success("Successfully Updated !");
-    router.push("/admin/customers");
+    const payload = {
+      data: userInfo,
+      token
+    }
+    dispatch(updateUserStart(payload));
+   // router.push("/admin/customers");
   };
 
   /**

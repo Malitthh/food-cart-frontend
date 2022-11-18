@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   getUser: [],
   allUsers: [],
   getError: "",
+  status: false,
   getUpdatedProduct: {},
 };
 
@@ -71,6 +72,7 @@ const setGetUserStart = (state) => ({
 
 const setGetUserSuccess = (state, payload) => ({
   ...state,
+  status: true,
   isLoading: false,
   getUser: [...state.getUser, payload],
   getError: null,
@@ -78,6 +80,7 @@ const setGetUserSuccess = (state, payload) => ({
 
 const setGetUserError = (state, payload) => ({
   ...state,
+  status: false,
   isLoading: false,
   getError: payload,
 });
@@ -93,6 +96,7 @@ const setGetDBUserStart = (state) => ({
 
 const setGetDBUserSuccess = (state, payload) => ({
   ...state,
+  status: true,
   isLoading: false,
   allUsers: payload,
   getError: null,
@@ -100,6 +104,7 @@ const setGetDBUserSuccess = (state, payload) => ({
 
 const setGetDBUserError = (state, payload) => ({
   ...state,
+  status: false,
   isLoading: false,
   getError: payload,
 });
@@ -115,6 +120,7 @@ const setGetUpdateUserStart = (state) => ({
 
 const setGetUpdateUserSuccess = (state, payload) => ({
   ...state,
+  status: true,
   isLoading: false,
   getUpdatedProduct: payload,
   getError: null,
@@ -122,6 +128,7 @@ const setGetUpdateUserSuccess = (state, payload) => ({
 
 const setGetUpdateUserError = (state, payload) => ({
   ...state,
+  status: false,
   isLoading: false,
   getError: payload,
 });
@@ -137,6 +144,7 @@ const setGetDeleteUserStart = (state) => ({
 
 const setGetDeleteUserSuccess = (state, payload) => ({
   ...state,
+  status: true,
   isLoading: false,
   getDeletedProduct: payload,
   getError: null,
@@ -144,6 +152,7 @@ const setGetDeleteUserSuccess = (state, payload) => ({
 
 const setGetDeleteUserError = (state, payload) => ({
   ...state,
+  status: false,
   isLoading: false,
   getError: payload,
 });

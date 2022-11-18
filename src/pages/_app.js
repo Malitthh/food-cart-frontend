@@ -11,7 +11,7 @@ const App = ({ Component, pageProps }) => {
     <Provider store={store}>
          <PersistGate loading={null} persistor={persistor}>
             <Component {...pageProps} />
-            <ToastContainer />
+            <ToastContainer theme="colored" />
         </PersistGate>
     </Provider>
     )

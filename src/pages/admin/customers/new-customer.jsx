@@ -2,20 +2,24 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { apiUrl, clientBaseURL } from "config";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { addUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { CustomerSchema } from "../../../schema/customerSchema";
+// import { token } from '../.././../helpers/session'
 
 const NewCustomer = () => {
   const router = useRouter();
   const dispatch = useDispatch();
+  const { users } = useSelector((state) => state);
+  const { getError, status } = users
   const [userInfo, setUserInfo] = useState({});
   const [files, setFile] = useState([]);
   const [errors, setErrors] = useState([]);
   const [message, setMessage] = useState();
+  const token =  window.localStorage.getItem('@token');
 
   const onChangeCategory = (e) => {
     setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
@@ -39,10 +43,12 @@ const NewCustomer = () => {
   const onSubmit = async () => {
     let user = userInfo;
     user.role = "customer";
-    dispatch(addUserStart(user));
-    toast.success("Successfully Added !");
 
-    router.push("/admin/customers");
+    const payload = {
+      data: user,
+      token
+    }
+    dispatch(addUserStart(payload));
   };
 
   /**
@@ -53,7 +59,6 @@ const NewCustomer = () => {
   const validateBeforeSave = (e) => {
     e.preventDefault();
     const err = validateForm(userInfo, CustomerSchema);
-    console.log(err, "errrrr");
     if (err) {
       setErrors(err);
     } else {

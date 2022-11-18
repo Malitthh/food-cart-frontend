@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 const CustomerIndex = () => {
+  const token =  window.localStorage.getItem('@token');
   const dispatch = useDispatch();
   const router = useRouter();
   const { users, auth } = useSelector((state) => state);
@@ -21,7 +22,11 @@ const CustomerIndex = () => {
   };
 
   const deleteUser = async (id) => {
-    dispatch(deleteUserStart(id));
+    const payload = {
+      id,
+      token
+    }
+    dispatch(deleteUserStart(payload));
     toast.success("Successfully Deleted !");
     router.reload(window.location.pathname)
   };
