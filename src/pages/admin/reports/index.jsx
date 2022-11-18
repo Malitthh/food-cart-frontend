@@ -56,7 +56,7 @@ const ReportIndex = () => {
                 <div className="tab-head tab-head__icon-top-layout icon-top-layout">
                   <ul className="tabs md-margin-bottom-35-im xs-margin-bottom-40-im">
                     <li className="tab-element">
-                      <a href="#tab01_2nd" className="tab-link">
+                      <a href="/admin/reports/orders" className="tab-link">
                         <span className="biolife-icon icon-car"></span>Orders
                       </a>
                     </li>
