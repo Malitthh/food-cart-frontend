@@ -15,14 +15,18 @@ const SingleOrder = () => {
   const { orders } = useSelector((state) => state);
   const { allOrders, singleOrder } = orders;
   console.log(orders, "or", singleOrder);
-
+  const token =  window.localStorage.getItem('@token');
   useEffect(() => {
     if (!oid) {
       return;
     }
 
     const featchOnLoad = async () => {
-      dispatch(getOneOrderStart(oid));
+      const payload = {
+        id: oid,
+        token
+      }
+      dispatch(getOneOrderStart(payload));
     };
     featchOnLoad();
   }, [oid]);
@@ -36,8 +40,14 @@ const SingleOrder = () => {
     }, 0);
 
   const updateOrderStatus = () => {
-    // singleOrder.status = status
-    // dispatch(updateOrderStart(singleOrder));
+   console.log("hi")
+    const order = singleOrder;
+    order.status = status
+    const payload = {
+      data: order,
+      token
+    }
+    dispatch(updateOrderStart(payload));
   };
 
   return (

@@ -8,7 +8,7 @@ const OrderIndex = () => {
   const dispatch = useDispatch();
   const { orders, auth } = useSelector((state) => state);
   const { allOrders } = orders;
-    console.log(orders, "or")
+  const token =  window.localStorage.getItem('@token');
   const featchOnLoad = async () => {
     dispatch(getOrderStart());
   };

@@ -13,7 +13,7 @@ const Checkout = () => {
   const router = useRouter();
   const [orderInfo, setOrderInfo] = useState({});
   const [errors, setErrors] = useState([]);
-
+  const token =  window.localStorage.getItem('@token');
   const [showCheckout, setShowCheckout] = useState(true);
   const { cart, auth } = useSelector((state) => state);
   const { user } = auth;
@@ -24,6 +24,7 @@ const Checkout = () => {
 
   const checkoutFunc = () => {
     console.log(orderInfo, "orderinfo");
+
     let shippingAddress = {
       name: orderInfo.recipientName,
       mobile: orderInfo.recipientMobile,
@@ -59,7 +60,11 @@ const Checkout = () => {
 
     console.log("orderinfo", OrderData, orderItems);
 
-    dispatch(addOrderStart(OrderData));
+    const payload = {
+      data: OrderData,
+      token
+    }
+    dispatch(addOrderStart(payload));
 
     setShowCheckout(false)
 
