@@ -278,15 +278,15 @@ const updateCustomer = () => {
                     &nbsp;
                     <button
                       data-cy="save-new-report-btn"
-                      onClick={(e) => validateBeforeSave(e)}
+                      // onClick={(e) => validateBeforeSave(e)}
                       className="btn btn-warning"
                     >
                       Reset
                     </button> &nbsp;
                     <a 
-                    data-cy="link-new-report"
-                    href="/admin/customers"
-                    className="new-report btn btn-danger gap- btn-sm"
+                      data-cy="link-new-report"
+                      href="/admin/customers"
+                      className="new-report btn btn-danger gap- btn-sm"
                   > Cancel
                    
                   </a>

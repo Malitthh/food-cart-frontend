@@ -152,9 +152,8 @@ const aboutUs = () => {
                   focuses on supply control and generation is called a supply management system.
                 </p>
                 <p className="qt-text">
-                  “There are many variations of passages of Lorem Ipsum
-                  available, but the majority have suffered alteration in some
-                  form.”
+                  “Adopting a new healthier lifestyle can involve changing diet to include more 
+                  fresh fruit and vegetables as well as increasing levels of exercise.”
                 </p>
               </div>
             </div>

@@ -122,7 +122,7 @@ const NewCustomer = () => {
             </li>
             <li className="nav-item">
               <a href="/admin/suppliers" className="permal-link">
-                Suppliers
+                Suppliers List
               </a>
             </li>
             <li className="nav-item">

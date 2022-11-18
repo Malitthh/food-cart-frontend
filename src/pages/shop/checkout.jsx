@@ -333,13 +333,14 @@ const Checkout = () => {
                       </li>
                     </ul>
                     <div
-                      className="btn-checkout"
+                      className="btn-warning btn-sm text-center"
                       onClick={() => checkoutFunc()}
                     >
                       <a className="btn checkout">Check out</a>
                     </div>
-                  </div>
+                  </div> 
                 </div>
+                
                 <div className="col-lg-5 col-md-5 col-sm-6 col-xs-12 sm-padding-top-48px sm-margin-bottom-0 xs-margin-bottom-15px">
                   <div className="order-summary sm-margin-bottom-80px">
                     <div className="title-block">
@@ -426,18 +427,8 @@ const Checkout = () => {
               <div className="container">
                 <h4 className="title">Thank You for your order!</h4>
                 <div className="text-wraper">
-                  <p className="text-info">
-                    Contrary to popular belief, Lorem Ipsum is not simply random
-                    text. It has roots in a piece of classical Latin literature
-                    from 45 BC, making it over 2000 years old. Richard
-                    McClintock, a Latin professor at Hampden-Sydney College in
-                    Virginia, looked up one of the more obscure Latin words,
-                    consectetur,
-                  </p>
-                  <p className="qt-text">
-                    “There are many variations of passages of Lorem Ipsum
-                    available, but the majority have suffered alteration in some
-                    form.”
+                  <p className="text-info" style={{color:"green"}}>
+                 <i>" Thank you for being our valued customer. We hope our product will meet your expectations. Let us know if you have any questions. "</i> 
                   </p>
                 </div>
               </div>

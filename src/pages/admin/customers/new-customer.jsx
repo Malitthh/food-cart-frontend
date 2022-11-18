@@ -191,7 +191,7 @@ const NewCustomer = () => {
                     </div>
                     <div className="form-group col-md-6">
                       <label htmlFor="address">
-                        <b>Address : </b>
+                        <b>Province : </b>
                       </label>
                       <select className="form-control">
                         <option disabled="disabled" selected="true">Select your province here</option>

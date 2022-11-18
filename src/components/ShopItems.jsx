@@ -29,7 +29,7 @@ const ShopItem = ({product}) => {
         <div className="info">
           <h4 className="product-title">
             <a href="#" className="pr-name">
-            {product.productName}
+            <span>{product.productName}</span>
             </a>
           </h4>
           <div className="price">

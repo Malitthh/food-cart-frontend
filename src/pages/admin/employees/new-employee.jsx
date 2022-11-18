@@ -120,7 +120,7 @@ const NewCustomer = () => {
             </li>
             <li className="nav-item">
               <a href="/admin/employees" className="permal-link">
-                Employees
+                Employee List
               </a>
             </li>
             <li className="nav-item">

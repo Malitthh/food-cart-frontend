@@ -5952,6 +5952,53 @@ body.open-overlay #overlay {
   /*height: 499px;*/
   height: 555px;
 }
+.thankyou-order-block {
+  background: url("../images/thankyouOrder.jpg");
+  background-position: center bottom;
+  /*height: 499px;*/
+  height: 500px;
+}
+
+.thankyou-order-block {
+  display: block;
+  clear: both;
+}
+
+.thankyou-order-block .title {
+  font-size: 40px;
+  line-height: 1;
+  font-weight: 700;
+  color: #222222;
+  display: block;
+  text-align: center;
+  margin: 15px 0 0;
+}
+.thankyou-order-block .text-info {
+  float: right;
+  clear: both;
+  text-align: left;
+  font-size: 15px;
+  line-height: 24px;
+  color: #555555;
+  display: inline-block;
+  max-width: 503px;
+  margin: 180px 0 0;
+}
+.thankyou-order-block .qt-text {
+  font-family: "Ubuntu", sans-serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 24px;
+  color: #444444;
+  display: inline-block;
+  max-width: 503px;
+  float: right;
+  clear: both;
+  text-align: left;
+  padding-left: 18px;
+  margin: 25px 0 0;
+}
+
 .why-choose-us-block .box-title,
 .testimonial-block .box-title,
 .welcome-us-block .title {
@@ -11058,6 +11105,29 @@ body.open-quickview-block .biolife-quickview-block {
   .welcome-us-block .text-info {
     width: 100%;
   }
+
+  .thankyou-order-block {
+    text-align: center;
+    height: auto;
+    padding-bottom: 150px;
+  }
+  .thankyou-order-block .text-wraper {
+    display: inline-block;
+    max-width: 503px;
+    margin: 90px 0 0;
+    padding: 10px;
+    background-color: rgba(250, 250, 250, 0.8);
+    float: none;
+  }
+  .thankyou-order-block.text-info {
+    margin-top: 0;
+  }
+  .thankyou-order-block .qt-text,
+  .thankyou-order-block .text-info {
+    width: 100%;
+  }
+
+
   .login-on-checkout .form-row button {
     margin-top: 10px;
     margin-bottom: 25px;
@@ -12471,6 +12541,32 @@ body.open-quickview-block .biolife-quickview-block {
   .why-choose-us-block .showcase {
     padding-bottom: 50px;
   }
+
+  .thankyou-order-block {
+    height: auto;
+    background: none;
+    padding-bottom: 20px;
+  }
+
+  .thankyou-order-block .text-wraper {
+    margin: 43px 0 0;
+    padding: 0 0 40px;
+    background: none;
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+  .thankyou-order-block .qt-text,
+  .thankyou-order-block .text-info {
+    float: none;
+  }
+
+  .why-choose-us-block .box-title,
+  .testimonial-block .box-title,
+  .thankyou-order-block .title {
+    font-size: 28px;
+  }
+
   .welcome-us-block {
     height: auto;
     background: none;
@@ -14775,5 +14871,11 @@ a.new-report.btn.btn-danger.gap-.btn-sm {
   padding-right: 10px;
   padding-left: 10px;
   font-size: x-small;
+}
+
+.header-top .right .horizontal-menu > li > a {
+  display: inline-block;
+  line-height: 20px !important;
+  margin-top: 8px;
 }
 

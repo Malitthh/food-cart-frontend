@@ -158,19 +158,14 @@ const NewProduct = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page"><b>Products</b></span>
+              <a href="/admin/products" className="permal-link">
+                Product List
+              </a>
+            </li>
+            <li className="nav-item">
+              <span className="current-page"><b> New Product</b></span>
             </li>
           </ul>
-          <div style={{ float: "right" }}>
-            <a
-              data-cy="link-new-report"
-              href="/admin/products/new-product"
-              className="new-report btn btn-primary gap-2 btn-sm"
-            >
-              <i className="fa fa-plus" aria-hidden="true"></i>
-              New Product
-            </a>
-          </div>
         </nav>
       </div>
       <main>
@@ -220,6 +215,7 @@ const NewProduct = () => {
                       id="stock"
                       onChange={onChangeInput}
                       value={productInfo.stock}
+                      placeholder="Enter stock in hand"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["stock"]}
@@ -236,7 +232,7 @@ const NewProduct = () => {
                       value={productInfo.customerName}
                       id="costPrice"
                       name="costPrice"
-                      placeholder=""
+                      placeholder="Enter cost price here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["costPrice"]}
@@ -247,11 +243,11 @@ const NewProduct = () => {
                     <input
                       type="number"
                       className="form-control"
-                      placeholder=""
                       onChange={onChangeInput}
                       value={productInfo.price}
                       id="price"
                       name="price"
+                      placeholder="Enter market price here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["price"]}
@@ -268,7 +264,7 @@ const NewProduct = () => {
                       value={productInfo.description}
                       id="description"
                       name="description"
-                      placeholder=""
+                      placeholder="Entetr some remarks here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["description"]}
@@ -280,9 +276,8 @@ const NewProduct = () => {
                       type="file"
                       onChange={handleImageFile}
                       className="form-control"
-                      placeholder=""
                       multiple="multiple"
-                      name="files[]"
+                      name="files[]" 
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["price"]}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import HeaderBar from "src/components/HeaderBar";
 import Footer from "src/components/Footer";
 import { useSelector, useDispatch } from "react-redux";
-import { loginStart } from "../../store/auth/actions";
+import { incrementQty, decrementQty } from "../../store/cart/actions";
 import { useRouter } from "next/router";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { AuthSchema } from "../../schema/authSchema";
@@ -12,7 +12,10 @@ const Cart = () => {
     const router = useRouter();
     const [errors, setErrors] = useState([]);
     const { cart } = useSelector((state) => state);
-
+    const [myCart, setMyCart] = useState(cart);
+    const countStateArray = React.useState(0);
+    const count = countStateArray[0];
+    const setCount = countStateArray[1];
 
     const sum = cart.cart.reduce(function(sum, number) {
       return sum + number.price*number.quantity;
@@ -27,6 +30,15 @@ const Cart = () => {
     //       router.push("/");
     //     }
     // }, [auth]);
+
+    const increase = (product) => {
+      dispatch(incrementQty(product))
+      
+    }; 
+    
+    const decrease = (product) =>  {
+      dispatch(decrementQty(product))
+    }
 
     const login = () => {
  
@@ -106,9 +118,9 @@ const Cart = () => {
                                             <td className="product-quantity" data-title="Quantity">
                                                 <div className="quantity-box type1">
                                                     <div className="qty-input">
-                                                        <input type="text" name="qty12554" value={product.quantity} data-max_value="20" data-min_value="1" data-step="1"/>
-                                                        <a href="#" className="qty-btn btn-up"><i className="fa fa-caret-up" aria-hidden="true"></i></a>
-                                                        <a href="#" className="qty-btn btn-down"><i className="fa fa-caret-down" aria-hidden="true"></i></a>
+                                                        <input type="text" name="qty12554" value={product.quantity} data-max_value="5" data-min_value="1" data-step="1"/>
+                                                        <span onClick={()=>increase(product)} className="qty-btn btn-up"><i className="fa fa-caret-up" aria-hidden="true"></i></span>
+                                                        <span onClick={()=>decrease(product)} className="qty-btn btn-down"><i className="fa fa-caret-down" aria-hidden="true"></i></span>
                                                     </div>
                                                 </div>
                                             </td>

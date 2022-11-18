@@ -47,17 +47,20 @@ export default function cart(state = INITIAL_STATE, { type, payload }) {
         numberCart: state.numberCart + 1,
       };
     case CART_TYPES.INCREMENT_QTY:
+      console.log(payload.id, "payload", state.cart[0]);
+      const index = state.cart.findIndex(( c) => c.id === payload.id)
       state.numberCart++;
-      state.cart[payload].quantity++;
+      state.cart[index].quantity++;
 
       return {
         ...state,
       };
     case CART_TYPES.DECREMENT_QTY:
-      let quantity = state.cart[payload].quantity;
+      const indexde = state.cart.findIndex(( c) => c.id === payload.id)
+      let quantity = state.cart[indexde].quantity;
       if (quantity > 1) {
         state.numberCart--;
-        state.cart[payload].quantity--;
+        state.cart[indexde].quantity--;
       }
 
       return {

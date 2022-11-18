@@ -52,13 +52,13 @@ const contactUs = () => {
                                 <li>
                                     <div className="if-item">
                                         <b className="tie">Phone:</b>
-                                        <p className="dsc"> (+94) ( 081) 2447441</p>
+                                        <p className="dsc"> (+94) (81) 2447441</p>
                                     </div>
                                 </li>
                                 <li>
                                     <div className="if-item">
                                         <b className="tie">Email:</b>
-                                        <p className="dsc">foodCard@example.com</p>
+                                        <p className="dsc">foodcart@gmail.com</p>
                                     </div>
                                 </li>
                                 <li>

@@ -83,6 +83,7 @@ const CustomerIndex = () => {
                         <td>{user.mobileNo}</td>
                         <td>{user.nic}</td>
                         <td>{user.role}</td>
+                        <td></td>
                         <td>
                           <a
                             data-cy={`view-report-btn${key}`}
