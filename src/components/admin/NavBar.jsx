@@ -144,7 +144,7 @@ const NavBar = () => {
                       <a href="/admin/orders">Orders</a>
                     </li>
                     <li className="menu-item">
-                      <a href="/admin/">Reports</a>
+                      <a href="/admin/reports/orders">Reports</a>
                     </li>
                   </ul>
                 </div>
