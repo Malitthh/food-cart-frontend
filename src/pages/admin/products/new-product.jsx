@@ -206,14 +206,14 @@ const NewProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-2">
-                    <label htmlFor="stock"><b>Type</b></label>
-                    <select className="form-control" name="type" id="type">
+                    <label htmlFor="stockType"><b>Stock Type</b></label>
+                    <select className="form-control" name="stockType" id="stockType">
                         <option disabled="disabled" selected="true">Choose a type</option>
                         <option value="kg">Kg</option>
-                        <option value="qty">Quantity</option>
+                        <option value="pcs">Quantity</option>
                       </select>
                     <p className="text-red-500 text-xs italic">
-                      {errors && errors["stock"]}
+                      {errors && errors["stockType"]}
                     </p>
                   </div>
                   <div className="form-group col-md-2">

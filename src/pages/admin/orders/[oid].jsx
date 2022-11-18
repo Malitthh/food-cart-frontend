@@ -31,7 +31,7 @@ const SingleOrder = () => {
     featchOnLoad();
   }, [oid]);
 
-  console.log(router.query, "QQ");
+
 
   const sum =
     singleOrder &&

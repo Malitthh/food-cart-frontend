@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
-import { getProductStart } from "../../../store/products/actions";
+import { getOrderStart } from "../../../store/orders/actions";
 import Footer from "../../../components/admin/Footer"
 
 const Home = () => {
@@ -9,11 +9,17 @@ const Home = () => {
   const [damageReportsData, setDamageReportsData] = useState([]);
   // get damage reports from state
   const dispatch = useDispatch();
-  const { products, auth } = useSelector((state) => state);
-  const { allProducts } = products;
-console.log(allProducts, "test")
+  const { orders, auth } = useSelector((state) => state);
+  const { allOrders } = orders;
+console.log(allOrders, "test")
+
+ const pendingOrders = allOrders.filter(order => order.status === 'pending');
+ const processingOrders = allOrders.filter(order => order.status === 'processing');
+ const shippedOrders = allOrders.filter(order => order.status === 'shipped');
+ const deliveredOrders = allOrders.filter(order => order.status === 'delivered');
+
   const featchOnLoad = async () => {
-    dispatch(getProductStart());
+    dispatch(getOrderStart());
   };
 
   useEffect(() => {
@@ -45,7 +51,7 @@ console.log(allProducts, "test")
               <ul className="services-list">
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">1</span>
+                    <span className="number">{allOrders.length}</span>
                     <span className="biolife-icon icon-beer"></span>
                     <a className="srv-name" href="#">
                      Number of Orders
@@ -54,7 +60,7 @@ console.log(allProducts, "test")
                 </li>
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">2</span>
+                    <span className="number">{pendingOrders.length}</span>
                     <span className="biolife-icon icon-schedule"></span>
                     <a className="srv-name" href="#">
                     Number of Pending Orders
@@ -63,10 +69,28 @@ console.log(allProducts, "test")
                 </li>
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">3</span>
+                    <span className="number">{processingOrders.length}</span>
                     <span className="biolife-icon icon-car"></span>
                     <a className="srv-name" href="#">
-                      Number of Completed Orders
+                      Number of Processing Orders
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div className="service-inner color-reverse">
+                    <span className="number">{shippedOrders.length}</span>
+                    <span className="biolife-icon icon-car"></span>
+                    <a className="srv-name" href="#">
+                      Number of Shipped Orders
+                    </a>
+                  </div>
+                </li>
+                <li>
+                  <div className="service-inner color-reverse">
+                    <span className="number">{deliveredOrders.length}</span>
+                    <span className="biolife-icon icon-car"></span>
+                    <a className="srv-name" href="#">
+                      Number of Delivered Orders
                     </a>
                   </div>
                 </li>
