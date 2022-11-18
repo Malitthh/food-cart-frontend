@@ -114,7 +114,7 @@ const Checkout = () => {
                       <li className="step 1st">
                         <div className="checkout-act active">
                           <h3 className="title-box">
-                            <span className="number">1</span>Customer
+                            <span className="number">1</span>Customer Details
                           </h3>
                           <div className="box-content">
                             <div className="login-on-checkout">
@@ -146,106 +146,17 @@ const Checkout = () => {
                           </div>
                         </div>
                       </li>
-                      <li className="step 2nd ">
+                      
+                      <li className="step 2nd">
                         <div className="checkout-act active">
                           <h3 className="title-box">
-                            <span className="number">2</span>Shipping
+                            <span className="number">2</span>Billing Details
                           </h3>
                           <div className="box-content">
                             <div className="login-on-checkout">
                               <div className="row">
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="recipientName">
-                                    Recipient name{" "}
-                                  </label>
-                                  <input
-                                    type="text"
-                                    name="recipientName"
-                                    id="recipientName"
-                                    value={orderInfo.recipientName}
-                                    onChange={onChangeInput}
-                                    placeholder="Recipient name"
-                                  />
-                                </div>
-                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="email">Recipient mobile</label>
-                                  <input
-                                    type="text"
-                                    name="recipientMobile"
-                                    id="recipientMobile"
-                                    value={orderInfo.recipientMobile}
-                                    onChange={onChangeInput}
-                                    placeholder="Recipient Mobile"
-                                  />
-                                </div>
-                              </div>
-                              <div className="row">
-                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="addressLine1">
-                                    Address Line 1{" "}
-                                  </label>
-                                  <input
-                                    type="text"
-                                    name="addressLine1"
-                                    id="addressLine1"
-                                    value={orderInfo.addressLine1}
-                                    onChange={onChangeInput}
-                                    placeholder="Address Line 1"
-                                  />
-                                </div>
-                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="addressLine2">
-                                    Address Line 2{" "}
-                                  </label>
-                                  <input
-                                    type="text"
-                                    name="addressLine2"
-                                    id="addressLine2"
-                                    value={orderInfo.addressLine2}
-                                    onChange={onChangeInput}
-                                    placeholder="Address Line 2"
-                                  />
-                                </div>
-                              </div>
-                              <div className="row">
-                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="city">City </label>
-                                  <br></br>
-                                  <input
-                                    type="text"
-                                    name="city"
-                                    id="city"
-                                    value={orderInfo.city}
-                                    onChange={onChangeInput}
-                                    placeholder="City"
-                                  />
-                                </div>
-                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="postalCode">Postal Code</label>
-                                  <input
-                                    type="text"
-                                    name="postalCode"
-                                    id="postalCode"
-                                    value={orderInfo.postalCode}
-                                    onChange={onChangeInput}
-                                    placeholder="Postal Code "
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-                      <li className="step 3rd">
-                        <div className="checkout-act active">
-                          <h3 className="title-box">
-                            <span className="number">3</span>Billing
-                          </h3>
-                          <div className="box-content">
-                            <div className="login-on-checkout">
-                              <div className="row">
-                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="billingName">Billing name </label>
+                                  <label for="billingName">Billing Name</label>
                                   <input
                                     type="text"
                                     name="billingName"
@@ -256,7 +167,7 @@ const Checkout = () => {
                                   />
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="email">Billing mobile</label>
+                                  <label for="email">Contact No</label>
                                   <input
                                     type="text"
                                     name="billingMobile"
@@ -270,7 +181,7 @@ const Checkout = () => {
                               <div className="row">
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                   <label for="addressLine1B">
-                                    Address Line 1{" "}
+                                    Address 
                                   </label>
                                   <input
                                     type="text"
@@ -278,20 +189,18 @@ const Checkout = () => {
                                     id="addressLine1B"
                                     value={orderInfo.addressLine1B}
                                     onChange={onChangeInput}
-                                    placeholder="Address Line 1"
+                                    placeholder="Address Line"
                                   />
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="addressLine2B">
-                                    Address Line 2{" "}
-                                  </label>
+                                  <label for="postalCodeB">Postal Code</label>
                                   <input
                                     type="text"
-                                    name="addressLine2B"
-                                    id="addressLine2B"
-                                    value={orderInfo.addressLine2B}
+                                    name="postalCodeB"
+                                    id="postalCodeB"
+                                    value={orderInfo.postalCodeB}
                                     onChange={onChangeInput}
-                                    placeholder="Address Line 2"
+                                    placeholder="Postal Code "
                                   />
                                 </div>
                               </div>
@@ -308,15 +217,83 @@ const Checkout = () => {
                                     placeholder="City"
                                   />
                                 </div>
+                                
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </li>
+
+                      <li className="step 3rd ">
+                        <div className="checkout-act active">
+                          <h3 className="title-box">
+                            <span className="number">3</span>Shipping Details
+                          </h3>
+                          <div className="box-content">
+                            <div className="login-on-checkout">
+                              <div className="row">
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="postalCodeB">Postal Code</label>
+                                  <label for="recipientName">
+                                    Recipient Name{" "}
+                                  </label>
                                   <input
                                     type="text"
-                                    name="postalCodeB"
-                                    id="postalCodeB"
-                                    value={orderInfo.postalCodeB}
+                                    name="recipientName"
+                                    id="recipientName"
+                                    value={orderInfo.recipientName}
                                     onChange={onChangeInput}
-                                    placeholder="Postal Code "
+                                    placeholder="Enter name here"
+                                  />
+                                </div>
+                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                  <label for="email">Recipient Contact No</label>
+                                  <input
+                                    type="text"
+                                    name="recipientMobile"
+                                    id="recipientMobile"
+                                    value={orderInfo.recipientMobile}
+                                    onChange={onChangeInput}
+                                    placeholder="Enter contact no here"
+                                  />
+                                </div>
+                              </div>
+                              <div className="row">
+                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                  <label for="addressLine1">
+                                    Address 
+                                  </label>
+                                  <input
+                                    type="text"
+                                    name="addressLine1"
+                                    id="addressLine1"
+                                    value={orderInfo.addressLine1}
+                                    onChange={onChangeInput}
+                                    placeholder="Enter address here"
+                                  />
+                                </div>
+                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                  <label for="postalCode">Postal Code</label>
+                                  <input
+                                    type="text"
+                                    name="postalCode"
+                                    id="postalCode"
+                                    value={orderInfo.postalCode}
+                                    onChange={onChangeInput}
+                                    placeholder="Enter postal code here"
+                                  />
+                                </div>
+                              </div>
+                              <div className="row">
+                                <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                  <label for="city">City </label>
+                                  <br></br>
+                                  <input
+                                    type="text"
+                                    name="city"
+                                    id="city"
+                                    value={orderInfo.city}
+                                    onChange={onChangeInput}
+                                    placeholder="Enter city here"
                                   />
                                 </div>
                               </div>
