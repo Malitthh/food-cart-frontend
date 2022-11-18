@@ -185,20 +185,20 @@ const NewCustomer = () => {
                       <label htmlFor="gender">
                         <b>Gender : </b>
                       </label>
-                      <select className="form-control">
+                      <select className="form-control" name="gender" id="gender" onChange={(e) => setUserInfo({ ...userInfo, [e.target.id]: e.target.value })}>
                         <option disabled="disabled" selected="true">Select your Gender here</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="M">Male</option>
+                        <option value="F">Female</option>
                       </select>
                       <p className="text-red-500 text-xs italic">
-                        {errors && errors["dob"]}
+                        {errors && errors["gender"]}
                       </p>
                     </div>
                     <div className="form-group col-md-6">
                       <label htmlFor="address">
                         <b>Province : </b>
                       </label>
-                      <select className="form-control">
+                      <select className="form-control" name="province" id="province" onChange={(e) => setUserInfo({ ...userInfo, [e.target.id]: e.target.value })}>
                         <option disabled="disabled" selected="true">Select your province here</option>
                         <option value="southern">Southern</option>
                         <option value="central">Central</option>

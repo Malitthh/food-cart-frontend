@@ -13,6 +13,8 @@ export const CustomerSchema = {
   password: JOI.any().allow(),
   passwordConfirm: JOI.any().allow(),
   role: JOI.any().allow(),
+  province: JOI.any().allow(),
+  gender: JOI.any().allow(),
 };
 
 export const CustomerSchemaUpdate = {
