@@ -138,20 +138,20 @@ const aboutUs = () => {
             </div>
           </div>
 
-          <div className="welcome-us-block">
+          <div className="thankyou-order-block">
             <div className="container">
               <div className="text-wraper">
                 <p className="text-info">
-                Decentralized supply system that let customers buy products online and warehouse managers 
+                <b><i>Decentralized supply system that let customers buy products online and warehouse managers 
                 maintain track of stock levels. Customers are let down by poorly managed inventory, 
                 and too much money is locked up in slower sales and warehouses.
                  This method speeds up the process by getting rid of paperwork, human error, 
                  and manual delays. This supply management system will be able to monitor finances, 
                  deliveries, and available inventories; it will also be able to alert a warehouse manager 
                  when it's time to place another order and how much to buy. An online application that
-                  focuses on supply control and generation is called a supply management system.
+                  focuses on supply control and generation is called a supply management system.</i></b>
                 </p>
-                <p className="qt-text">
+                <p className="qt-text" style={{color:"#21c821"}}>
                   “Adopting a new healthier lifestyle can involve changing diet to include more 
                   fresh fruit and vegetables as well as increasing levels of exercise.”
                 </p>

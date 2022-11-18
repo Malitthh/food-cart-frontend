@@ -85,7 +85,7 @@ const NavBar = () => {
                   </li>
                   <li>
                     <a onClick={() => logout()}
-                       className="btn btn-danger btn-sm"
+                       className="btn btn-warning btn-sm"
                     >
                       Logout
                     </a>
