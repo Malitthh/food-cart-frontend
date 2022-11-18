@@ -18,7 +18,7 @@ const updateProduct = () => {
   const [productInfo, setProductInfo] = useState({});
   const [files, setFile] = useState([]);
   const [errors, setErrors] = useState([]);
-  const [message, setMessage] = useState();
+  const [showImg, setShowImg] = useState(true);
   const { products, auth } = useSelector((state) => state);
   const { singleProduct, allProducts } = products;
   const token = window.localStorage.getItem("@token");
@@ -42,7 +42,6 @@ const updateProduct = () => {
    * @returns
    */
   const handleImageFile = (e) => {
-    setMessage("");
     let file = e.target.files;
 
     for (let i = 0; i < file.length; i++) {
@@ -55,6 +54,7 @@ const updateProduct = () => {
       ];
       if (validImageTypes.includes(fileType)) {
         setFile([...files, file[i]]);
+        setShowImg(false)
       } else {
         toast.error("only images accepted");
       }
@@ -172,6 +172,13 @@ const updateProduct = () => {
       delete errors[name];
     }
   };
+
+  const reset = () => {
+    const result = allProducts.filter((product) => product._id === pid);
+    console.log(result[0], "all");
+    setProductInfo(result[0]);
+    setShowImg(true)
+  }
 
   return (
     <div className="min-h-full">
@@ -329,7 +336,7 @@ const updateProduct = () => {
                       {errors && errors["photo"]}
                     </p>
 
-                    {productInfo.photos &&
+                    {showImg && productInfo.photos &&
                       productInfo.photos.map((file, key) => {
                         return (
                           <div key={key} className="overflow-hidden relative">
@@ -375,7 +382,7 @@ const updateProduct = () => {
                     &nbsp;
                     <button
                       data-cy="save-new-report-btn"
-                      // onClick={(e) => validateBeforeSave(e)}
+                      onClick={(e) => reset(e)}
                       className="btn btn-warning"
                     >
                       Reset
