@@ -33,22 +33,22 @@ const Orders = () => {
   }, []);
 
   const sum =
-  allProducts &&
-  allProducts.reduce(function (sum, item) {
-    return sum + ((item.price * item.sold) - (item.costPrice * item.sold));
-  }, 0);
+    allProducts &&
+    allProducts.reduce(function (sum, item) {
+      return sum + (item.price * item.sold - item.costPrice * item.sold);
+    }, 0);
 
   const totalSales =
-  allProducts &&
-  allProducts.reduce(function (sum, item) {
-    return sum + (item.price * item.sold);
-  }, 0);
+    allProducts &&
+    allProducts.reduce(function (sum, item) {
+      return sum + item.price * item.sold;
+    }, 0);
 
   const totalCosts =
-  allProducts &&
-  allProducts.reduce(function (sum, item) {
-    return sum + (item.costPrice * item.sold);
-  }, 0);
+    allProducts &&
+    allProducts.reduce(function (sum, item) {
+      return sum + item.costPrice * item.sold;
+    }, 0);
 
   return (
     <div className="min-h-full">
@@ -194,33 +194,51 @@ const Orders = () => {
                                             />
                                           </td>
                                           <td>{product.productName}</td>
-                                          <td  class="text-right">{product.costPrice}/=</td>
-                                          <td  class="text-right">{product.price}/=</td>
-                                          <td  class="text-right">{product.sold}</td>
-                                          <td  class="text-right">{product.costPrice*product.sold}/=</td>
-                                          <td  class="text-right">{product.sold*product.price}/=</td>
-                                          <td class="text-right">{(product.sold*product.price) - (product.costPrice*product.sold)}/=</td>
+                                          <td class="text-right">
+                                            {product.costPrice}/=
+                                          </td>
+                                          <td class="text-right">
+                                            {product.price}/=
+                                          </td>
+                                          <td class="text-right">
+                                            {product.sold}
+                                          </td>
+                                          <td class="text-right">
+                                            {product.costPrice * product.sold}/=
+                                          </td>
+                                          <td class="text-right">
+                                            {product.sold * product.price}/=
+                                          </td>
+                                          <td class="text-right">
+                                            {product.sold * product.price -
+                                              product.costPrice * product.sold}
+                                            /=
+                                          </td>
                                         </tr>
                                       ))}
                                   </tbody>
                                   <tfoot>
                                     <tr>
-                                      <th colspan="7" class="text-right">
-                                        
-                                      </th>
+                                      <th colspan="7" class="text-right"></th>
                                       <th class="text-right"> -</th>
                                     </tr>
                                     <tr>
                                       <th colspan="7" class="text-right">
                                         Total Sales
                                       </th>
-                                      <th class="text-right"> LKR {totalSales}.00</th>
+                                      <th class="text-right">
+                                        {" "}
+                                        LKR {totalSales}.00
+                                      </th>
                                     </tr>
                                     <tr>
                                       <th colspan="7" class="text-right">
                                         Total Cost
                                       </th>
-                                      <th class="text-right"> LKR {totalCosts}.00</th>
+                                      <th class="text-right">
+                                        {" "}
+                                        LKR {totalCosts}.00
+                                      </th>
                                     </tr>
                                     <tr>
                                       <th colspan="7" class="text-right">
