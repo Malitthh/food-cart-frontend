@@ -91,11 +91,12 @@ const Cart = () => {
                                 <form className="shopping-cart-form" action="#" method="post">
                                     <table className="shop_table cart-form">
                                         <thead>
-                                        <tr>
+                                        <tr style={{backgroundColor:"#ecf0e2"}}>
                                             <th className="product-name">Product Name</th>
                                             <th className="product-price">Price</th>
                                             <th className="product-quantity">Quantity</th>
                                             <th className="product-subtotal">Total</th>
+                                            <th></th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -106,9 +107,9 @@ const Cart = () => {
                                                     <figure><img width="113" height="113" src={product.image} alt="shipping cart"/></figure>
                                                 </a>
                                                 <a className="prd-name" href="#">{product.productName}</a>
-                                                <div className="action">
+                                                {/* <div className="action">
                                                     <a href="#" className="remove"><i className="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                </div>
+                                                </div> */}
                                             </td>
                                             <td className="product-price" data-title="Price">
                                                 <div className="price price-contain">
@@ -127,6 +128,11 @@ const Cart = () => {
                                             <td className="product-subtotal" data-title="Total">
                                                 <div className="price price-contain">
                                                     <ins><span className="price-amount"><span className="currencySymbol">LKR </span>{product.price*product.quantity}</span></ins>
+                                                </div>
+                                            </td>
+                                            <td>
+                                            <div className="action">
+                                                    <a href="#" className="remove"><i className="fa fa-trash-o" aria-hidden="true"></i></a>
                                                 </div>
                                             </td>
                                         </tr>))}

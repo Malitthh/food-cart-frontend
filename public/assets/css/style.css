@@ -5954,9 +5954,10 @@ body.open-overlay #overlay {
 }
 .thankyou-order-block {
   background: url("../images/thankyouOrder.jpg");
-  background-position: center bottom;
-  /*height: 499px;*/
-  height: 500px;
+  background-position: left bottom;
+  background-repeat: no-repeat;
+  height: 550px;
+  margin-left:10%;
 }
 
 .thankyou-order-block {
