@@ -68,7 +68,7 @@ const HeaderBar = () => {
               ) : (
                 <ul className="horizontal-menu">
                   <li>
-                    <a href="" className="login-link">
+                    <a href="/shop/my-profile" className="login-link">
                       <i className="biolife-icon icon-login"></i>
                       {user.name}
                     </a>
@@ -76,7 +76,7 @@ const HeaderBar = () => {
                   <li>
                     <a
                       onClick={() => logout()}
-                      className="btn btn-danger btn-sm"
+                      className="btn btn-warning btn-sm" 
                     >
                       Logout
                     </a>

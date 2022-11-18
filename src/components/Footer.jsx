@@ -32,7 +32,6 @@ const Footer = () => {
                                             <li><a href="#">Contact Us</a></li>
                                             <li><a href="#">Delivery infomation</a></li>
                                             <li><a href="#">Privacy Policy</a></li>
-                                            <li><a href="#">Our Sitemap</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -44,7 +43,6 @@ const Footer = () => {
                                             <li><a href="#">Projects</a></li>
                                             <li><a href="#">Contacts Us</a></li>
                                             <li><a href="#">Innovation</a></li>
-                                            <li><a href="#">Testimonials</a></li>
                                         </ul>
                                     </div>
                                 </div>

@@ -208,7 +208,7 @@ const NewProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-2">
-                    <label htmlFor="stock"><b>Stock in Hand</b></label>
+                    <label htmlFor="stock"><b>Stock in Hand (Kg)</b></label>
                     <input
                       type="number"
                       className="form-control"

@@ -13,9 +13,9 @@ const BannerPromotion = () => {
                             <div className="container text-wrap">
                                 <span className="first-line">Healthy Food</span>
                                 <b className="second-line">Vegetable Always fresh</b>
-                                <p className="third-line">Food Heaven Made Easy sounds like the name of an amazingly delicious food delivery service, but don't be fooled...</p>
+                                <p className="third-line">“Food Heaven Made Easy sounds like the name of an amazingly delicious food delivery service, but don't be fooled. The blog is actually a compilation of recipes, cooking videos, and nutrition tips.”..</p>
                                 <div className="product-detail">
-                                    <p className="txt-price"><span>Only:</span>Rs.80/=</p>
+                                    <p className="txt-price"><span>Starting with:</span>Rs.80/=</p>
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,7 @@ const BannerPromotion = () => {
                             <div className="text-content">
                                 <b className="first-line">Food Heaven Made</b>
                                 <span className="second-line">Easy <i>Healthy, Happy Life</i></span>
-                                <p className="third-line">Food Heaven Made Easy sounds like the name of an amazingly delicious food delivery service, but don't be fooled. The blog is actually a compilation of recipes, cooking videos, and nutrition tips.</p>
+                                <p className="third-line">“If you do just one thing—make one conscious choice—that can change the world, go organic. Buy organic food. Stop using chemicals and start supporting organic farmers. No other single choice you can make to improve the health of your family and the planet will have greater positive repercussions for our future.”</p>
                             </div>
                         </div>
                     </div>
