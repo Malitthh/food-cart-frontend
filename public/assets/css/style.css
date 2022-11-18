@@ -5386,6 +5386,29 @@ body.open-overlay #overlay {
 .shpcart-subtotal-block .btn-checkout .btn:hover {
   background-color: #444444 !important;
 }
+
+.shpcart-subtotal-block .btn-checkoutcart {
+  margin-top: 40px;
+}
+.shpcart-subtotal-block .btn-checkoutcart .btn {
+  border: none;
+  display: block;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-align: center;
+  clear: both;
+  border-radius: 9999px;
+  background-color: #7b1e1e;
+  padding: 13px 15px 12px;
+  font-weight: 700;
+}
+.shpcart-subtotal-block .btn-checkoutcart .btn:hover {
+  background-color: #848484 !important;
+}
+
+
+
 .shpcart-subtotal-block .biolife-progress-bar {
   margin-top: 39px;
 }
