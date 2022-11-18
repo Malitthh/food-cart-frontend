@@ -6,8 +6,7 @@ import { getProductStart } from "../../../store/products/actions";
 import Footer from "../../../components/admin/Footer";
 import { apiUrl, clientBaseURLImages } from "config";
 const Orders = () => {
-  // set damage report data to usestate
-  const [damageReportsData, setDamageReportsData] = useState([]);
+
   // get damage reports from state
   const dispatch = useDispatch();
   const { orders, products } = useSelector((state) => state);
