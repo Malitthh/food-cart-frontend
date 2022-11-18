@@ -4,7 +4,7 @@ import NavBar from "src/components/admin/NavBar";
 import { getOrderStart } from "../../../store/orders/actions";
 import Footer from "../../../components/admin/Footer"
 
-const Orders = () => {
+const ReportIndex = () => {
   // set damage report data to usestate
   const [damageReportsData, setDamageReportsData] = useState([]);
   // get damage reports from state
@@ -39,7 +39,7 @@ console.log(allOrders, "test")
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Dashboard</span>
+              <span className="current-page">Reports</span>
             </li>
           </ul>
         </nav>
@@ -85,15 +85,7 @@ console.log(allOrders, "test")
                     </a>
                   </div>
                 </li>
-                <li>
-                  <div className="service-inner color-reverse">
-                    <span className="number">{deliveredOrders.length}</span>
-                    <span className="biolife-icon icon-car"></span>
-                    <a className="srv-name" href="#">
-                      Number of Delivered Orders
-                    </a>
-                  </div>
-                </li>
+               
               </ul>
             </div>
           </div>
@@ -104,4 +96,4 @@ console.log(allOrders, "test")
   );
 };
 
-export default Orders;
+export default ReportIndex;

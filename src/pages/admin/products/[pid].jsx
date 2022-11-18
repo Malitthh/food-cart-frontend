@@ -210,7 +210,7 @@ const updateProduct = () => {
             <div className="overflow-x-auto">
               <form>
                 <div className="form-row">
-                  <div className="form-group col-md-4">
+                  <div className="form-group col-md-6">
                     <label htmlFor="productName">
                       <b>Product Name : </b>
                     </label>
@@ -252,21 +252,8 @@ const updateProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-2">
-                    <label htmlFor="type">
-                      <b>Type</b>
-                    </label>
-                    <select className="form-control" name="type" id="type">
-                        <option disabled="disabled" selected="true">Choose a type</option>
-                        <option value="kg">Kg</option>
-                        <option value="qty">Quantity</option>
-                      </select>
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["stock"]}
-                    </p>
-                  </div>
-                  <div className="form-group col-md-2">
                     <label htmlFor="stock">
-                      <b>Stock in Hand</b>
+                      <b>Stock in Hand (Kg/Qty)</b>
                     </label>
                     <input
                       type="number"
