@@ -49,15 +49,7 @@ console.log(allOrders, "test")
           <div className="container mx-2">
             <div className="biolife-service type01 biolife-service__type01 sm-margin-top-0 xs-margin-top-45px">
               <ul className="services-list">
-                <li>
-                  <div className="service-inner color-reverse">
-                    <span className="number">{allOrders.length}</span>
-                    <span className="biolife-icon icon-beer"></span>
-                    <a className="srv-name" href="#">
-                     Number of Orders
-                    </a>
-                  </div>
-                </li>
+               
                 <li>
                   <div className="service-inner color-reverse">
                     <span className="number">{pendingOrders.length}</span>
