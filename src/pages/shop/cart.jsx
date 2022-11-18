@@ -140,8 +140,9 @@ const Cart = () => {
                                         <tr className="cart_item wrap-buttons">
                                             <td className="wrap-btn-control" colspan="4">
                                                 <a href="/shop/products" className="btn back-to-shop">Back to Shop</a>
-                                                <button className="btn btn-update" type="submit" disabled>update</button>
-                                                <button className="btn btn-clear" type="reset">clear all</button>
+                                                <div className="btn-checkoutcart">
+                                                  <a href="/shop/checkout" className="btn checkoutcart">Check out</a>
+                                                </div>
                                             </td>
                                         </tr>
                                         </tbody>
@@ -149,13 +150,10 @@ const Cart = () => {
                                 </form>
                             </div> 
                              <div className="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-                                <div className="shpcart-subtotal-block">
+                                <div className="shpcart-subtotal-block" style={{marginTop:"25%", paddingTop:"10%", paddingTop:"10%"}}>
                                     <div className="subtotal-line">
-                                        <b className="stt-name">Total <span className="sub"></span></b>
-                                        <span className="stt-price">LKR {sum}</span>
-                                    </div>
-                                    <div className="btn-checkout">
-                                        <a href="/shop/checkout" className="btn checkout">Check out</a>
+                                        <b className="stt-name" style={{color:"red", fontSize:"18px"}}>Total Amount<span className="sub"></span></b>
+                                        <span className="stt-price">LKR {sum}.00</span>
                                     </div>
                                     <p className="pickup-info"><b>Free Pickup</b> is available as soon as today More about shipping and pickup</p>
                                 </div>
