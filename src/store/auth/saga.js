@@ -1,5 +1,6 @@
 import { call, put, takeEvery } from "redux-saga/effects";
 import AuthService from "./service";
+import { toast } from "react-toastify";
 import {
   AUTH_TYPES,
   loginSuccess,
@@ -25,7 +26,7 @@ function* loginStart({ type, payload }) {
     console.log(response, "saga", payload);
   } catch (err) {
     yield put(loginError(err.response.data));
-    console.log(err, "err");
+    toast.error(err.response.data.message);
   }
 }
 
@@ -41,7 +42,7 @@ function* logoutStart({ type, payload }) {
     localStorage.setItem("@user", "");
   } catch (err) {
     yield put(logoutError(err));
-    console.log(err, "err");
+    toast.error(err.response.data.message);
   }
 }
 
@@ -60,7 +61,7 @@ function* signupStart({ type, payload }) {
     console.log(response, "saga", payload);
   } catch (err) {
     yield put(signupError(err.response.data));
-    console.log(err.response.data, "err");
+    toast.error(err.response.data.message);
   }
 }
 

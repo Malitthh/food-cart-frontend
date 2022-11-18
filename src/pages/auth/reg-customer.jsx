@@ -28,12 +28,7 @@ const RegCustomer = () => {
           } else {
             router.push("/");
           }
-    } else {
-        if(getError !== null) {
-            toast.error(getError.message);
-        }
-    }
-      
+    } 
   }, [auth]);
 
   const login = () => {

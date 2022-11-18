@@ -1,5 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import OrderService from './service'
+import { toast } from "react-toastify";
 import {
     ORDER_TYPES,
     addOrderSuccess,
@@ -23,10 +24,10 @@ function* addOrderStart({type, payload}) {
         console.log("saga", payload)
         const response = yield OrderService.addOrder(payload)
         yield put(addOrderSuccess(response.data))
-     
+        toast.success("Successfully Added !");
     } catch (err) {
         yield put(addOrderError(err))
-        console.log(err, "err")
+        toast.error(err.response.data.message);
     }
 }
 
@@ -41,7 +42,7 @@ function* addOrderStart({type, payload}) {
         console.log(response.data.data.orders,"saga")
     } catch (err) {
         yield put(getOrderError(err))
-        console.log(err, "err")
+        toast.error(err.response.data.message);
     }
 }
 
@@ -53,7 +54,7 @@ function* getOneOrderStart({type, payload}) {
         console.log(response,"saga")
     } catch (err) {
         yield put(getOneOrderError(err))
-        console.log(err, "err")
+        toast.error(err.response.data.message);
     }
 }
 
@@ -61,11 +62,11 @@ function* updateOrderStart({type, payload}) {
     console.log(payload, "Saga")
     try {
         const response = yield OrderService.updateOrder(payload)
-        yield put(getOneOrderSuccess(response.data.order))
-        console.log(response,"saga")
+        yield put(updateOrderSuccess(response.data.order))
+        toast.success("Successfully Updated !");
     } catch (err) {
-        yield put(getOneOrderError(err))
-        console.log(err, "err")
+        yield put(updateOrderError(err))
+        toast.error(err.response.data.message);
     }
 }
 

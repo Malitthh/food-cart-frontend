@@ -1,5 +1,6 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
 import ProductsService from './service'
+import { toast } from "react-toastify";
 import {
     PRODUCTS_TYPES,
     addProductsSuccess,
@@ -23,9 +24,11 @@ function* addProductStart({type, payload}) {
         console.log("saga", payload)
         const response = yield ProductsService.addProduct(payload)
         yield put(addProductsSuccess(response.data))
+        toast.success("Successfully Added !");
      
     } catch (err) {
         yield put(addProductsError(err))
+        toast.error(err.response.data.message);
         console.log(err, "err")
     }
 }
@@ -41,6 +44,7 @@ function* addProductStart({type, payload}) {
         console.log(response.data.data.products,"saga")
     } catch (err) {
         yield put(getProductError(err))
+        toast.error(err.response.data.message);
         console.log(err, "err")
     }
 }
@@ -54,8 +58,10 @@ function* addProductStart({type, payload}) {
         const response = yield ProductsService.getSingleProduct(payload)
         yield put(getSingleProductSuccess(response.data.product))
         console.log(response.data.product,"saga")
+
     } catch (err) {
         yield put(getSingleProductError(err))
+        toast.error(err.response.data.message);
         console.log(err, "err")
     }
 }
@@ -70,8 +76,10 @@ function* addProductStart({type, payload}) {
         const response = yield ProductsService.updateProduct(payload)
         yield put(updateProductSuccess(response.data.data.products))
         console.log(response.data.data.products,"saga")
+        toast.success("Successfully Updated !");
     } catch (err) {
         yield put(updateProductError(err))
+        toast.error(err.response.data.message);
         console.log(err, "err")
     }
 }
@@ -87,8 +95,10 @@ function* addProductStart({type, payload}) {
         const response = yield ProductsService.deleteProduct(payload)
         yield put(deleteProductSuccess(response.data.products))
         console.log(response.data.data.products,"saga")
+        toast.success("Successfully Deleted !");
     } catch (err) {
         yield put(deleteProductError(err))
+        toast.error(err.response.data.message);
         console.log(err, "err")
     }
 }
