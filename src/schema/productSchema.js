@@ -12,6 +12,7 @@ export const ProductSchema = {
   costPrice: JOI.number().required().label("Cost Price"),
   price: JOI.number().required().label("Price"),
   stock: JOI.number().required().label("Stock"),
+  sold: JOI.number().allow().label("Stock"),
   category: JOI.string()
     .required()
     .label("Category")
@@ -43,6 +44,7 @@ export const ProductSchemaUpdate = {
   costPrice: JOI.number().required().label("Cost Price"),
   price: JOI.number().required().label("Price"),
   stock: JOI.number().required().label("Stock"),
+  sold: JOI.number().allow().label("Stock"),
   category: JOI.string()
     .required()
     .label("Category")
