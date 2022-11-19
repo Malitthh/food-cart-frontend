@@ -62,7 +62,7 @@ const Orders = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Dashboard</span>
+              <span className="current-page"><b>Financial Report</b></span>
             </li>
           </ul>
         </nav>
