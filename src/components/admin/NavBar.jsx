@@ -66,7 +66,16 @@ const NavBar = () => {
                   </a>
                 </li>
               </ul>
-
+              <div className="top-bar right">
+              <ul className="social-list">
+                <li>
+                  <a href="#">
+                   <a href="#"><b>Inqueries</b></a> &nbsp;
+                    <i className="fa fa-bell" aria-hidden="true"></i>
+                  </a>
+                </li>
+              </ul>
+              </div>
               {status !== "success" ? (
                 <ul className="horizontal-menu">
                   <li>
@@ -91,8 +100,8 @@ const NavBar = () => {
                     </a>
                   </li>
                 </ul>
-                
               )}
+              
             </div>
           </div>
         </div>
