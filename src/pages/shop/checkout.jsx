@@ -528,12 +528,11 @@ var od;
                       </div>
                     </div>
                     <div id="legalcopy">
-                      <h6 class="legal">
+                      <p class="legal">
                         <strong>Thank you for your business!</strong>  Payment
                         is expected within 31 days; please process this invoice
-                        within that time. There will be a 5% interest charge per
-                        month on late invoices.
-                      </h6>
+                        within that time. 
+                      </p>
                     </div>
                   </div>
                 </div>
