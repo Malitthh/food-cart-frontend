@@ -92,8 +92,8 @@ function* addUserStart({type, payload}) {
     console.log(payload,"saga")
     try {
         const response = yield UserService.getOneUser(payload)
-     //   yield put(getSingleUserSuccess(response.data.data.users))
-        console.log(response,"saga")
+       yield put(getSingleUserSuccess(response.data.user))
+        console.log(response.data.user,"saga")
     } catch (err) {
         yield put(getSingleUserError(err))
         toast.error(err.response.data.message);

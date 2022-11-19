@@ -1,30 +1,83 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getSingleUserStart } from "../../store/users/actions";
+import { getSingleUserStart, updateUserStart } from "../../store/users/actions";
 import HeaderBar from "src/components/HeaderBar";
 import Footer from "src/components/Footer";
-import MainContent_Shop from "src/components/MainContent_Shop";
-import ShopItem from "src/components/ShopItems";
-import sidebar_Shop from "src/components/Sidebar_shop";
+import { validateForm, validateProperty } from "src/helpers/validationHeper";
+import { CustomerSchemaUpdate } from "../../schema/customerSchema";
+import { useRouter } from "next/router";
 
 const product = () => {
   const dispatch = useDispatch();
-  const { products, auth } = useSelector((state) => state);
-  const { allProducts } = products;
+  const { users, auth } = useSelector((state) => state);
+  const { profile } = users;
   const [userInfo, setUserInfo] = useState({});
   const [errors, setErrors] = useState([]);
   const token = window.localStorage.getItem("@token");
+  const router = useRouter();
+
+  const gender = [
+    {
+      label: "Male",
+      value: "M",
+    },
+    {
+      label: "Female",
+      value: "F",
+    },
+  ];
+
+  const province = [
+    {
+      label: "Southern",
+      value: "southern",
+    },
+    {
+      label: "Central",
+      value: "central",
+    },
+    {
+      label: "North western",
+      value: "northwest",
+    },
+    {
+      label: "Uva",
+      value: "uva",
+    },
+    {
+      label: "Sabaragamuwa",
+      value: "sabaragamuwa",
+    },
+    {
+      label: "West",
+      value: "west",
+    },
+    {
+      label: "Eastern",
+      value: "eastern",
+    },
+    {
+      label: "Northen",
+      value: "northen",
+    },
+    {
+      label: "North Central",
+      value: "northCentral",
+    },
+  ];
 
   const featchOnLoad = async () => {
     const payload = {
       id: auth.user._id,
-      token
-    }
+      token,
+    };
     dispatch(getSingleUserStart(payload));
+    setUserInfo(profile);
   };
 
   useEffect(() => {
     featchOnLoad();
+
   }, []);
 
   const onChangeInput = (e) => {
@@ -32,6 +85,44 @@ const product = () => {
     validateField(e.target.id, e.target.value);
     setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
   };
+
+  /**
+   * OnSubmit method to invoke the database call
+   */
+  const onSubmit = async () => {
+    const payload = {
+      data: userInfo,
+      token,
+    };
+    dispatch(updateUserStart(payload));
+    router.reload(window.location.pathname)
+  };
+
+  /**
+   * Validate Form
+   * @param {*} e
+   */
+
+  const validateBeforeSave = (e) => {
+    e.preventDefault();
+    console.log(userInfo, "pp");
+    onSubmit();
+  };
+
+    /**
+   * Validate single field on the fly
+   * @param {*} name
+   * @param {*} value
+   */
+     const validateField = (name, value) => {
+      const errMsg = validateProperty(name, value, CustomerSchemaUpdate);
+  
+      if (errMsg) {
+        errors[name] = errMsg;
+      } else {
+        delete errors[name];
+      }
+    };
 
   return (
     <>
@@ -166,12 +257,24 @@ const product = () => {
                       <label htmlFor="gender">
                         <b>Gender : </b>
                       </label>
-                      <select className="form-control">
-                        <option disabled="disabled" selected="true">
+                      <select
+                        className="form-control"
+                        name="gender"
+                        id="gender"
+                        value={userInfo.gender}
+                        onChange={(e) =>
+                          setUserInfo({
+                            ...userInfo,
+                            [e.target.id]: e.target.value,
+                          })
+                        }
+                      >
+                        <option value="" disabled="disabled">
                           Select your Gender here
                         </option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        {gender.map((option) => (
+                          <option value={option.value}>{option.label}</option>
+                        ))}
                       </select>
                       <p className="text-red-500 text-xs italic">
                         {errors && errors["dob"]}
@@ -181,19 +284,24 @@ const product = () => {
                       <label htmlFor="address">
                         <b>Province : </b>
                       </label>
-                      <select className="form-control">
+                      <select
+                        className="form-control"
+                        name="province"
+                        id="province"
+                        value={userInfo.province}
+                        onChange={(e) =>
+                          setUserInfo({
+                            ...userInfo,
+                            [e.target.id]: e.target.value,
+                          })
+                        }
+                      >
                         <option disabled="disabled" selected="true">
                           Select your province here
                         </option>
-                        <option value="southern">Southern</option>
-                        <option value="central">Central</option>
-                        <option value="northwest">North western</option>
-                        <option value="uva">Uva</option>
-                        <option value="sabaragamuwa">Sabaragamuwa</option>
-                        <option value="west">West</option>
-                        <option value="eastern">Eastern</option>
-                        <option value="northen">Northen</option>
-                        <option value="northCentral">North Central</option>
+                        {province.map((option) => (
+                          <option value={option.value}>{option.label}</option>
+                        ))}
                       </select>
                       <p className="text-red-500 text-xs italic">
                         {errors && errors["province"]}
