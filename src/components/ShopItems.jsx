@@ -52,16 +52,16 @@ const ShopItem = ({product}) => {
               All products are carefully selected to ensure food safety.
             </p>
             <div className="buttons">
-              <a href="#" className="btn wishlist-btn">
+              {/* <a href="#" className="btn wishlist-btn">
                 <i className="fa fa-heart" aria-hidden="true"></i>
-              </a>
+              </a> */}
               <a href="#" className="btn add-to-cart-btn" onClick={() => onAddToCart()}>
                 <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
                 add to cart
               </a>
-              <a href="#" className="btn compare-btn">
+              {/* <a href="#" className="btn compare-btn">
                 <i className="fa fa-random" aria-hidden="true"></i>
-              </a>
+              </a> */}
             </div>
           </div>
         </div>

@@ -11,6 +11,8 @@ const product = () => {
   const dispatch = useDispatch();
   const { products, auth } = useSelector((state) => state);
   const { allProducts } = products;
+  const [category, setCategory] = useState('');
+  const [showAll, setShowAll] = useState(true);
 
   const featchOnLoad = async () => {
     dispatch(getProductStart());
@@ -19,6 +21,16 @@ const product = () => {
   useEffect(() => {
     featchOnLoad();
   }, []);
+
+  const currentCategory = (category) => {
+    setCategory(category)
+    setShowAll(false)
+  }
+
+  const resetCategory = () => {
+    setCategory('')
+    setShowAll(true)
+  }
 
   return (
     <>
@@ -58,11 +70,12 @@ const product = () => {
                             <h3 class="wgt-title"><b>Categories List</b></h3>
                             <div class="wgt-content">
                                 <ul class="cat-list">
-                                    <li class="cat-list-item"><a href="#" class="cat-link">Fruits & Nuts</a></li>
-                                    <li class="cat-list-item"><a href="#" class="cat-link">Vegetables</a></li>
-                                    <li class="cat-list-item"><a href="#" class="cat-link">Butter & Eggs</a></li>
-                                    <li class="cat-list-item"><a href="#" class="cat-link">Berries</a></li>
-                                    <li class="cat-list-item"><a href="#" class="cat-link">Rice</a></li>
+                                    <li class="cat-list-item"><a style={{ cursor: 'pointer'}} onClick={() => currentCategory('fruit_nuts')} class="cat-link">Fruits & Nuts</a></li>
+                                    <li class="cat-list-item"><a style={{ cursor: 'pointer'}} onClick={() => currentCategory('vegetables')} class="cat-link">Vegetables</a></li>
+                                    <li class="cat-list-item"><a style={{ cursor: 'pointer'}} onClick={() => currentCategory('butter_eggs')} class="cat-link">Butter & Eggs</a></li>
+                                    <li class="cat-list-item"><a style={{ cursor: 'pointer'}} onClick={() => currentCategory('berries')} class="cat-link">Berries</a></li>
+                                    <li class="cat-list-item"><a style={{ cursor: 'pointer'}} onClick={() => currentCategory('rice')} class="cat-link">Rice</a></li>
+                                    <li class="cat-list-item"><a style={{ cursor: 'pointer'}} onClick={() => resetCategory()} class="cat-link">Reset and All categories</a></li>
                                 </ul>
                             </div>
                         </div>     
@@ -71,7 +84,8 @@ const product = () => {
           </div>
           <div className="col-md-9">
             <div className="row">
-              {allProducts && allProducts.map((product, key) => <ShopItem key={key} product={product}/>)}
+              {showAll && allProducts && allProducts.map((product, key) => <ShopItem key={key} product={product}/>)}
+              {!showAll && allProducts && allProducts.filter((product) => product.category === category).map((product, key) => <ShopItem key={key} product={product}/>)}
             </div>
           </div>
         </div>
