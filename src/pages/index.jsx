@@ -28,7 +28,7 @@ const Home = () => {
             {/* <MainSlide/> */}
             <Banners/>
             <ProductTabs/>
-            <Brands/>
+            {/* <Brands/> */}
             <BannerPromotion/>
             {/* <Products/> */}
         </MainContent>
