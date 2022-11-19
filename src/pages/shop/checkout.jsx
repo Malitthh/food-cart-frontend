@@ -450,7 +450,11 @@ const Checkout = () => {
               <div className="container">
                 <h4 className="title">Thank You for your order!</h4>
                 <div style={{ float: "right" }}>
-                  <div id="invoice-POS" style={{ width: "35%", marginLeft: "65%"}}>
+                  <div
+                    id="invoice-POS"
+                    style={{ width: "35%", marginLeft: "65%" }}
+                    ref={ref}
+                  >
                     <div id="top">
                       <div style={{ float: "center" }}>
                         <img
@@ -474,26 +478,45 @@ const Checkout = () => {
                       </div>
                     </div>
                     <div>
-                      <div id="table" style={{ height: "200px", overflow: "auto", marginBottom:"1%"}}>
+                      <div
+                        id="table"
+                        style={{
+                          height: "200px",
+                          overflow: "auto",
+                          marginBottom: "1%",
+                        }}
+                      >
                         <table>
                           <tr class="tabletitle">
-                          <td class="item">
-                              <h2><b>Image</b></h2>
+                            <td class="item">
+                              <h2>
+                                <b>Image</b>
+                              </h2>
                             </td>
                             <td class="item">
-                              <h2><b>Item</b></h2>
+                              <h2>
+                                <b>Item</b>
+                              </h2>
                             </td>
                             <td class="Hours">
-                              <h2><b>Qty</b></h2>
+                              <h2>
+                                <b>Qty</b>
+                              </h2>
                             </td>
                             <td class="Rate">
-                              <h2><b>Sub Total</b></h2>
+                              <h2>
+                                <b>Sub Total</b>
+                              </h2>
                             </td>
                           </tr>
                           {finalOrder.orderItems.map((product, key) => (
                             <tr class="service">
                               <td class="tableitem">
-                                <img src={product.image} width={35} height={10}/>
+                                <img
+                                  src={product.image}
+                                  width={35}
+                                  height={10}
+                                />
                               </td>
                               <td class="tableitem">
                                 <p class="itemtext">{product.productName}</p>
@@ -512,24 +535,43 @@ const Checkout = () => {
                       </div>
                     </div>
                     <div id="legalcopy">
-                      <p class="legal" style={{marginTop:"12px", color:"#8ac554"}}>
-                        <strong style={{color:"#ab6f29"}}>Thank you for your business!</strong>  Payment
-                        is expected within 31 days; please process this invoice
-                        within that time. 
+                      <p
+                        class="legal"
+                        style={{ marginTop: "12px", color: "#8ac554" }}
+                      >
+                        <strong style={{ color: "#ab6f29" }}>
+                          Thank you for your business!
+                        </strong>
+                          Payment is expected within 31 days; please process
+                        this invoice within that time.
                       </p>
                     </div>
                   </div>
-                  <Pdf targetRef={ref} filename="receipt.pdf"  x={.5} y={.5} scale={0.72}>
-                  {({ toPdf }) => <button 
-                                    onClick={toPdf} 
-                                    className="btn btn-success"
-                                    style={{float:"right", marginRight:"0.5%", marginTop:"1%", marginBottom:"0.5%", padding:"0.58%"}}
-                                  >
-                                  <i className="fa fa-download" aria-hidden="true"></i>
-                                  &nbsp;&nbsp;Download Receipt
-                                  </button>}
-                </Pdf>
-                </div>             
+                  <Pdf
+                    targetRef={ref}
+                    filename="receipt.pdf"
+                    x={0.5}
+                    y={0.5}
+                    scale={1}
+                  >
+                    {({ toPdf }) => (
+                      <button
+                        onClick={toPdf}
+                        className="btn btn-success"
+                        style={{
+                          float: "right",
+                          marginRight: "0.5%",
+                          marginTop: "1%",
+                          marginBottom: "0.5%",
+                          padding: "0.58%",
+                        }}
+                      >
+                        <i className="fa fa-download" aria-hidden="true"></i>
+                        &nbsp;&nbsp;Download Receipt
+                      </button>
+                    )}
+                  </Pdf>
+                </div>
               </div>
             </div>
           )}
