@@ -5,7 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { addOrderStart } from "../../store/orders/actions";
 import { useRouter } from "next/router";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
-import { AuthSchema } from "../../schema/authSchema";
+import { OrderSchema } from "../../schema/OrderSchema";
 import { emptyCart } from "../../store/cart/actions";
 import Recipt from "../../components/Recipt";
 
@@ -24,8 +24,19 @@ const Checkout = () => {
     return sum + number.price * number.quantity;
   }, 0);
 
-  const checkoutFunc = () => {
-    console.log(orderInfo, "orderinfo");
+  const checkoutFunc = (OrderData) => {
+    const payload = {
+      data: OrderData,
+      token,
+    };
+    dispatch(addOrderStart(payload));
+    setShowCheckout(false);
+    setFinalOrder(OrderData);
+    dispatch(emptyCart());
+  };
+
+  const validateBeforeSave = (e) => {
+    e.preventDefault();
 
     let shippingAddress = {
       name: orderInfo.recipientName,
@@ -60,17 +71,13 @@ const Checkout = () => {
       orderItems,
     };
 
-    console.log("orderinfo", OrderData, orderItems);
-    od = OrderData;
-    const payload = {
-      data: OrderData,
-      token,
-    };
-    dispatch(addOrderStart(payload));
-    setShowCheckout(false);
-    setFinalOrder(OrderData);
-    console.log(OrderData, "cccc");
-    dispatch(emptyCart());
+    const err = validateForm(orderInfo, OrderSchema);
+    console.log(err, "err");
+    if (err) {
+      setErrors(err);
+    } else {
+      checkoutFunc(OrderData);
+    }
   };
 
   const onChangeInput = (e) => {
@@ -79,7 +86,7 @@ const Checkout = () => {
   };
 
   const validateField = (name, value) => {
-    const errMsg = validateProperty(name, value, AuthSchema);
+    const errMsg = validateProperty(name, value, OrderSchema);
 
     if (errMsg) {
       errors[name] = errMsg;
@@ -172,6 +179,9 @@ const Checkout = () => {
                                     onChange={onChangeInput}
                                     placeholder="Billing name"
                                   />
+                                  <p className="text-red-500 text-xs italic">
+                                    {errors && errors["billingName"]}
+                                  </p>
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                   <label for="email">Contact No</label>
@@ -183,6 +193,9 @@ const Checkout = () => {
                                     onChange={onChangeInput}
                                     placeholder="Billing Mobile"
                                   />
+                                  <p className="text-red-500 text-xs italic">
+                                    {errors && errors["billingMobile"]}
+                                  </p>
                                 </div>
                               </div>
                               <div className="row">
@@ -196,6 +209,9 @@ const Checkout = () => {
                                     onChange={onChangeInput}
                                     placeholder="Address Line"
                                   />
+                                  <p className="text-red-500 text-xs italic">
+                                    {errors && errors["addressLine1B"]}
+                                  </p>
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                   <label for="postalCodeB">Postal Code</label>
@@ -207,6 +223,9 @@ const Checkout = () => {
                                     onChange={onChangeInput}
                                     placeholder="Postal Code "
                                   />
+                                  <p className="text-red-500 text-xs italic">
+                                    {errors && errors["postalCodeB"]}
+                                  </p>
                                 </div>
                               </div>
                               <div className="row">
@@ -221,6 +240,9 @@ const Checkout = () => {
                                     onChange={onChangeInput}
                                     placeholder="City"
                                   />
+                                  <p className="text-red-500 text-xs italic">
+                                    {errors && errors["cityB"]}
+                                  </p>
                                 </div>
                               </div>
                             </div>
@@ -233,6 +255,9 @@ const Checkout = () => {
                           <h3 className="title-box">
                             <span className="number">3</span>Shipping Details
                           </h3>
+                          <p className="text-red-500 text-xs italic">
+                            {errors && errors["shippingAddress"]}
+                          </p>
                           <div className="box-content">
                             <div className="login-on-checkout">
                               <div className="row">
@@ -248,6 +273,9 @@ const Checkout = () => {
                                     onChange={onChangeInput}
                                     placeholder="Enter name here"
                                   />
+                                  <p className="text-red-500 text-xs italic">
+                                    {errors && errors["recipientName"]}
+                                  </p>
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                   <label for="email">
@@ -261,6 +289,9 @@ const Checkout = () => {
                                     onChange={onChangeInput}
                                     placeholder="Enter contact no here"
                                   />
+                                  <p className="text-red-500 text-xs italic">
+                                    {errors && errors["recipientMobile"]}
+                                  </p>
                                 </div>
                               </div>
                               <div className="row">
@@ -274,6 +305,9 @@ const Checkout = () => {
                                     onChange={onChangeInput}
                                     placeholder="Enter address here"
                                   />
+                                  <p className="text-red-500 text-xs italic">
+                                    {errors && errors["addressLine1"]}
+                                  </p>
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                   <label for="postalCode">Postal Code</label>
@@ -285,6 +319,9 @@ const Checkout = () => {
                                     onChange={onChangeInput}
                                     placeholder="Enter postal code here"
                                   />
+                                  <p className="text-red-500 text-xs italic">
+                                    {errors && errors["postalCode"]}
+                                  </p>
                                 </div>
                               </div>
                               <div className="row">
@@ -299,6 +336,9 @@ const Checkout = () => {
                                     onChange={onChangeInput}
                                     placeholder="Enter city here"
                                   />
+                                  <p className="text-red-500 text-xs italic">
+                                    {errors && errors["city"]}
+                                  </p>
                                 </div>
                               </div>
                             </div>
@@ -315,7 +355,7 @@ const Checkout = () => {
                     </ul>
                     <div
                       className="btn-warning btn-sm text-center"
-                      onClick={() => checkoutFunc()}
+                      onClick={(e) => validateBeforeSave(e)}
                     >
                       <a className="btn checkout">Check out</a>
                     </div>
