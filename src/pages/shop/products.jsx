@@ -13,6 +13,9 @@ const product = () => {
   const { allProducts } = products;
   const [category, setCategory] = useState("");
   const [showAll, setShowAll] = useState(true);
+  const [q, setQ] = useState({
+    text: "",
+  });
 
   const featchOnLoad = async () => {
     dispatch(getProductStart());
@@ -32,9 +35,30 @@ const product = () => {
     setShowAll(true);
   };
 
+  const onChangeInput = (e) => {
+    // setQ(e.target.value);
+    console.log(e.target.value);
+    setQ({ ...q, text: e.target.value });
+  };
+
   return (
     <>
-      <HeaderBar />
+      <HeaderBar>
+        <>
+          <input
+            type="text"
+            id="q"
+            name="q"
+            className="input-text"
+            onChange={onChangeInput}
+            value={q.text}
+            placeholder="Search here..."
+          />
+          <button type="submit" className="btn-submit">
+            <i className="biolife-icon icon-search"></i>
+          </button>
+        </>
+      </HeaderBar>
       <div className="hero-section hero-background">
         <h1 className="page-title">Shop</h1>
       </div>

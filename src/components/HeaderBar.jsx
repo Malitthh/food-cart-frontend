@@ -3,7 +3,11 @@ import { logoutStart } from "../store/auth/actions";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 
-const HeaderBar = () => {
+const search = () => (
+ 'hi'
+)
+
+const HeaderBar = ({children}) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const { cart, auth } = useSelector((state) => state);
@@ -147,23 +151,8 @@ const HeaderBar = () => {
                           type="text"
                           name="s"
                           className="input-text"
-                          value=""
                           placeholder="Search here..."
                         />
-                        <select name="category">
-                          <option value="-1" selected>
-                            All Categories
-                          </option>
-                          <option value="vegetables">Vegetables</option>
-                          <option value="fresh_berries">Fresh Berries</option>
-                          <option value="ocean_foods">Ocean Foods</option>
-                          <option value="butter_eggs">Butter & Eggs</option>
-                          <option value="fastfood">Fastfood</option>
-                          <option value="fresh_meat">Fresh Meat</option>
-                          <option value="fresh_onion">Fresh Onion</option>
-                          <option value="papaya_crisps">Papaya & Crisps</option>
-                          <option value="oatmeal">Oatmeal</option>
-                        </select>
                         <button type="submit" className="btn-submit">
                           go
                         </button>
@@ -267,6 +256,7 @@ const HeaderBar = () => {
             </div>
           </div>
         </div>
+
         <div className="header-bottom hidden-sm hidden-xs">
           <div className="container">
             <div className="row">
@@ -285,37 +275,7 @@ const HeaderBar = () => {
               </div>
               <div className="col-lg-9 col-md-8 padding-top-2px">
                 <div className="header-search-bar layout-01">
-                  <form
-                    action="#"
-                    className="form-search"
-                    name="desktop-seacrh"
-                    method="get"
-                  >
-                    <input
-                      type="text"
-                      name="s"
-                      className="input-text"
-                      value=""
-                      placeholder="Search here..."
-                    />
-                    <select name="category">
-                      <option value="-1" selected>
-                        All Categories
-                      </option>
-                      <option value="vegetables">Vegetables</option>
-                      <option value="fresh_berries">Fresh Berries</option>
-                      <option value="ocean_foods">Ocean Foods</option>
-                      <option value="butter_eggs">Butter & Eggs</option>
-                      <option value="fastfood">Fastfood</option>
-                      <option value="fresh_meat">Fresh Meat</option>
-                      <option value="fresh_onion">Fresh Onion</option>
-                      <option value="papaya_crisps">Papaya & Crisps</option>
-                      <option value="oatmeal">Oatmeal</option>
-                    </select>
-                    <button type="submit" className="btn-submit">
-                      <i className="biolife-icon icon-search"></i>
-                    </button>
-                  </form>
+                    {children}
                 </div>
                 <div className="live-info">
                   <p className="telephone">
