@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getProductStart } from "../../store/products/actions";
+import { getSingleUserStart } from "../../store/users/actions";
 import HeaderBar from "src/components/HeaderBar";
 import Footer from "src/components/Footer";
 import MainContent_Shop from "src/components/MainContent_Shop";
@@ -13,9 +13,14 @@ const product = () => {
   const { allProducts } = products;
   const [userInfo, setUserInfo] = useState({});
   const [errors, setErrors] = useState([]);
+  const token = window.localStorage.getItem("@token");
 
   const featchOnLoad = async () => {
-    console.log(auth.user._id)
+    const payload = {
+      id: auth.user._id,
+      token
+    }
+    dispatch(getSingleUserStart(payload));
   };
 
   useEffect(() => {
