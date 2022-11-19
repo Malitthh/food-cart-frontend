@@ -58,7 +58,7 @@ const Home = () => {
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="container mx-2">
             <div className="biolife-service type01 biolife-service__type01 sm-margin-top-0 xs-margin-top-45px">
-              <ul className="services-list">
+              <ul className="services-list" style={{border:"none"}}>
                 <li>
                   <div className="service-inner color-reverse">
                     <span className="biolife-icon icon-suporter"></span>
@@ -90,7 +90,7 @@ const Home = () => {
                   </div>
                 </li>
               </ul>
-              <ul className="services-list">
+              <ul className="services-list" style={{border:"none"}}>
                 <li>
                   <div className="service-inner color-reverse">
                     <span className="biolife-icon icon-fruits"></span>
