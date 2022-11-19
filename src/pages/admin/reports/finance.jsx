@@ -95,7 +95,7 @@ const Orders = () => {
                                   Generate Pdf
                                   </button>}
                 </Pdf>
-                <a
+                    <a
                       data-cy="link-new-report"
                       href="/admin/reports"
                       style={{float:"right", marginRight:"0.5%", marginTop:"-2%", marginBottom:"0.5%", padding:"0.58%"}}
