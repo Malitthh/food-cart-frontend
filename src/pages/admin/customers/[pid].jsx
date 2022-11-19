@@ -119,7 +119,7 @@ const updateCustomer = () => {
    * @param {*} value
    */
   const validateField = (name, value) => {
-    const errMsg = validateProperty(name, value, ProductSchema);
+    const errMsg = validateProperty(name, value, CustomerSchemaUpdate);
 
     if (errMsg) {
       errors[name] = errMsg;

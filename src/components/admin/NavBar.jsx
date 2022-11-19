@@ -70,7 +70,7 @@ const NavBar = () => {
               <ul className="social-list">
                 <li>
                   <a href="#">
-                   <a href="#"><b>Inqueries</b></a> &nbsp;
+                   <a href="#"><b>Inquiries</b></a> &nbsp;
                     <i className="fa fa-bell" aria-hidden="true"></i>
                   </a>
                 </li>
