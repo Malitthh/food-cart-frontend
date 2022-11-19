@@ -52,7 +52,7 @@ const ReportIndex = () => {
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="container mx-3">
             <div className="biolife-service type01 biolife-service__type01 sm-margin-top-0 xs-margin-top-45px">
-              <ul className="services-list">
+              <ul className="services-list" style={{border:"none"}}>
                 <div className="tab-head tab-head__icon-top-layout icon-top-layout">
                   <ul className="tabs md-margin-bottom-35-im xs-margin-bottom-40-im">
                     <li className="tab-element">
@@ -79,7 +79,7 @@ const ReportIndex = () => {
           </div>
         </div>
       </main>
-      <br />
+      <br /><br/>
       <Footer />
     </div>
   );
