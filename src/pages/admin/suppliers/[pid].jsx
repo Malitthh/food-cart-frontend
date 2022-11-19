@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
-import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { SupplierSchemaUpdate } from "../../../schema/customerSchema";
 
@@ -257,42 +256,6 @@ const updateSupplier = () => {
                     </p>
                   </div>
                 </div>
-                {/* <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label htmlFor="password">
-                      <b>Password</b>
-                    </label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      onChange={onChangeInput}
-                      value={userInfo.password}
-                      id="password"
-                      name="password"
-                      placeholder="Enter your password here"
-                    />
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["password"]}
-                    </p>
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="passwordConfirm">
-                      <b>Confirm Password</b>
-                    </label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      onChange={onChangeInput}
-                      value={userInfo.passwordConfirm}
-                      id="passwordConfirm"
-                      name="passwordConfirm"
-                      placeholder="Re-Enter your password here"
-                    />
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["passwordConfirm"]}
-                    </p>
-                  </div>
-                </div> */}
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <button
@@ -312,6 +275,7 @@ const updateSupplier = () => {
                     </button>{" "}
                     &nbsp;
                     <a
+                      style={{padding:"6px", fontSize:"13px"}}
                       data-cy="link-new-report"
                       href="/admin/suppliers"
                       className="new-report btn btn-danger gap- btn-sm"

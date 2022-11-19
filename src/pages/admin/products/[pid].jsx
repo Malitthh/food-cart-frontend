@@ -5,7 +5,6 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
   updateProductStart,
-  getSingleProductStart,
 } from "../../../store/products/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
@@ -109,20 +108,6 @@ const updateProduct = () => {
    * Validate Form
    * @param {*} e
    */
-
-  // const validateBeforeSave = (e) => {
-  //   e.preventDefault();
-
-  //   console.log(productInfo, "pp");
-  //   const hasErrors = validateForm(productInfo, ProductSchemaUpdate);
-  //   console.log(hasErrors, "pp");
-  //   if (hasErrors) {
-  //     setErrors(hasErrors);
-  //   } else {
-  //     e.preventDefault();
-  //     onSubmit();
-  //   }
-  // };
 
   const validateBeforeSave = async (e) => {
     e.preventDefault();

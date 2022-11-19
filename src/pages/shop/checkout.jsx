@@ -476,7 +476,7 @@ const Checkout = () => {
                     <div>
                       <div id="table" style={{ height: "200px", overflow: "auto", marginBottom:"1%"}}>
                         <table>
-                          <tr class="tabletitle">
+                          <tr class="tabletitle" style={{backgroundColor:"#c3c3c357", fontSize:"10px"}}>
                           <td class="item">
                               <h2><b>Image</b></h2>
                             </td>
@@ -512,7 +512,7 @@ const Checkout = () => {
                       </div>
                     </div>
                     <div id="legalcopy">
-                      <p class="legal" style={{marginTop:"12px", color:"#8ac554"}}>
+                      <p class="legal" style={{marginTop:"18px", color:"#8ac554",fontFamily: "monospace", fontSize:"12px"}}>
                         <strong style={{color:"#ab6f29"}}>Thank you for your business!</strong>  Payment
                         is expected within 31 days; please process this invoice
                         within that time. 

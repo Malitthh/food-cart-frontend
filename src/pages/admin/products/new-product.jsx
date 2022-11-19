@@ -318,6 +318,7 @@ const NewProduct = () => {
                     Reset
                   </button> &nbsp;
                   <a 
+                    style={{padding:"6px", fontSize:"13px"}}
                     data-cy="link-new-report"
                     href="/admin/products"
                     className="new-report btn btn-danger gap- btn-sm"

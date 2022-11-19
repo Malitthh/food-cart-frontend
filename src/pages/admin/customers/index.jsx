@@ -1,9 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
 import { getUserStart, deleteUserStart } from "../../../store/users/actions";
-import { apiUrl, clientBaseURLImages } from "config";
-import queryString from "query-string";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
