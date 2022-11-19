@@ -54,7 +54,7 @@ const OrderIndex = () => {
                       <tr key={key} className={key % 2 === 1 ? "active" : ""}>
                         <td>{item.customerName}</td>
                         <td>{item.customerEmail}</td>
-                        <td>{item.status}</td>
+                        <td><b>{item.status}</b></td>
                         <td>
                           <a
                             data-cy={`view-report-btn${key}`}

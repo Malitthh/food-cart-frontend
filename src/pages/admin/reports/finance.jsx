@@ -71,6 +71,11 @@ const Orders = () => {
               </a>
             </li>
             <li className="nav-item">
+              <a href="/admin/reports" className="permal-link">
+                Reports
+              </a>
+            </li>
+            <li className="nav-item">
               <span className="current-page"><b>Financial Report</b></span>
             </li>
           </ul>
@@ -82,10 +87,24 @@ const Orders = () => {
             <div className="overflow-x-auto">
               <div class="container bootdey">
               <Pdf targetRef={ref} filename="finance-report.pdf" options={options} x={.5} y={.5} scale={0.72}>
-                  {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+                  {({ toPdf }) => <button 
+                                    onClick={toPdf} 
+                                    className="btn btn-success"
+                                    style={{float:"right", marginRight:"17%", marginTop:"-2%"}}
+                                  >
+                                  Generate Pdf
+                                  </button>}
                 </Pdf>
-
-                <div class="row invoice row-printable" ref={ref}>
+                <a
+                      data-cy="link-new-report"
+                      href="/admin/reports"
+                      style={{float:"right", marginRight:"0.5%", marginTop:"-2%", marginBottom:"0.5%", padding:"0.58%"}}
+                      className="new-report btn btn-warning gap-2 btn-sm"
+                    >
+                    <i className="fa fa-angle-left" aria-hidden="true"></i>
+                    &nbsp;&nbsp;BACK
+                  </a>
+                <div class="row invoice row-printable" ref={ref}><br/>
                   <div class="col-md-10">
                     <div class="panel panel-default plain" id="dash_0">
                       <div class="panel-body p30">

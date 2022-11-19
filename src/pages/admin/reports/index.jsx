@@ -43,7 +43,7 @@ const ReportIndex = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Reports</span>
+              <span className="current-page"><b>Reports</b></span>
             </li>
           </ul>
         </nav>
