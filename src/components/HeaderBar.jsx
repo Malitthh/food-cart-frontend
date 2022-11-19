@@ -76,7 +76,7 @@ const HeaderBar = () => {
                   <li>
                     <a
                       onClick={() => logout()}
-                      className="btn btn-warning btn-sm" 
+                      className="btn btn-warning btn-sm"
                     >
                       Logout
                     </a>
@@ -213,26 +213,20 @@ const HeaderBar = () => {
                                         />
                                       </div>
                                     </div>
-                                    {/* <div className="action">
-                                      <a href="#" className="remove">
-                                        <i
-                                          className="fa fa-trash-o"
-                                          aria-hidden="true"
-                                        ></i>
-                                      </a>
-                                    </div> */}
                                   </div>
                                 </li>
                               ))}
                           </ul>
-                          <p className="btn-control">
-                            <a href="/shop/cart" className="btn view-cart">
-                              view cart
-                            </a>
-                            <a href="/shop/checkout" className="btn">
-                              checkout
-                            </a>
-                          </p>
+                          {cart.numberCart !== 0 && (
+                            <p className="btn-control">
+                              <a href="/shop/cart" className="btn view-cart">
+                                view cart
+                              </a>
+                              <a href="/shop/checkout" className="btn">
+                                checkout
+                              </a>
+                            </p>
+                          )}
                         </div>
                       </div>
                     </div>

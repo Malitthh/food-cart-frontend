@@ -208,14 +208,17 @@ const Cart = () => {
                             >
                               Back to Shop
                             </a>
-                            <div className="btn-checkoutcart">
-                              <a
-                                href="/shop/checkout"
-                                className="btn checkoutcart"
-                              >
-                                Check out
-                              </a>
-                            </div>
+
+                            {cart.cart.length !== 0 && (
+                              <div className="btn-checkoutcart">
+                                <a
+                                  href="/shop/checkout"
+                                  className="btn checkoutcart"
+                                >
+                                  Check out
+                                </a>
+                              </div>
+                            )}
                           </td>
                         </tr>
                       </tbody>
