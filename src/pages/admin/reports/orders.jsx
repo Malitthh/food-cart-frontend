@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
 import { getOrderStart } from "../../../store/orders/actions";
 import { getProductStart } from "../../../store/products/actions";
 import Footer from "../../../components/admin/Footer";
 import { apiUrl, clientBaseURLImages } from "config";
+import Pdf from "react-to-pdf";
+
+const ref = React.createRef();
+
 const Orders = () => {
 
   // get damage reports from state
@@ -49,6 +53,11 @@ const Orders = () => {
       return sum + item.costPrice * item.sold;
     }, 0);
 
+    const options = {
+      // unit: 'in',
+      // format: [4,2]
+  };
+
   return (
     <div className="min-h-full">
       <NavBar />
@@ -62,7 +71,7 @@ const Orders = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Dashboard</span>
+              <span className="current-page"><b>Financial Report</b></span>
             </li>
           </ul>
         </nav>
@@ -72,7 +81,11 @@ const Orders = () => {
           <div className="container mx-2">
             <div className="overflow-x-auto">
               <div class="container bootdey">
-                <div class="row invoice row-printable">
+              <Pdf targetRef={ref} filename="order summary-report.pdf" options={options} x={.5} y={.5} scale={0.8}>
+                  {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+                </Pdf>
+
+                <div class="row invoice row-printable" ref={ref}>
                   <div class="col-md-10">
                     <div class="panel panel-default plain" id="dash_0">
                       <div class="panel-body p30">
@@ -89,7 +102,7 @@ const Orders = () => {
                             <div
                               style={{ paddingLeft: "15px", color: "#b19a1a" }}
                             >
-                              FINANCE REPORT
+                              Orders Summary Report
                             </div>
                           </div>
                           <br /> <br />
@@ -109,42 +122,6 @@ const Orders = () => {
                           </div>
                           <div class="col-lg-12">
                             <div className="row pb-3 p-1">
-                              <div className="col-md-6 text-left">
-                                <div class="invoice-details mt25">
-                                  <div
-                                    class="well"
-                                    style={{
-                                      border: "none",
-                                      paddingTop: "1px",
-                                      backgroundColor: "#f6f7e9",
-                                      borderRadius: "5px",
-                                    }}
-                                  >
-                                    <ul class="list-unstyled">
-                                      <li>
-                                        <strong>All Orders : </strong>{" "}
-                                        {allOrders.length}
-                                      </li>
-                                      <li>
-                                        <strong>Pending Orders :</strong>{" "}
-                                        {pendingOrders.length}
-                                      </li>
-                                      <li>
-                                        <strong>Processing Orders :</strong>{" "}
-                                        {processingOrders.length}
-                                      </li>
-                                      <li>
-                                        <strong>Shipped Orders :</strong>{" "}
-                                        {shippedOrders.length}
-                                      </li>
-                                      <li>
-                                        <strong>Delivered Orders :</strong>{" "}
-                                        {deliveredOrders.length}
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
                             </div>
                             <div class="invoice-items">
                               <div class="table-responsive">
@@ -152,99 +129,42 @@ const Orders = () => {
                                   <thead>
                                     <tr style={{ backgroundColor: "#ecf0e2" }}>
                                       <th class="per70 text-center">
-                                        <b>Image</b>
+                                        <b>Pending</b>
                                       </th>
                                       <th class="per70 text-center">
-                                        <b>Name</b>
+                                        <b>Processing</b>
                                       </th>
                                       <th class="per5 text-center">
-                                        <b> Unit Cost Price</b>
+                                        <b>Shipped</b>
                                       </th>
                                       <th class="per5 text-center">
-                                        <b> Unit Market Price</b>
+                                        <b>Delivered</b>
                                       </th>
                                       <th class="per25 text-center">
-                                        <b>Sold Qty</b>
-                                      </th>
-                                      <th class="per25 text-center">
-                                        <b>Total Cost Price</b>
-                                      </th>
-                                      <th class="per25 text-center">
-                                        <b>Total Market Price</b>
-                                      </th>
-                                      <th class="per25 text-center">
-                                        <b>Total Profit</b>
+                                        <b>Total Orders</b>
                                       </th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    {allProducts &&
-                                      allProducts.map((product, key) => (
-                                        <tr
-                                          key={key}
-                                          className={
-                                            key % 2 === 1 ? "active" : ""
-                                          }
-                                        >
-                                          <td>
-                                            <img
-                                              style={{ height: "20px" }}
-                                              src={`${clientBaseURLImages}${product.photos[0]?.url}`}
-                                            />
-                                          </td>
-                                          <td>{product.productName}</td>
-                                          <td class="text-right">
-                                            {product.costPrice}/=
-                                          </td>
-                                          <td class="text-right">
-                                            {product.price}/=
-                                          </td>
-                                          <td class="text-right">
-                                            {product.sold}
-                                          </td>
-                                          <td class="text-right">
-                                            {product.costPrice * product.sold}/=
-                                          </td>
-                                          <td class="text-right">
-                                            {product.sold * product.price}/=
-                                          </td>
-                                          <td class="text-right">
-                                            {product.sold * product.price -
-                                              product.costPrice * product.sold}
-                                            /=
-                                          </td>
+                                        <tr>
+                                          <td class="text-right">{pendingOrders.length}</td>
+                                          <td class="text-right">{processingOrders.length}</td>
+                                          <td class="text-right">{shippedOrders.length}</td>
+                                          <td class="text-right">{deliveredOrders.length}</td>
+                                          <td class="text-right">{allOrders.length}</td>
                                         </tr>
-                                      ))}
                                   </tbody>
                                   <tfoot>
                                     <tr>
-                                      <th colspan="7" class="text-right"></th>
+                                      <th colspan="4" class="text-right"></th>
                                       <th class="text-right"> -</th>
                                     </tr>
                                     <tr>
-                                      <th colspan="7" class="text-right">
-                                        Total Sales
+                                      <th colspan="4" class="text-right">
+                                        <b>Total Orders </b>
                                       </th>
                                       <th class="text-right">
-                                        {" "}
-                                        LKR {totalSales}.00
-                                      </th>
-                                    </tr>
-                                    <tr>
-                                      <th colspan="7" class="text-right">
-                                        Total Cost
-                                      </th>
-                                      <th class="text-right">
-                                        {" "}
-                                        LKR {totalCosts}.00
-                                      </th>
-                                    </tr>
-                                    <tr>
-                                      <th colspan="7" class="text-right">
-                                        <b>Total Profit </b>
-                                      </th>
-                                      <th class="text-right">
-                                        <b>LKR {sum}.00</b>
+                                        <b>{allOrders.length}</b>
                                       </th>
                                     </tr>
                                   </tfoot>

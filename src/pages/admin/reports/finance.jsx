@@ -1,10 +1,14 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
 import { getOrderStart } from "../../../store/orders/actions";
 import { getProductStart } from "../../../store/products/actions";
 import Footer from "../../../components/admin/Footer";
 import { apiUrl, clientBaseURLImages } from "config";
+import Pdf from "react-to-pdf";
+
+const ref = React.createRef();
+
 const Orders = () => {
 
   // get damage reports from state
@@ -49,6 +53,11 @@ const Orders = () => {
       return sum + item.costPrice * item.sold;
     }, 0);
 
+    const options = {
+      // unit: 'in',
+      // format: [4,2]
+  };
+
   return (
     <div className="min-h-full">
       <NavBar />
@@ -72,7 +81,11 @@ const Orders = () => {
           <div className="container mx-2">
             <div className="overflow-x-auto">
               <div class="container bootdey">
-                <div class="row invoice row-printable">
+              <Pdf targetRef={ref} filename="finance-report.pdf" options={options} x={.5} y={.5} scale={0.72}>
+                  {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+                </Pdf>
+
+                <div class="row invoice row-printable" ref={ref}>
                   <div class="col-md-10">
                     <div class="panel panel-default plain" id="dash_0">
                       <div class="panel-body p30">
@@ -109,42 +122,7 @@ const Orders = () => {
                           </div>
                           <div class="col-lg-12">
                             <div className="row pb-3 p-1">
-                              <div className="col-md-6 text-left">
-                                <div class="invoice-details mt25">
-                                  <div
-                                    class="well"
-                                    style={{
-                                      border: "none",
-                                      paddingTop: "1px",
-                                      backgroundColor: "#f6f7e9",
-                                      borderRadius: "5px",
-                                    }}
-                                  >
-                                    <ul class="list-unstyled">
-                                      <li>
-                                        <strong>All Orders : </strong>{" "}
-                                        {allOrders.length}
-                                      </li>
-                                      <li>
-                                        <strong>Pending Orders :</strong>{" "}
-                                        {pendingOrders.length}
-                                      </li>
-                                      <li>
-                                        <strong>Processing Orders :</strong>{" "}
-                                        {processingOrders.length}
-                                      </li>
-                                      <li>
-                                        <strong>Shipped Orders :</strong>{" "}
-                                        {shippedOrders.length}
-                                      </li>
-                                      <li>
-                                        <strong>Delivered Orders :</strong>{" "}
-                                        {deliveredOrders.length}
-                                      </li>
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
+                         
                             </div>
                             <div class="invoice-items">
                               <div class="table-responsive">
