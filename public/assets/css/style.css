@@ -14944,6 +14944,9 @@ p{
 .info{
   display: block;
   margin-left: 0;
+  font-family: 'Ubuntu';
+  font-size: 12px;
+  margin-bottom: 5px;
 }
 .title{
   float: right;
@@ -14956,7 +14959,6 @@ table{
 }
 
 .tabletitle{
- 
   font-size: .5em;
   background: #EEE;
 }

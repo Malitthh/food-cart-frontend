@@ -211,17 +211,6 @@ const Orders = () => {
                     </div>
                   </div>
                 </div>
-                {/* <button
-                  onClick={() =>
-                    pdfFromReact(
-                      ".element-to-print",
-                      "My-file",
-                      "p",
-                      true,
-                      false
-                    )
-                  }
-                ></button> */}
               </div>
             </div>
           </div>

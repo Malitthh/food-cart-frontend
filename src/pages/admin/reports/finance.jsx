@@ -4,7 +4,7 @@ import NavBar from "src/components/admin/NavBar";
 import { getOrderStart } from "../../../store/orders/actions";
 import { getProductStart } from "../../../store/products/actions";
 import Footer from "../../../components/admin/Footer";
-import { apiUrl, clientBaseURLImages } from "config";
+import { clientBaseURLImages } from "config";
 import Pdf from "react-to-pdf";
 
 const ref = React.createRef();
@@ -224,7 +224,7 @@ const Orders = () => {
                                       </th>
                                       <th class="text-right">
                                         {" "}
-                                        LKR {totalSales}.00
+                                        Rs. {totalSales}.00
                                       </th>
                                     </tr>
                                     <tr>
@@ -233,7 +233,7 @@ const Orders = () => {
                                       </th>
                                       <th class="text-right">
                                         {" "}
-                                        LKR {totalCosts}.00
+                                        Rs. {totalCosts}.00
                                       </th>
                                     </tr>
                                     <tr>
@@ -241,7 +241,7 @@ const Orders = () => {
                                         <b>Total Profit </b>
                                       </th>
                                       <th class="text-right">
-                                        <b>LKR {sum}.00</b>
+                                        <b>Rs. {sum}.00</b>
                                       </th>
                                     </tr>
                                   </tfoot>

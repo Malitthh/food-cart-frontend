@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
-import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { EmployeeSchemaUpdate } from "../../../schema/customerSchema";
 
@@ -355,6 +354,7 @@ const updateEmployee = () => {
                     </button>{" "}
                     &nbsp;
                     <a
+                      style={{padding:"6px", fontSize:"13px"}}
                       data-cy="link-new-report"
                       href="/admin/employees"
                       className="new-report btn btn-danger gap- btn-sm"

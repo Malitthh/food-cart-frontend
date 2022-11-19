@@ -355,19 +355,32 @@ const Checkout = () => {
                         </div>
                       </li>
                     </ul>
-                    <div
-                      className="btn-warning btn-sm text-center"
-                      onClick={(e) => validateBeforeSave(e)}
-                    >
-                      <a className="btn checkout">Check out</a>
-                    </div>
+
+                    <table>
+                      <tbody>
+                      <tr class="cart_item wrap-buttons" >
+                          <td class="wrap-btn-control" colspan="4"  style={{borderColor:"white"}}>
+
+                              <a href="/shop/cart"className="btn-success btn-lg text-center" style={{float:"left"}}>
+                                <i className="fa fa-angle-left" aria-hidden="true"></i>
+                                &nbsp;&nbsp;<b>Back to My Cart</b></a>&nbsp;
+
+                              <button  className="btn-warning btn-lg text-center" style={{float:"right"}}
+                                onClick={(e) => validateBeforeSave(e)}>
+                                <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                                &nbsp;&nbsp; <b>Check out</b>
+                              </button>
+                          </td>
+                      </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
 
                 <div className="col-lg-5 col-md-5 col-sm-6 col-xs-12 sm-padding-top-48px sm-margin-bottom-0 xs-margin-bottom-15px">
                   <div className="order-summary sm-margin-bottom-80px">
                     <div className="title-block">
-                      <h3 className="title">Order Summary</h3>
+                      <h1 className="title" style={{color:"yellowgreen"}}><b>Order Summary</b></h1>
                       <a href="#" className="link-forward">
                         {cart.cart.length} items
                       </a>
@@ -392,7 +405,7 @@ const Checkout = () => {
                                 </div>
                                 <div className="info">
                                   <span className="txt-quantity">
-                                    {product.quantity}X
+                                    {product.quantity}x
                                   </span>
                                   <a href="#" className="pr-name">
                                     {product.productName}
@@ -402,7 +415,7 @@ const Checkout = () => {
                                   <ins>
                                     <span className="price-amount">
                                       <span className="currencySymbol">
-                                        LKR
+                                        Rs. &nbsp;
                                       </span>
                                       {product.price * product.quantity}.00
                                     </span>
@@ -415,26 +428,26 @@ const Checkout = () => {
                       <ul className="subtotal">
                         <li>
                           <div className="subtotal-line">
-                            <b className="stt-name">Subtotal</b>
-                            <span className="stt-price">LKR {sum}.00</span>
+                            <b className="stt-name">Sub-total</b>
+                            <span className="stt-price">Rs. {sum}.00</span>
                           </div>
                         </li>
                         <li>
                           <div className="subtotal-line">
                             <b className="stt-name">Shipping</b>
-                            <span className="stt-price">LKR 00.00</span>
+                            <span className="stt-price">Rs. 00.00</span>
                           </div>
                         </li>
                         <li>
                           <div className="subtotal-line">
-                            <b className="stt-name">Tax</b>
-                            <span className="stt-price">LKR 00.00</span>
+                            <b className="stt-name"style={{fontWeight:"400"}}>Tax</b>
+                            <span className="stt-price">Rs. 00.00</span>
                           </div>
                         </li>
                         <li>
                           <div className="subtotal-line">
-                            <b className="stt-name">total:</b>
-                            <span className="stt-price">LKR {sum}.00</span>
+                            <b className="stt-name"style={{color:"green"}}>total Amount</b>
+                            <span className="stt-price" style={{color:"red"}}>Rs. {sum}.00</span>
                           </div>
                         </li>
                       </ul>
@@ -487,11 +500,9 @@ const Checkout = () => {
                         }}
                       >
                         <table>
-                          <tr class="tabletitle">
-                            <td class="item">
-                              <h2>
-                                <b>Image</b>
-                              </h2>
+                          <tr class="tabletitle" style={{backgroundColor:"#c3c3c357", fontSize:"10px"}}>
+                          <td class="item">
+                              <h2><b>Image</b></h2>
                             </td>
                             <td class="item">
                               <h2>
@@ -535,15 +546,10 @@ const Checkout = () => {
                       </div>
                     </div>
                     <div id="legalcopy">
-                      <p
-                        class="legal"
-                        style={{ marginTop: "12px", color: "#8ac554" }}
-                      >
-                        <strong style={{ color: "#ab6f29" }}>
-                          Thank you for your business!
-                        </strong>
-                          Payment is expected within 31 days; please process
-                        this invoice within that time.
+                      <p class="legal" style={{marginTop:"18px", color:"#8ac554",fontFamily: "monospace", fontSize:"12px"}}>
+                        <strong style={{color:"#ab6f29"}}>Thank you for your business!</strong>  Payment
+                        is expected within 31 days; please process this invoice
+                        within that time. 
                       </p>
                     </div>
                   </div>

@@ -1,11 +1,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { apiUrl, clientBaseURL } from "config";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
-import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { SupplierSchema } from "../../../schema/customerSchema";
 
@@ -243,6 +240,7 @@ const NewCustomer = () => {
                     Reset
                   </button> &nbsp;
                   <a 
+                    style={{padding:"6px", fontSize:"13px"}}
                     data-cy="link-new-report"
                     href="/admin/suppliers"
                     className="new-report btn btn-danger gap- btn-sm"

@@ -318,7 +318,7 @@ const SingleOrder = () => {
                                         <b>Total Amount </b>
                                       </th>
                                       <th class="text-right">
-                                        <b>LKR {sum}.00</b>
+                                        <b>Rs. {sum}.00</b>
                                       </th>
                                     </tr>
                                   </tfoot>

@@ -289,12 +289,12 @@ const NewCustomer = () => {
                       Reset
                     </button> &nbsp;
                     <a 
-                    data-cy="link-new-report"
-                    href="/admin/customers"
-                    className="new-report btn btn-danger gap- btn-sm"
-                  > Cancel
-                   
-                  </a>
+                      style={{padding:"6px", fontSize:"13px"}}
+                      data-cy="link-new-report"
+                      href="/admin/customers"
+                      className="new-report btn btn-danger gap- btn-sm"
+                    > Cancel
+                    </a>
                   </div>
                 </div>
                 </div>

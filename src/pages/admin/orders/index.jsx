@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
 import { getOrderStart } from "../../../store/orders/actions";
-import { apiUrl, clientBaseURLImages } from "config";
 
 const OrderIndex = () => {
   const dispatch = useDispatch();

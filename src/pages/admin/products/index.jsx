@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
 import { getProductStart, deleteProductStart } from "../../../store/products/actions";
 import { apiUrl, clientBaseURLImages } from "config";
-import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 
 const ProductIndex = () => {

@@ -164,15 +164,6 @@ const product = () => {
               <div class="sidebar-contain">
                 <div class="widget biolife-filter">
                   <h4 class="wgt-title">Settings</h4>
-                  <div class="wgt-content">
-                    <ul class="cat-list">
-                      <li class="cat-list-item">
-                        <a href="#" class="cat-link">
-                          My Orders
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
                 </div>
               </div>
             </aside>
@@ -326,44 +317,7 @@ const product = () => {
                         {errors && errors["address"]}
                       </p>
                     </div>
-                  </div>
-
-                  <div className="form-row">
-                    <div className="form-group col-md-6">
-                      <label htmlFor="password">
-                        <b>Password : </b>
-                      </label>
-                      <input
-                        type="password"
-                        className="form-control"
-                        onChange={onChangeInput}
-                        value={userInfo.password}
-                        id="password"
-                        name="password"
-                        placeholder="Enter your password here"
-                      />
-                      <p className="text-red-500 text-xs italic">
-                        {errors && errors["password"]}
-                      </p>
-                    </div>
-                    <div className="form-group col-md-6">
-                      <label htmlFor="passwordConfirm">
-                        <b>Confirm Password : </b>
-                      </label>
-                      <input
-                        type="password"
-                        className="form-control"
-                        onChange={onChangeInput}
-                        value={userInfo.passwordConfirm}
-                        id="passwordConfirm"
-                        name="passwordConfirm"
-                        placeholder="Re-Enter your password here"
-                      />
-                      <p className="text-red-500 text-xs italic">
-                        {errors && errors["passwordConfirm"]}
-                      </p>
-                    </div>
-                  </div>
+                  </div>    
                   <div className="form-row">
                     <div className="form-group col-md-6">
                       <button
@@ -383,6 +337,7 @@ const product = () => {
                       </button>{" "}
                       &nbsp;
                       <a
+                        style={{padding:"6px", fontSize:"13px"}}
                         data-cy="link-new-report"
                         href="/admin/customers"
                         className="new-report btn btn-danger gap- btn-sm"
