@@ -27,9 +27,9 @@ const Login = () => {
           router.push("/");
         }
   } else {
-      if(getError !== null) {
-          toast.error(getError.message);
-      }
+      // if(getError !== null) {
+      //     toast.error(getError.message);
+      // }
   }
   }, [auth]);
 
