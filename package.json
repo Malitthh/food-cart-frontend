@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.9.1",
     "@hookform/resolvers": "2.0.0",
     "axios": "^0.27.2",
     "carousel-react-rcdev": "^0.0.5",
