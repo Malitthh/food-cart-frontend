@@ -30,6 +30,12 @@ const Home = () => {
     featchOnLoad();
   }, []);
 
+  const styles =`    
+  margin-top: -6px;
+  padding-top: 7px;
+  margin-bottom: 15px;
+  margin-left: 20px;`
+
   return (
     <div className="min-h-full">
       <NavBar />
@@ -43,7 +49,7 @@ const Home = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Dashboard</span>
+              <span className="current-page"><b>Dashboard</b></span>
             </li>
           </ul>
         </nav>
@@ -55,28 +61,30 @@ const Home = () => {
               <ul className="services-list">
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">{suppliers.length}</span>
                     <span className="biolife-icon icon-suporter"></span>
-                    <a className="srv-name" href="#">
+                    <a className="srv-name" href="admin/suppliers" styles={styles}>
                       Number of Suppliers
+                      <span className="number" style={{marginLeft: "6px", marginTop: "-7px"}} >{suppliers.length}</span>
                     </a>
                   </div>
                 </li>
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">{employees.length}</span>
+                    
                     <span className="biolife-icon icon-suporter"></span>
-                    <a className="srv-name" href="#">
+                    <a className="srv-name" href="admin/employees">
                       Number of Employees
+                      <span className="number" style={{marginLeft: "6px", marginTop: "-7px"}}>{employees.length}</span>
                     </a>
                   </div>
                 </li>
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">{customers.length}</span>
+                    
                     <span className="biolife-icon icon-suporter"></span>
-                    <a className="srv-name" href="#">
+                    <a className="srv-name" href="admin/customers">
                       Number of customers
+                      <span className="number" style={{marginLeft: "6px", marginTop: "-7px"}}>{customers.length}</span>
                     </a>
                   </div>
                 </li>
@@ -84,20 +92,20 @@ const Home = () => {
               <ul className="services-list">
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">{allProducts.length}</span>
                     <span className="biolife-icon icon-fruits"></span>
-                    <a className="srv-name" href="#">
+                    <a className="srv-name" href="admin/products">
                       Number of Products
+                      <span className="number"  style={{marginLeft: "6px", marginTop: "-7px"}}>{allProducts.length}</span>
                     </a>
                   </div>
                 </li>
 
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">{allOrders.length}</span>
                     <span className="biolife-icon icon-car"></span>
-                    <a className="srv-name" href="#">
+                    <a className="srv-name" href="/admin/orders">
                       Number of Orders
+                      <span className="number" style={{marginLeft: "6px", marginTop: "-7px"}}>{allOrders.length}</span>
                     </a>
                   </div>
                 </li>
