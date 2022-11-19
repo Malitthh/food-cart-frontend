@@ -11,11 +11,13 @@ import {
     updateUserSuccess,
     updateUserError,
     deleteUserSuccess,
-    deleteUserError
+    deleteUserError,
+    getSingleUserSuccess,
+    getSingleUserError
 } from './actions'
 
 /**
- * Add user start saga funtion to invoke the API call
+ * Add user start saga function to invoke the API call
  * @param {*}  
  */
 function* addUserStart({type, payload}) {
@@ -31,7 +33,7 @@ function* addUserStart({type, payload}) {
 }
 
 /**
- * Add user start saga funtion to invoke the API call
+ * Add user start saga function to invoke the API call
  * @param {*}  
  */
  function* getUserStart({type, payload}) {
@@ -48,7 +50,7 @@ function* addUserStart({type, payload}) {
 }
 
 /**
- * delete user saga funtion to invoke the API call
+ * delete user saga function to invoke the API call
  * @param {*}  
  */
  function* deleteUserStart({type, payload}) {
@@ -65,7 +67,7 @@ function* addUserStart({type, payload}) {
 }
 
 /**
- * update user saga funtion to invoke the API call
+ * update user saga function to invoke the API call
  * @param {*}  
  */
  function* updateUserStart({type, payload}) {
@@ -83,6 +85,22 @@ function* addUserStart({type, payload}) {
 }
 
 /**
+ * Add user start saga function to invoke the API call
+ * @param {*}  
+ */
+ function* getSingleUserStart({type, payload}) {
+    try {
+        const response = yield UserService.getOneUser(payload)
+        yield put(getSingleUserSuccess(response.data.data.users))
+        console.log(response.data.data.users,"saga")
+    } catch (err) {
+        yield put(getSingleUserError(err))
+        toast.error(err.response.data.message);
+        console.log(err, "err")
+    }
+}
+
+/**
  * Main Saga for users saga
  */
 function* UsersSaga() {
@@ -90,7 +108,8 @@ function* UsersSaga() {
         takeEvery(USER_TYPES.ADD_USER_START, addUserStart),
         takeEvery(USER_TYPES.GET_USER_START, getUserStart),
         takeEvery(USER_TYPES.DELETE_USER_START, deleteUserStart),
-        takeEvery(USER_TYPES.UPDATE_USER_START, updateUserStart)
+        takeEvery(USER_TYPES.UPDATE_USER_START, updateUserStart),
+        takeEvery(USER_TYPES.GET_SINGLE_USER_START, getSingleUserStart)
     ]
 }
 

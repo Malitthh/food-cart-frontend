@@ -5,7 +5,7 @@ import { apiUrl } from "config";
  */
 
 class UserService {
-  static addUser = ({ data, token}) =>
+  static addUser = ({ data, token }) =>
     axios.post(`${apiUrl}/v1/users`, data, {
       headers: {
         "Content-Type": "application/json",
@@ -21,19 +21,27 @@ class UserService {
       params: { role: payload },
     });
 
-  static deleteUser = ({id, token}) =>
+  static deleteUser = ({ id, token }) =>
     axios.delete(`${apiUrl}/v1/users/${id}`, {
       headers: {
         "Content-Type": "application/json",
-       Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
-  static updateUser = ({data, token}) =>
+  static updateUser = ({ data, token }) =>
     axios.patch(`${apiUrl}/v1/users/${data._id}`, data, {
       headers: {
         "Content-Type": "application/json",
-       Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+  static getOneUser = ({ id, token }) =>
+    axios.get(`${apiUrl}/v1/users/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
     });
 }
