@@ -19,7 +19,7 @@ const Checkout = () => {
   const [showCheckout, setShowCheckout] = useState(true);
   const { cart, auth } = useSelector((state) => state);
   const { user } = auth;
-var od;
+  var od;
   const sum = cart.cart.reduce(function (sum, number) {
     return sum + number.price * number.quantity;
   }, 0);
@@ -61,7 +61,7 @@ var od;
     };
 
     console.log("orderinfo", OrderData, orderItems);
-    od = OrderData
+    od = OrderData;
     const payload = {
       data: OrderData,
       token,
@@ -69,7 +69,7 @@ var od;
     dispatch(addOrderStart(payload));
     setShowCheckout(false);
     setFinalOrder(OrderData);
-    console.log(OrderData,"cccc")
+    console.log(OrderData, "cccc");
     dispatch(emptyCart());
   };
 
@@ -422,10 +422,11 @@ var od;
                     <div id="mid">
                       <div class="info">
                         <p>
-                          <b>Name</b> : {finalOrder.customerName}<br />
+                          <b>Name</b> : {finalOrder.customerName}
+                          <br />
                           <b>Email</b> : {finalOrder.customerEmail}
                           <br />
-                          <b>Phone</b> : 555-555-5555
+                          <b>Phone</b> : {finalOrder.billingAddress.mobile}
                           <br />
                         </p>
                       </div>
@@ -444,86 +445,21 @@ var od;
                               <h2>Sub Total</h2>
                             </td>
                           </tr>
-
-                          <tr class="service">
-                            <td class="tableitem">
-                              <p class="itemtext">Communication</p>
-                            </td>
-                            <td class="tableitem">
-                              <p class="itemtext">5</p>
-                            </td>
-                            <td class="tableitem">
-                              <p class="itemtext">$375.00</p>
-                            </td>
-                          </tr>
-
-                          <tr class="service">
-                            <td class="tableitem">
-                              <p class="itemtext">Asset Gathering</p>
-                            </td>
-                            <td class="tableitem">
-                              <p class="itemtext">3</p>
-                            </td>
-                            <td class="tableitem">
-                              <p class="itemtext">$225.00</p>
-                            </td>
-                          </tr>
-
-                          <tr class="service">
-                            <td class="tableitem">
-                              <p class="itemtext">Design Development</p>
-                            </td>
-                            <td class="tableitem">
-                              <p class="itemtext">5</p>
-                            </td>
-                            <td class="tableitem">
-                              <p class="itemtext">$375.00</p>
-                            </td>
-                          </tr>
-
-                          <tr class="service">
-                            <td class="tableitem">
-                              <p class="itemtext">Animation</p>
-                            </td>
-                            <td class="tableitem">
-                              <p class="itemtext">20</p>
-                            </td>
-                            <td class="tableitem">
-                              <p class="itemtext">$1500.00</p>
-                            </td>
-                          </tr>
-
-                          <tr class="service">
-                            <td class="tableitem">
-                              <p class="itemtext">Animation Revisions</p>
-                            </td>
-                            <td class="tableitem">
-                              <p class="itemtext">10</p>
-                            </td>
-                            <td class="tableitem">
-                              <p class="itemtext">$750.00</p>
-                            </td>
-                          </tr>
-
-                          <tr class="tabletitle">
-                            <td></td>
-                            <td class="Rate">
-                              <h2>tax</h2>
-                            </td>
-                            <td class="payment">
-                              <h2>$419.25</h2>
-                            </td>
-                          </tr>
-
-                          <tr class="tabletitle">
-                            <td></td>
-                            <td class="Rate">
-                              <h2>Total</h2>
-                            </td>
-                            <td class="payment">
-                              <h2>$3,644.25</h2>
-                            </td>
-                          </tr>
+                          {finalOrder.orderItems.map((product, key) => (
+                            <tr class="service">
+                              <td class="tableitem">
+                                <p class="itemtext">{product.productName}</p>
+                              </td>
+                              <td class="tableitem">
+                                <p class="itemtext">{product.quantity}</p>
+                              </td>
+                              <td class="tableitem">
+                                <p class="itemtext">
+                                  {product.price * product.quantity}
+                                </p>
+                              </td>
+                            </tr>
+                          ))}
                         </table>
                       </div>
                     </div>
