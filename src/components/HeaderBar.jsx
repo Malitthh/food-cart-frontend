@@ -164,7 +164,7 @@ const HeaderBar = () => {
                           <span className="qty">{cart.numberCart}</span>
                         </span>
                         <span className="title">My Cart - </span>
-                        <span className="sub-total">LKR {sum}</span>
+                        <span className="sub-total">Rs. {sum}</span>
                       </a>
                       <div className="cart-content">
                         <div className="cart-inner">

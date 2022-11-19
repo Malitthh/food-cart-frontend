@@ -59,7 +59,7 @@ const Cart = () => {
       <HeaderBar />
 
       <div className="hero-section hero-background">
-        <h1 className="page-title">Cart</h1>
+        <h1 className="page-title">My Cart</h1>
       </div>
 
       <div className="container">
@@ -71,7 +71,7 @@ const Cart = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Cart</span>
+              <span className="current-page"><b>My Cart</b></span>
             </li>
           </ul>
         </nav>
@@ -86,9 +86,9 @@ const Cart = () => {
               <div className="row">
                 <div className="col-lg-9 col-md-12 col-sm-12 col-xs-12">
                   <h3 className="box-title">Your cart items</h3>
-                  <form className="shopping-cart-form" action="#" method="post">
-                    <table className="shop_table cart-form">
-                      <thead>
+                  {/* <form className="shopping-cart-form" action="#" method="post"> */}
+                    <table>
+                      <thead  style={{height:"50px%", overflow:"auto"}}>
                         <tr style={{ backgroundColor: "#ecf0e2" }}>
                           <th className="product-name">Product Name</th>
                           <th className="product-price">Price</th>
@@ -118,9 +118,6 @@ const Cart = () => {
                                 <a className="prd-name" href="#">
                                   {product.productName}
                                 </a>
-                                {/* <div className="action">
-                                                    <a href="#" className="remove"><i className="fa fa-trash-o" aria-hidden="true"></i></a>
-                                                </div> */}
                               </td>
                               <td className="product-price" data-title="Price">
                                 <div className="price price-contain">
@@ -191,6 +188,7 @@ const Cart = () => {
                                     className="remove"
                                   >
                                     <i
+                                      style={{color:"red"}}
                                       className="fa fa-trash-o"
                                       aria-hidden="true"
                                     ></i>
@@ -223,7 +221,7 @@ const Cart = () => {
                         </tr>
                       </tbody>
                     </table>
-                  </form>
+                  {/* </form> */}
                 </div>
                 <div className="col-lg-3 col-md-12 col-sm-12 col-xs-12">
                   <div
@@ -241,7 +239,7 @@ const Cart = () => {
                       >
                         Total Amount<span className="sub"></span>
                       </b>
-                      <span className="stt-price">LKR {sum}.00</span>
+                      <span className="stt-price">Rs. {sum}.00</span>
                     </div>
                     <p className="pickup-info">
                       <b>Free Pickup</b> is available as soon as today More
