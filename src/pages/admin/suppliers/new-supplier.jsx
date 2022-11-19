@@ -37,7 +37,7 @@ const NewCustomer = () => {
       token
     }
     dispatch(addUserStart(payload));
-   // router.push("/admin/products");
+    router.push("/admin/suppliers");
 
   };
 
@@ -237,7 +237,7 @@ const NewCustomer = () => {
                   </button> &nbsp;
                   <button
                     data-cy="save-new-report-btn"
-                    onClick={(e) => validateBeforeSave(e)}
+                    // onClick={(e) => validateBeforeSave(e)}
                     className="btn btn-warning"
                   >
                     Reset

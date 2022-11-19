@@ -99,7 +99,7 @@ const updateCustomer = () => {
       token,
     };
     dispatch(updateUserStart(payload));
-    // router.push("/admin/customers");
+    router.push("/admin/customers");
   };
 
   /**
@@ -306,7 +306,7 @@ const updateCustomer = () => {
                     </div>
                   </div>
 
-                  <div className="form-row">
+                  {/* <div className="form-row">
                     <div className="form-group col-md-6">
                       <label htmlFor="password">
                         <b>Password : </b>
@@ -341,7 +341,7 @@ const updateCustomer = () => {
                         {errors && errors["passwordConfirm"]}
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="form-row">
                     <div className="form-group col-md-6">
                       <button

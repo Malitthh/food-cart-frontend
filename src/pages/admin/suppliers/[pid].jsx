@@ -74,6 +74,7 @@ const updateSupplier = () => {
       token,
     };
     dispatch(updateUserStart(payload));
+    router.push("/admin/suppliers")
   };
 
   /**
@@ -256,7 +257,7 @@ const updateSupplier = () => {
                     </p>
                   </div>
                 </div>
-                <div className="form-row">
+                {/* <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="password">
                       <b>Password</b>
@@ -291,7 +292,7 @@ const updateSupplier = () => {
                       {errors && errors["passwordConfirm"]}
                     </p>
                   </div>
-                </div>
+                </div> */}
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <button

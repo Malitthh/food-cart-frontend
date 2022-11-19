@@ -101,10 +101,19 @@ const product = () => {
               <div class="sidebar-contain">
                 <div class="widget biolife-filter">
                   <h3 class="wgt-title">
-                    <b>Categories List</b>
+                    <b>Category List</b>
                   </h3>
                   <div class="wgt-content">
-                    <ul class="cat-list">
+                    <ul class="cat-list">    
+                    <li class="cat-list-item">
+                        <a
+                          style={{ cursor: "pointer" }}
+                          onClick={() => resetCategory()}
+                          class="cat-link"
+                        >
+                          All Category Items
+                        </a>
+                      </li>
                       <li class="cat-list-item">
                         <a
                           style={{ cursor: "pointer" }}
@@ -148,15 +157,6 @@ const product = () => {
                           class="cat-link"
                         >
                           Rice
-                        </a>
-                      </li>
-                      <li class="cat-list-item">
-                        <a
-                          style={{ cursor: "pointer" }}
-                          onClick={() => resetCategory()}
-                          class="cat-link"
-                        >
-                          Reset and All categories
                         </a>
                       </li>
                     </ul>
