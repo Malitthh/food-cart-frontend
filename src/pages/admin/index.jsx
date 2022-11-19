@@ -64,9 +64,10 @@ const Home = () => {
                     <span className="biolife-icon icon-suporter"></span>
                     <a className="srv-name" href="admin/suppliers" styles={styles}>
                       Number of Suppliers
-                      <span className="number" style={{marginLeft: "6px", marginTop: "-7px"}} >{suppliers.length}</span>
                     </a>
+                    <span className="number" style={{marginLeft: "60px", marginTop: "12px"}} >{suppliers.length}</span>
                   </div>
+                  
                 </li>
                 <li>
                   <div className="service-inner color-reverse">
@@ -74,8 +75,8 @@ const Home = () => {
                     <span className="biolife-icon icon-suporter"></span>
                     <a className="srv-name" href="admin/employees">
                       Number of Employees
-                      <span className="number" style={{marginLeft: "6px", marginTop: "-7px"}}>{employees.length}</span>
                     </a>
+                    <span className="number" style={{marginLeft: "60px", marginTop: "12px"}}>{employees.length}</span>
                   </div>
                 </li>
                 <li>
@@ -84,8 +85,8 @@ const Home = () => {
                     <span className="biolife-icon icon-suporter"></span>
                     <a className="srv-name" href="admin/customers">
                       Number of customers
-                      <span className="number" style={{marginLeft: "6px", marginTop: "-7px"}}>{customers.length}</span>
                     </a>
+                    <span className="number"style={{marginLeft: "62px", marginTop: "12px"}} >{customers.length}</span>
                   </div>
                 </li>
               </ul>
@@ -95,8 +96,8 @@ const Home = () => {
                     <span className="biolife-icon icon-fruits"></span>
                     <a className="srv-name" href="admin/products">
                       Number of Products
-                      <span className="number"  style={{marginLeft: "6px", marginTop: "-7px"}}>{allProducts.length}</span>
                     </a>
+                    <span className="number" style={{marginLeft: "60px", marginTop: "12px"}} >{allProducts.length}</span>
                   </div>
                 </li>
 
@@ -105,8 +106,8 @@ const Home = () => {
                     <span className="biolife-icon icon-car"></span>
                     <a className="srv-name" href="/admin/orders">
                       Number of Orders
-                      <span className="number" style={{marginLeft: "6px", marginTop: "-7px"}}>{allOrders.length}</span>
                     </a>
+                    <span className="number" style={{marginLeft: "60px", marginTop: "12px"}} >{allOrders.length}</span>
                   </div>
                 </li>
               </ul>
