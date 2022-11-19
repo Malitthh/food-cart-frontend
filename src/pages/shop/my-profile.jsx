@@ -15,7 +15,7 @@ const product = () => {
   const [errors, setErrors] = useState([]);
 
   const featchOnLoad = async () => {
-    dispatch(getProductStart());
+    console.log(auth.user._id)
   };
 
   useEffect(() => {

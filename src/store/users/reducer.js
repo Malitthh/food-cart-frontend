@@ -4,6 +4,7 @@ import { USER_TYPES } from "./actions";
 const INITIAL_STATE = {
   isLoading: false,
   getUser: [],
+  profile:{},
   allUsers: [],
   getError: "",
   status: false,
@@ -55,6 +56,15 @@ export default function users(state = INITIAL_STATE, { type, payload }) {
 
     case USER_TYPES.DELETE_USER_ERROR:
       return setGetDeleteUserError(state, payload);
+
+    case USER_TYPES.GET_SINGLE_USER_START:
+      return setGetSGUserStart(state);
+
+    case USER_TYPES.GET_SINGLE_USER_SUCCESS:
+      return setGetSGUserSuccess(state, payload);
+
+    case USER_TYPES.GET_SINGLE_USER_ERROR:
+      return setGetSGUserError(state, payload);
 
     default:
       return state;
@@ -151,6 +161,30 @@ const setGetDeleteUserSuccess = (state, payload) => ({
 });
 
 const setGetDeleteUserError = (state, payload) => ({
+  ...state,
+  status: false,
+  isLoading: false,
+  getError: payload,
+});
+
+/**
+ ************** Get User **************
+ */
+ const setGetSGUserStart = (state) => ({
+  ...state,
+  isLoading: true,
+  getError: null,
+});
+
+const setGetSGUserSuccess = (state, payload) => ({
+  ...state,
+  status: true,
+  isLoading: false,
+  profile: payload,
+  getError: null,
+});
+
+const setGetSGUserError = (state, payload) => ({
   ...state,
   status: false,
   isLoading: false,
