@@ -52,6 +52,11 @@ const Orders = () => {
       return sum + item.costPrice * item.sold;
     }, 0);
 
+    const options = {
+      // unit: 'in',
+      // format: [4,2]
+  };
+
   return (
     <div className="min-h-full">
       <NavBar />
@@ -75,7 +80,7 @@ const Orders = () => {
           <div className="container mx-2">
             <div className="overflow-x-auto">
               <div class="container bootdey">
-                <Pdf targetRef={ref} filename="code-example.pdf">
+                <Pdf targetRef={ref} filename="stock-report.pdf" options={options} x={.5} y={.5} scale={0.8}>
                   {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
                 </Pdf>
                 <div class="row invoice row-printable element-to-print" ref={ref}>
