@@ -30,11 +30,6 @@ const Home = () => {
     featchOnLoad();
   }, []);
 
-  const styles =`    
-  margin-top: -6px;
-  padding-top: 7px;
-  margin-bottom: 15px;
-  margin-left: 20px;`
 
   return (
     <div className="min-h-full">
@@ -62,10 +57,10 @@ const Home = () => {
                 <li>
                   <div className="service-inner color-reverse">
                     <span className="biolife-icon icon-suporter"></span>
-                    <a className="srv-name" href="admin/suppliers" styles={styles}>
+                    <a className="srv-name" href="admin/suppliers">
                       Number of Suppliers
                     </a>
-                    <span className="number" style={{marginLeft: "60px", marginTop: "12px"}} >{suppliers.length}</span>
+                    <span className="number" style={{marginLeft: "60px", marginTop: "12px", backgroundColor:"#ed9f00"}} >{suppliers.length}</span>
                   </div>
                   
                 </li>
@@ -76,7 +71,7 @@ const Home = () => {
                     <a className="srv-name" href="admin/employees">
                       Number of Employees
                     </a>
-                    <span className="number" style={{marginLeft: "60px", marginTop: "12px"}}>{employees.length}</span>
+                    <span className="number" style={{marginLeft: "60px", marginTop: "12px", backgroundColor:"#ed9f00"}}>{employees.length}</span>
                   </div>
                 </li>
                 <li>
@@ -86,7 +81,7 @@ const Home = () => {
                     <a className="srv-name" href="admin/customers">
                       Number of customers
                     </a>
-                    <span className="number"style={{marginLeft: "62px", marginTop: "12px"}} >{customers.length}</span>
+                    <span className="number"style={{marginLeft: "62px", marginTop: "12px", backgroundColor:"#ed9f00"}} >{customers.length}</span>
                   </div>
                 </li>
               </ul>
@@ -97,7 +92,7 @@ const Home = () => {
                     <a className="srv-name" href="admin/products">
                       Number of Products
                     </a>
-                    <span className="number" style={{marginLeft: "60px", marginTop: "12px"}} >{allProducts.length}</span>
+                    <span className="number" style={{marginLeft: "60px", marginTop: "12px", backgroundColor:"#ed9f00"}} >{allProducts.length}</span>
                   </div>
                 </li>
 
@@ -107,7 +102,7 @@ const Home = () => {
                     <a className="srv-name" href="/admin/orders">
                       Number of Orders
                     </a>
-                    <span className="number" style={{marginLeft: "60px", marginTop: "12px"}} >{allOrders.length}</span>
+                    <span className="number" style={{marginLeft: "55px", marginTop: "12px",  backgroundColor:"#ed9f00"}} >{allOrders.length}</span>
                   </div>
                 </li>
               </ul>
