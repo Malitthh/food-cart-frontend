@@ -30,6 +30,12 @@ const Home = () => {
     featchOnLoad();
   }, []);
 
+  const styles =`    
+  margin-top: -6px;
+  padding-top: 7px;
+  margin-bottom: 15px;
+  margin-left: 20px;`
+
   return (
     <div className="min-h-full">
       <NavBar />
@@ -43,7 +49,7 @@ const Home = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page">Dashboard</span>
+              <span className="current-page"><b>Dashboard</b></span>
             </li>
           </ul>
         </nav>
@@ -55,50 +61,53 @@ const Home = () => {
               <ul className="services-list">
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">{suppliers.length}</span>
                     <span className="biolife-icon icon-suporter"></span>
-                    <a className="srv-name" href="#">
+                    <a className="srv-name" href="admin/suppliers" styles={styles}>
                       Number of Suppliers
                     </a>
+                    <span className="number" style={{marginLeft: "60px", marginTop: "12px"}} >{suppliers.length}</span>
                   </div>
+                  
                 </li>
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">{employees.length}</span>
+                    
                     <span className="biolife-icon icon-suporter"></span>
-                    <a className="srv-name" href="#">
+                    <a className="srv-name" href="admin/employees">
                       Number of Employees
                     </a>
+                    <span className="number" style={{marginLeft: "60px", marginTop: "12px"}}>{employees.length}</span>
                   </div>
                 </li>
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">{customers.length}</span>
+                    
                     <span className="biolife-icon icon-suporter"></span>
-                    <a className="srv-name" href="#">
+                    <a className="srv-name" href="admin/customers">
                       Number of customers
                     </a>
+                    <span className="number"style={{marginLeft: "62px", marginTop: "12px"}} >{customers.length}</span>
                   </div>
                 </li>
               </ul>
               <ul className="services-list">
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">{allProducts.length}</span>
                     <span className="biolife-icon icon-fruits"></span>
-                    <a className="srv-name" href="#">
+                    <a className="srv-name" href="admin/products">
                       Number of Products
                     </a>
+                    <span className="number" style={{marginLeft: "60px", marginTop: "12px"}} >{allProducts.length}</span>
                   </div>
                 </li>
 
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="number">{allOrders.length}</span>
                     <span className="biolife-icon icon-car"></span>
-                    <a className="srv-name" href="#">
+                    <a className="srv-name" href="/admin/orders">
                       Number of Orders
                     </a>
+                    <span className="number" style={{marginLeft: "60px", marginTop: "12px"}} >{allOrders.length}</span>
                   </div>
                 </li>
               </ul>
