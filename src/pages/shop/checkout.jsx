@@ -7,17 +7,19 @@ import { useRouter } from "next/router";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { AuthSchema } from "../../schema/authSchema";
 import { emptyCart } from "../../store/cart/actions";
+import Recipt from "../../components/Recipt";
 
 const Checkout = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [orderInfo, setOrderInfo] = useState({});
+  const [finalOrder, setFinalOrder] = useState({});
   const [errors, setErrors] = useState([]);
-  const token =  window.localStorage.getItem('@token');
+  const token = window.localStorage.getItem("@token");
   const [showCheckout, setShowCheckout] = useState(true);
   const { cart, auth } = useSelector((state) => state);
   const { user } = auth;
-
+var od;
   const sum = cart.cart.reduce(function (sum, number) {
     return sum + number.price * number.quantity;
   }, 0);
@@ -59,15 +61,15 @@ const Checkout = () => {
     };
 
     console.log("orderinfo", OrderData, orderItems);
-
+    od = OrderData
     const payload = {
       data: OrderData,
-      token
-    }
+      token,
+    };
     dispatch(addOrderStart(payload));
-
-    setShowCheckout(false)
-
+    setShowCheckout(false);
+    setFinalOrder(OrderData);
+    console.log(OrderData,"cccc")
     dispatch(emptyCart());
   };
 
@@ -151,7 +153,7 @@ const Checkout = () => {
                           </div>
                         </div>
                       </li>
-                      
+
                       <li className="step 2nd">
                         <div className="checkout-act active">
                           <h3 className="title-box">
@@ -185,9 +187,7 @@ const Checkout = () => {
                               </div>
                               <div className="row">
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="addressLine1B">
-                                    Address 
-                                  </label>
+                                  <label for="addressLine1B">Address</label>
                                   <input
                                     type="text"
                                     name="addressLine1B"
@@ -222,7 +222,6 @@ const Checkout = () => {
                                     placeholder="City"
                                   />
                                 </div>
-                                
                               </div>
                             </div>
                           </div>
@@ -251,7 +250,9 @@ const Checkout = () => {
                                   />
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="email">Recipient Contact No</label>
+                                  <label for="email">
+                                    Recipient Contact No
+                                  </label>
                                   <input
                                     type="text"
                                     name="recipientMobile"
@@ -264,9 +265,7 @@ const Checkout = () => {
                               </div>
                               <div className="row">
                                 <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                  <label for="addressLine1">
-                                    Address 
-                                  </label>
+                                  <label for="addressLine1">Address</label>
                                   <input
                                     type="text"
                                     name="addressLine1"
@@ -320,9 +319,9 @@ const Checkout = () => {
                     >
                       <a className="btn checkout">Check out</a>
                     </div>
-                  </div> 
+                  </div>
                 </div>
-                
+
                 <div className="col-lg-5 col-md-5 col-sm-6 col-xs-12 sm-padding-top-48px sm-margin-bottom-0 xs-margin-bottom-15px">
                   <div className="order-summary sm-margin-bottom-80px">
                     <div className="title-block">
@@ -408,10 +407,135 @@ const Checkout = () => {
             <div className="welcome-us-block">
               <div className="container">
                 <h4 className="title">Thank You for your order!</h4>
-                <div className="text-wraper">
-                  <p className="text-info" style={{color:"green"}}>
-                 <i>" Thank you for being our valued customer. We hope our product will meet your expectations. Let us know if you have any questions. "</i> 
-                  </p>
+                <div style={{ float: "right" }}>
+                  <div id="invoice-POS" style={{ width: "min-content" }}>
+                    <div id="top">
+                      <div style={{ float: "center" }}>
+                        <img
+                          src="/assets/images/Logo.jpg"
+                          width={120}
+                          height={15}
+                        />
+                      </div>
+                    </div>{" "}
+                    <br />
+                    <div id="mid">
+                      <div class="info">
+                        <p>
+                          <b>Name</b> : {finalOrder.customerName}<br />
+                          <b>Email</b> : {finalOrder.customerEmail}
+                          <br />
+                          <b>Phone</b> : 555-555-5555
+                          <br />
+                        </p>
+                      </div>
+                    </div>
+                    <div>
+                      <div id="table">
+                        <table style={{ height: "200px", overflow: "auto" }}>
+                          <tr class="tabletitle">
+                            <td class="item">
+                              <h2>Item</h2>
+                            </td>
+                            <td class="Hours">
+                              <h2>Qty</h2>
+                            </td>
+                            <td class="Rate">
+                              <h2>Sub Total</h2>
+                            </td>
+                          </tr>
+
+                          <tr class="service">
+                            <td class="tableitem">
+                              <p class="itemtext">Communication</p>
+                            </td>
+                            <td class="tableitem">
+                              <p class="itemtext">5</p>
+                            </td>
+                            <td class="tableitem">
+                              <p class="itemtext">$375.00</p>
+                            </td>
+                          </tr>
+
+                          <tr class="service">
+                            <td class="tableitem">
+                              <p class="itemtext">Asset Gathering</p>
+                            </td>
+                            <td class="tableitem">
+                              <p class="itemtext">3</p>
+                            </td>
+                            <td class="tableitem">
+                              <p class="itemtext">$225.00</p>
+                            </td>
+                          </tr>
+
+                          <tr class="service">
+                            <td class="tableitem">
+                              <p class="itemtext">Design Development</p>
+                            </td>
+                            <td class="tableitem">
+                              <p class="itemtext">5</p>
+                            </td>
+                            <td class="tableitem">
+                              <p class="itemtext">$375.00</p>
+                            </td>
+                          </tr>
+
+                          <tr class="service">
+                            <td class="tableitem">
+                              <p class="itemtext">Animation</p>
+                            </td>
+                            <td class="tableitem">
+                              <p class="itemtext">20</p>
+                            </td>
+                            <td class="tableitem">
+                              <p class="itemtext">$1500.00</p>
+                            </td>
+                          </tr>
+
+                          <tr class="service">
+                            <td class="tableitem">
+                              <p class="itemtext">Animation Revisions</p>
+                            </td>
+                            <td class="tableitem">
+                              <p class="itemtext">10</p>
+                            </td>
+                            <td class="tableitem">
+                              <p class="itemtext">$750.00</p>
+                            </td>
+                          </tr>
+
+                          <tr class="tabletitle">
+                            <td></td>
+                            <td class="Rate">
+                              <h2>tax</h2>
+                            </td>
+                            <td class="payment">
+                              <h2>$419.25</h2>
+                            </td>
+                          </tr>
+
+                          <tr class="tabletitle">
+                            <td></td>
+                            <td class="Rate">
+                              <h2>Total</h2>
+                            </td>
+                            <td class="payment">
+                              <h2>$3,644.25</h2>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                    <div id="legalcopy">
+                      <h6 class="legal">
+                        <strong>Thank you for your business!</strong>  Payment
+                        is expected within 31 days; please process this invoice
+                        within that time. There will be a 5% interest charge per
+                        month on late invoices.
+                      </h6>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
