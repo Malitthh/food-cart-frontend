@@ -69,7 +69,7 @@ const Footer = () => {
                                     <li>
                                         <p className="info-item">
                                             <i className="biolife-icon icon-letter"></i>
-                                            <b className="desc">Email: foodcart@gmail.com</b>
+                                            <b className="desc">Email: foodcartpvt@gmail.com</b>
                                         </p>
                                     </li>
                                     <li>

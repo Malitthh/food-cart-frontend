@@ -31,7 +31,7 @@ const HeaderBar = () => {
                 <li>
                   <a href="#">
                     <i className="fa fa-envelope" aria-hidden="true"></i>
-                    foodcart@gmail.com
+                    foodcartpvt@gmail.com
                   </a>
                 </li>
                 <li>
