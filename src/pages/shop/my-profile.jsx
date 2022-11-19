@@ -28,7 +28,6 @@ const product = () => {
     setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
   };
 
-
   return (
     <>
       <HeaderBar />
@@ -51,29 +50,40 @@ const product = () => {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-md-4">    
-          <aside id="sidebar" class="sidebar col-lg-8 col-md-4 col-sm-12 col-xs-12">
-                    <div class="biolife-mobile-panels">
-                        <span class="biolife-current-panel-title">Sidebar</span>
-                        <a class="biolife-close-btn" href="#" data-object="open-mobile-filter">&times;</a>
-                    </div>
-                    <div class="sidebar-contain">
-                        <div class="widget biolife-filter">
-                            <h4 class="wgt-title">Settings</h4>
-                            <div class="wgt-content">
-                                <ul class="cat-list">
-                                    <li class="cat-list-item"><a href="#" class="cat-link">My Orders</a></li>
-                                </ul>
-                            </div>
-                        </div>     
-                    </div>
-
-                </aside>
-    
+          <div className="col-md-4">
+            <aside
+              id="sidebar"
+              class="sidebar col-lg-8 col-md-4 col-sm-12 col-xs-12"
+            >
+              <div class="biolife-mobile-panels">
+                <span class="biolife-current-panel-title">Sidebar</span>
+                <a
+                  class="biolife-close-btn"
+                  href="#"
+                  data-object="open-mobile-filter"
+                >
+                  &times;
+                </a>
+              </div>
+              <div class="sidebar-contain">
+                <div class="widget biolife-filter">
+                  <h4 class="wgt-title">Settings</h4>
+                  <div class="wgt-content">
+                    <ul class="cat-list">
+                      <li class="cat-list-item">
+                        <a href="#" class="cat-link">
+                          My Orders
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </aside>
           </div>
           <div className="col-md-8">
             <div className="row">
-            <form>
+              <form>
                 <div className="form-row col-md-12">
                   <div className="form-row">
                     <div className="form-group col-md-6">
@@ -152,7 +162,9 @@ const product = () => {
                         <b>Gender : </b>
                       </label>
                       <select className="form-control">
-                        <option disabled="disabled" selected="true">Select your Gender here</option>
+                        <option disabled="disabled" selected="true">
+                          Select your Gender here
+                        </option>
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                       </select>
@@ -165,7 +177,9 @@ const product = () => {
                         <b>Province : </b>
                       </label>
                       <select className="form-control">
-                        <option disabled="disabled" selected="true">Select your province here</option>
+                        <option disabled="disabled" selected="true">
+                          Select your province here
+                        </option>
                         <option value="southern">Southern</option>
                         <option value="central">Central</option>
                         <option value="northwest">North western</option>
@@ -179,7 +193,6 @@ const product = () => {
                       <p className="text-red-500 text-xs italic">
                         {errors && errors["province"]}
                       </p>
-                      
                     </div>
                   </div>
                   <div className="form-row">
@@ -201,76 +214,78 @@ const product = () => {
                       </p>
                     </div>
                   </div>
-                
-                <div className="form-row">      
-                  <div className="form-group col-md-6">
-                    <label htmlFor="password">
-                      <b>Password : </b>
-                    </label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      onChange={onChangeInput}
-                      value={userInfo.password}
-                      id="password"
-                      name="password"
-                      placeholder="Enter your password here"
-                    />
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["password"]}
-                    </p>
+
+                  <div className="form-row">
+                    <div className="form-group col-md-6">
+                      <label htmlFor="password">
+                        <b>Password : </b>
+                      </label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        onChange={onChangeInput}
+                        value={userInfo.password}
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password here"
+                      />
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["password"]}
+                      </p>
+                    </div>
+                    <div className="form-group col-md-6">
+                      <label htmlFor="passwordConfirm">
+                        <b>Confirm Password : </b>
+                      </label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        onChange={onChangeInput}
+                        value={userInfo.passwordConfirm}
+                        id="passwordConfirm"
+                        name="passwordConfirm"
+                        placeholder="Re-Enter your password here"
+                      />
+                      <p className="text-red-500 text-xs italic">
+                        {errors && errors["passwordConfirm"]}
+                      </p>
+                    </div>
                   </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="passwordConfirm">
-                      <b>Confirm Password : </b>
-                    </label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      onChange={onChangeInput}
-                      value={userInfo.passwordConfirm}
-                      id="passwordConfirm"
-                      name="passwordConfirm"
-                      placeholder="Re-Enter your password here"
-                    />
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["passwordConfirm"]}
-                    </p>
+                  <div className="form-row">
+                    <div className="form-group col-md-6">
+                      <button
+                        data-cy="save-new-report-btn"
+                        onClick={(e) => validateBeforeSave(e)}
+                        className="btn btn-success"
+                      >
+                        Save
+                      </button>{" "}
+                      &nbsp;
+                      <button
+                        data-cy="save-new-report-btn"
+                        onClick={(e) => validateBeforeSave(e)}
+                        className="btn btn-warning"
+                      >
+                        Reset
+                      </button>{" "}
+                      &nbsp;
+                      <a
+                        data-cy="link-new-report"
+                        href="/admin/customers"
+                        className="new-report btn btn-danger gap- btn-sm"
+                      >
+                        {" "}
+                        Cancel
+                      </a>
+                    </div>
                   </div>
-                </div>
-                <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <button
-                      data-cy="save-new-report-btn"
-                      onClick={(e) => validateBeforeSave(e)}
-                      className="btn btn-success"
-                    >
-                      Save
-                    </button>{" "}
-                    &nbsp;
-                    <button
-                      data-cy="save-new-report-btn"
-                      onClick={(e) => validateBeforeSave(e)}
-                      className="btn btn-warning"
-                    >
-                      Reset
-                    </button> &nbsp;
-                    <a 
-                    data-cy="link-new-report"
-                    href="/admin/customers"
-                    className="new-report btn btn-danger gap- btn-sm"
-                  > Cancel
-                   
-                  </a>
-                  </div>
-                </div>
                 </div>
               </form>
             </div>
           </div>
         </div>
-      </div> 
-  
+      </div>
+
       <Footer />
     </>
   );
