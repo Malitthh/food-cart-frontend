@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import HeaderBar from "src/components/HeaderBar";
 import Footer from "src/components/Footer";
 import { useSelector, useDispatch } from "react-redux";
-import { incrementQty, decrementQty } from "../../store/cart/actions";
+import { incrementQty, decrementQty, removeFromCart } from "../../store/cart/actions";
 import { useRouter } from "next/router";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { AuthSchema } from "../../schema/authSchema";
@@ -21,15 +21,10 @@ const Cart = () => {
       return sum + number.price*number.quantity;
     }, 0);
 
-    // useEffect(() => {
-    //     if(status === "success")
+    const removeCart = (product) => {
+      dispatch(removeFromCart(product))
+    }; 
 
-    //     if(user.role === "admin") {
-    //       router.push("/admin");
-    //     } else {
-    //       router.push("/");
-    //     }
-    // }, [auth]);
 
     const increase = (product) => {
       dispatch(incrementQty(product))
@@ -132,7 +127,7 @@ const Cart = () => {
                                             </td>
                                             <td>
                                             <div className="action">
-                                                    <a href="#" className="remove"><i className="fa fa-trash-o" aria-hidden="true"></i></a>
+                                                    <a onClick={() => removeCart(product)} className="remove"><i className="fa fa-trash-o" aria-hidden="true"></i></a>
                                                 </div>
                                             </td>
                                         </tr>))}

@@ -67,12 +67,13 @@ export default function cart(state = INITIAL_STATE, { type, payload }) {
         ...state,
       };
     case CART_TYPES.REMOVE_FROM_CART:
-      let quantity_ = state.cart[payload].quantity;
+      const removeIndex = state.cart.findIndex(( c) => c.id === payload.id)
+      let quantity_ = state.cart[removeIndex].quantity;
       return {
         ...state,
         numberCart: state.numberCart - quantity_,
         cart: state.cart.filter((item) => {
-          return item.id != state.cart[payload].id;
+          return item.id != state.cart[removeIndex].id;
         }),
       };
     case CART_TYPES.EMPTY_CART:
