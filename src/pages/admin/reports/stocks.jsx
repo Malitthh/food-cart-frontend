@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import NavBar from "src/components/admin/NavBar";
 import { getOrderStart } from "../../../store/orders/actions";
 import { getProductStart } from "../../../store/products/actions";
 import Footer from "../../../components/admin/Footer";
 import { apiUrl, clientBaseURLImages } from "config";
-const Orders = () => {
+import Pdf from "react-to-pdf";
 
+const ref = React.createRef();
+
+const Orders = () => {
   // get damage reports from state
   const dispatch = useDispatch();
   const { orders, products } = useSelector((state) => state);
@@ -72,7 +75,10 @@ const Orders = () => {
           <div className="container mx-2">
             <div className="overflow-x-auto">
               <div class="container bootdey">
-                <div class="row invoice row-printable">
+                <Pdf targetRef={ref} filename="code-example.pdf">
+                  {({ toPdf }) => <button onClick={toPdf}>Generate Pdf</button>}
+                </Pdf>
+                <div class="row invoice row-printable element-to-print" ref={ref}>
                   <div class="col-md-10">
                     <div class="panel panel-default plain" id="dash_0">
                       <div class="panel-body p30">
@@ -110,9 +116,7 @@ const Orders = () => {
                           <div class="col-lg-12">
                             <div className="row pb-3 p-1">
                               <div className="col-md-6 text-left">
-                                <div class="invoice-details mt25">
-                                 
-                                </div>
+                                <div class="invoice-details mt25"></div>
                               </div>
                             </div>
                             <div class="invoice-items">
@@ -154,7 +158,7 @@ const Orders = () => {
                                           </td>
                                           <td>{product.productName}</td>
                                           <td class="text-right">
-                                            {product.sold+product.stock}
+                                            {product.sold + product.stock}
                                           </td>
                                           <td class="text-right">
                                             {product.sold}
@@ -183,6 +187,17 @@ const Orders = () => {
                     </div>
                   </div>
                 </div>
+                {/* <button
+                  onClick={() =>
+                    pdfFromReact(
+                      ".element-to-print",
+                      "My-file",
+                      "p",
+                      true,
+                      false
+                    )
+                  }
+                ></button> */}
               </div>
             </div>
           </div>
