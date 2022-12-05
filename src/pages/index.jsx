@@ -16,31 +16,28 @@ import QuickViewPopup from 'src/components/QuickViewPopup';
 import ScollUpButton from 'src/components/ScrollUpButton';
 import CarouselBar from 'src/components/CarouselBar';
 
-
 const Home = () => {
 
-    return (
+  return (
     <div>
-      <HeaderBar/>
+      <HeaderBar />
       <PageContain>
-        <MainContent>
-        <CarouselBar/>
-            {/* <MainSlide/> */}
-            <Banners/>
-            <ProductTabs/>
-            {/* <Brands/> */}
-            <BannerPromotion/>
-            {/* <Products/> */}
-        </MainContent>
+      <MainContent>
+      <CarouselBar />
+      {/* <MainSlide/> */}
+      <Banners />
+      <ProductTabs />
+      {/* <Brands/> */}
+      <BannerPromotion />
+      {/* <Products/> */}
+      </MainContent>
       </PageContain>
-
-      <Footer/>
-      <FooterForMobile/>
-      <QuickViewPopup/>
-      <ScollUpButton/>
-
-
+      <Footer />
+      <FooterForMobile />
+      <QuickViewPopup />
+      <ScollUpButton />
     </div>
-)}
+  )
+}
 
-export default Home
+export default Home;

@@ -47,7 +47,7 @@ const HeaderBar = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#">
+                  <a href="/shop/home-supplier/">
                     <i className="fa fa-facebook" aria-hidden="true"></i>
                   </a>
                 </li>

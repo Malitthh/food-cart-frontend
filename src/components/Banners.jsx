@@ -4,12 +4,6 @@ const Banners = () => {
             <div className="container">
                 <ul className="biolife-carousel dots_ring_style" data-slick='{"arrows": false, "dots": true, "slidesMargin": 30, "slidesToShow": 1, "infinite": true, "speed": 800, "responsive":[{"breakpoint":1200, "settings":{ "slidesToShow": 1}},{"breakpoint":768, "settings":{ "slidesToShow": 2, "slidesMargin":20, "dots": false}},{"breakpoint":480, "settings":{ "slidesToShow": 1}}]}' >
                     <li>
-                        {/* <div className="slide-contain biolife-banner__special">
-                            <div className="banner-contain">
-                            </div>
-                        </div> */}
-                    </li>
-                    <li>
                             <div className="slide-contain biolife-banner__special" style={{marginTop: "25px"}}>
                                 <div className="banner-contain">
                                     <div className="media">
