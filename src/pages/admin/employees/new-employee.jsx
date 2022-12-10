@@ -5,6 +5,7 @@ import { addUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { EmployeeSchema } from "../../../schema/customerSchema";
+import moment from 'moment';
 
 const NewCustomer = () => {
   const router = useRouter();
@@ -12,7 +13,13 @@ const NewCustomer = () => {
   const [userInfo, setUserInfo] = useState({});
   const [errors, setErrors] = useState([]);
   const token =  window.localStorage.getItem('@token');
+  const dateFormat = "YYYY-MM-DD";
+  const today = new Date();
 
+  const dateTime = moment(today).format(dateFormat);
+  const dobMax = moment(dateTime).subtract(18, 'years').format(dateFormat);
+  const dobMin = moment(dateTime).subtract(60, 'years').format(dateFormat);
+//  console.log(dateTime, "date", dobLimit)
   /**
    * 
    * @param {*} e
@@ -171,6 +178,8 @@ const NewCustomer = () => {
                     </label>
                     <input
                       type="date"
+                      max={dobMax}
+                      min={dobMin}
                       className="form-control"
                       onChange={onChangeInput}
                       value={userInfo.dob}
@@ -219,6 +228,7 @@ const NewCustomer = () => {
                     </label>
                     <input
                       type="date"
+                      max={dateTime}
                       className="form-control"
                       onChange={onChangeInput}
                       value={userInfo.joinDate}
