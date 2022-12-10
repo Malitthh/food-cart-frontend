@@ -43,7 +43,16 @@ export const EmployeeSchema = {
     .regex(/^[0-9]+$/)
     .required()
     .label("Mobile No"),
-  nic: JOI.string().required().label("NIC"),
+  nic: JOI.string()
+    .required()
+    .regex(/^[0-9]{9}[V|v|X|x]$/)
+    .error((errors) => {
+      errors.forEach((err) => {
+        err.message = "Not a valid NIC";
+      });
+      return errors;
+    })
+    .label("NIC"),
   address: JOI.string().required().label("Address"),
   password: JOI.any().required().label("Password"),
   passwordConfirm: JOI.any().required().label("Password Confirmation"),
@@ -77,8 +86,6 @@ export const EmployeeSchemaUpdate = {
   _id: JOI.any().allow(),
   __v: JOI.any().allow(),
 };
-
-
 
 export const SupplierSchema = {
   name: JOI.string().required().label("Supplier Name "),
