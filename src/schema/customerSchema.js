@@ -44,15 +44,15 @@ export const EmployeeSchema = {
     .required()
     .label("Mobile No"),
   nic: JOI.string().required().label("NIC"),
-  address: JOI.string().required().label("address"),
-  password: JOI.any().allow(),
-  passwordConfirm: JOI.any().allow(),
+  address: JOI.string().required().label("Address"),
+  password: JOI.any().required().label("Password"),
+  passwordConfirm: JOI.any().required().label("Password Confirmation"),
   role: JOI.any().allow(),
-  dob: JOI.any().allow(),
-  salary: JOI.number().allow(),
-  joinDate: JOI.any().allow(),
-  dept: JOI.any().allow(),
-  gender: JOI.any().allow(),
+  dob: JOI.any().required().label("Date of Birth"),
+  salary: JOI.number().required().label("Salary"),
+  joinDate: JOI.any().required().label("Joined Date"),
+  dept: JOI.any().required().label("Department"),
+  gender: JOI.any().required().label("Gender"),
 };
 
 export const EmployeeSchemaUpdate = {

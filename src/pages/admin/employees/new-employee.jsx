@@ -213,7 +213,7 @@ const NewCustomer = () => {
                     <label htmlFor="gender">
                       <b>Gender</b>
                     </label>
-                    <select className="form-control" name="gender" id="gender" onChange={(e) => setUserInfo({ ...userInfo, [e.target.id]: e.target.value })}>
+                    <select className="form-control" name="gender" id="gender" onChange={(e) => onChangeInput(e)}>
                       <option value="" selected="true" disabled="disabled">Select your Gender here</option>
                       <option value="M">Male</option>
                       <option value="F">Female</option>
@@ -243,14 +243,14 @@ const NewCustomer = () => {
                 <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="department"><b>Department</b></label>
-                    <select className="form-control" name="dept" id="dept" onChange={(e) => setUserInfo({ ...userInfo, [e.target.id]: e.target.value })}>
+                    <select className="form-control" name="dept" id="dept" onChange={(e) => onChangeInput(e)}>
                       <option value="" disabled="disabled" selected="true">Select your department here</option>
                       <option value="IT">IT</option>
                       <option value="HR">HR</option>
                       <option value="SALES">Sales</option>
                     </select>
                     <p className="text-red-500 text-xs italic">
-                      {errors && errors["department"]}
+                      {errors && errors["dept"]}
                     </p>
                   </div>
                   <div className="form-group col-md-6">
