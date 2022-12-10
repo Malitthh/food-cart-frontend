@@ -37,7 +37,7 @@ export const CustomerSchemaUpdate = {
 
 export const EmployeeSchema = {
   name: JOI.string().required().label("Employee Name "),
-  email: JOI.string().required().label("Email Address"),
+  email: JOI.string().email().required().label("Email Address"),
   mobileNo: JOI.string()
     .length(10)
     .regex(/^[0-9]+$/)
