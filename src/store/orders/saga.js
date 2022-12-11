@@ -37,7 +37,7 @@ function* addOrderStart({type, payload}) {
  */
  function* getOrderStart({type, payload}) {
     try {
-        const response = yield OrderService.getOrders()
+        const response = yield OrderService.getOrders(payload)
         yield put(getOrderSuccess(response.data.data.orders))
         console.log(response.data.data.orders,"saga")
     } catch (err) {
