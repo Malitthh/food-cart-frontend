@@ -9,12 +9,12 @@ import Pdf from "react-to-pdf";
 const ref = React.createRef();
 
 const Orders = () => {
-
   // get damage reports from state
   const dispatch = useDispatch();
   const { orders, products } = useSelector((state) => state);
   const { allOrders } = orders;
   const { allProducts } = products;
+  const [filteredOrders, setFilderedOrders] = useState(allOrders);
 
   const pendingOrders = allOrders.filter((order) => order.status === "pending");
   const processingOrders = allOrders.filter(
@@ -26,7 +26,7 @@ const Orders = () => {
   );
 
   const featchOnLoad = async () => {
-    dispatch(getOrderStart());
+    dispatch(getOrderStart("ALL"));
     dispatch(getProductStart());
   };
 
@@ -52,9 +52,18 @@ const Orders = () => {
       return sum + item.costPrice * item.sold;
     }, 0);
 
-    const options = {
-      // unit: 'in',
-      // format: [4,2]
+  const options = {
+    // unit: 'in',
+    // format: [4,2]
+  };
+
+  const onChangeCategory = (e) => {
+    const orders = allOrders.filter((order) => order.status === e.target.value);
+
+    setFilderedOrders(orders)
+    // setProductInfo({ ...productInfo, [e.target.id]: e.target.value });
+    // console.log(e.target.value, e.target.id);
+    //validateField("vMakeModel", e.value);
   };
 
   return (
@@ -75,7 +84,9 @@ const Orders = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page"><b>Orders Report</b></span>
+              <span className="current-page">
+                <b>Orders Report</b>
+              </span>
             </li>
           </ul>
         </nav>
@@ -85,24 +96,44 @@ const Orders = () => {
           <div className="container mx-2">
             <div className="overflow-x-auto">
               <div class="container bootdey">
-              <Pdf targetRef={ref} filename="order summary-report.pdf" options={options} x={.5} y={.5} scale={0.8}>
-                  {({ toPdf }) => <button 
-                                    onClick={toPdf}
-                                    className="btn btn-success"
-                                    style={{float:"right", marginRight:"17%", marginTop:"-3%", marginBottom:"0.5%"}}
-                                  >
-                                    Generate Pdf
-                                  </button>}
-                </Pdf>
-                    <a
-                      data-cy="link-new-report"
-                      href="/admin/reports"
-                      style={{float:"right", marginRight:"0.5%", marginTop:"-3%", marginBottom:"0.5%", padding:"0.58%"}}
-                      className="new-report btn btn-warning gap-2 btn-sm"
+                <Pdf
+                  targetRef={ref}
+                  filename="order summary-report.pdf"
+                  options={options}
+                  x={0.5}
+                  y={0.5}
+                  scale={0.8}
+                >
+                  {({ toPdf }) => (
+                    <button
+                      onClick={toPdf}
+                      className="btn btn-success"
+                      style={{
+                        float: "right",
+                        marginRight: "17%",
+                        marginTop: "-3%",
+                        marginBottom: "0.5%",
+                      }}
                     >
-                    <i className="fa fa-angle-left" aria-hidden="true"></i>
-                    &nbsp;&nbsp;BACK
-                  </a>
+                      Generate Pdf
+                    </button>
+                  )}
+                </Pdf>
+                <a
+                  data-cy="link-new-report"
+                  href="/admin/reports"
+                  style={{
+                    float: "right",
+                    marginRight: "0.5%",
+                    marginTop: "-3%",
+                    marginBottom: "0.5%",
+                    padding: "0.58%",
+                  }}
+                  className="new-report btn btn-warning gap-2 btn-sm"
+                >
+                  <i className="fa fa-angle-left" aria-hidden="true"></i>
+                  &nbsp;&nbsp;BACK
+                </a>
                 <div class="row invoice row-printable" ref={ref}>
                   <div class="col-md-10">
                     <div class="panel panel-default plain" id="dash_0">
@@ -122,6 +153,26 @@ const Orders = () => {
                             >
                               Orders Summary Report
                             </div>
+                            <div className="form-group col-md-6">
+                              <label htmlFor="status">
+                                <b>Order Status</b>
+                              </label>
+                              <select
+                                className="form-control"
+                                name="status"
+                                id="status"
+                                onChange={onChangeCategory}
+                              >
+                                <option value="ALL" selected="true">
+                                  ALL
+                                </option>
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="shipped">Shipped</option>
+                                <option value="delivered">Delivered</option>
+                                <option value="cancel">Cancelled</option>
+                              </select>
+                            </div>
                           </div>
                           <br /> <br />
                           <div class="col-lg-6">
@@ -139,8 +190,7 @@ const Orders = () => {
                             </div>
                           </div>
                           <div class="col-lg-12">
-                            <div className="row pb-3 p-1">
-                            </div>
+                            <div className="row pb-3 p-1"></div>
                             <div class="invoice-items">
                               <div class="table-responsive">
                                 <table class="table table-bordered">
@@ -164,28 +214,67 @@ const Orders = () => {
                                     </tr>
                                   </thead>
                                   <tbody>
-                                        <tr>
-                                          <td class="text-right">{pendingOrders.length}</td>
-                                          <td class="text-right">{processingOrders.length}</td>
-                                          <td class="text-right">{shippedOrders.length}</td>
-                                          <td class="text-right">{deliveredOrders.length}</td>
-                                          <td class="text-right">{allOrders.length}</td>
-                                        </tr>
+                                    <tr>
+                                      <td class="text-right">
+                                        {pendingOrders.length}
+                                      </td>
+                                      <td class="text-right">
+                                        {processingOrders.length}
+                                      </td>
+                                      <td class="text-right">
+                                        {shippedOrders.length}
+                                      </td>
+                                      <td class="text-right">
+                                        {deliveredOrders.length}
+                                      </td>
+                                      <td class="text-right">
+                                        {allOrders.length}
+                                      </td>
+                                    </tr>
                                   </tbody>
-                                  <tfoot>
-                                    <tr>
-                                      <th colspan="4" class="text-right"></th>
-                                      <th class="text-right"> -</th>
-                                    </tr>
-                                    <tr>
-                                      <th colspan="4" class="text-right">
-                                        <b>Total Orders </b>
+                                </table>
+                                <table className="table w-full">
+                                  <thead>
+                                    <tr style={{ backgroundColor: "#ecf0e2" }}>
+                                      <th>
+                                        <b>Customer Name</b>
                                       </th>
-                                      <th class="text-right">
-                                        <b>{allOrders.length}</b>
+                                      <th>
+                                        <b>Email</b>
                                       </th>
+                                      <th>
+                                        <b>Status</b>
+                                      </th>
+                                      <th></th>
                                     </tr>
-                                  </tfoot>
+                                  </thead>
+                                  <tbody>
+                                    {filteredOrders &&
+                                      filteredOrders.map((item, key) => (
+                                        <tr
+                                          key={key}
+                                          className={
+                                            key % 2 === 1 ? "active" : ""
+                                          }
+                                        >
+                                          <td>{item.customerName}</td>
+                                          <td>{item.customerEmail}</td>
+                                          <td>
+                                            <b>{item.status}</b>
+                                          </td>
+                                          <td>
+                                            <a
+                                              data-cy={`view-report-btn${key}`}
+                                              href={`../orders/${item._id}`}
+                                              target="_blank"
+                                              className="inline-block px-6 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
+                                            >
+                                              <i className="leading-tight fa fa-eye text-xs"></i>
+                                            </a>
+                                          </td>
+                                        </tr>
+                                      ))}
+                                  </tbody>
                                 </table>
                               </div>
                               <p style={{ float: "right", fontSize: "12px" }}>
