@@ -7,7 +7,7 @@ import { addProductStart } from "../../../store/products/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
-import { ProductSchema } from "../../../schema/productSchema";
+import { AdminProductSchema } from "../../../schema/productSchema";
 
 const NewProduct = () => {
   const router = useRouter();
@@ -120,13 +120,15 @@ const NewProduct = () => {
 
     let product = productInfo;
 
+    product.isReviewed = 1
+
     if (imgs.length !== 0) product.photos = imgs;
 
     product.supplierId = user._id;
     product.supplierName =  user.name
     product.supplierEmail =  user.email
 
-    const err = validateForm(product, ProductSchema);
+    const err = validateForm(product, AdminProductSchema);
 
     if (err) {
       setErrors(err);
@@ -141,7 +143,7 @@ const NewProduct = () => {
    * @param {*} value
    */
   const validateField = (name, value) => {
-    const errMsg = validateProperty(name, value, ProductSchema);
+    const errMsg = validateProperty(name, value, AdminProductSchema);
 
     if (errMsg) {
       errors[name] = errMsg;

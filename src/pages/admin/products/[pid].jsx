@@ -7,7 +7,7 @@ import { updateProductStart } from "../../../store/products/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
-import { ProductSchemaUpdate } from "../../../schema/productSchema";
+import { AdminProductSchemaUpdate } from "../../../schema/productSchema";
 
 const updateProduct = () => {
   const router = useRouter();
@@ -136,7 +136,10 @@ const updateProduct = () => {
     let product = productInfo;
 
     if (imgs.length !== 0) product.photos = imgs;
-
+    
+    if( product.price > product.costPrice) {
+      product.isReviewed = 1
+    }
     
     if(productInfo.supplierId === user._id) {
         product.supplierId = user._id;
@@ -144,7 +147,7 @@ const updateProduct = () => {
         product.supplierEmail = user.email;
     }
 
-    const err = validateForm(product, ProductSchemaUpdate);
+    const err = validateForm(product, AdminProductSchemaUpdate);
 
     if (err) {
       setErrors(err);
@@ -159,7 +162,7 @@ const updateProduct = () => {
    * @param {*} value
    */
   const validateField = (name, value) => {
-    const errMsg = validateProperty(name, value, ProductSchemaUpdate);
+    const errMsg = validateProperty(name, value, AdminProductSchemaUpdate);
 
     if (errMsg) {
       errors[name] = errMsg;
@@ -287,7 +290,7 @@ const updateProduct = () => {
                       <b>Cost Price</b>
                     </label>
                     <input
-                      disabled={isDisable}
+                     // disabled={isDisable}
                       type="number"
                       className="form-control"
                       onChange={onChangeInput}

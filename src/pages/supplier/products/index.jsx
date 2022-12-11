@@ -101,6 +101,9 @@ const ProductIndex = () => {
                     <th>
                       <b>Sold</b>
                     </th>
+                    <th>
+                      <b>Admin Approval</b>
+                    </th>
                     <th></th>
                   </tr>
                 </thead>
@@ -120,6 +123,7 @@ const ProductIndex = () => {
                         <td>{product.stock}</td>
                         <td>{product.lowStock}</td>
                         <td>{product.sold}</td>
+                        <td>{product.isReviewed === 1 ? <span style={{backgroundColor: "green", color: "white"}}> Approved </span> : <span  style={{backgroundColor: "yellow", color: "black"}}> Pending </span>}</td>
                         <td>
                           <a
                             data-cy={`view-report-btn${key}`}
