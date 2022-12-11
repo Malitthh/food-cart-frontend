@@ -80,10 +80,12 @@ export const AdminProductSchema = {
   productName: JOI.string()
     .required()
     .label("Product Name")
-    .error(() => {
-      return {
-        message: "Product Name is not allowed to be empty",
-      };
+    .regex(/^[a-zA-Z\s]+$/)
+    .error((errors) => {
+      errors.forEach((err) => {
+        err.message = "Not a valid Name";
+      });
+      return errors;
     }),
   costPrice: JOI.number().required().label("Cost Price"),
   price: JOI.number().required().label("Price"),
@@ -117,10 +119,12 @@ export const AdminProductSchemaUpdate = {
   productName: JOI.string()
     .required()
     .label("Product Name")
-    .error(() => {
-      return {
-        message: "Product Name is not allowed to be empty",
-      };
+    .regex(/^[a-zA-Z\s]+$/)
+    .error((errors) => {
+      errors.forEach((err) => {
+        err.message = "Not a valid Name";
+      });
+      return errors;
     }),
   costPrice: JOI.number().required().label("Cost Price"),
   price: JOI.number().required().label("Price"),
