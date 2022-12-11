@@ -126,9 +126,6 @@ const NavBar = () => {
                     {user?.role === "supplier" && (
                       <>
                         <li className="menu-item">
-                          <a href="/supplier">Dashboard</a>
-                        </li>
-                        <li className="menu-item">
                           <a
                             href="/supplier/products"
                             className="menu-name"

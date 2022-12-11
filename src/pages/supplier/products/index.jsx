@@ -46,11 +46,6 @@ const ProductIndex = () => {
         <nav className="biolife-nav">
           <ul>
             <li className="nav-item">
-              <a href="/supplier" className="permal-link">
-                Dashboard
-              </a>
-            </li>
-            <li className="nav-item">
               <span className="current-page">
                 <b>Products</b>
               </span>
@@ -93,7 +88,7 @@ const ProductIndex = () => {
                       <b>Cost Price</b>
                     </th>
                     <th>
-                      <b>Stock In hand</b>
+                      <b>Delivery (Qty/Kg)</b>
                     </th>
                     <th>
                       <b>Low Stock Notice</b>

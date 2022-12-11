@@ -38,18 +38,18 @@ const Home = () => {
       <div className="container">
         <nav className="biolife-nav">
           <ul>
-            <li className="nav-item">
+            {/* <li className="nav-item">
               <a href="/admin" className="permal-link">
                 Dashboard
               </a>
-            </li>
-            <li className="nav-item">
+            </li> */}
+            {/* <li className="nav-item">
               <span className="current-page"><b>Dashboard</b></span>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>
-      <main>
+      {/* <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="container mx-2">
             <div className="biolife-service type01 biolife-service__type01 sm-margin-top-0 xs-margin-top-45px">
@@ -109,9 +109,9 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </main>
+      </main> */}
       <br />
-      <Footer />
+    
     </div>
   );
 };

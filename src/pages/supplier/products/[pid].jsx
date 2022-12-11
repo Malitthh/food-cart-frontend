@@ -180,11 +180,6 @@ const updateProduct = () => {
         <nav className="biolife-nav">
           <ul>
             <li className="nav-item">
-              <a href="/supplier" className="permal-link">
-                Dashboard
-              </a>
-            </li>
-            <li className="nav-item">
               <a href="/supplier/products" className="permal-link">
                 Products
               </a>
@@ -224,7 +219,7 @@ const updateProduct = () => {
                
                   <div className="form-group col-md-3">
                     <label htmlFor="stock">
-                      <b>Stock in Hand (Kg/Qty)</b>
+                      <b>Delivery (Kg/Qty)</b>
                     </label>
                     <input
                       disabled={isDisable}
@@ -299,24 +294,6 @@ const updateProduct = () => {
                       {errors && errors["category"]}
                     </p>
                   </div>
-                  {/* <div className="form-group col-md-6">
-                    <label htmlFor="marketPrice">
-                      <b>Market Price</b>
-                    </label>
-                    <input
-                      disabled={isDisable}
-                      type="number"
-                      className="form-control"
-                      placeholder=""
-                      onChange={onChangeInput}
-                      value={productInfo.price}
-                      id="price"
-                      name="price"
-                    />
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["price"]}
-                    </p>
-                  </div> */}
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">

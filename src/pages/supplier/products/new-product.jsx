@@ -158,11 +158,6 @@ const NewProduct = () => {
         <nav className="biolife-nav">
           <ul>
             <li className="nav-item">
-              <a href="/supplier" className="permal-link">
-                Dashboard
-              </a>
-            </li>
-            <li className="nav-item">
               <a href="/supplier/products" className="permal-link">
                 Product List
               </a>
@@ -200,7 +195,7 @@ const NewProduct = () => {
                   </div>
                   <div className="form-group col-md-3">
                     <label htmlFor="stock">
-                      <b>Stock in Hand (Kg/Qty)</b>
+                      <b>Delivery (Kg/Qty)</b>
                     </label>
                     <input
                       type="number"
