@@ -18,7 +18,7 @@ const product = () => {
   });
 
   const featchOnLoad = async () => {
-    dispatch(getProductStart());
+    dispatch(getProductStart("ALL"));
   };
 
   useEffect(() => {

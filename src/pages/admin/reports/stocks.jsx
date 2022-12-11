@@ -27,7 +27,7 @@ const Orders = () => {
 
   const featchOnLoad = async () => {
     dispatch(getOrderStart());
-    dispatch(getProductStart());
+    dispatch(getProductStart("ALL"));
   };
 
   useEffect(() => {
@@ -168,12 +168,7 @@ const Orders = () => {
                                   <tbody>
                                     {allProducts &&
                                       allProducts.map((product, key) => (
-                                        <tr
-                                          key={key}
-                                          className={
-                                            key % 2 === 1 ? "active" : ""
-                                          }
-                                        >
+                                        <tr key={key} className={product.stock <= product.lowStock ? "" : key % 2 === 1 ? 'active': ""} style={product.stock <= product.lowStock ? {backgroundColor: "#ffc6c6"}: {backgroundColor: ""}}>
                                           <td>
                                             <img
                                               style={{ height: "20px" }}

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { apiUrl, clientBaseURL } from "config";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addProductStart } from "../../../store/products/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
@@ -16,7 +16,11 @@ const NewProduct = () => {
   const [files, setFile] = useState([]);
   const [errors, setErrors] = useState([]);
   const [message, setMessage] = useState();
-  const token =  window.localStorage.getItem('@token');
+  const token = window.localStorage.getItem("@token");
+  const { auth } = useSelector((state) => state);
+  const { user, status } = auth;
+
+  console.log(user._id, "userrrrr");
   /**
    * set image
    * @param {*} e
@@ -36,7 +40,7 @@ const NewProduct = () => {
       ];
       if (validImageTypes.includes(fileType)) {
         setFile([...files, file[i]]);
-        delete errors['photos'];
+        delete errors["photos"];
       } else {
         toast.error("only images accepted");
       }
@@ -78,15 +82,14 @@ const NewProduct = () => {
     //  e.preventDefault()
 
     const payload = {
-      data : product,
-      token
-    }
+      data: product,
+      token,
+    };
 
     dispatch(addProductStart(payload));
-    setFile([])
+    setFile([]);
 
     router.push("/admin/products");
-
   };
 
   /**
@@ -117,7 +120,11 @@ const NewProduct = () => {
 
     let product = productInfo;
 
-    if(imgs.length !== 0) product.photos = imgs; 
+    if (imgs.length !== 0) product.photos = imgs;
+
+    product.supplierId = user._id;
+    product.supplierName =  user.name
+    product.supplierEmail =  user.email
 
     const err = validateForm(product, ProductSchema);
 
@@ -160,7 +167,9 @@ const NewProduct = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page"><b> New Product</b></span>
+              <span className="current-page">
+                <b> New Product</b>
+              </span>
             </li>
           </ul>
         </nav>
@@ -172,7 +181,9 @@ const NewProduct = () => {
               <form>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="productName"><b>Product Name : </b></label>
+                    <label htmlFor="productName">
+                      <b>Product Name : </b>
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -186,15 +197,20 @@ const NewProduct = () => {
                       {errors && errors["productName"]}
                     </p>
                   </div>
-                  <div className="form-group col-md-4">
-                    <label htmlFor="category"><b>Category : </b></label>
-                    <select selected="true"
+                  <div className="form-group col-md-2">
+                    <label htmlFor="category">
+                      <b>Category : </b>
+                    </label>
+                    <select
+                      selected="true"
                       id="category"
                       className="form-control"
                       onChange={onChangeCategory}
                       value={productInfo.category}
                     >
-                      <option selected disabled>Choose a Category</option>
+                      <option selected disabled>
+                        Choose a Category
+                      </option>
                       <option value="fruit_nuts">Fruit & Nuts</option>
                       <option value="vegetables">Vegetables</option>
                       <option value="berries">Berries</option>
@@ -206,7 +222,9 @@ const NewProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-2">
-                    <label htmlFor="stock"><b>Stock in Hand (Kg/Qty)</b></label>
+                    <label htmlFor="stock">
+                      <b>Stock in Hand (Kg/Qty)</b>
+                    </label>
                     <input
                       type="number"
                       className="form-control"
@@ -219,10 +237,27 @@ const NewProduct = () => {
                       {errors && errors["stock"]}
                     </p>
                   </div>
+                  <div className="form-group col-md-2">
+                    <label htmlFor="stock">
+                      <b>Low Stock Notice</b>
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="lowStock"
+                      onChange={onChangeInput}
+                      value={productInfo.lowStock}
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["lowStock"]}
+                    </p>
+                  </div>
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="costPrice"><b>Cost Price</b></label>
+                    <label htmlFor="costPrice">
+                      <b>Cost Price</b>
+                    </label>
                     <input
                       type="number"
                       className="form-control"
@@ -237,7 +272,9 @@ const NewProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="marketPrice"><b>Market Price</b></label>
+                    <label htmlFor="marketPrice">
+                      <b>Market Price</b>
+                    </label>
                     <input
                       type="number"
                       className="form-control"
@@ -254,7 +291,9 @@ const NewProduct = () => {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="costPrice"><b>Remarks</b></label>
+                    <label htmlFor="costPrice">
+                      <b>Remarks</b>
+                    </label>
                     <input
                       type="text"
                       className="form-control"
@@ -269,13 +308,15 @@ const NewProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-6">
-                    <label htmlFor="images"><b>Images</b></label>
+                    <label htmlFor="images">
+                      <b>Images</b>
+                    </label>
                     <input
                       type="file"
                       onChange={handleImageFile}
                       className="form-control"
                       multiple="multiple"
-                      name="files[]" 
+                      name="files[]"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["photos"]}
@@ -302,30 +343,33 @@ const NewProduct = () => {
                   </div>
                 </div>
                 <div className="form-row">
-                <div className="form-group col-md-6">
-                  <button
-                    data-cy="save-new-report-btn"
-                    onClick={(e) => validateBeforeSave(e)}
-                    className="btn btn-success"
-                  >
-                    Save
-                  </button> &nbsp;
-                  <button
-                    data-cy="save-new-report-btn"
-                    // onClick={(e) => validateBeforeSave(e)}
-                    className="btn btn-warning"
-                  >
-                    Reset
-                  </button> &nbsp;
-                  <a 
-                    style={{padding:"6px", fontSize:"13px"}}
-                    data-cy="link-new-report"
-                    href="/admin/products"
-                    className="new-report btn btn-danger gap- btn-sm"
-                  > Cancel
-                   
-                  </a>
-                </div>
+                  <div className="form-group col-md-6">
+                    <button
+                      data-cy="save-new-report-btn"
+                      onClick={(e) => validateBeforeSave(e)}
+                      className="btn btn-success"
+                    >
+                      Save
+                    </button>{" "}
+                    &nbsp;
+                    <button
+                      data-cy="save-new-report-btn"
+                      // onClick={(e) => validateBeforeSave(e)}
+                      className="btn btn-warning"
+                    >
+                      Reset
+                    </button>{" "}
+                    &nbsp;
+                    <a
+                      style={{ padding: "6px", fontSize: "13px" }}
+                      data-cy="link-new-report"
+                      href="/admin/products"
+                      className="new-report btn btn-danger gap- btn-sm"
+                    >
+                      {" "}
+                      Cancel
+                    </a>
+                  </div>
                 </div>
               </form>
             </div>

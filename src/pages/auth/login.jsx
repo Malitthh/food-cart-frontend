@@ -12,8 +12,8 @@ const Login = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [authInfo, setAuthInfo] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
   const [errors, setErrors] = useState([]);
   const { auth } = useSelector((state) => state);
@@ -22,15 +22,17 @@ const Login = () => {
   useEffect(() => {
     if (status === "success") {
       if (user.role === "admin") {
-          router.push("/admin");
-        } else {
-          router.push("/");
-        }
-  } else {
+        router.push("/admin");
+      } else if (user.role === "supplier") {
+        router.push("/supplier");
+      } else {
+        router.push("/");
+      }
+    } else {
       // if(getError !== null) {
       //     toast.error(getError.message);
       // }
-  }
+    }
   }, [auth]);
 
   const login = () => {

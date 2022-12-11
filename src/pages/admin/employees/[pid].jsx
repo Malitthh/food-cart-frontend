@@ -5,6 +5,7 @@ import { updateUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { EmployeeSchemaUpdate } from "../../../schema/customerSchema";
+import moment from 'moment';
 
 const updateEmployee = () => {
   const router = useRouter();
@@ -14,6 +15,14 @@ const updateEmployee = () => {
   const [userInfo, setUserInfo] = useState({});
   const [errors, setErrors] = useState([]);
   const token = window.localStorage.getItem("@token");
+
+  const dateFormat = "YYYY-MM-DD";
+  const today = new Date();
+
+  const dateTime = moment(today).format(dateFormat);
+  const dobMax = moment(dateTime).subtract(18, 'years').format(dateFormat);
+  const dobMin = moment(dateTime).subtract(60, 'years').format(dateFormat);
+
   const depts = [
     {
       label: "IT",
@@ -61,6 +70,7 @@ const updateEmployee = () => {
    */
   const onChangeInput = (e) => {
     console.log(e.target.id, e.target.value);
+    validateField(e.target.id, e.target.value);
     setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
   };
 
@@ -216,6 +226,8 @@ const updateEmployee = () => {
                       <b>Date of Birth</b>
                     </label>
                     <input
+                      max={dobMax}
+                      min={dobMin}
                       type="date"
                       className="form-control"
                       onChange={onChangeInput}
@@ -254,12 +266,7 @@ const updateEmployee = () => {
                       className="form-control"
                       name="gender" id="gender"
                       value={userInfo.gender}
-                      onChange={(e) =>
-                        setUserInfo({
-                          ...userInfo,
-                          [e.target.id]: e.target.value,
-                        })
-                      }
+                      onChange={onChangeInput}
                     >
                       <option value="" disabled="disabled">
                         Select your Gender here
@@ -278,6 +285,7 @@ const updateEmployee = () => {
                     </label>
                     <input
                       type="date"
+                      max={dateTime}
                       className="form-control"
                       onChange={onChangeInput}
                       value={userInfo.joinDate}
@@ -299,12 +307,7 @@ const updateEmployee = () => {
                       name="dept"
                       id="dept"
                       value={userInfo.dept}
-                      onChange={(e) =>
-                        setUserInfo({
-                          ...userInfo,
-                          [e.target.id]: e.target.value,
-                        })
-                      }
+                      onChange={onChangeInput}
                     >
                       <option value="" disabled="disabled">
                         Select your department here

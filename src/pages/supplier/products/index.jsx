@@ -46,7 +46,7 @@ const ProductIndex = () => {
         <nav className="biolife-nav">
           <ul>
             <li className="nav-item">
-              <a href="/admin" className="permal-link">
+              <a href="/supplier" className="permal-link">
                 Dashboard
               </a>
             </li>
@@ -66,7 +66,7 @@ const ProductIndex = () => {
           >
             <a
               data-cy="link-new-report"
-              href="/admin/products/new-product"
+              href="/supplier/products/new-product"
               className="btn gap-2 btn-sm .hover-item"
             >
               <i className="fa fa-plus" aria-hidden="true"></i>
@@ -87,9 +87,6 @@ const ProductIndex = () => {
                       <b>Product Name</b>
                     </th>
                     <th>
-                      <b>Supplier Name</b>
-                    </th>
-                    <th>
                       <b>Category</b>
                     </th>
                     <th>
@@ -100,6 +97,9 @@ const ProductIndex = () => {
                     </th>
                     <th>
                       <b>Stock In hand</b>
+                    </th>
+                    <th>
+                      <b>Low Stock Notice</b>
                     </th>
                     <th>
                       <b>Sold</b>
@@ -118,11 +118,11 @@ const ProductIndex = () => {
                           />
                         </td>
                         <td>{product.productName}</td>
-                        <td>{product.supplierName}</td>
                         <td>{product.category}</td>
                         <td>{product.costPrice}</td>
                         <td>{product.price}</td>
                         <td>{product.stock}</td>
+                        <td>{product.lowStock}</td>
                         <td>{product.sold}</td>
                         <td>
                           <a

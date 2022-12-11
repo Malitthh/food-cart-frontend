@@ -16,6 +16,7 @@ const Login = () => {
     if (auth.getData[0]?.status === "success") {
       router.push("/admin");
     }
+    //console.log(auth, "auth")
   }, [auth]);
 
   const login = () => {

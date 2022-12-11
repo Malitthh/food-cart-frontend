@@ -3,14 +3,14 @@ import { apiUrl, clientBaseURLImages } from "config";
 import { addToCart } from "../store/cart/actions";
 import { useDispatch } from "react-redux";
 
-const ShopItem = ({product}) => {
+const ShopItem = ({ product }) => {
   const dispatch = useDispatch();
 
   const onAddToCart = () => {
-    console.log(product, "pro")
+    console.log(product, "pro");
     dispatch(addToCart(product));
-   // toast.success("Successfully Added !");
-  }
+    // toast.success("Successfully Added !");
+  };
 
   return (
     <div className="product-item col-lg-3 col-md-3 col-sm-3 col-xs-6">
@@ -29,7 +29,7 @@ const ShopItem = ({product}) => {
         <div className="info">
           <h4 className="product-title">
             <a href="#" className="pr-name">
-            <span>{product.productName}</span>
+              <span>{product.productName}</span>
             </a>
           </h4>
           <div className="price">
@@ -39,12 +39,11 @@ const ShopItem = ({product}) => {
               </span>
             </ins>
             <del>
-              <span className="price-amount">
-              </span>
+              <span className="price-amount"></span>
             </del>
           </div>
           <div className="shipping-info">
-            <p className="shipping-day">3-Day Shipping</p>
+            <p className="shipping-day">{product?.supplierName}</p>
             <p className="for-today">Free Pickup Today</p>
           </div>
           <div className="slide-down-box">
@@ -52,15 +51,24 @@ const ShopItem = ({product}) => {
               All products are carefully selected to ensure food safety.
             </p>
             <div className="buttons">
-             {product.stock === 0 ? <a className="btn btn-danger disabled" style={{color:"white"}}>
-                <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                &nbsp;Out of stock
-              </a> : 
-              <a href="#" className="btn add-to-cart-btn" onClick={() => onAddToCart()}>
-                <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                add to cart
-              </a>}
-             
+              {product.stock === 0 ? (
+                <a
+                  className="btn btn-danger disabled"
+                  style={{ color: "white" }}
+                >
+                  <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                  &nbsp;Out of stock
+                </a>
+              ) : (
+                <a
+                  href="#"
+                  className="btn add-to-cart-btn"
+                  onClick={() => onAddToCart()}
+                >
+                  <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
+                  add to cart
+                </a>
+              )}
             </div>
           </div>
         </div>

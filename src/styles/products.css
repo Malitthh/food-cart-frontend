@@ -190,3 +190,7 @@
   position: relative;
   bottom: 5px;
 }
+
+.lowStock {
+ background-color: #ffc6c6;
+}

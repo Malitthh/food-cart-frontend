@@ -6,7 +6,7 @@ import { apiUrl } from "config";
  */
 
 class ProductsService {
-  static addProduct = ({data, token}) =>
+  static addProduct = ({ data, token }) =>
     axios.post(`${apiUrl}/v1/products`, data, {
       headers: {
         "Content-Type": "application/json",
@@ -14,14 +14,21 @@ class ProductsService {
       },
     });
 
-  static getProducts = () =>
-    axios.get(`${apiUrl}/v1/products`, {
+  // static getProducts = () =>
+  //   axios.get(`${apiUrl}/v1/products`, {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+
+  static getProducts = (sid) =>
+    axios.get(`${apiUrl}/v1/products/supplier/${sid}`, {
       headers: {
         "Content-Type": "application/json",
       },
     });
 
-    static getSingleProduct = (id) =>
+  static getSingleProduct = (id) =>
     axios.get(`${apiUrl}/v1/products/${id}`, {
       headers: {
         "Content-Type": "application/json",
@@ -29,19 +36,19 @@ class ProductsService {
       },
     });
 
-    static updateProduct = ({ data, token}) =>
+  static updateProduct = ({ data, token }) =>
     axios.patch(`${apiUrl}/v1/products/${data._id}`, data, {
       headers: {
         "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 
-    static deleteProduct = ({id, token}) =>
-    axios.delete(`${apiUrl}/v1/products/${id}`,{
+  static deleteProduct = ({ id, token }) =>
+    axios.delete(`${apiUrl}/v1/products/${id}`, {
       headers: {
         "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
     });
 }

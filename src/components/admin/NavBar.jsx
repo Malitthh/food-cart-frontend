@@ -1,9 +1,7 @@
-
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { logoutStart } from "../../store/auth/actions";
-
 
 const NavBar = () => {
   const { cart, auth } = useSelector((state) => state);
@@ -11,21 +9,20 @@ const NavBar = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  
   useEffect(() => {
     if (status === "success")
-      if (user.role !== "admin") {
+      if (user.role === "customer") {
         router.push("/");
-      } 
+      }
   }, []);
 
   const logout = () => {
     dispatch(logoutStart());
     localStorage.clear();
 
-    console.log(auth, "user")
+    console.log(auth, "user");
     router.push("/");
-  }
+  };
 
   return (
     <>
@@ -44,7 +41,9 @@ const NavBar = () => {
                   </a>
                 </li>
                 <li>
-                  <a href="#"><b>ADMIN PORTAL</b></a>
+                  <a href="#">
+                    <b>{user?.role.toUpperCase()} PORTAL</b>
+                  </a>
                 </li>
               </ul>
             </div>
@@ -67,14 +66,17 @@ const NavBar = () => {
                 </li>
               </ul>
               <div className="top-bar right">
-              <ul className="social-list">
-                <li>
-                  <a href="#">
-                   <a href="#"><b>Inquiries</b></a> &nbsp;
-                    <i className="fa fa-bell" aria-hidden="true"></i>
-                  </a>
-                </li>
-              </ul>
+                <ul className="social-list">
+                  <li>
+                    <a href="#">
+                      <a href="#">
+                        <b>Inquiries</b>
+                      </a>{" "}
+                      &nbsp;
+                      <i className="fa fa-bell" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                </ul>
               </div>
               {status !== "success" ? (
                 <ul className="horizontal-menu">
@@ -93,15 +95,15 @@ const NavBar = () => {
                     </a>
                   </li>
                   <li>
-                    <a onClick={() => logout()}
-                       className="btn btn-warning btn-sm"
+                    <a
+                      onClick={() => logout()}
+                      className="btn btn-warning btn-sm"
                     >
                       Logout
                     </a>
                   </li>
                 </ul>
               )}
-              
             </div>
           </div>
         </div>
@@ -128,33 +130,54 @@ const NavBar = () => {
                     id="primary-menu"
                     data-menuname="main menu"
                   >
-                    <li className="menu-item">
-                      <a href="/admin">Dashboard</a>
-                    </li>
-                    <li className="menu-item">
-                      <a
-                        href="/admin/products"
-                        className="menu-name"
-                        data-title="Product"
-                      >
-                        Products
-                      </a>
-                    </li>
-                    <li className="menu-item">
-                      <a href="/admin/customers">Customers</a>
-                    </li>
-                    <li className="menu-item">
-                      <a href="/admin/employees">Employees</a>
-                    </li>
-                    <li className="menu-item">
-                      <a href="/admin/suppliers">Suppliers</a>
-                    </li>
-                    <li className="menu-item">
-                      <a href="/admin/orders">Orders</a>
-                    </li>
-                    <li className="menu-item">
-                      <a href="/admin/reports">Reports</a>
-                    </li>
+                    {user?.role === "supplier" && (
+                      <>
+                        <li className="menu-item">
+                          <a href="/supplier">Dashboard</a>
+                        </li>
+                        <li className="menu-item">
+                          <a
+                            href="/supplier/products"
+                            className="menu-name"
+                            data-title="Product"
+                          >
+                            Products
+                          </a>
+                        </li>
+                      </>
+                    )}
+
+                    {user?.role === "admin" && (
+                      <>
+                        <li className="menu-item">
+                          <a href="/admin">Dashboard</a>
+                        </li>
+                        <li className="menu-item">
+                          <a
+                            href="/admin/products"
+                            className="menu-name"
+                            data-title="Product"
+                          >
+                            Products
+                          </a>
+                        </li>
+                        <li className="menu-item">
+                          <a href="/admin/customers">Customers</a>
+                        </li>
+                        <li className="menu-item">
+                          <a href="/admin/employees">Employees</a>
+                        </li>
+                        <li className="menu-item">
+                          <a href="/admin/suppliers">Suppliers</a>
+                        </li>
+                        <li className="menu-item">
+                          <a href="/admin/orders">Orders</a>
+                        </li>
+                        <li className="menu-item">
+                          <a href="/admin/reports">Reports</a>
+                        </li>
+                      </>
+                    )}
                   </ul>
                 </div>
               </div>

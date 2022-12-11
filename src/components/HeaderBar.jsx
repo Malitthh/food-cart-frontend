@@ -67,12 +67,30 @@ const HeaderBar = () => {
                 </ul>
               ) : (
                 <ul className="horizontal-menu">
-                  <li>
-                    <a href="/shop/my-profile" className="login-link">
-                      <i className="biolife-icon icon-login"></i>
-                      {user.name}
-                    </a>
-                  </li>
+                  {user.role === "supplier" && (
+                    <li>
+                      <a href="/supplier" className="login-link">
+                        <i className="biolife-icon icon-login"></i>
+                        {user.name}
+                      </a>
+                    </li>
+                  )}
+                  {user.role === "customer" && (
+                    <li>
+                      <a href="/shop/my-profile" className="login-link">
+                        <i className="biolife-icon icon-login"></i>
+                        {user.name}
+                      </a>
+                    </li>
+                  )}
+                  {user.role === "admin" && (
+                    <li>
+                      <a href="/admin" className="login-link">
+                        <i className="biolife-icon icon-login"></i>
+                        {user.name}
+                      </a>
+                    </li>
+                  )}
                   <li>
                     <a
                       onClick={() => logout()}

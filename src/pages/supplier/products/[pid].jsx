@@ -32,7 +32,7 @@ const updateProduct = () => {
       console.log(result[0], "all");
       setProductInfo(result[0]);
 
-      if (result[0].supplierId !== user._id) {
+      if (result[0].supplierId !== user?._id) {
         setIsDisable(true);
       }
     };
@@ -104,7 +104,7 @@ const updateProduct = () => {
       token,
     };
     dispatch(updateProductStart(payload));
-    router.push("/admin/products");
+    router.push("/supplier/products");
   };
 
   /**
@@ -137,9 +137,9 @@ const updateProduct = () => {
 
     if (imgs.length !== 0) product.photos = imgs;
 
-    product.supplierId = user._id;
-    product.supplierName = user.name;
-    product.supplierEmail = user.email;
+    product.supplierId = user?._id;
+    product.supplierName = user?.name;
+    product.supplierEmail = user?.email;
 
     const err = validateForm(product, ProductSchemaUpdate);
 
@@ -179,12 +179,12 @@ const updateProduct = () => {
         <nav className="biolife-nav">
           <ul>
             <li className="nav-item">
-              <a href="/admin" className="permal-link">
+              <a href="/supplier" className="permal-link">
                 Dashboard
               </a>
             </li>
             <li className="nav-item">
-              <a href="/admin/products" className="permal-link">
+              <a href="/supplier/products" className="permal-link">
                 Products
               </a>
             </li>
@@ -408,7 +408,7 @@ const updateProduct = () => {
                       &nbsp;
                       <a
                         data-cy="link-new-report"
-                        href="/admin/products"
+                        href="/supplier/products"
                         className="new-report btn btn-danger gap- btn-sm"
                       >
                         {" "}
@@ -423,12 +423,12 @@ const updateProduct = () => {
                         {" "}
                         This product is belongs to{" "}
                         <b>{productInfo.supplierName}</b>. So you don't have
-                        privilages to update this item{" "} &nbsp;&nbsp;&nbsp;
+                        privilages to update this item &nbsp;&nbsp;&nbsp;
                       </span>
 
                       <a
                         data-cy="link-new-report"
-                        href="/admin/products"
+                        href="/supplier/products"
                         className="new-report btn btn-danger gap- btn-sm"
                       >
                         {" "}

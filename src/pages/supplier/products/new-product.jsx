@@ -3,47 +3,30 @@ import { useRouter } from "next/router";
 import { apiUrl, clientBaseURL } from "config";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProductStart } from "../../../store/products/actions";
+import { addProductStart } from "../../../store/products/actions";
 import NavBar from "src/components/admin/NavBar";
 import { toast } from "react-toastify";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
-import { ProductSchemaUpdate } from "../../../schema/productSchema";
+import { ProductSchema } from "../../../schema/productSchema";
 
-const updateProduct = () => {
+const NewProduct = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const [productInfo, setProductInfo] = useState({});
   const [files, setFile] = useState([]);
   const [errors, setErrors] = useState([]);
-  const [showImg, setShowImg] = useState(true);
-  const [isDisable, setIsDisable] = useState(false);
-  const { products, auth } = useSelector((state) => state);
-  const { singleProduct, allProducts } = products;
+  const [message, setMessage] = useState();
   const token = window.localStorage.getItem("@token");
-  const { pid } = router.query;
+  const { auth } = useSelector((state) => state);
   const { user, status } = auth;
-  useEffect(() => {
-    if (!pid) {
-      return;
-    }
 
-    const featchOnLoad = async () => {
-      const result = allProducts.filter((product) => product._id === pid);
-      console.log(result[0], "all");
-      setProductInfo(result[0]);
-
-      if (result[0].supplierId !== user._id) {
-        setIsDisable(true);
-      }
-    };
-    featchOnLoad();
-  }, [pid]);
   /**
    * set image
    * @param {*} e
    * @returns
    */
   const handleImageFile = (e) => {
+    setMessage("");
     let file = e.target.files;
 
     for (let i = 0; i < file.length; i++) {
@@ -56,7 +39,7 @@ const updateProduct = () => {
       ];
       if (validImageTypes.includes(fileType)) {
         setFile([...files, file[i]]);
-        setShowImg(false);
+        delete errors["photos"];
       } else {
         toast.error("only images accepted");
       }
@@ -71,11 +54,6 @@ const updateProduct = () => {
     setFile(files.filter((x) => x.name !== i));
   };
 
-  const removeDBImage = (i) => {
-    console.log(i, "rm");
-    const imgs = productInfo.photos.filter((x) => x.uuid !== i);
-    setProductInfo({ ...productInfo, photos: imgs });
-  };
   /**
    * set vehicle makde and model
    * @param {*} e
@@ -83,6 +61,7 @@ const updateProduct = () => {
   const onChangeCategory = (e) => {
     setProductInfo({ ...productInfo, [e.target.id]: e.target.value });
     console.log(e.target.value, e.target.id);
+    //validateField("vMakeModel", e.value);
   };
 
   /**
@@ -90,6 +69,7 @@ const updateProduct = () => {
    * @param {*} e
    */
   const onChangeInput = (e) => {
+    console.log(e.target.id, e.target.value);
     validateField(e.target.id, e.target.value);
     setProductInfo({ ...productInfo, [e.target.id]: e.target.value });
   };
@@ -99,12 +79,16 @@ const updateProduct = () => {
    */
   const onSubmit = async (product) => {
     //  e.preventDefault()
+
     const payload = {
       data: product,
       token,
     };
-    dispatch(updateProductStart(payload));
-    router.push("/admin/products");
+
+    dispatch(addProductStart(payload));
+    setFile([]);
+
+    router.push("/supplier/products");
   };
 
   /**
@@ -137,11 +121,11 @@ const updateProduct = () => {
 
     if (imgs.length !== 0) product.photos = imgs;
 
-    product.supplierId = user._id;
-    product.supplierName = user.name;
-    product.supplierEmail = user.email;
+    product.supplierId = user?._id;
+    product.supplierName =  user?.name
+    product.supplierEmail =  user?.email
 
-    const err = validateForm(product, ProductSchemaUpdate);
+    const err = validateForm(product, ProductSchema);
 
     if (err) {
       setErrors(err);
@@ -156,20 +140,13 @@ const updateProduct = () => {
    * @param {*} value
    */
   const validateField = (name, value) => {
-    const errMsg = validateProperty(name, value, ProductSchemaUpdate);
+    const errMsg = validateProperty(name, value, ProductSchema);
 
     if (errMsg) {
       errors[name] = errMsg;
     } else {
       delete errors[name];
     }
-  };
-
-  const reset = () => {
-    const result = allProducts.filter((product) => product._id === pid);
-    console.log(result[0], "all");
-    setProductInfo(result[0]);
-    setShowImg(true);
   };
 
   return (
@@ -179,18 +156,18 @@ const updateProduct = () => {
         <nav className="biolife-nav">
           <ul>
             <li className="nav-item">
-              <a href="/admin" className="permal-link">
+              <a href="/supplier" className="permal-link">
                 Dashboard
               </a>
             </li>
             <li className="nav-item">
-              <a href="/admin/products" className="permal-link">
-                Products
+              <a href="/supplier/products" className="permal-link">
+                Product List
               </a>
             </li>
             <li className="nav-item">
               <span className="current-page">
-                <b>Edit Products</b>
+                <b> New Product</b>
               </span>
             </li>
           </ul>
@@ -207,7 +184,6 @@ const updateProduct = () => {
                       <b>Product Name : </b>
                     </label>
                     <input
-                      disabled={isDisable}
                       type="text"
                       className="form-control"
                       id="productName"
@@ -225,7 +201,6 @@ const updateProduct = () => {
                       <b>Category : </b>
                     </label>
                     <select
-                      disabled={isDisable}
                       selected="true"
                       id="category"
                       className="form-control"
@@ -250,12 +225,12 @@ const updateProduct = () => {
                       <b>Stock in Hand (Kg/Qty)</b>
                     </label>
                     <input
-                      disabled={isDisable}
                       type="number"
                       className="form-control"
                       id="stock"
                       onChange={onChangeInput}
                       value={productInfo.stock}
+                      placeholder="Enter stock in hand"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["stock"]}
@@ -266,7 +241,6 @@ const updateProduct = () => {
                       <b>Low Stock Notice</b>
                     </label>
                     <input
-                      disabled={isDisable}
                       type="number"
                       className="form-control"
                       id="lowStock"
@@ -284,14 +258,13 @@ const updateProduct = () => {
                       <b>Cost Price</b>
                     </label>
                     <input
-                      disabled={isDisable}
                       type="number"
                       className="form-control"
                       onChange={onChangeInput}
-                      value={productInfo.costPrice}
+                      value={productInfo.customerName}
                       id="costPrice"
                       name="costPrice"
-                      placeholder=""
+                      placeholder="Enter cost price here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["costPrice"]}
@@ -302,14 +275,13 @@ const updateProduct = () => {
                       <b>Market Price</b>
                     </label>
                     <input
-                      disabled={isDisable}
                       type="number"
                       className="form-control"
-                      placeholder=""
                       onChange={onChangeInput}
                       value={productInfo.price}
                       id="price"
                       name="price"
+                      placeholder="Enter market price here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["price"]}
@@ -322,14 +294,13 @@ const updateProduct = () => {
                       <b>Remarks</b>
                     </label>
                     <input
-                      disabled={isDisable}
                       type="text"
                       className="form-control"
                       onChange={onChangeInput}
                       value={productInfo.description}
                       id="description"
                       name="description"
-                      placeholder=""
+                      placeholder="Write some remarks here"
                     />
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["description"]}
@@ -337,36 +308,19 @@ const updateProduct = () => {
                   </div>
                   <div className="form-group col-md-6">
                     <label htmlFor="images">
-                      <b>Images - replace current image</b>
+                      <b>Images</b>
                     </label>
                     <input
-                      disabled={isDisable}
                       type="file"
                       onChange={handleImageFile}
                       className="form-control"
-                      placeholder=""
-                      // multiple="multiple"
-                      name="files"
+                      multiple="multiple"
+                      name="files[]"
                     />
                     <p className="text-red-500 text-xs italic">
-                      {errors && errors["photo"]}
+                      {errors && errors["photos"]}
                     </p>
 
-                    {showImg &&
-                      productInfo.photos &&
-                      productInfo.photos.map((file, key) => {
-                        return (
-                          <div key={key} className="overflow-hidden relative">
-                            {/* <i
-                              onClick={() => {
-                                removeDBImage(file.uuid);
-                              }}
-                              className="fa fa-close absolute right-1 hover:text-white cursor-pointer"
-                            ></i> */}
-                            <img style={{ height: "100px" }} src={file.url} />
-                          </div>
-                        );
-                      })}
                     <div className="flex flex-wrap gap-2 mt-2">
                       {files.map((file, key) => {
                         return (
@@ -388,54 +342,33 @@ const updateProduct = () => {
                   </div>
                 </div>
                 <div className="form-row">
-                  {productInfo.supplierId === user?._id && (
-                    <div className="form-group col-md-6">
-                      <button
-                        data-cy="save-new-report-btn"
-                        onClick={(e) => validateBeforeSave(e)}
-                        className="btn btn-success"
-                      >
-                        Save
-                      </button>{" "}
-                      &nbsp;
-                      <button
-                        data-cy="save-new-report-btn"
-                        onClick={(e) => reset(e)}
-                        className="btn btn-warning"
-                      >
-                        Reset
-                      </button>{" "}
-                      &nbsp;
-                      <a
-                        data-cy="link-new-report"
-                        href="/admin/products"
-                        className="new-report btn btn-danger gap- btn-sm"
-                      >
-                        {" "}
-                        Cancel
-                      </a>
-                    </div>
-                  )}
-
-                  {productInfo.supplierId !== user._id && (
-                    <>
-                      <span style={{ color: "red" }}>
-                        {" "}
-                        This product is belongs to{" "}
-                        <b>{productInfo.supplierName}</b>. So you don't have
-                        privilages to update this item{" "} &nbsp;&nbsp;&nbsp;
-                      </span>
-
-                      <a
-                        data-cy="link-new-report"
-                        href="/admin/products"
-                        className="new-report btn btn-danger gap- btn-sm"
-                      >
-                        {" "}
-                        Go Back
-                      </a>
-                    </>
-                  )}
+                  <div className="form-group col-md-6">
+                    <button
+                      data-cy="save-new-report-btn"
+                      onClick={(e) => validateBeforeSave(e)}
+                      className="btn btn-success"
+                    >
+                      Save
+                    </button>{" "}
+                    &nbsp;
+                    <button
+                      data-cy="save-new-report-btn"
+                      // onClick={(e) => validateBeforeSave(e)}
+                      className="btn btn-warning"
+                    >
+                      Reset
+                    </button>{" "}
+                    &nbsp;
+                    <a
+                      style={{ padding: "6px", fontSize: "13px" }}
+                      data-cy="link-new-report"
+                      href="/supplier/products"
+                      className="new-report btn btn-danger gap- btn-sm"
+                    >
+                      {" "}
+                      Cancel
+                    </a>
+                  </div>
                 </div>
               </form>
             </div>
@@ -446,4 +379,4 @@ const updateProduct = () => {
   );
 };
 
-export default updateProduct;
+export default NewProduct;
