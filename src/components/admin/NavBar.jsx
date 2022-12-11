@@ -10,18 +10,11 @@ const NavBar = () => {
   const dispatch = useDispatch();
   const color = user?.role === "supplier" ? "rgb(153 79 14)" : "black";
 
-  // useEffect(() => {
-  //   if (status === "success")
-  //     if (user.role === "customer") {
-  //       router.push("/customer");
-  //     }
-  //   if (user.role === "admin") {
-  //     router.push("/admin");
-  //   }
-  //   if (user.role === "supplier") {
-  //     router.push("/supplier");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (status !== "success"){
+      router.push("/");
+    }
+  }, []);
 
   const logout = () => {
     dispatch(logoutStart());

@@ -20,12 +20,12 @@ const Home = () => {
   const employees = allUsers.filter((user) => user.role === "employee");
   const suppliers = allUsers.filter((user) => user.role === "supplier");
 
-  useEffect(() => {
-    if (status === "success")
-      if (user.role !== "admin") {
-        router.push("/");
-      }
-  }, []);
+  // useEffect(() => {
+  //   if (status === "success")
+  //     if (user.role !== "admin") {
+  //       router.push("/");
+  //     }
+  // }, []);
 
   const featchOnLoad = async () => {
     let role = "all";

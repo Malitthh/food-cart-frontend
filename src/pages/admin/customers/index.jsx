@@ -13,6 +13,14 @@ const CustomerIndex = () => {
   const { allUsers } = users;
 
   console.log(allUsers, "uu");
+  const { user, status } = auth;
+
+  useEffect(() => {
+    if (status === "success") {
+      if(user.role !== 'admin')
+      router.push("/");
+    }
+  }, []);
 
   const featchOnLoad = async () => {
     let role = "customer";
