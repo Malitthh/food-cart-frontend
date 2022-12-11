@@ -6,6 +6,7 @@ import { getProductStart } from "../../../store/products/actions";
 import Footer from "../../../components/admin/Footer";
 import { apiUrl, clientBaseURLImages } from "config";
 import Pdf from "react-to-pdf";
+import Select from "react-select";
 
 const ref = React.createRef();
 
@@ -15,15 +16,28 @@ const Orders = () => {
   const { orders, products } = useSelector((state) => state);
   const { allOrders } = orders;
   const { allProducts } = products;
+  const [filteredProducts, setFilderedProducts] = useState(allProducts);
 
-  const pendingOrders = allOrders.filter((order) => order.status === "pending");
-  const processingOrders = allOrders.filter(
-    (order) => order.status === "processing"
-  );
-  const shippedOrders = allOrders.filter((order) => order.status === "shipped");
-  const deliveredOrders = allOrders.filter(
-    (order) => order.status === "delivered"
-  );
+  const SelectOptions = [
+    { value: "chocolate", label: "Chocolate" },
+    { value: "strawberry", label: "Strawberry" },
+    { value: "vanilla", label: "Vanilla" },
+  ];
+
+
+    // Initialize an empty array to hold the mapped elements
+    const mappedArray = []
+
+    // Map over the elements of the array and push them to the new array
+    allProducts.map(element => mappedArray.push({value: element._id, label: element.productName}))
+
+    const onChangeCategory = (selectedOption) => {
+      let products;
+    console.log(selectedOption, "ss")
+      products = allProducts.filter((product) => product._id === selectedOption.value);
+      setFilderedProducts(products)
+    };
+
 
   const featchOnLoad = async () => {
     dispatch(getOrderStart());
@@ -52,9 +66,9 @@ const Orders = () => {
       return sum + item.costPrice * item.sold;
     }, 0);
 
-    const options = {
-      // unit: 'in',
-      // format: [4,2]
+  const options = {
+    // unit: 'in',
+    // format: [4,2]
   };
 
   return (
@@ -75,7 +89,9 @@ const Orders = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page"><b>Stock Report</b></span>
+              <span className="current-page">
+                <b>Stock Report</b>
+              </span>
             </li>
           </ul>
         </nav>
@@ -85,24 +101,49 @@ const Orders = () => {
           <div className="container mx-2">
             <div className="overflow-x-auto">
               <div class="container bootdey">
-                <Pdf targetRef={ref} filename="stock-report.pdf" options={options} x={.5} y={.5} scale={0.8}>
-                  {({ toPdf }) => <button 
-                                    onClick={toPdf}
-                                    className="btn btn-success"
-                                    style={{float:"right", marginRight:"17%", marginTop:"-3%", marginBottom:"0.5%"}}
-                                  > Generate Pdf
-                                  </button>}
+                <Pdf
+                  targetRef={ref}
+                  filename="stock-report.pdf"
+                  options={options}
+                  x={0.5}
+                  y={0.5}
+                  scale={0.8}
+                >
+                  {({ toPdf }) => (
+                    <button
+                      onClick={toPdf}
+                      className="btn btn-success"
+                      style={{
+                        float: "right",
+                        marginRight: "17%",
+                        marginTop: "-3%",
+                        marginBottom: "0.5%",
+                      }}
+                    >
+                      {" "}
+                      Generate Pdf
+                    </button>
+                  )}
                 </Pdf>
                 <a
-                      data-cy="link-new-report"
-                      href="/admin/reports"
-                      style={{float:"right", marginRight:"0.5%", marginTop:"-3%", marginBottom:"0.5%", padding:"0.58%"}}
-                      className="new-report btn btn-warning gap-2 btn-sm"
-                    >
-                    <i className="fa fa-angle-left" aria-hidden="true"></i>
-                    &nbsp;&nbsp;BACK
-                  </a>
-                <div class="row invoice row-printable element-to-print" ref={ref}>
+                  data-cy="link-new-report"
+                  href="/admin/reports"
+                  style={{
+                    float: "right",
+                    marginRight: "0.5%",
+                    marginTop: "-3%",
+                    marginBottom: "0.5%",
+                    padding: "0.58%",
+                  }}
+                  className="new-report btn btn-warning gap-2 btn-sm"
+                >
+                  <i className="fa fa-angle-left" aria-hidden="true"></i>
+                  &nbsp;&nbsp;BACK
+                </a>
+                <div
+                  class="row invoice row-printable element-to-print"
+                  ref={ref}
+                >
                   <div class="col-md-10">
                     <div class="panel panel-default plain" id="dash_0">
                       <div class="panel-body p30">
@@ -121,6 +162,11 @@ const Orders = () => {
                             >
                               STOCK REPORT
                             </div>
+                            <Select
+                              //   value={selectedOption}
+                              onChange={onChangeCategory}
+                              options={mappedArray}
+                            />
                           </div>
                           <br /> <br />
                           <div class="col-lg-6">
@@ -166,9 +212,23 @@ const Orders = () => {
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    {allProducts &&
-                                      allProducts.map((product, key) => (
-                                        <tr key={key} className={product.stock <= product.lowStock ? "" : key % 2 === 1 ? 'active': ""} style={product.stock <= product.lowStock ? {backgroundColor: "#ffc6c6"}: {backgroundColor: ""}}>
+                                    {filteredProducts &&
+                                      filteredProducts.map((product, key) => (
+                                        <tr
+                                          key={key}
+                                          className={
+                                            product.stock <= product.lowStock
+                                              ? ""
+                                              : key % 2 === 1
+                                              ? "active"
+                                              : ""
+                                          }
+                                          style={
+                                            product.stock <= product.lowStock
+                                              ? { backgroundColor: "#ffc6c6" }
+                                              : { backgroundColor: "" }
+                                          }
+                                        >
                                           <td>
                                             <img
                                               style={{ height: "20px" }}
