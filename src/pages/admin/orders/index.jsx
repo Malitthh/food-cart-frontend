@@ -7,7 +7,8 @@ const OrderIndex = () => {
   const dispatch = useDispatch();
   const { orders, auth } = useSelector((state) => state);
   const { allOrders } = orders;
-  const token =  window.localStorage.getItem('@token');
+  const [filteredOrders, setFilderedOrders] = useState(allOrders);
+  const token = window.localStorage.getItem("@token");
   const featchOnLoad = async () => {
     dispatch(getOrderStart("ALL"));
   };
@@ -15,6 +16,16 @@ const OrderIndex = () => {
   useEffect(() => {
     featchOnLoad();
   }, []);
+
+  const onChangeCategory = (e) => {
+    let orders;
+    if(e.target.value === "ALL") {
+      orders = allOrders;
+    } else {
+      orders = allOrders.filter((order) => order.status === e.target.value);
+    }
+    setFilderedOrders(orders)
+  };
 
   return (
     <div className="min-h-full">
@@ -29,7 +40,9 @@ const OrderIndex = () => {
               </a>
             </li>
             <li className="nav-item">
-              <span className="current-page"><b>Orders</b></span>
+              <span className="current-page">
+                <b>Orders</b>
+              </span>
             </li>
           </ul>
         </nav>
@@ -37,23 +50,51 @@ const OrderIndex = () => {
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="container mx-2">
+            <div className="form-group col-md-6">
+              <label htmlFor="status">
+                <b>Order Status</b>
+              </label>
+              <select
+                className="form-control"
+                name="status"
+                id="status"
+                 onChange={onChangeCategory}
+              >
+                <option value="ALL" selected="true">
+                  ALL
+                </option>
+                <option value="pending">Pending</option>
+                <option value="processing">Processing</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option>
+                <option value="cancel">Cancelled</option>
+              </select>
+            </div>
             <div className="overflow-x-auto">
               <table className="table w-full">
                 <thead>
-                  <tr style={{backgroundColor:"#ecf0e2"}}>
-                    <th><b>Customer Name</b></th>
-                    <th><b>Email</b></th>
-                    <th><b>Status</b></th>
+                  <tr style={{ backgroundColor: "#ecf0e2" }}>
+                    <th>
+                      <b>Customer Name</b>
+                    </th>
+                    <th>
+                      <b>Email</b>
+                    </th>
+                    <th>
+                      <b>Status</b>
+                    </th>
                     <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {allOrders &&
-                    allOrders.map((item, key) => (
+                  {filteredOrders &&
+                    filteredOrders.map((item, key) => (
                       <tr key={key} className={key % 2 === 1 ? "active" : ""}>
                         <td>{item.customerName}</td>
                         <td>{item.customerEmail}</td>
-                        <td><b>{item.status}</b></td>
+                        <td>
+                          <b>{item.status}</b>
+                        </td>
                         <td>
                           <a
                             data-cy={`view-report-btn${key}`}

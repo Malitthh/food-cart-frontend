@@ -58,12 +58,13 @@ const Orders = () => {
   };
 
   const onChangeCategory = (e) => {
-    const orders = allOrders.filter((order) => order.status === e.target.value);
-
+    let orders;
+    if(e.target.value === "ALL") {
+      orders = allOrders;
+    } else {
+      orders = allOrders.filter((order) => order.status === e.target.value);
+    }
     setFilderedOrders(orders)
-    // setProductInfo({ ...productInfo, [e.target.id]: e.target.value });
-    // console.log(e.target.value, e.target.id);
-    //validateField("vMakeModel", e.value);
   };
 
   return (
