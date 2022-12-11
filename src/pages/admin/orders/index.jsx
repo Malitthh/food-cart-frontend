@@ -9,7 +9,7 @@ const OrderIndex = () => {
   const { allOrders } = orders;
   const token =  window.localStorage.getItem('@token');
   const featchOnLoad = async () => {
-    dispatch(getOrderStart());
+    dispatch(getOrderStart("ALL"));
   };
 
   useEffect(() => {

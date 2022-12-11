@@ -23,7 +23,7 @@ const Home = () => {
     let role = "all";
     dispatch(getUserStart(role));
     dispatch(getProductStart());
-    dispatch(getOrderStart());
+    dispatch(getOrderStart("ALL"));
   };
 
   useEffect(() => {
