@@ -8,6 +8,7 @@ const NavBar = () => {
   const { user, status } = auth;
   const router = useRouter();
   const dispatch = useDispatch();
+  const color = user?.role === "supplier" ? "rgb(153 79 14)" : "black"
 
   useEffect(() => {
     if (status === "success")
@@ -15,6 +16,7 @@ const NavBar = () => {
         router.push("/");
       }
   }, []);
+
 
   const logout = () => {
     dispatch(logoutStart());
@@ -29,7 +31,7 @@ const NavBar = () => {
       <header id="header" className="header-area style-01 layout-03">
         <div
           className="header-top bg-main hidden-xs"
-          style={{ backgroundColor: "black" }}
+          style={{ backgroundColor: color }}
         >
           <div className="container">
             <div className="top-bar left">
@@ -42,7 +44,7 @@ const NavBar = () => {
                 </li>
                 <li>
                   <a href="#">
-                    <b>{user?.role.toUpperCase()} PORTAL</b>
+                    <b>{user?.role.toUpperCase()}  &nbsp;&nbsp; P O R T A L</b>
                   </a>
                 </li>
               </ul>
@@ -67,15 +69,6 @@ const NavBar = () => {
               </ul>
               <div className="top-bar right">
                 <ul className="social-list">
-                  <li>
-                    <a href="#">
-                      <a href="#">
-                        <b>Inquiries</b>
-                      </a>{" "}
-                      &nbsp;
-                      <i className="fa fa-bell" aria-hidden="true"></i>
-                    </a>
-                  </li>
                 </ul>
               </div>
               {status !== "success" ? (
