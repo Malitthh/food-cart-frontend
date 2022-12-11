@@ -12,7 +12,9 @@ import { CustomerSchema } from "../../../schema/customerSchema";
 const NewCustomer = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { users } = useSelector((state) => state);
+  const { users, auth } = useSelector((state) => state);
+  const { allUsers } = users;
+  const { user } = auth;
   const { getError, status } = users
   const [userInfo, setUserInfo] = useState({});
   const [files, setFile] = useState([]);
@@ -26,6 +28,12 @@ const NewCustomer = () => {
     //validateField("vMakeModel", e.value);
   };
 
+  useEffect(() => {
+  
+      if(user.role !== 'admin')
+      router.push("/");
+
+  }, []);
   /**
    * set customer name
    * @param {*} e

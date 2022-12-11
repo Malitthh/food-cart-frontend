@@ -132,6 +132,7 @@ const NewProduct = () => {
 
     if (err) {
       setErrors(err);
+      console.log(err, "err")
     } else {
       onSubmit(product);
     }

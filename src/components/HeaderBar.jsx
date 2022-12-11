@@ -77,7 +77,7 @@ const HeaderBar = () => {
                   )}
                   {user.role === "customer" && (
                     <li>
-                      <a href="/shop/my-profile" className="login-link">
+                      <a href="/customer" className="login-link">
                         <i className="biolife-icon icon-login"></i>
                         {user.name}
                       </a>

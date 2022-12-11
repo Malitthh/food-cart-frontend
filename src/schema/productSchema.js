@@ -93,6 +93,7 @@ export const AdminProductSchema = {
   supplierId: JOI.string().allow().label("Supplier"),
   supplierName: JOI.any().allow().label("Supplier Name"),
   supplierEmail: JOI.any().allow().label("Supplier Email"),
+  isReviewed: JOI.any().allow().label("Reviewed"),
   category: JOI.string()
     .required()
     .label("Category")

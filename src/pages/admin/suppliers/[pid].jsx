@@ -228,7 +228,7 @@ const updateSupplier = () => {
                       {errors && errors["joinDate"]}
                     </p>
                   </div>
-                  <div className="form-group col-md-6">
+                  {/* <div className="form-group col-md-6">
                     <label htmlFor="category">
                       <b>What does he/she supply?</b>
                     </label>
@@ -254,7 +254,7 @@ const updateSupplier = () => {
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["category"]}
                     </p>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">

@@ -10,8 +10,8 @@ class OrderService {
       },
     });
 
-  static getOrders = () =>
-    axios.get(`${apiUrl}/v1/orders`, {
+  static getOrders = (id) =>
+    axios.get(`${apiUrl}/v1/orders/filter/${id}`, {
       headers: {
         "Content-Type": "application/json",
       },

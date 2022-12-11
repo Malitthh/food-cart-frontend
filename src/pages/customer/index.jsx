@@ -10,8 +10,7 @@ import { getOrderStart } from "../../store/orders/actions";
 const Home = () => {
   const token = window.localStorage.getItem("@token");
   const dispatch = useDispatch();
-  const { users, products, orders, auth } = useSelector((state) => state);
-  const { user, status } = auth;
+  const { users, products, orders } = useSelector((state) => state);
   const { allUsers } = users;
   const { allProducts } = products;
   const { allOrders } = orders;
@@ -20,18 +19,11 @@ const Home = () => {
   const employees = allUsers.filter((user) => user.role === "employee");
   const suppliers = allUsers.filter((user) => user.role === "supplier");
 
-  useEffect(() => {
-    if (status === "success")
-      if (user.role !== "admin") {
-        router.push("/");
-      }
-  }, []);
-
   const featchOnLoad = async () => {
     let role = "all";
     dispatch(getUserStart(role));
     dispatch(getProductStart());
-    dispatch(getOrderStart("ALL"));
+    dispatch(getOrderStart());
   };
 
   useEffect(() => {
