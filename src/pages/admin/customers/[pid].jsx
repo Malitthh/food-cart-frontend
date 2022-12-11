@@ -238,12 +238,7 @@ const updateCustomer = () => {
                         name="gender"
                         id="gender"
                         value={userInfo.gender}
-                        onChange={(e) =>
-                          setUserInfo({
-                            ...userInfo,
-                            [e.target.id]: e.target.value,
-                          })
-                        }
+                        onChange={onChangeInput}
                       >
                         <option value="" disabled="disabled">
                           Select your Gender here
@@ -265,12 +260,7 @@ const updateCustomer = () => {
                         name="province"
                         id="province"
                         value={userInfo.province}
-                        onChange={(e) =>
-                          setUserInfo({
-                            ...userInfo,
-                            [e.target.id]: e.target.value,
-                          })
-                        }
+                        onChange={onChangeInput}
                       >
                         <option disabled="disabled" selected="true">
                           Select your province here

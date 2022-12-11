@@ -5,6 +5,7 @@ import { addUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
 import { validateForm, validateProperty } from "src/helpers/validationHeper";
 import { SupplierSchema } from "../../../schema/customerSchema";
+import moment from 'moment';
 
 const NewCustomer = () => {
   const router = useRouter();
@@ -13,7 +14,10 @@ const NewCustomer = () => {
   const [files, setFile] = useState([]);
   const [errors, setErrors] = useState([]);
   const token =  window.localStorage.getItem('@token');
+  const dateFormat = "YYYY-MM-DD";
+  const today = new Date();
 
+  const dateTime = moment(today).format(dateFormat);
   /**
    * set customer name, mobile no and vehicle no
    * @param {*} e
@@ -127,19 +131,22 @@ const NewCustomer = () => {
                   </div>
                 </div>
                 <div className="form-row">
+             
                   <div className="form-group col-md-6">
-                    <label htmlFor="address"><b>Address : </b></label>
+                    <label htmlFor="joinDate">
+                      <b>Date of Join</b>
+                    </label>
                     <input
-                      type="text"
+                      max={dateTime}
+                      type="date"
                       className="form-control"
                       onChange={onChangeInput}
-                      value={userInfo.address}
-                      id="address"
-                      name="address"
-                      placeholder="Enter your address here"
+                      value={userInfo.joinDate}
+                      id="joinDate"
+                      name="joinDate"
                     />
                     <p className="text-red-500 text-xs italic">
-                      {errors && errors["address"]}
+                      {errors && errors["joinDate"]}
                     </p>
                   </div>
                   <div className="form-group col-md-6">
@@ -159,35 +166,19 @@ const NewCustomer = () => {
                   </div>
                 </div>
                 <div className="form-row">
-                <div className="form-group col-md-6">
-                    <label htmlFor="joinDate">
-                      <b>Date of Join</b>
-                    </label>
+                <div className="form-group col-md-12">
+                    <label htmlFor="address"><b>Address : </b></label>
                     <input
-                      type="date"
+                      type="text"
                       className="form-control"
                       onChange={onChangeInput}
-                      value={userInfo.joinDate}
-                      id="joinDate"
-                      name="joinDate"
+                      value={userInfo.address}
+                      id="address"
+                      name="address"
+                      placeholder="Enter your address here"
                     />
                     <p className="text-red-500 text-xs italic">
-                      {errors && errors["joinDate"]}
-                    </p>
-                  </div>
-                  <div className="form-group col-md-6">
-                    <label htmlFor="category">
-                      <b>What does he/she supply?</b>
-                    </label>
-                    <select className="form-control" name="category" id="category" onChange={(e) => setUserInfo({ ...userInfo, [e.target.id]: e.target.value })}>
-                      <option value="" disabled="disabled" selected="true">Select a category here</option>
-                      <option value="fruit_nuts">Fruit & Nuts</option>
-                      <option value="vegetables">Vegetables</option>
-                      <option value="berries">Berries</option>
-                      <option value="butter_eggs">Butter & Eggs</option>
-                    </select>
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["category"]}
+                      {errors && errors["address"]}
                     </p>
                   </div>
                 </div>

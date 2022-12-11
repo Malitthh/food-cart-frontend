@@ -184,7 +184,7 @@ const NewCustomer = () => {
                       <label htmlFor="gender">
                         <b>Gender : </b>
                       </label>
-                      <select className="form-control" name="gender" id="gender" onChange={(e) => setUserInfo({ ...userInfo, [e.target.id]: e.target.value })}>
+                      <select className="form-control" name="gender" id="gender" onChange={onChangeInput}>
                         <option disabled="disabled" selected="true">Select your Gender here</option>
                         <option value="M">Male</option>
                         <option value="F">Female</option>
@@ -197,7 +197,7 @@ const NewCustomer = () => {
                       <label htmlFor="address">
                         <b>Province : </b>
                       </label>
-                      <select className="form-control" name="province" id="province" onChange={(e) => setUserInfo({ ...userInfo, [e.target.id]: e.target.value })}>
+                      <select className="form-control" name="province" id="province" onChange={onChangeInput}>
                         <option disabled="disabled" selected="true">Select your province here</option>
                         <option value="southern">Southern</option>
                         <option value="central">Central</option>

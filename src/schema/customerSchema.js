@@ -11,7 +11,7 @@ export const CustomerSchema = {
     })
     .required()
     .label("Customer Name "),
-  email: JOI.string().required().label("Email Address"),
+  email: JOI.string().email().required().label("Email Address"),
   mobileNo: JOI.string()
     .length(10)
     .regex(/^[0-9]+$/)
@@ -46,7 +46,7 @@ export const CustomerSchemaUpdate = {
       return errors;
     })
     .label("Customer Name "),
-  email: JOI.string().required().label("Email Address"),
+  email: JOI.string().required().email().label("Email Address"),
   mobileNo: JOI.string()
     .length(10)
     .regex(/^[0-9]+$/)
@@ -161,7 +161,7 @@ export const SupplierSchema = {
       return errors;
     })
     .label("Supplier Name "),
-  email: JOI.string().required().label("Email Address"),
+  email: JOI.string().email().required().label("Email Address"),
   mobileNo: JOI.string()
     .length(10)
     .regex(/^[0-9]+$/)
@@ -186,7 +186,7 @@ export const SupplierSchemaUpdate = {
       return errors;
     })
     .label("Supplier Name "),
-  email: JOI.string().required().label("Email Address"),
+  email: JOI.string().email().required().label("Email Address"),
   mobileNo: JOI.string()
     .length(10)
     .regex(/^[0-9]+$/)
