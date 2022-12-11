@@ -140,6 +140,7 @@ const updateProduct = () => {
     product.supplierId = user?._id;
     product.supplierName = user?.name;
     product.supplierEmail = user?.email;
+   // product.price = 0;
 
     const err = validateForm(product, ProductSchemaUpdate);
 
@@ -220,32 +221,8 @@ const updateProduct = () => {
                       {errors && errors["productName"]}
                     </p>
                   </div>
-                  <div className="form-group col-md-2">
-                    <label htmlFor="category">
-                      <b>Category : </b>
-                    </label>
-                    <select
-                      disabled={isDisable}
-                      selected="true"
-                      id="category"
-                      className="form-control"
-                      onChange={onChangeCategory}
-                      value={productInfo.category}
-                    >
-                      <option selected disabled>
-                        Choose a Category
-                      </option>
-                      <option value="fruit_nuts">Fruit & Nuts</option>
-                      <option value="vegetables">Vegetables</option>
-                      <option value="berries">Berries</option>
-                      <option value="butter_eggs">Butter & Eggs</option>
-                      <option value="rice">Rice</option>
-                    </select>
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["category"]}
-                    </p>
-                  </div>
-                  <div className="form-group col-md-2">
+               
+                  <div className="form-group col-md-3">
                     <label htmlFor="stock">
                       <b>Stock in Hand (Kg/Qty)</b>
                     </label>
@@ -261,7 +238,7 @@ const updateProduct = () => {
                       {errors && errors["stock"]}
                     </p>
                   </div>
-                  <div className="form-group col-md-2">
+                  <div className="form-group col-md-3">
                     <label htmlFor="stock">
                       <b>Low Stock Notice</b>
                     </label>
@@ -298,6 +275,31 @@ const updateProduct = () => {
                     </p>
                   </div>
                   <div className="form-group col-md-6">
+                    <label htmlFor="category">
+                      <b>Category : </b>
+                    </label>
+                    <select
+                      disabled={isDisable}
+                      selected="true"
+                      id="category"
+                      className="form-control"
+                      onChange={onChangeCategory}
+                      value={productInfo.category}
+                    >
+                      <option selected disabled>
+                        Choose a Category
+                      </option>
+                      <option value="fruit_nuts">Fruit & Nuts</option>
+                      <option value="vegetables">Vegetables</option>
+                      <option value="berries">Berries</option>
+                      <option value="butter_eggs">Butter & Eggs</option>
+                      <option value="rice">Rice</option>
+                    </select>
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["category"]}
+                    </p>
+                  </div>
+                  {/* <div className="form-group col-md-6">
                     <label htmlFor="marketPrice">
                       <b>Market Price</b>
                     </label>
@@ -314,7 +316,7 @@ const updateProduct = () => {
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["price"]}
                     </p>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">

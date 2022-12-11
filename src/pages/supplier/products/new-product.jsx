@@ -59,6 +59,7 @@ const NewProduct = () => {
    * @param {*} e
    */
   const onChangeCategory = (e) => {
+    validateField(e.target.id, e.target.value);
     setProductInfo({ ...productInfo, [e.target.id]: e.target.value });
     console.log(e.target.value, e.target.id);
     //validateField("vMakeModel", e.value);
@@ -124,6 +125,7 @@ const NewProduct = () => {
     product.supplierId = user?._id;
     product.supplierName =  user?.name
     product.supplierEmail =  user?.email
+    product.price = 0
 
     const err = validateForm(product, ProductSchema);
 
@@ -196,7 +198,41 @@ const NewProduct = () => {
                       {errors && errors["productName"]}
                     </p>
                   </div>
-                  <div className="form-group col-md-2">
+                  <div className="form-group col-md-3">
+                    <label htmlFor="stock">
+                      <b>Stock in Hand (Kg/Qty)</b>
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="stock"
+                      onChange={onChangeInput}
+                      value={productInfo.stock}
+                      placeholder="Enter stock in hand"
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["stock"]}
+                    </p>
+                  </div>
+                  <div className="form-group col-md-3">
+                    <label htmlFor="stock">
+                      <b>Low Stock Notice</b>
+                    </label>
+                    <input
+                      type="number"
+                      className="form-control"
+                      id="lowStock"
+                      onChange={onChangeInput}
+                      value={productInfo.lowStock}
+                    />
+                    <p className="text-red-500 text-xs italic">
+                      {errors && errors["lowStock"]}
+                    </p>
+                  </div>
+            
+                </div>
+                <div className="form-row">
+                <div className="form-group col-md-6">
                     <label htmlFor="category">
                       <b>Category : </b>
                     </label>
@@ -220,39 +256,6 @@ const NewProduct = () => {
                       {errors && errors["category"]}
                     </p>
                   </div>
-                  <div className="form-group col-md-2">
-                    <label htmlFor="stock">
-                      <b>Stock in Hand (Kg/Qty)</b>
-                    </label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="stock"
-                      onChange={onChangeInput}
-                      value={productInfo.stock}
-                      placeholder="Enter stock in hand"
-                    />
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["stock"]}
-                    </p>
-                  </div>
-                  <div className="form-group col-md-2">
-                    <label htmlFor="stock">
-                      <b>Low Stock Notice</b>
-                    </label>
-                    <input
-                      type="number"
-                      className="form-control"
-                      id="lowStock"
-                      onChange={onChangeInput}
-                      value={productInfo.lowStock}
-                    />
-                    <p className="text-red-500 text-xs italic">
-                      {errors && errors["lowStock"]}
-                    </p>
-                  </div>
-                </div>
-                <div className="form-row">
                   <div className="form-group col-md-6">
                     <label htmlFor="costPrice">
                       <b>Cost Price</b>
@@ -270,7 +273,7 @@ const NewProduct = () => {
                       {errors && errors["costPrice"]}
                     </p>
                   </div>
-                  <div className="form-group col-md-6">
+                  {/* <div className="form-group col-md-6">
                     <label htmlFor="marketPrice">
                       <b>Market Price</b>
                     </label>
@@ -286,7 +289,7 @@ const NewProduct = () => {
                     <p className="text-red-500 text-xs italic">
                       {errors && errors["price"]}
                     </p>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">

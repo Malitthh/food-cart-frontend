@@ -10,7 +10,7 @@ export const ProductSchema = {
       };
     }),
   costPrice: JOI.number().required().label("Cost Price"),
-  price: JOI.number().required().label("Price"),
+  price: JOI.number().allow().label("Price"),
   stock: JOI.number().required().label("Stock"),
   sold: JOI.number().allow().label("Stock"),
   lowStock: JOI.number().required().label("Low Stock"),
@@ -46,7 +46,7 @@ export const ProductSchemaUpdate = {
       };
     }),
   costPrice: JOI.number().required().label("Cost Price"),
-  price: JOI.number().required().label("Price"),
+  price: JOI.number().allow().label("Price"),
   stock: JOI.number().required().label("Stock"),
   lowStock: JOI.number().required().label("Low Stock"),
   sold: JOI.number().allow().label("Stock"),

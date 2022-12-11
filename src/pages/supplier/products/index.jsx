@@ -93,9 +93,6 @@ const ProductIndex = () => {
                       <b>Cost Price</b>
                     </th>
                     <th>
-                      <b>Market Price</b>
-                    </th>
-                    <th>
                       <b>Stock In hand</b>
                     </th>
                     <th>
@@ -120,7 +117,6 @@ const ProductIndex = () => {
                         <td>{product.productName}</td>
                         <td>{product.category}</td>
                         <td>{product.costPrice}</td>
-                        <td>{product.price}</td>
                         <td>{product.stock}</td>
                         <td>{product.lowStock}</td>
                         <td>{product.sold}</td>
