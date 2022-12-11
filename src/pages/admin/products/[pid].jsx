@@ -137,9 +137,12 @@ const updateProduct = () => {
 
     if (imgs.length !== 0) product.photos = imgs;
 
-    product.supplierId = user._id;
-    product.supplierName = user.name;
-    product.supplierEmail = user.email;
+    
+    if(productInfo.supplierId === user._id) {
+        product.supplierId = user._id;
+        product.supplierName = user.name;
+        product.supplierEmail = user.email;
+    }
 
     const err = validateForm(product, ProductSchemaUpdate);
 
@@ -302,7 +305,7 @@ const updateProduct = () => {
                       <b>Market Price</b>
                     </label>
                     <input
-                      disabled={isDisable}
+                     // disabled={isDisable}
                       type="number"
                       className="form-control"
                       placeholder=""
@@ -388,7 +391,7 @@ const updateProduct = () => {
                   </div>
                 </div>
                 <div className="form-row">
-                  {productInfo.supplierId === user?._id && (
+                 
                     <div className="form-group col-md-6">
                       <button
                         data-cy="save-new-report-btn"
@@ -415,15 +418,14 @@ const updateProduct = () => {
                         Cancel
                       </a>
                     </div>
-                  )}
-
+               
                   {productInfo.supplierId !== user._id && (
                     <>
                       <span style={{ color: "red" }}>
                         {" "}
                         This product is belongs to{" "}
                         <b>{productInfo.supplierName}</b>. So you don't have
-                        privilages to update this item{" "} &nbsp;&nbsp;&nbsp;
+                        privilages to update details except Market Price{" "} &nbsp;&nbsp;&nbsp;
                       </span>
 
                       <a
