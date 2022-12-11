@@ -78,10 +78,10 @@ const ProductIndex = () => {
       <main>
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="container mx-2">
-            <div style={{ height: "500PX", overflowY: "scroll" }}>
+            <div style={{ height: "500PX",  overflowY: "auto"}}>
               <table className="table w-full">
                 <thead>
-                  <tr style={{ backgroundColor: "#ecf0e2", overflow: "auto" }}>
+                  <tr style={{ backgroundColor: "#ecf0e2"}}>
                     <th></th>
                     <th>
                       <b>Product Name</b>
