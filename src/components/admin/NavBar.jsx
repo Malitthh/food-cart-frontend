@@ -8,13 +8,15 @@ const NavBar = () => {
   const { user, status } = auth;
   const router = useRouter();
   const dispatch = useDispatch();
-  const color = user?.role === "supplier" ? "rgb(153 79 14)" : "black";
+  const color = user?.role === "supplier" ? "rgb(153 79 14)" : "black"
 
   useEffect(() => {
-    if (status !== "success"){
-      router.push("/");
-    }
+    if (status === "success")
+      if (user.role === "customer") {
+        router.push("/");
+      }
   }, []);
+
 
   const logout = () => {
     dispatch(logoutStart());
@@ -42,7 +44,7 @@ const NavBar = () => {
                 </li>
                 <li>
                   <a href="#">
-                    <b>{user?.role.toUpperCase()} &nbsp;&nbsp; P O R T A L</b>
+                    <b>{user?.role.toUpperCase()} PORTAL</b>
                   </a>
                 </li>
               </ul>
@@ -66,7 +68,17 @@ const NavBar = () => {
                 </li>
               </ul>
               <div className="top-bar right">
-                <ul className="social-list"></ul>
+                <ul className="social-list">
+                  <li>
+                    <a href="#">
+                      <a href="#">
+                        <b>Inquiries</b>
+                      </a>{" "}
+                      &nbsp;
+                      <i className="fa fa-bell" aria-hidden="true"></i>
+                    </a>
+                  </li>
+                </ul>
               </div>
               {status !== "success" ? (
                 <ul className="horizontal-menu">
@@ -123,29 +135,15 @@ const NavBar = () => {
                     {user?.role === "supplier" && (
                       <>
                         <li className="menu-item">
+                          <a href="/supplier">Dashboard</a>
+                        </li>
+                        <li className="menu-item">
                           <a
                             href="/supplier/products"
                             className="menu-name"
                             data-title="Product"
                           >
                             Products
-                          </a>
-                        </li>
-                      </>
-                    )}
-
-                    {user?.role === "customer" && (
-                      <>
-                        <li className="menu-item">
-                          <a href="/customer">Dashboard</a>
-                        </li>
-                        <li className="menu-item">
-                          <a
-                            href="/customer/orders"
-                            className="menu-name"
-                            data-title="Product"
-                          >
-                            My Orders
                           </a>
                         </li>
                       </>
