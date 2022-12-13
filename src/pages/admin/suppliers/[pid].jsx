@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
-import { validateForm, validateProperty } from "src/helpers/validationHeper";
+import {  validateForm, validateProperty } from "src/helpers/validationHeper";
 import { SupplierSchemaUpdate } from "../../../schema/customerSchema";
+import moment from 'moment';
 
 const updateSupplier = () => {
   const router = useRouter();
@@ -37,6 +38,12 @@ const updateSupplier = () => {
       value: "rice",
     },
   ];
+
+  
+  const dateFormat = "YYYY-MM-DD";
+  const today = new Date();
+
+  const dateTime = moment(today).format(dateFormat);
 
   const { pid } = router.query;
 
@@ -73,7 +80,7 @@ const updateSupplier = () => {
       token,
     };
     dispatch(updateUserStart(payload));
-    router.push("/admin/suppliers")
+   
   };
 
   /**
@@ -81,11 +88,7 @@ const updateSupplier = () => {
    * @param {*} e
    */
 
-  const validateBeforeSave = (e) => {
-    e.preventDefault();
-    console.log(userInfo, "pp");
-    onSubmit();
-
+   const validateBeforeSave = (e) => {
     e.preventDefault();
     const err = validateForm(userInfo, SupplierSchemaUpdate);
     console.log(err, "update")
@@ -93,9 +96,9 @@ const updateSupplier = () => {
       setErrors(err);
     } else {
       onSubmit();
+      router.push("/admin/suppliers");
     }
   };
-
   /**
    * Validate single field on the fly
    * @param {*} name
@@ -177,20 +180,20 @@ const updateSupplier = () => {
                 </div>
                 <div className="form-row">
                   <div className="form-group col-md-6">
-                    <label htmlFor="address">
-                      <b>Address : </b>
+                    <label htmlFor="joinDate">
+                      <b>Date of Join</b>
                     </label>
                     <input
-                      type="text"
+                      max={dateTime}
+                      type="date"
                       className="form-control"
                       onChange={onChangeInput}
-                      value={userInfo.address}
-                      id="address"
-                      name="address"
-                      placeholder="Enter your address here"
+                      value={userInfo.joinDate}
+                      id="joinDate"
+                      name="joinDate"
                     />
                     <p className="text-red-500 text-xs italic">
-                      {errors && errors["address"]}
+                      {errors && errors["joinDate"]}
                     </p>
                   </div>
                   <div className="form-group col-md-6">
@@ -212,20 +215,21 @@ const updateSupplier = () => {
                   </div>
                 </div>
                 <div className="form-row">
-                  <div className="form-group col-md-6">
-                    <label htmlFor="joinDate">
-                      <b>Date of Join</b>
+                <div className="form-group col-md-12">
+                    <label htmlFor="address">
+                      <b>Address : </b>
                     </label>
                     <input
-                      type="date"
+                      type="text"
                       className="form-control"
                       onChange={onChangeInput}
-                      value={userInfo.joinDate}
-                      id="joinDate"
-                      name="joinDate"
+                      value={userInfo.address}
+                      id="address"
+                      name="address"
+                      placeholder="Enter your address here"
                     />
                     <p className="text-red-500 text-xs italic">
-                      {errors && errors["joinDate"]}
+                      {errors && errors["address"]}
                     </p>
                   </div>
                   {/* <div className="form-group col-md-6">
