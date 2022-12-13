@@ -156,7 +156,7 @@ const NavBar = () => {
                             Low Stock Products
                           </a>
                         </li>
-                        
+
                         <li className="menu-item">
                           <a
                             href="/shop/contact-us"
@@ -167,6 +167,19 @@ const NavBar = () => {
                             Contact Us
                           </a>
                         </li>
+
+                        
+                        <li className="menu-item">
+                          <a
+                            href={`/supplier/account/${user._id}`}
+                            className="menu-name"
+                            data-title="Product"
+                          >
+                           My Profile
+                          </a>
+                        </li>
+
+                        
                       </>
                     )}
 
