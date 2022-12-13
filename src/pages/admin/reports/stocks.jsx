@@ -18,26 +18,31 @@ const Orders = () => {
   const { allProducts } = products;
   const [filteredProducts, setFilderedProducts] = useState(allProducts);
 
-  const SelectOptions = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
+  // Initialize an empty array to hold the mapped elements
+  const mappedArray = [
+    {
+      value: "ALL",
+      label: "ALL",
+    },
   ];
 
+  // Map over the elements of the array and push them to the new array
+  allProducts.map((element) =>
+    mappedArray.push({ value: element._id, label: element.productName })
+  );
 
-    // Initialize an empty array to hold the mapped elements
-    const mappedArray = []
+  const onChangeCategory = (selectedOption) => {
+    let products;
 
-    // Map over the elements of the array and push them to the new array
-    allProducts.map(element => mappedArray.push({value: element._id, label: element.productName}))
-
-    const onChangeCategory = (selectedOption) => {
-      let products;
-    console.log(selectedOption, "ss")
-      products = allProducts.filter((product) => product._id === selectedOption.value);
-      setFilderedProducts(products)
-    };
-
+    if (selectedOption.value === "ALL") {
+      products = allProducts
+    } else {
+      products = allProducts.filter(
+        (product) => product._id === selectedOption.value
+      );
+    }
+    setFilderedProducts(products);
+  };
 
   const featchOnLoad = async () => {
     dispatch(getOrderStart());
@@ -163,7 +168,7 @@ const Orders = () => {
                               STOCK REPORT
                             </div>
                             <Select
-                              //   value={selectedOption}
+                              //value={"ALL"}
                               onChange={onChangeCategory}
                               options={mappedArray}
                             />
