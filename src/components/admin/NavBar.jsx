@@ -146,6 +146,17 @@ const NavBar = () => {
                             Products
                           </a>
                         </li>
+
+                        <li className="menu-item">
+                          <a
+                            href="/shop/contact-us"
+                            className="menu-name"
+                            data-title="Product"
+                            target="_blank"
+                          >
+                            Contact Us
+                          </a>
+                        </li>
                       </>
                     )}
 
