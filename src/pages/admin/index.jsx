@@ -30,7 +30,7 @@ const Home = () => {
   const featchOnLoad = async () => {
     let role = "all";
     dispatch(getUserStart(role));
-    dispatch(getProductStart());
+    dispatch(getProductStart("ALL"));
     dispatch(getOrderStart("ALL"));
   };
 
