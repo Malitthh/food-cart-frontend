@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { updateUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
-import { validateProperty } from "src/helpers/validationHeper";
+import { validateProperty, validateForm } from "src/helpers/validationHeper";
 import { CustomerSchemaUpdate } from "../../../schema/customerSchema";
 
 const updateCustomer = () => {
@@ -86,6 +86,7 @@ const updateCustomer = () => {
    */
   const onChangeInput = (e) => {
     console.log(e.target.id, e.target.value);
+    validateField(e.target.id, e.target.value);
     setUserInfo({ ...userInfo, [e.target.id]: e.target.value });
   };
 
@@ -98,7 +99,7 @@ const updateCustomer = () => {
       token,
     };
     dispatch(updateUserStart(payload));
-    router.push("/admin/customers");
+  //  router.push("/admin/customers");
   };
 
   /**
@@ -108,8 +109,14 @@ const updateCustomer = () => {
 
   const validateBeforeSave = (e) => {
     e.preventDefault();
-    console.log(userInfo, "pp");
-    onSubmit();
+    const err = validateForm(userInfo, CustomerSchemaUpdate);
+    console.log(err, "update")
+    if (err) {
+      setErrors(err);
+    } else {
+      onSubmit();
+      router.push("/admin/customers");
+    }
   };
 
   /**
