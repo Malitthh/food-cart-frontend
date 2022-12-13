@@ -5,6 +5,7 @@ import { updateUserStart } from "../../../store/users/actions";
 import NavBar from "src/components/admin/NavBar";
 import {  validateForm, validateProperty } from "src/helpers/validationHeper";
 import { SupplierSchemaUpdate } from "../../../schema/customerSchema";
+import moment from 'moment';
 
 const updateSupplier = () => {
   const router = useRouter();
@@ -37,6 +38,12 @@ const updateSupplier = () => {
       value: "rice",
     },
   ];
+
+  
+  const dateFormat = "YYYY-MM-DD";
+  const today = new Date();
+
+  const dateTime = moment(today).format(dateFormat);
 
   const { pid } = router.query;
 
@@ -177,6 +184,7 @@ const updateSupplier = () => {
                       <b>Date of Join</b>
                     </label>
                     <input
+                      max={dateTime}
                       type="date"
                       className="form-control"
                       onChange={onChangeInput}

@@ -172,7 +172,7 @@ export const SupplierSchema = {
   passwordConfirm: JOI.any().required().label("Password Confirmation"),
   role: JOI.any().required(),
   joinDate: JOI.any().required().label("Joined Date"),
-  category: JOI.any().required().label("Category"),
+//  category: JOI.any().required().label("Category"),
 };
 
 export const SupplierSchemaUpdate = {
@@ -196,7 +196,7 @@ export const SupplierSchemaUpdate = {
   password: JOI.any().allow(),
   passwordConfirm: JOI.any().allow(),
   role: JOI.any().allow(),
-  category: JOI.any().required().label("Category"),
+//  category: JOI.any().required().label("Category"),
   joinDate: JOI.any().required().label("Joined Date"),
   activated: JOI.any().allow(),
   _id: JOI.any().allow(),
