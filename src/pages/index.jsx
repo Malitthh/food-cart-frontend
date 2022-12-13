@@ -24,12 +24,10 @@ const Home = () => {
       <PageContain>
       <MainContent>
       <CarouselBar />
-      {/* <MainSlide/> */}
       <Banners />
       <ProductTabs />
       {/* <Brands/> */}
       <BannerPromotion />
-      {/* <Products/> */}
       </MainContent>
       </PageContain>
       <Footer />
