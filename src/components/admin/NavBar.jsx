@@ -143,10 +143,20 @@ const NavBar = () => {
                             className="menu-name"
                             data-title="Product"
                           >
-                            Products
+                           All Products
                           </a>
                         </li>
 
+                        <li className="menu-item">
+                          <a
+                            href="/supplier/products/low-stocks"
+                            className="menu-name"
+                            data-title="Product"
+                          >
+                            Low Stock Products
+                          </a>
+                        </li>
+                        
                         <li className="menu-item">
                           <a
                             href="/shop/contact-us"
