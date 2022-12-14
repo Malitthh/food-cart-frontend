@@ -11,10 +11,7 @@ const NavBar = () => {
   const color = user?.role === "supplier" ? "rgb(153 79 14)" : "black";
 
   useEffect(() => {
-    if (status === "success")
-      if (user.role === "customer") {
-        router.push("/");
-      }
+    if (status !== "success") router.push("/");
   }, []);
 
   const logout = () => {
@@ -178,7 +175,22 @@ const NavBar = () => {
                         </li>
                       </>
                     )}
-
+                    {user?.role === "customer" && (
+                      <>
+                        <li className="menu-item">
+                          <a href="/customer">Dashboard</a>
+                        </li>
+                        <li className="menu-item">
+                          <a
+                            href="/customer/orders"
+                            className="menu-name"
+                            data-title="Product"
+                          >
+                            My Orders
+                          </a>
+                        </li>
+                      </>
+                    )}
                     {user?.role === "admin" && (
                       <>
                         <li className="menu-item">

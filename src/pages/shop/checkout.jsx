@@ -86,7 +86,7 @@ const Checkout = () => {
   };
 
   const onChangeInput = (e) => {
-    // validateField(e.target.id, e.target.value)
+    validateField(e.target.id, e.target.value);
     setOrderInfo({ ...orderInfo, [e.target.id]: e.target.value });
   };
 
@@ -261,7 +261,7 @@ const Checkout = () => {
                             <span className="number">3</span>Shipping Details
                           </h3>
                           <p className="text-red-500 text-xs italic">
-                            {errors && errors["shippingAddress"]}
+                          
                           </p>
                           <div className="box-content">
                             <div className="login-on-checkout">
