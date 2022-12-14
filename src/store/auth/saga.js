@@ -61,6 +61,7 @@ function* signupStart({ type, payload }) {
     console.log(response, "saga", payload);
   } catch (err) {
     yield put(signupError(err.response.data));
+    console.log(err.response)
     toast.error(err.response.data.message);
   }
 }

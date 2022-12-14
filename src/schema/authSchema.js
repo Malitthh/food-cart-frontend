@@ -6,7 +6,16 @@ export const AuthSchema = {
 };
 
 export const RegSchema = {
-  name: JOI.string().required().label("Customer Name "),
+  name: JOI.string()
+  .regex(/^[a-zA-Z\s]+$/)
+  .error((errors) => {
+    errors.forEach((err) => {
+      err.message = "Not a valid Name";
+    });
+    return errors;
+  })
+  .required()
+  .label(" Name "),
   email: JOI.string().email().required().label("Email Address"),
   password: JOI.string()
     .regex(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/)
