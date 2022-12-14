@@ -20,12 +20,15 @@ const Checkout = () => {
   const token = window.localStorage.getItem("@token");
   const [showCheckout, setShowCheckout] = useState(true);
   const { cart, auth } = useSelector((state) => state);
-  const { user } = auth;
-  var od;
+  const { user, status } = auth;
+
   const sum = cart.cart.reduce(function (sum, number) {
     return sum + number.price * number.quantity;
   }, 0);
 
+  useEffect(() => {
+    if (status !== "success") router.push("/shop/cart");
+  }, []);
   const checkoutFunc = (OrderData) => {
     const payload = {
       data: OrderData,
@@ -60,9 +63,9 @@ const Checkout = () => {
 
     let orderItems = cart.cart;
 
-    let customerName = user.name;
-    let customerId = user._id;
-    let customerEmail = user.email;
+    let customerName = user?.name;
+    let customerId = user?._id;
+    let customerEmail = user?.email;
 
     const OrderData = {
       customerName,
@@ -143,7 +146,7 @@ const Checkout = () => {
                                     type="text"
                                     name="customerName"
                                     id="customerName"
-                                    value={user.name}
+                                    value={user?.name}
                                     placeholder="Your email"
                                   />
                                 </div>
@@ -153,7 +156,7 @@ const Checkout = () => {
                                     type="email"
                                     name="email"
                                     id="email"
-                                    value={user.email}
+                                    value={user?.email}
                                     placeholder="Your email"
                                   />
                                 </div>
@@ -358,20 +361,37 @@ const Checkout = () => {
 
                     <table>
                       <tbody>
-                      <tr class="cart_item wrap-buttons" >
-                          <td class="wrap-btn-control" colspan="4"  style={{borderColor:"white"}}>
-
-                              <a href="/shop/cart"className="btn-success btn-lg text-center" style={{float:"left"}}>
-                                <i className="fa fa-angle-left" aria-hidden="true"></i>
-                                &nbsp;&nbsp;<b>Back to My Cart</b></a>&nbsp;
-
-                              <button  className="btn-warning btn-lg text-center" style={{float:"right"}}
-                                onClick={(e) => validateBeforeSave(e)}>
-                                <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                &nbsp;&nbsp; <b>Check out</b>
-                              </button>
+                        <tr class="cart_item wrap-buttons">
+                          <td
+                            class="wrap-btn-control"
+                            colspan="4"
+                            style={{ borderColor: "white" }}
+                          >
+                            <a
+                              href="/shop/cart"
+                              className="btn-success btn-lg text-center"
+                              style={{ float: "left" }}
+                            >
+                              <i
+                                className="fa fa-angle-left"
+                                aria-hidden="true"
+                              ></i>
+                              &nbsp;&nbsp;<b>Back to My Cart</b>
+                            </a>
+                            &nbsp;
+                            <button
+                              className="btn-warning btn-lg text-center"
+                              style={{ float: "right" }}
+                              onClick={(e) => validateBeforeSave(e)}
+                            >
+                              <i
+                                className="fa fa-cart-arrow-down"
+                                aria-hidden="true"
+                              ></i>
+                              &nbsp;&nbsp; <b>Check out</b>
+                            </button>
                           </td>
-                      </tr>
+                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -380,7 +400,9 @@ const Checkout = () => {
                 <div className="col-lg-5 col-md-5 col-sm-6 col-xs-12 sm-padding-top-48px sm-margin-bottom-0 xs-margin-bottom-15px">
                   <div className="order-summary sm-margin-bottom-80px">
                     <div className="title-block">
-                      <h1 className="title" style={{color:"yellowgreen"}}><b>Order Summary</b></h1>
+                      <h1 className="title" style={{ color: "yellowgreen" }}>
+                        <b>Order Summary</b>
+                      </h1>
                       <a href="#" className="link-forward">
                         {cart.cart.length} items
                       </a>
@@ -440,14 +462,26 @@ const Checkout = () => {
                         </li>
                         <li>
                           <div className="subtotal-line">
-                            <b className="stt-name"style={{fontWeight:"400"}}>Tax</b>
+                            <b
+                              className="stt-name"
+                              style={{ fontWeight: "400" }}
+                            >
+                              Tax
+                            </b>
                             <span className="stt-price">Rs. 00.00</span>
                           </div>
                         </li>
                         <li>
                           <div className="subtotal-line">
-                            <b className="stt-name"style={{color:"green"}}>total Amount</b>
-                            <span className="stt-price" style={{color:"red"}}>Rs. {sum}.00</span>
+                            <b className="stt-name" style={{ color: "green" }}>
+                              total Amount
+                            </b>
+                            <span
+                              className="stt-price"
+                              style={{ color: "red" }}
+                            >
+                              Rs. {sum}.00
+                            </span>
                           </div>
                         </li>
                       </ul>
@@ -500,9 +534,17 @@ const Checkout = () => {
                         }}
                       >
                         <table>
-                          <tr class="tabletitle" style={{backgroundColor:"#c3c3c357", fontSize:"10px"}}>
-                          <td class="item">
-                              <h2><b>Image</b></h2>
+                          <tr
+                            class="tabletitle"
+                            style={{
+                              backgroundColor: "#c3c3c357",
+                              fontSize: "10px",
+                            }}
+                          >
+                            <td class="item">
+                              <h2>
+                                <b>Image</b>
+                              </h2>
                             </td>
                             <td class="item">
                               <h2>
@@ -546,10 +588,20 @@ const Checkout = () => {
                       </div>
                     </div>
                     <div id="legalcopy">
-                      <p class="legal" style={{marginTop:"18px", color:"#8ac554",fontFamily: "monospace", fontSize:"12px"}}>
-                        <strong style={{color:"#ab6f29"}}>Thank you for your business!</strong>  Payment
-                        is expected within 31 days; please process this invoice
-                        within that time. 
+                      <p
+                        class="legal"
+                        style={{
+                          marginTop: "18px",
+                          color: "#8ac554",
+                          fontFamily: "monospace",
+                          fontSize: "12px",
+                        }}
+                      >
+                        <strong style={{ color: "#ab6f29" }}>
+                          Thank you for your business!
+                        </strong>
+                          Payment is expected within 31 days; please process
+                        this invoice within that time.
                       </p>
                     </div>
                   </div>

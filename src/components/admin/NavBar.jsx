@@ -8,7 +8,7 @@ const NavBar = () => {
   const { user, status } = auth;
   const router = useRouter();
   const dispatch = useDispatch();
-  const color = user?.role === "supplier" ? "rgb(153 79 14)" : "black"
+  const color = user?.role === "supplier" ? "rgb(153 79 14)" : "black";
 
   useEffect(() => {
     if (status === "success")
@@ -16,7 +16,6 @@ const NavBar = () => {
         router.push("/");
       }
   }, []);
-
 
   const logout = () => {
     dispatch(logoutStart());
@@ -143,7 +142,7 @@ const NavBar = () => {
                             className="menu-name"
                             data-title="Product"
                           >
-                           All Products
+                            All Products
                           </a>
                         </li>
 
@@ -168,18 +167,15 @@ const NavBar = () => {
                           </a>
                         </li>
 
-                        
                         <li className="menu-item">
                           <a
                             href={`/supplier/account/${user._id}`}
                             className="menu-name"
                             data-title="Product"
                           >
-                           My Profile
+                            My Profile
                           </a>
                         </li>
-
-                        
                       </>
                     )}
 
