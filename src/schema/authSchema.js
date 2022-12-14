@@ -1,21 +1,14 @@
 import JOI from "joi-browser";
 
 export const AuthSchema = {
-  email: JOI.string()
-    .required()
-    .label("Email Address")
-    .error(() => {
-      return {
-        message: "email address is not allowed to be empty",
-      };
-    }),
+  email: JOI.string().email().required().label("Email Address"),
   password: JOI.string().required().label("Password"),
 };
 
 export const RegSchema = {
   name: JOI.string().required().label("Customer Name "),
-  email: JOI.string().required().label("Email Address"),
-  password: JOI.any().allow(),
-  passwordConfirm: JOI.any().allow(),
+  email: JOI.string().email().required().label("Email Address"),
+  password: JOI.string().required().label("Password"),
+  passwordConfirm: JOI.string().required().label("Confirm Password"),
   role: JOI.any().allow(),
 };

@@ -153,7 +153,7 @@ const RegCustomer = () => {
                         className="txt-input"
                       />
                       <p className="text-red-500 text-xs italic">
-                        {errors && errors["password"]}
+                        {errors && errors["passwordConfirm"]}
                       </p>
                     </p>
                     
