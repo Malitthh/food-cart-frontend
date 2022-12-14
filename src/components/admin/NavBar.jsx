@@ -8,8 +8,8 @@ const NavBar = () => {
   const { user, status } = auth;
   const router = useRouter();
   const dispatch = useDispatch();
-  const color = user?.role === "supplier" ? "rgb(153 79 14)" : "black";
-
+  const color = user?.role === "supplier" ? "rgb(153 79 14)": ( user?.role === "customer" ? "#8ac353": "black");
+  
   useEffect(() => {
     if (status !== "success") router.push("/");
   }, []);
