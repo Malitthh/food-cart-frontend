@@ -10,7 +10,8 @@ import { getOrderStart } from "../../store/orders/actions";
 const Home = () => {
   const token = window.localStorage.getItem("@token");
   const dispatch = useDispatch();
-  const { users, products, orders } = useSelector((state) => state);
+  const { users, products, orders, auth } = useSelector((state) => state);
+  const { user, status } = auth;
   const { allUsers } = users;
   const { allProducts } = products;
   const { allOrders } = orders;
@@ -19,11 +20,24 @@ const Home = () => {
   const employees = allUsers.filter((user) => user.role === "employee");
   const suppliers = allUsers.filter((user) => user.role === "supplier");
 
+  const pendingOrders = allOrders.filter((order) => order.status === "pending");
+  const processingOrders = allOrders.filter(
+    (order) => order.status === "processing"
+  );
+  const shippedOrders = allOrders.filter((order) => order.status === "shipped");
+  const deliveredOrders = allOrders.filter(
+    (order) => order.status === "delivered"
+  );
+
+  const cancelOrders = allOrders.filter(
+    (order) => order.status === "cancel"
+  );
+
   const featchOnLoad = async () => {
     let role = "all";
     dispatch(getUserStart(role));
     dispatch(getProductStart());
-    dispatch(getOrderStart());
+    dispatch(getOrderStart(user?._id));
   };
 
   useEffect(() => {
@@ -56,53 +70,62 @@ const Home = () => {
               <ul className="services-list" style={{border:"none"}}>
                 <li>
                   <div className="service-inner color-reverse">
-                    <span className="biolife-icon icon-suporter"></span>
-                    <a className="srv-name" href="admin/suppliers">
-                      Number of Suppliers
-                    </a>
-                    <span className="number" style={{marginLeft: "60px", marginTop: "12px", backgroundColor:"#ed9f00"}} >{suppliers.length}</span>
-                  </div>
-                  
-                </li>
-                <li>
-                  <div className="service-inner color-reverse">
-                    
-                    <span className="biolife-icon icon-suporter"></span>
-                    <a className="srv-name" href="admin/employees">
-                      Number of Employees
-                    </a>
-                    <span className="number" style={{marginLeft: "60px", marginTop: "12px", backgroundColor:"#ed9f00"}}>{employees.length}</span>
-                  </div>
-                </li>
-                <li>
-                  <div className="service-inner color-reverse">
-                    
-                    <span className="biolife-icon icon-suporter"></span>
-                    <a className="srv-name" href="admin/customers">
-                      Number of customers
-                    </a>
-                    <span className="number"style={{marginLeft: "62px", marginTop: "12px", backgroundColor:"#ed9f00"}} >{customers.length}</span>
-                  </div>
-                </li>
-              </ul>
-              <ul className="services-list" style={{border:"none"}}>
-                <li>
-                  <div className="service-inner color-reverse">
                     <span className="biolife-icon icon-fruits"></span>
-                    <a className="srv-name" href="admin/products">
-                      Number of Products
+                    <a className="srv-name" href="customer/products">
+                      Total Orders
                     </a>
-                    <span className="number" style={{marginLeft: "60px", marginTop: "12px", backgroundColor:"#ed9f00"}} >{allProducts.length}</span>
+                    <span className="number" style={{marginLeft: "60px", marginTop: "12px", backgroundColor:"#ed9f00"}} >{allOrders.length}</span>
                   </div>
                 </li>
 
                 <li>
                   <div className="service-inner color-reverse">
                     <span className="biolife-icon icon-car"></span>
-                    <a className="srv-name" href="/admin/orders">
-                      Number of Orders
+                    <a className="srv-name" href="/customer/orders">
+                      Pending Orders
                     </a>
-                    <span className="number" style={{marginLeft: "55px", marginTop: "12px",  backgroundColor:"#ed9f00"}} >{allOrders.length}</span>
+                    <span className="number" style={{marginLeft: "55px", marginTop: "12px",  backgroundColor:"#ed9f00"}} >{pendingOrders.length}</span>
+                  </div>
+                </li>
+
+                
+                <li>
+                  <div className="service-inner color-reverse">
+                    <span className="biolife-icon icon-car"></span>
+                    <a className="srv-name" href="/customer/orders">
+                      Processing Orders
+                    </a>
+                    <span className="number" style={{marginLeft: "55px", marginTop: "12px",  backgroundColor:"#ed9f00"}} >{processingOrders.length}</span>
+                  </div>
+                </li>
+
+                <li>
+                  <div className="service-inner color-reverse">
+                    <span className="biolife-icon icon-car"></span>
+                    <a className="srv-name" href="/customer/orders">
+                      Shipped Orders
+                    </a>
+                    <span className="number" style={{marginLeft: "55px", marginTop: "12px",  backgroundColor:"#ed9f00"}} >{shippedOrders.length}</span>
+                  </div>
+                </li>
+
+                <li>
+                  <div className="service-inner color-reverse">
+                    <span className="biolife-icon icon-car"></span>
+                    <a className="srv-name" href="/customer/orders">
+                      Delivered Orders
+                    </a>
+                    <span className="number" style={{marginLeft: "55px", marginTop: "12px",  backgroundColor:"#ed9f00"}} >{deliveredOrders.length}</span>
+                  </div>
+                </li>
+
+                <li>
+                  <div className="service-inner color-reverse">
+                    <span className="biolife-icon icon-car"></span>
+                    <a className="srv-name" href="/customer/orders">
+                      Cancelled Orders
+                    </a>
+                    <span className="number" style={{marginLeft: "55px", marginTop: "12px",  backgroundColor:"#ed9f00"}} >{cancelOrders.length}</span>
                   </div>
                 </li>
               </ul>

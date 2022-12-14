@@ -189,6 +189,15 @@ const NavBar = () => {
                             My Orders
                           </a>
                         </li>
+                        <li className="menu-item">
+                          <a
+                            href={`/customer/account/${user._id}`}
+                            className="menu-name"
+                            data-title="Product"
+                          >
+                            My Profile
+                          </a>
+                        </li>
                       </>
                     )}
                     {user?.role === "admin" && (

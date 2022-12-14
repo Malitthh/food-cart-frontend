@@ -67,6 +67,7 @@ export const CustomerSchemaUpdate = {
   passwordConfirm: JOI.any().allow(),
   role: JOI.any().allow(),
   activated: JOI.any().allow(),
+  province: JOI.any().required().label("Province"),
   _id: JOI.any().allow(),
   __v: JOI.any().allow(),
 };
