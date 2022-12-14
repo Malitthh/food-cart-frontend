@@ -20,22 +20,20 @@ const RegCustomer = () => {
 
   const [errors, setErrors] = useState([]);
 
-
   useEffect(() => {
     if (status === "success") {
-        if (user.role === "admin") {
-            router.push("/admin");
-          } else {
-            router.push("/");
-          }
-    } 
+      if (user.role === "admin") {
+        router.push("/admin");
+      } else {
+        router.push("/");
+      }
+    }
   }, [auth]);
 
   const login = () => {
-    const user =  authInfo;
-    user.role = 'customer'
+    const user = authInfo;
+    user.role = "customer";
     dispatch(signupStart(user));
-  
   };
 
   const onChangeInput = (e) => {
@@ -55,7 +53,11 @@ const RegCustomer = () => {
 
   const validateBeforeSave = () => {
     const err = validateForm(authInfo, RegSchema);
-    console.log(err, "errrrr");
+
+    // if (authInfo.password === authInfo.passwordConfirm) {
+    //   errors["password"] = "Passwords doesn't match";
+    // }
+
     if (err) {
       setErrors(err);
     } else {
@@ -142,7 +144,7 @@ const RegCustomer = () => {
                     </p>
                     <p className="form-row">
                       <label for="fid-pass">
-                      Password Confirm:<span className="requite">*</span>
+                        Password Confirm:<span className="requite">*</span>
                       </label>
                       <input
                         required
@@ -156,7 +158,7 @@ const RegCustomer = () => {
                         {errors && errors["passwordConfirm"]}
                       </p>
                     </p>
-                    
+
                     <p className="form-row wrap-btn">
                       <button
                         className="btn btn-submit btn-bold"
@@ -173,9 +175,7 @@ const RegCustomer = () => {
                 <div className="register-in-container">
                   <div className="intro">
                     <h4 className="box-title">already registered?</h4>
-                    <p className="sub-title">
-                      No need to register again
-                    </p>
+                    <p className="sub-title">No need to register again</p>
                     <ul className="lis">
                       {/* <li>Check out faster</li>
                       <li>Access your order history</li>
