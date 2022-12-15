@@ -3,6 +3,8 @@ import HeaderBar from "/src/components/HeaderBar";
 import Footer from "/src/components/Footer";
 import emailjs from "@emailjs/browser";
 import { toast } from "react-toastify";
+import { validateForm, validateProperty } from "src/helpers/validationHeper";
+import { ContactSchema } from "../../schema/contactSchema";
 
 const contactUs = () => {
   const [contactInfo, setContactInfo] = useState({});
@@ -11,18 +13,19 @@ const contactUs = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-   console.log(contactInfo, "test", form.current)
+    console.log(contactInfo, "test", form.current);
 
     emailjs
       .sendForm(
-        "service_igjkp0f","template_9njn2mh",
+        "service_igjkp0f",
+        "template_9njn2mh",
         form.current,
         "8YXBJOHzg-v2auB3Z"
       )
       .then(
         (result) => {
           console.log(result.text);
-          setContactInfo({})
+          setContactInfo({});
           toast.success("message sent!");
         },
         (error) => {
@@ -35,8 +38,32 @@ const contactUs = () => {
 
   const onChangeInput = (e) => {
     console.log(e.target.id, e.target.value);
+    validateField(e.target.id, e.target.value);
     setContactInfo({ ...contactInfo, [e.target.id]: e.target.value });
   };
+
+  const validateBeforeSave = (e) => {
+    e.preventDefault();
+    const err = validateForm(contactInfo, ContactSchema);
+    console.log(err, "update");
+    if (err) {
+      setErrors(err);
+    } else {
+      sendEmail(e);
+      router.push("/");
+    }
+  };
+
+  const validateField = (name, value) => {
+    const errMsg = validateProperty(name, value, ContactSchema);
+console.log(errMsg, "ms")
+    if (errMsg) {
+      errors[name] = errMsg;
+    } else {
+      delete errors[name];
+    }
+  };
+
   return (
     <>
       <HeaderBar />
@@ -150,6 +177,7 @@ const contactUs = () => {
                 <div className="contact-form-container sm-margin-top-112px">
                   <form name="frm-contact" ref={form}>
                     <p className="form-row">
+                      
                       <input
                         type="text"
                         name="from_name"
@@ -160,6 +188,9 @@ const contactUs = () => {
                         className="txt-input"
                       />
                     </p>
+                    <p className="text-red-500 text-xs italic">
+                        {errors && errors["from_name"]}
+                      </p>
                     <p className="form-row">
                       <input
                         type="email"
@@ -170,7 +201,11 @@ const contactUs = () => {
                         placeholder="Email Address"
                         className="txt-input"
                       />
+                     
                     </p>
+                    <p className="text-red-500 text-xs italic">
+                        {errors && errors["reply_to"]}
+                      </p>
                     <p className="form-row">
                       <input
                         type="tel"
@@ -181,7 +216,11 @@ const contactUs = () => {
                         placeholder="Phone Number"
                         className="txt-input"
                       />
+                    
                     </p>
+                    <p className="text-red-500 text-xs italic">
+                        {errors && errors["contact_no"]}
+                      </p>
                     <p className="form-row">
                       <textarea
                         name="message"
@@ -192,14 +231,22 @@ const contactUs = () => {
                         rows="9"
                         placeholder="Leave Message"
                       ></textarea>
+                      
                     </p>
+                    <p className="text-red-500 text-xs italic">
+                        {errors && errors["message"]}
+                      </p>
                     <p className="form-row">
-                      <button className="btn btn-submit" type="button" onClick={(e) => sendEmail(e)}>
+                      <button
+                        className="btn btn-submit"
+                        type="button"
+                        onClick={(e) => validateBeforeSave(e)}
+                      >
                         send message
                       </button>
                     </p>
 
-{/* <form ref={form} onSubmit={sendEmail}>
+                    {/* <form ref={form} onSubmit={sendEmail}>
       <label>Name</label>
       <input type="text" name="from_name" />
       <label>Phone Number</label>
