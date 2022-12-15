@@ -192,6 +192,7 @@ const SingleOrder = () => {
                                         </span>
                                       </li>
                                     </ul>
+                                    {singleOrder.status !== 'cancel'  &&
                                     <div
                                       style={{
                                         borderStyle: "dotted",
@@ -230,6 +231,15 @@ const SingleOrder = () => {
                                         onChange={() => setStatus("delivered")}
                                       />
                                         <label for="delivered">Delivered</label>
+                                      <br /> {" "}
+                                      <input
+                                        type="radio"
+                                        id="delivered"
+                                        name="order_status"
+                                        value="delivered"
+                                        onChange={() => setStatus("cancel")}
+                                      />
+                                        <label for="delivered">Cancel</label>
                                       <button
                                         onClick={() => updateOrderStatus()}
                                         className="btn btn-success gap-2 btn-sm"
@@ -240,7 +250,7 @@ const SingleOrder = () => {
                                       >
                                         Update Order Status
                                       </button>
-                                    </div>
+                                    </div>}
                                   </div>
                                 </div>
                               </div>

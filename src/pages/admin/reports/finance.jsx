@@ -27,8 +27,8 @@ const Orders = () => {
   );
 
   const featchOnLoad = async () => {
-    dispatch(getOrderStart());
-    dispatch(getProductStart());
+    dispatch(getOrderStart("ALL"));
+    dispatch(getProductStart("ALL"));
   };
 
   useEffect(() => {
