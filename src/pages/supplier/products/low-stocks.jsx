@@ -55,7 +55,7 @@ const ProductIndex = () => {
               </span>
             </li>
           </ul>
-          <div
+          {/* <div
             style={{
               float: "right",
               backgroundColor: "black",
@@ -71,7 +71,7 @@ const ProductIndex = () => {
               <i className="fa fa-plus" aria-hidden="true"></i>
               &nbsp;&nbsp;New Product
             </a>
-          </div>
+          </div> */}
         </nav>
       </div>
       <main>
@@ -126,7 +126,7 @@ const ProductIndex = () => {
                         <td>
                           <a
                             data-cy={`view-report-btn${key}`}
-                            href={`products/${product._id}`}
+                            href={`/supplier/products/${product._id}`}
                             className="inline-block px-6 py-3 mb-0 font-bold text-center uppercase align-middle transition-all bg-transparent border-0 rounded-lg shadow-none leading-pro text-xs ease-soft-in bg-150 tracking-tight-soft bg-x-25 text-slate-400"
                           >
                             <i className="leading-tight fa fa-pencil text-xs"></i>
